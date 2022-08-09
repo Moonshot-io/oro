@@ -1,4 +1,5 @@
 import React from "react";
+import Search from './Search.tsx'
 
 const App: React.FC = () => {
 
