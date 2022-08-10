@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import React, {} from 'react';
+import { Link, Routes, Route} from 'react-router-dom';
 import Profile from '../pages/Profile';
 import Notifications from '../pages/Notifications';
 import EventListings from '../pages/EventListings';

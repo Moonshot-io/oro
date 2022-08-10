@@ -19,12 +19,6 @@ export default function Menu() {
     setState({ ...state, [anchor]: open });
   };
 
-  <Link to='/profile'>My Account</Link>
-  <Link to='/notifications'>Notifications</Link>
-  <Link to='/eventListings'>Find Events</Link>
-  <Link to='/songFinder'>Song Finder</Link>
-  <Link to='/artists'>Artists</Link>
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}

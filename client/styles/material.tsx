@@ -9,6 +9,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 module.exports = {
   Box, 
@@ -21,5 +24,8 @@ module.exports = {
   ListItemIcon, 
   ListItemText, 
   InboxIcon, 
-  MailIcon
+  MailIcon, 
+  Container,
+  Grid,
+  Paper
 };
