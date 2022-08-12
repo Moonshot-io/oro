@@ -4,10 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { UserContextProvider } from './context/UserContext';
 import { ArtistContextProvider } from './context/ArtistContext';
-import {Box, Grid, Paper } from './styles/material';
-import { styled } from "@mui/material/styles";
+import { Box, Grid, Paper } from './styles/material';
+import { styled } from '@mui/material/styles';
+import { EventContext, EventContextProvider } from './context/EventContext';
 const rootElement = document.getElementById('root');
-
 
 if (!rootElement) {
   throw new Error('Failed to find the root element');
@@ -27,15 +27,17 @@ root.render(
     <Grid container>
       <Grid item xs={8} md={12}>
         <Item>
-          <UserContextProvider>
-            <ArtistContextProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path='*' element={<App />} />
-                </Routes>
-              </BrowserRouter>
-            </ArtistContextProvider>
-          </UserContextProvider>
+          {/* <EventContextProvider>
+            <UserContextProvider>
+              <ArtistContextProvider> */}
+          <BrowserRouter>
+            <Routes>
+              <Route path='*' element={<App />} />
+            </Routes>
+          </BrowserRouter>
+          {/* </ArtistContextProvider>
+            </UserContextProvider>
+          </EventContextProvider> */}
         </Item>
       </Grid>
     </Grid>
