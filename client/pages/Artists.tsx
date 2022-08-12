@@ -1,33 +1,56 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Link, Outlet, Routes, Route, useNavigate } from 'react-router-dom';
-import { ArtistContext } from '../context/ArtistContext'; // imports context
-import AccordionCard from '../components/Accordian';
+import ArtistInfoCard from '../components/ArtistCards';
+import axios from 'axios';
+import { ArtistContext } from '../context/ArtistContext';
+import {Box,	Grid, Item} from '../styles/material';
 
 const Artists = () => {
-  const {artist, setArtist} = useContext(ArtistContext);
-  
-  const updateArtist = () => {
-    setArtist({
-      id: 1044650045,
-      userId: 348934234234758923745,
-      artistName: 'Mariah',
-    });
-  };
+  const artistContext = useContext(ArtistContext);
+  // console.log(artistContext);
+  const {artistData, getFaveArtists, setArtistData } = artistContext;
+  const favorites = artistData;
+
   useEffect(() => {
-    updateArtist();
+    getFaveArtists();
   }, []);
-  
+
   return (
     <div>
       <div>Hello ARtists</div>
-      <AccordionCard />
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          {favorites.map((artObj) => {
+            return (
+              <Grid item key={artObj.id}>
+                <ArtistInfoCard artistProps={artObj} key={artObj.id}/>
+              </Grid>
+            );
+          })
+          }
+        </Grid>
+      </Box>
     </div>
   );
 };
 
 export default Artists;
-// const navigate = useNavigate();
-// {artist.artistName}
-// <button onClick={() => {
-//   navigate('/');
-// }}>Go home</button>
+
+// const getFaveArtists = (name) => {
+//   name = name | 'Adele';
+//   axios.get('/favArtists', {
+//     params: {
+//       artistName: name
+//     }
+//   })
+//     .then((artistData) => {
+//       console.log('artistEvents', artistData.data[0]);
+//       const artist = artistData.data;
+//       setArtistData((state) => {
+//         return { ...state, favArtist: artist };
+//       });
+//     })
+//     .catch((err) => {
+//       // console.log('artistEvents');
+//       // console.error(err);
+//     });
+// };

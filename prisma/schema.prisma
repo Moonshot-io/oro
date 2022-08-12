@@ -12,14 +12,14 @@ datasource db {
 
 model Users {
   id Int @id @default(autoincrement())
-  googleId Int @unique
+  googleId Int? @unique
   fullName String
   profileURL String?
   email String @unique
-  fbId String @unique
-  instaId String @unique
-  twitterId String @unique
-  snapchatId String @unique
+  fbId String? @unique
+  instaId String? @unique
+  twitterId String? @unique
+  snapchatId String? @unique
   notifications Notifications[]
   eventGallery EventPhotos[]
   userEvents UserEvents[]
@@ -40,6 +40,16 @@ model ArtistFollowing {
   user Users @relation(fields: [userId], references: [id])
   userId Int
   artistName String
+  bio String
+  ticketId String
+  youtube String
+  twitter String
+  facebook String
+  instagram String
+  itunes String
+  wiki String
+  homepage String
+  image String
 }
 
 // Notifications Model

@@ -6,7 +6,10 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EventCards from './EventCards';
 
-export default function AccordionCard() {
+export default function AccordionCard(props) {
+  const {artist, favArtist, getFaveArtists} = props.artistProps;
+  // console.log(artist);
+  const {artistName} = artist;
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange =
@@ -23,7 +26,7 @@ export default function AccordionCard() {
           id="panel1bh-header"
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            Selena Gomez
+            {artistName}
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
