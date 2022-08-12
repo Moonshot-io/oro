@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import passport from 'passport';
 import passportAuth from '../passport';
-// import session from 'express-session';
 // require('../passport');
- 
+
+
 const authRouter = Router();
+authRouter.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+authRouter.use(passport.initialize());
+authRouter.use(passport.session());
 passportAuth();
 
 const isLoggedIn = (req: { user: any; }, res: { sendStatus: (arg0: number) => any; }, next: () => any) => {
@@ -13,7 +16,7 @@ const isLoggedIn = (req: { user: any; }, res: { sendStatus: (arg0: number) => an
 
  
 authRouter.get('/', (_req, res) => {
- res.send('<a href="/auth/google">Authenticate with Google</a>');
+ res.send('<a href="/auth/auth/google">Authenticate with Google</a>');
 });
  
 authRouter.get('/auth/google',

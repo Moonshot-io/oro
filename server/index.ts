@@ -1,6 +1,8 @@
 import path from 'path';
 import express from 'express';
 import axios from 'axios';
+import passport from 'passport';
+import session from 'express-session';
 
 import eventListingsRouter from './routes/eventListingsRouter';
 import artistsRouter from './routes/artists';

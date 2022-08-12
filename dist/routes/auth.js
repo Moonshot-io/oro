@@ -6,15 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var passport_1 = __importDefault(require("passport"));
 var passport_2 = __importDefault(require("../passport"));
-// import session from 'express-session';
 // require('../passport');
 var authRouter = (0, express_1.Router)();
+authRouter.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+authRouter.use(passport_1.default.initialize());
+authRouter.use(passport_1.default.session());
 (0, passport_2.default)();
 var isLoggedIn = function (req, res, next) {
     req.user ? next() : res.sendStatus(401);
 };
 authRouter.get('/', function (_req, res) {
-    res.send('<a href="/auth/google">Authenticate with Google</a>');
+    res.send('<a href="/auth/auth/google">Authenticate with Google</a>');
 });
 authRouter.get('/auth/google', passport_1.default.authenticate("google", { scope: ['profile', 'email'] }));
 // authRouter.get('/auth/google/callback',
