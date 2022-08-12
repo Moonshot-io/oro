@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var passport_1 = __importDefault(require("passport"));
 var passport_2 = __importDefault(require("../passport"));
-// require('../passport');
 var authRouter = (0, express_1.Router)();
 authRouter.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 authRouter.use(passport_1.default.initialize());
@@ -19,16 +18,20 @@ authRouter.get('/', function (_req, res) {
     res.send('<a href="/auth/auth/google">Authenticate with Google</a>');
 });
 authRouter.get('/auth/google', passport_1.default.authenticate("google", { scope: ['profile', 'email'] }));
-// authRouter.get('/auth/google/callback',
-//  passport.authenticate('google', {
-//    successRedirect: '/protected',
-//    failureRedirect: '/auth/failure',
-//  })
-// )
-// authRouter.get('/auth/failure', (_req, res) => {
-//  res.send('something went wrong...');
-// })
-// authRouter.get('/protected', isLoggedIn, (_req, res) => {
-//  res.send('Hello!');
-// });
+authRouter.get('/auth/google/callback', passport_1.default.authenticate('google', {
+    successRedirect: '/protected',
+    failureRedirect: '/auth/failure',
+}));
+authRouter.get('/auth/failure', function (_req, res) {
+    res.send('something went wrong...');
+});
+authRouter.get('/protected', isLoggedIn, function (req, res) {
+    console.log(req);
+    res.send("Hello ".concat(req.user.displayName));
+});
+authRouter.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy();
+    res.send('Goodbye!');
+});
 exports.default = authRouter;

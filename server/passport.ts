@@ -1,8 +1,5 @@
 require('dotenv').config();
 
-// const passport = require("passport");
-// const GoogleStrategy = require('passport-google-oauth2').Strategy;
-
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 
@@ -15,7 +12,7 @@ const passportAuth = () => {
     passReqToCallback: true
   },
     (_request: any, _accessToken: any, _refreshToken: any, profile: any, done: (arg0: any, arg1: any) => any) => {
-      return done(err, profile);
+      return done(null, profile);
     }
   ));
 

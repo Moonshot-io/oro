@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import passport from 'passport';
 import passportAuth from '../passport';
-// require('../passport');
-
+import session from 'express-session'
 
 const authRouter = Router();
 authRouter.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
@@ -23,19 +22,26 @@ authRouter.get('/auth/google',
   passport.authenticate("google", { scope: ['profile', 'email'] }),
 );
  
-// authRouter.get('/auth/google/callback',
-//  passport.authenticate('google', {
-//    successRedirect: '/protected',
-//    failureRedirect: '/auth/failure',
-//  })
-// )
+authRouter.get('/auth/google/callback',
+ passport.authenticate('google', {
+   successRedirect: '/protected',
+   failureRedirect: '/auth/failure',
+ })
+);
  
-// authRouter.get('/auth/failure', (_req, res) => {
-//  res.send('something went wrong...');
-// })
+authRouter.get('/auth/failure', (_req, res) => {
+ res.send('something went wrong...');
+});
  
-// authRouter.get('/protected', isLoggedIn, (_req, res) => {
-//  res.send('Hello!');
-// });
+authRouter.get('/protected', isLoggedIn, (req, res) => {
+  console.log(req);
+  res.send(`Hello ${req.user.displayName}`);
+});
+
+authRouter.get('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.send('Goodbye!');
+})
  
 export default authRouter;

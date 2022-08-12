@@ -4,8 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
-// const passport = require("passport");
-// const GoogleStrategy = require('passport-google-oauth2').Strategy;
 var passport_1 = __importDefault(require("passport"));
 var passport_google_oauth20_1 = __importDefault(require("passport-google-oauth20"));
 var passportAuth = function () {
@@ -15,7 +13,7 @@ var passportAuth = function () {
         callbackURL: process.env.GOOGLE_CALLBACK_URL,
         passReqToCallback: true
     }, function (_request, _accessToken, _refreshToken, profile, done) {
-        return done(err, profile);
+        return done(null, profile);
     }));
     passport_1.default.serializeUser(function (user, done) {
         done(null, user);
