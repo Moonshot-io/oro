@@ -1,5 +1,6 @@
 // import axios from 'axios';
 import React, { useState } from 'react';
+import axios from 'axios';
 
 type Props = {
   children: React.ReactNode
@@ -8,11 +9,15 @@ type Props = {
 const UserContext = React.createContext({});
 
 const UserContextProvider = ({ children }: Props) => {
-  const [userInfo, setUserInfo] = useState([]);
+
+  const login = () => {
+    axios.get('/auth/google', (req, res) => {
+      console.log(res);
+    })
+  }
 
   const appProps = {
-    userInfo,
-    setUserInfo,
+    login
   };
   return (
     <UserContext.Provider value={appProps}>{children}</UserContext.Provider>

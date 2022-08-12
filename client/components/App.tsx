@@ -5,11 +5,13 @@ import Notifications from '../pages/Notifications';
 import EventListings from '../pages/EventListings';
 import SongFinder from '../pages/SongFinder';
 import Artists from '../pages/Artists';
+import Login from '../pages/Login'
 import Menu from '../components/Menu';
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';
 import { UserContextProvider } from '../context/UserContext';
 import EventDetails from '../pages/EventDetails';
+
 
 const App: React.FC = () => {
   // update React.FC, .FC deprecated?
@@ -28,6 +30,7 @@ const App: React.FC = () => {
                 <Link to='/songFinder'>Song Finder</Link>
                 <Link to='/artists'>Artists</Link>
                 <Link to='/details'>details</Link>
+                <Link to="/login">Login</Link>
               </nav>
               <Menu />
             </header>
@@ -37,6 +40,7 @@ const App: React.FC = () => {
               <Route path='/eventListings' element={<EventListings />} />
               <Route path='/songFinder' element={<SongFinder />} />
               <Route path='/details' element={<EventDetails />} />
+              <Route path='/login' element={<Login />} />
             </Routes>
           </div>
         </ArtistContextProvider>

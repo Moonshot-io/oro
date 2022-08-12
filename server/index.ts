@@ -3,7 +3,7 @@ import express from 'express';
 import axios from 'axios';
 
 import eventListingsRouter from './routes/eventListingsRouter';
-import artistsRouter from './routes/artists';
+import artistsRouter from './routes/artistsRouter';
 import authRouter from './routes/auth';
 
 const app = express();
