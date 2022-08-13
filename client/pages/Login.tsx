@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 // import UserContext from '../context/UserContext';
 import GoogleButton from 'react-google-button';
 
 const Login = () => {
 
-  const redirectToGoogle = async () => {
-    const googleLoginURL = 'http://localhost:5000/auth/auth/google';
-    const newWindow = window.open(googleLoginURL, '_blank', 'width=500, height=600');
+  const redirectToGoogle = () => {
+    window.open('http://localhost:5000/auth/auth/google', '_self')
   }
 
   return (

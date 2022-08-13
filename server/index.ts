@@ -1,6 +1,7 @@
 import path from 'path';
 import express from 'express';
 import axios from 'axios';
+import cookieParser from 'cookie-parser';
 
 import eventListingsRouter from './routes/eventListingsRouter';
 import artistsRouter from './routes/artistsRouter';
@@ -8,6 +9,8 @@ import authRouter from './routes/auth';
 
 const app = express();
 
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true })); // Parses url
 app.use(express.static(path.join(__dirname, '../public')));
 
 //ROUTERS------------------------------

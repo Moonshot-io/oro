@@ -1,42 +1,58 @@
 import { Router } from 'express';
 import passport from 'passport';
 import passportAuth from '../passport';
-import session from 'express-session'
-import { QrCodeScannerOutlined } from '@mui/icons-material';
-
-const successLoginUrl = 'http://localhost:5000/'
+import session from 'express-session';
+require('../passport');
 
 const authRouter = Router();
-authRouter.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+// passportAuth();
+authRouter.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
 authRouter.use(passport.initialize());
 authRouter.use(passport.session());
-passportAuth();
 
 const isLoggedIn = (req: { user: any; }, res: { sendStatus: (arg0: number) => any; }, next: () => any) => {
   req.user ? next() : res.sendStatus(401);
 };
 
-authRouter.get('/', (_req, res) => {
-  res.send('<a href="/auth/auth/google">Authenticate with Google</a>');
+authRouter.get('/auth/success', (req, res) => {
+  if (req.user) {
+    console.log(req.user);
+    res.status(200).json({
+      user: req.user,
+      message: 'success',
+      success: true,
+    });
+  }
 });
 
-authRouter.get('/auth/google',
-  passport.authenticate("google", { scope: ['profile', 'email'] }),
-);
-
-authRouter.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: successLoginUrl,
-  }),
+authRouter.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }),
   (req, res) => {
     console.log(req);
   }
 );
 
+authRouter.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, redirect secrets.
+    console.log(req);
+    res.redirect('/');
+  },
+);
+
 authRouter.get('/logout', (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.send('Goodbye!');
-})
+  req.logout(() => {
+    res.redirect('/');
+  });
+});
 
 export default authRouter;

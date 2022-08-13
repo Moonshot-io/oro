@@ -5,10 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = __importDefault(require("path"));
 var express_1 = __importDefault(require("express"));
+var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var eventListingsRouter_1 = __importDefault(require("./routes/eventListingsRouter"));
 var artistsRouter_1 = __importDefault(require("./routes/artistsRouter"));
 var auth_1 = __importDefault(require("./routes/auth"));
 var app = (0, express_1.default)();
+app.use((0, cookie_parser_1.default)());
+app.use(express_1.default.urlencoded({ extended: true })); // Parses url
 app.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
 //ROUTERS------------------------------
 app.use('/events', eventListingsRouter_1.default);
