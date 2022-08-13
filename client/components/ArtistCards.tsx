@@ -1,11 +1,11 @@
-import React, { useNavigate } from 'react';
+import React, { useNavigate, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import {
-  Box,	Grid,	Paper,	Card,	CardHeader,	CardMedia,	CardContent,	CardActions,	Collapse,	Typography,	FavoriteIcon,	ExpandMoreIcon,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, Item
+  Box,	Grid,	Card,	CardHeader,	CardMedia,	CardContent,	CardActions,	Collapse,	Typography,	FavoriteIcon,	ExpandMoreIcon,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, Item
 } from '../styles/material';
-
-
+import EventCards from './EventCards';
+import axios from 'axios';
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
@@ -23,6 +23,15 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 const ArtistInfoCard = ({artistProps}) => {
   // console.log(artistProps);
+  const [expanded, setExpanded] = React.useState(false);
+  const [events, setEvents] = useState(
+    [{
+      name: 'No events found',
+      image: '/images/patrick-perkins-pay-artists.jpg',
+      description: 'There are currently no events found for this artist.',
+      id: 1001,
+    }]
+  );
   const {
     artistName,
     bio,
@@ -36,14 +45,38 @@ const ArtistInfoCard = ({artistProps}) => {
     youtube,
   } = artistProps;
 
-  const [expanded, setExpanded] = React.useState(false);
+  const socials = {
+    youtube: [youtube, <YouTubeIcon key={youtube}/>],
+    twitter: [twitter, <TwitterIcon key={twitter}/>],
+    facebook: [facebook, <FacebookIcon key={facebook}/>],
+    instagram: [instagram, <InstagramIcon key={instagram}/>],
+    homepage: [homepage, <LanguageIcon key={homepage}/>],
+    itunes: [itunes, <MusicNoteIcon key={itunes}/>],
+    wiki: [wiki, <QuizIcon key={wiki}/>],
+  };
   // console.log(artist);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const getArtistEvents = (artist) => {
+    const noSpecialChars: string = artist
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    axios.get('/favArtists/events', { params: { keyword: noSpecialChars } })
+      .then((responseObj) => {
+        console.log(responseObj.data.events);
+        setEvents(responseObj.data.events);
+      })
+      .then(() => {
+        console.log(events);
+      })
+      .catch(err => console.error(err));
+
+    console.log(events);
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardHeader
         title={artistName}
       />
@@ -64,7 +97,10 @@ const ArtistInfoCard = ({artistProps}) => {
         </IconButton>
         <ExpandMore
           expand={expanded}
-          onClick={handleExpandClick}
+          onClick={()=>{
+            handleExpandClick();
+            getArtistEvents(artistName);
+          }}
           aria-expanded={expanded}
           aria-label="show more"
         >
@@ -72,7 +108,7 @@ const ArtistInfoCard = ({artistProps}) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <CardContent id={artistName}>
           <Typography paragraph>Bio:</Typography>
           <Typography paragraph>
             {bio}
@@ -81,44 +117,32 @@ const ArtistInfoCard = ({artistProps}) => {
           <Typography paragraph>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={2}>
-                <Grid item>
-                  <Item>
-                    <a href={youtube}><YouTubeIcon/></a>
-                  </Item>
-                </Grid>
-                <Grid item>
-                  <Item>
-                    <a href={twitter}><TwitterIcon/></a>
-                  </Item>
-                </Grid>
-                <Grid item>
-                  <Item>
-                    <a href={facebook}><FacebookIcon/></a>
-                  </Item>
-                </Grid>
-                <Grid item>
-                  <Item>
-                    <a href={instagram}><InstagramIcon/></a>
-                  </Item>
-                </Grid>
-                <Grid item>
-                  <Item>
-                    <a href={homepage}><LanguageIcon/></a>
-                  </Item>
-                </Grid>
-                <Grid item>
-                  <Item>
-                    <a href={itunes}><MusicNoteIcon/></a>
-                  </Item>
-                </Grid>
-                <Grid item>
-                  <Item>
-                    <a href={wiki}><QuizIcon/></a>
-                  </Item>
-                </Grid>
+                {Object.keys(socials).map((social) => {
+                  return (
+                    <Grid item key={social}>
+                      <Item>
+                        <a href={socials[social][0]}>{socials[social][1]}</a>
+                      </Item>
+                    </Grid>
+                  );
+                })}
               </Grid>
             </Box>
           </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+              {
+                events.length > 1
+                  ? <Grid item id={artistName}>
+                    <Typography paragraph>Events:</Typography>
+                    { events.map((eventObj) => {
+                      return <EventCards events={eventObj} key={eventObj.id}/>;
+                    })}
+                  </Grid>
+                  : <Typography paragraph>No Upcoming Events</Typography>
+              }
+            </Grid>
+          </Box>
         </CardContent>
       </Collapse>
     </Card>

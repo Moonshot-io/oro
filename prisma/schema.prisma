@@ -86,7 +86,7 @@ model Comments {
 
 // //MODELS
 
-// // POI Model 
+// // POI Model
 // model Points {
 //   id Int @id @default(autoincrement())
 //   photo String
@@ -134,10 +134,10 @@ model Comments {
 // // ✔️POI Votes Join
 // model PoiVotes {
 //   users Users @relation(fields: [usersId], references: [id])
-//   usersId Int 
+//   usersId Int
 //   poi Points @relation(fields: [poiId], references: [id])
 //   poiId Int
-//   votes Int 
+//   votes Int
 
 //   @@id([poiId, usersId])
 // }

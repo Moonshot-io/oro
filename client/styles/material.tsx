@@ -30,7 +30,13 @@ import facebookIcon from '@mui/icons-material/Facebook';
 import quizIcon from '@mui/icons-material/Quiz';
 import instagramIcon from '@mui/icons-material/Instagram';
 import languageIcon from '@mui/icons-material/Language';
-
+import musicOffIcon from '@mui/icons-material/MusicOff';
+import buttonBase from '@mui/material/ButtonBase';
+import pushPinIcon from '@mui/icons-material/PushPin';
+import localActivityIcon from '@mui/icons-material/LocalActivity';
+import calendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import infoIcon from '@mui/icons-material/Info';
+import descriptionIcon from '@mui/icons-material/Description';
 export const Item = styled(paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#212121',
   ...theme.typography.body2,
@@ -69,3 +75,11 @@ export	const	FacebookIcon	=	facebookIcon;
 export	const	QuizIcon	=	quizIcon;
 export	const	InstagramIcon	=	instagramIcon;
 export	const	LanguageIcon	=	languageIcon;
+export const MusicOffIcon = musicOffIcon;
+export const ButtonBase = buttonBase;
+export const PushPinIcon = pushPinIcon;
+
+export const LocalActivityIcon = localActivityIcon;
+export const CalendarMonthIcon = calendarMonthIcon;
+export const InfoIcon = infoIcon;
+export const DescriptionIcon = descriptionIcon;

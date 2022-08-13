@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { UserContextProvider } from './context/UserContext';
 import { ArtistContextProvider } from './context/ArtistContext';
-import { Box, Grid, Paper } from './styles/material';
+import { Box, Grid, Paper, Container } from './styles/material';
 import { styled } from '@mui/material/styles';
 import { EventContext, EventContextProvider } from './context/EventContext';
 const rootElement = document.getElementById('root');
@@ -23,9 +23,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 root.render(
-  <Box sx={{ flexGrow: 1 }}>
+  <Box>
     <Grid container>
-      <Grid item xs={8} md={12}>
+      <Grid item xs={12} md={12}>
         <Item>
           {/* <EventContextProvider>
             <UserContextProvider>

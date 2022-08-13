@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import PushPinIcon from '@mui/icons-material/PushPin';
 import axios from 'axios';
-import EventCardDetails from '../components/EventCardDetails';
-
+import moment from 'moment';
+import { Grid,	Paper,	Typography, ButtonBase, LocalActivityIcon, CalendarMonthIcon, InfoIcon, DescriptionIcon
+} from '../styles/material';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -17,7 +14,25 @@ const Img = styled('img')({
 });
 
 
-const EventCards = ({setEvents, events, keyword}) => {
+const EventCards = ({events}) => {
+  const navigate = useNavigate();
+  let date = events.dates.start.dateTime;
+  date = moment(date).add(1, 'day').format('MMMM Do YYYY');
+  const image = events.images[0].url;
+  const id = events.id;
+  const {
+    name,
+    url,
+    info,
+  } = events;
+
+  // useEffect(() => {
+  // }, []);
+
+  const getDetails = (id) => {
+    console.log('navigate', id);
+    navigate(`/eventDetails/${id}`);
+  };
 
   return (
     <Paper
@@ -31,21 +46,36 @@ const EventCards = ({setEvents, events, keyword}) => {
       }}
     >
       <Grid container spacing={2}>
-        <div>
-          {
-            events.map((event) => (
-              <EventCardDetails
-                events={events}
-                setEvents={setEvents}
-                keyword={keyword}
-                event={event}
-                key={keyword}
-
-              />
-            ))
-          }
-        </div>
-
+        <Grid item>
+          <ButtonBase onClick={()=>{ getDetails(id); }}>
+            <InfoIcon/> More details
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={12} container>
+          <Grid item container direction="column" spacing={2}>
+            <Grid item>
+              <Img alt="alt tag" src={image} />
+            </Grid>
+            <Grid item>
+              <Typography variant="h6">{name}</Typography>
+            </Grid>
+            <Grid item>
+              <CalendarMonthIcon/>{date}
+            </Grid>
+            { info
+              ?
+              <Grid item>
+                <DescriptionIcon/>{info}
+              </Grid>
+              : <Grid item>
+                <DescriptionIcon/> No event details
+              </Grid>
+            }
+            <Grid item>
+              <LocalActivityIcon/>{url}
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
     </Paper>
   );

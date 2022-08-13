@@ -21,7 +21,7 @@ const Artists = () => {
         <Grid container spacing={2}>
           {favorites.map((artObj) => {
             return (
-              <Grid item key={artObj.id}>
+              <Grid item key={artObj.id} xs={12} sm={4} md={4}>
                 <ArtistInfoCard artistProps={artObj} key={artObj.id}/>
               </Grid>
             );
@@ -34,23 +34,3 @@ const Artists = () => {
 };
 
 export default Artists;
-
-// const getFaveArtists = (name) => {
-//   name = name | 'Adele';
-//   axios.get('/favArtists', {
-//     params: {
-//       artistName: name
-//     }
-//   })
-//     .then((artistData) => {
-//       console.log('artistEvents', artistData.data[0]);
-//       const artist = artistData.data;
-//       setArtistData((state) => {
-//         return { ...state, favArtist: artist };
-//       });
-//     })
-//     .catch((err) => {
-//       // console.log('artistEvents');
-//       // console.error(err);
-//     });
-// };
