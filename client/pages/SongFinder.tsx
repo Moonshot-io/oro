@@ -60,10 +60,10 @@ const SongFinder: React.FC = () => {
   // const [isRecording, setIsRecording] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
   const [previewSource, setPreviewSource] = useState();
-  const [song, setSong] = useState('decide to be happydecide to be happy');
-  const [artist, setArtist] = useState('MisterWivesMisterWives');
+  const [song, setSong] = useState('decide to be happy');
+  const [artist, setArtist] = useState('MisterWives');
   // const [artistImage, setArtistImage] = useState('');
-  const [albumTitle, setAlbumTitle] = useState('SUPERBLOOMSUPERBLOOM');
+  const [albumTitle, setAlbumTitle] = useState('SUPERBLOOM');
   const [albumImage, setAlbumImage] = useState('');
   const [favorited, setFavorited] = useState(false);
   const [lyrics, setLyrics] = useState([]);
@@ -85,13 +85,13 @@ const SongFinder: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get('/songs', {
-        params: {
-          artistName: artist,
-          song,
-        },,
-      })
+    console.log('get songs use effect');
+    axios.get('/songs', {
+      params: {
+        artistName: artist,
+        song,
+      }
+    })
       .then((results) => {
         // console.log(results.data)
         setLyrics(results.data);
@@ -260,7 +260,9 @@ const SongFinder: React.FC = () => {
                 <div>
                   <div id='artistName'>{artist}</div>
 
-                  <div>{favoriteButton()}</div>
+                  <div>
+                    {favoriteButton()}
+                  </div>
                 </div>
               </AccordionDetails>
             </Accordion>
@@ -276,9 +278,7 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon  />}>
-                
-                {<LibraryMusic></LibraryMusic>} Album
+              <AccordionSummary expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
               </AccordionSummary>
               <AccordionDetails>
                 <div>{albumTitle}</div>
