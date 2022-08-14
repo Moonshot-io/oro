@@ -41,7 +41,7 @@ const EventCardDetails = ({ events, event }) => {
         eventAPIid: event.eventId,
       })
       .then((response) => {
-        console.log('POST SUCCESS', response);
+        // console.log('POST SUCCESS', response);
       })
       .then(getPins)
       .catch((err) => console.error('POST ERROR', err));
@@ -51,13 +51,13 @@ const EventCardDetails = ({ events, event }) => {
     axios
       .delete('/events/list/pins', { data: { eventAPIid: event.eventId } })
       .then(() => {
-        console.log('DELETE SUCCESS');
+        // console.log('DELETE SUCCESS');
         getPins();
       })
       .catch((err) => console.error('axios delete error', err));
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (pins.includes(event.eventId)) {
       return deleteEvent();
     } else if (pins == ['foo', 'bar']) {
@@ -71,10 +71,15 @@ const EventCardDetails = ({ events, event }) => {
   const navigate = useNavigate();
   let date = event.eventDate;
   date = moment(date).add(1, 'day').format('MMMM Do YYYY');
-  const image = event.artistInfo[0].artistImages[0].url;
+  const image =
+    event.artistInfo[0].artistImages[
+      Math.floor(Math.random() * event.artistInfo[0].artistImages.length)
+    ].url;
+  const id = events.id;
+  const { name, url, info } = events;
 
   const getDetails = () => {
-    console.log('navigate', event.eventId);
+    // console.log('navigate', event.eventId);
     navigate(`/details/?id=${event.eventId}`);
   };
 
@@ -83,20 +88,20 @@ const EventCardDetails = ({ events, event }) => {
       <Paper
         sx={{
           p: 2,
-          margin: 'auto auto 10px auto auto 10px auto',
+          margin: 'auto',
           maxWidth: 500,
           flexGrow: 1,
           backgroundColor: (theme) =>
             theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         }}
       >
-        <Grid container spacing={4} alignItems='center'>
+        <Grid container spacing={4}>
           <Grid item>
             <ButtonBase
               sx={{ width: 128, height: 128 }}
-              onClick={() => getDetails()}
+              onClick={() => getDetails(event.eventId)}
             >
-              <InfoIcon />
+              <InfoIcon /> More details
               <Img alt='alt tag' src={image} />
             </ButtonBase>
           </Grid>
@@ -104,10 +109,11 @@ const EventCardDetails = ({ events, event }) => {
             <Grid item xs container direction='column' spacing={2}>
               <Grid item xs>
                 <Typography variant='body2' gutterBottom>
-                  {event.eventName}
                   {event.artistInfo.map((artist) => (
                     <div>{artist.artistName}</div>
                   ))}
+                  {event.eventName}
+                  <br />
                   {date}
                   <br />
                   {event.venueInfo.map((venue) => (
@@ -117,6 +123,9 @@ const EventCardDetails = ({ events, event }) => {
                       {venue.city}, {venue.state} {venue.postalCode}
                     </div>
                   ))}
+                  <br />
+                  {event.venueInfo.city}, {event.venueInfo.state}
+                  <br />
                 </Typography>
               </Grid>
             </Grid>
@@ -124,7 +133,9 @@ const EventCardDetails = ({ events, event }) => {
               <PushPinIcon
                 id={event.eventId}
                 color={pins.includes(event.eventId) ? 'secondary' : 'action'}
-                onClick={handleClick}
+                onClick={(e) => {
+                  handleClick(e);
+                }}
               />
             </Grid>
           </Grid>
