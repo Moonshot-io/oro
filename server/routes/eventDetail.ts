@@ -12,7 +12,7 @@ eventDetailsRouter.get('/', (req, res) => {
       const singleEvent = data._embedded.events[0];
       const eventDetails = {
         name: singleEvent.name,
-        image: singleEvent.images[0],
+        image: singleEvent.images[0].url,
         dates: {
           localDate: singleEvent.dates.start.localDate,
           localTime: singleEvent.dates.start.localTime,
