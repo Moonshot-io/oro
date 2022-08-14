@@ -51,8 +51,6 @@ const Profile: React.FC = () => {
     getUserEvents();
   }, []);
 
-  console.log(userEvents);
-
   return (
     <div>
       <div>Hello Profile</div>
