@@ -34,7 +34,7 @@ import {
 } from '@mui/icons-material';
 window.oncontextmenu = function (event: any) {
   // eslint-disable-next-line no-console
-  // // console.log(event); // prints [object PointerEvent]
+  // console.log(event); // prints [object PointerEvent]
 
   const pointerEvent = event as PointerEvent;
   // eslint-disable-next-line no-console
@@ -273,7 +273,9 @@ const SongFinder: React.FC = () => {
                 {<Lyrics></Lyrics>} Lyrics
               </AccordionSummary>
               <AccordionDetails>
-                <div id='lyrics'>{getLyrics()}</div>
+                <div id='lyrics'>
+                  {getLyrics()}
+                </div>
               </AccordionDetails>
             </Accordion>
 

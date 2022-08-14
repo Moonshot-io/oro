@@ -19,14 +19,14 @@ const pages = [
   <Link to='/eventListings' style={{ textDecoration: 'none' }}>
     Find Events
   </Link>,
-  <Link to='/eventFeed' style={{ textDecoration: 'none' }}>
-    Event Feed
-  </Link>,
   <Link to='/songFinder' style={{ textDecoration: 'none' }}>
     Song Finder
   </Link>,
   <Link to='/artists' style={{ textDecoration: 'none' }}>
     Artists
+  </Link>,
+  <Link to='/details' style={{ textDecoration: 'none' }}>
+    details
   </Link>,
   <Link to='/login' style={{ textDecoration: 'none' }}>
     Login
