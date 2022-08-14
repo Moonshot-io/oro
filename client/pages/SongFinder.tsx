@@ -2,35 +2,21 @@ import React, { useState, useEffect } from 'react';
 import MicRecorder from 'mic-recorder-to-mp3';
 import axios from 'axios';
 import {
- 
   Accordion,
- 
   AccordionSummary,
- 
   AccordionDetails,
- 
   Button,
- 
   Grid,
- 
   Fab,
-,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
- 
   Star,
- 
   Person,
- 
   MusicNote,
- 
   LibraryMusic,
- 
   Lyrics,
- 
   RemoveCircleOutline,
-,
 } from '@mui/icons-material';
 window.oncontextmenu = function (event: any) {
   // eslint-disable-next-line no-console
@@ -55,15 +41,15 @@ window.oncontextmenu = function (event: any) {
   return true;
 };
 
-const Mp3Recorder = new MicRecorder({ bitRate: 128  });
+const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 const SongFinder: React.FC = () => {
   // const [isRecording, setIsRecording] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
   const [previewSource, setPreviewSource] = useState();
-  const [song, setSong] = useState('decide to be happy');
-  const [artist, setArtist] = useState('MisterWives');
+  const [song, setSong] = useState('decide to be happydecide to be happy');
+  const [artist, setArtist] = useState('MisterWivesMisterWives');
   // const [artistImage, setArtistImage] = useState('');
-  const [albumTitle, setAlbumTitle] = useState('SUPERBLOOM');
+  const [albumTitle, setAlbumTitle] = useState('SUPERBLOOMSUPERBLOOM');
   const [albumImage, setAlbumImage] = useState('');
   const [favorited, setFavorited] = useState(false);
   const [lyrics, setLyrics] = useState([]);
@@ -80,18 +66,18 @@ const SongFinder: React.FC = () => {
         // console.log("Permission Denied");
         setIsBlocked(false);
       }
-    
     );
   }, []);
 
   useEffect(() => {
     console.log('get songs use effect');
-    axios.get('/songs', {
-      params: {
-        artistName: artist,
-        song,
-      }
-    })
+    axios
+      .get('/songs', {
+        params: {
+          artistName: artist,
+          song,
+        },
+      })
       .then((results) => {
         // console.log(results.data)
         setLyrics(results.data);
@@ -102,12 +88,11 @@ const SongFinder: React.FC = () => {
   useEffect(() => {
     if (artist) {
       axios
-        
         .get('/favArtists/artist', {
-            params: {
-              artistName: artist,
-            },,
-          })
+          params: {
+            artistName: artist,
+          },
+        })
         .then((results) => {
           // console.log(results.data);
           // console.log(results.data);
@@ -124,10 +109,9 @@ const SongFinder: React.FC = () => {
   useEffect(() => {
     if (previewSource) {
       axios
-        
         .post('/songs', {
-            data: previewSource,
-          })
+          data: previewSource,
+        })
         .then((results) => {
           // console.log(results);
           setSong(results.data.title);
@@ -157,7 +141,6 @@ const SongFinder: React.FC = () => {
 
   const stop = () => {
     Mp3Recorder.stop()
-      
       .getMp3()
       .then(([buffer, blob]) => {
         const reader = new FileReader();
@@ -187,10 +170,9 @@ const SongFinder: React.FC = () => {
   const addToFavorites = () => {
     // console.log(artist);
     axios
-      
       .post('/favArtists', {
-          artistName: artist,,
-        })
+        artistName: artist,
+      })
       .then((data) => {
         setFavorited(true);
         // console.log('success', data)
@@ -217,9 +199,7 @@ const SongFinder: React.FC = () => {
       return (
         <div>
           <Button variant='contained' size='small' onClick={removeFavorites}>
-            
             {<RemoveCircleOutline></RemoveCircleOutline>} remove from favorites
-          
           </Button>
         </div>
       );
@@ -227,9 +207,7 @@ const SongFinder: React.FC = () => {
       return (
         <div>
           <Button variant='contained' size='small' onClick={addToFavorites}>
-            
             {<Star></Star>} add to favorites
-          
           </Button>
         </div>
       );
@@ -252,35 +230,30 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon  />}>
-                
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 {<Person></Person>} Artist
               </AccordionSummary>
               <AccordionDetails>
                 <div>
                   <div id='artistName'>{artist}</div>
 
-                  <div>
-                    {favoriteButton()}
-                  </div>
+                  <div>{favoriteButton()}</div>
                 </div>
               </AccordionDetails>
             </Accordion>
 
             <Accordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon  />}>
-                
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 {<Lyrics></Lyrics>} Lyrics
               </AccordionSummary>
               <AccordionDetails>
-                <div id='lyrics'>
-                  {getLyrics()}
-                </div>
+                <div id='lyrics'>{getLyrics()}</div>
               </AccordionDetails>
             </Accordion>
 
             <Accordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                {<LibraryMusic></LibraryMusic>} Album
               </AccordionSummary>
               <AccordionDetails>
                 <div>{albumTitle}</div>
@@ -292,11 +265,9 @@ const SongFinder: React.FC = () => {
         </Grid>
       </div>
 
-      <div style={{  marginTop: '10px'  }}>
+      <div style={{ marginTop: '10px' }}>
         <Fab variant='circular' onMouseDown={start} onMouseUp={stop}>
-          
           <MusicNote></MusicNote>
-        
         </Fab>
       </div>
     </div>
