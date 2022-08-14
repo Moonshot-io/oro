@@ -20,7 +20,7 @@ import {
 } from '@mui/icons-material';
 window.oncontextmenu = function (event: any) {
   // eslint-disable-next-line no-console
-  // console.log(event); // prints [object PointerEvent]
+  // // console.log(event); // prints [object PointerEvent]
 
   const pointerEvent = event as PointerEvent;
   // eslint-disable-next-line no-console
