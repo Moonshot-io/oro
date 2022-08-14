@@ -11,7 +11,6 @@ import Login from '../pages/Login';
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';
 import { UserContextProvider } from '../context/UserContext';
-import EventDetails from '../pages/EventDetails';
 import Navbar from '../components/Navbar';
 
 const App: React.FC = () => {
@@ -23,7 +22,7 @@ const App: React.FC = () => {
         <ArtistContextProvider>
           <div>
             <header>
-              <Navbar/>
+              <Navbar />
             </header>
             <Routes>
               <Route path='/home' element={<Home />} />
@@ -32,7 +31,6 @@ const App: React.FC = () => {
               <Route path='/eventListings' element={<EventListings />} />
               <Route path='/songFinder' element={<SongFinder />} />
               <Route path='/artists' element={<Artists />} />
-              <Route path='/details' element={<EventDetails />} />
               <Route path='/login' element={<Login />} />
             </Routes>
           </div>
