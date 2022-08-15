@@ -25,6 +25,10 @@ const EventCards = ({ events }) => {
   let date = events.dates.start.dateTime;
   date = moment(date).add(1, 'day').format('MMMM Do YYYY');
   const image = events.images[0].url;
+  // console.log(image);
+  // if (!image.length) {
+  //   image = 'https://source.unsplash.com/random/?music-festival';
+  // }
   const id = events.id;
   const { name, url, info } = events;
 

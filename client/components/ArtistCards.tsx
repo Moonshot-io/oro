@@ -45,6 +45,11 @@ const ArtistInfoCard = ({artistProps}) => {
     youtube,
   } = artistProps;
 
+  // console.log(image);
+  // if (!image.length) {
+  //   image = 'https://source.unsplash.com/random/?music-festival';
+  // }
+
   const socials = {
     youtube: [youtube, <YouTubeIcon key={youtube}/>],
     twitter: [twitter, <TwitterIcon key={twitter}/>],
