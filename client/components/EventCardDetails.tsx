@@ -26,32 +26,22 @@ const EventCardDetails = ({events, event}) => {
   }, []);
 
   const getPins = () => {
-    axios
-      .get('/events/list/pins')
-      .then((responseObj) => {
-        setPins(responseObj.data.map((event) => event.eventAPIid));
+    axios.get('/events/list/pins')
+      .then(responseObj => {
+        setPins(responseObj.data.map(event => event.eventAPIid));
       })
       .catch(err => console.error('GET PINS', err));
   };
 
-  const [ pins, setPins ] = useState(['foo', 'bar']);
+  const [  pins, setPins  ] = useState(['foo', 'bar']);
 
   const postEvent = () => {
-<<<<<<< HEAD
-    axios
-      .post('/events/list/pins', {
-        userId: 1,
-        eventAPIid: event.eventId,
-      })
-      .then((response) => {
-        console.log('POST SUCCESS', response);
-=======
     axios.post('/events/list/pins', {
       userId: 1,
       eventAPIid: event.eventId
     })
       .then(response => {
-        // console.log('POST SUCCESS', response);
+        console.log('POST SUCCESS', response);
       })
       .then(getPins)
       .catch(err => console.error('POST ERROR', err));
@@ -83,14 +73,18 @@ const EventCardDetails = ({events, event}) => {
   const image = event.artistInfo[0].artistImages[Math.floor(Math.random() * (event.artistInfo[0].artistImages.length))].url;
   const id = events.id;
   const {
+   
     name,
+   
     url,
+   
     info,
+ ,
   } = events;
 
   const getDetails = () => {
-    // console.log('navigate', event.eventId);
-    navigate(`/details/?id=${event.eventId}`);
+    console.log('navigate', event.eventId);
+    navigate(`/eventDetails/?id=${event.eventId}`);
   };
 
   return (
@@ -105,6 +99,7 @@ const EventCardDetails = ({events, event}) => {
             theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         }}
       >
+
 
         <Grid container spacing={4}>
           <Grid item>

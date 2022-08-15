@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import EventCardDetails from '../components/EventCardDetails';
+import EventCardDetailDetails from '../components/EventCardDetailDetails';
+
+import eventDummy from '../../server/database/data/eventDummy';
 
 import eventDummy from '../../server/database/data/eventDummy';
 const EventListings: React.FC = () => {
@@ -28,16 +30,26 @@ const EventListings: React.FC = () => {
     axios
       .get('/events/list', { params: { keyword: keyword } })
       .then((responseObj) => {
-        // console.log('GETEVENTS RESPONSEOBJ', responseObj);
+        console.log('GETEVENTS RESPONSEOBJ', responseObj);
         setEvents(responseObj.data.events);
       })
       .catch((err) => console.error(err));
   };
   useEffect(() => {
     getEvents();
-    // console.log(keyword);
+    console.log(keyword);
     console.log('EVENTS', events);
   }, []);
+
+  const enterClick = (e) => {
+    if (e.keyCode === 13) {
+      getEvents();
+    }
+  };
+
+  const handleChange = (e) => {
+    setKeyword(e.target.value);
+  };
 
   const enterClick = (e) => {
     if (e.keyCode === 13) {
