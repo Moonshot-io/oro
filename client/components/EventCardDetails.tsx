@@ -18,6 +18,18 @@ const Img = styled('img')({
   maxHeight: '100%',
 });
 
+// const useStyles = makeStyles((theme: Theme) =>
+//     createStyles({
+//             selected: {
+//                 background: 'blue',
+//             },
+//             default:{
+//                 background: 'default',
+//             }
+//         }
+//     ),
+// );
+
 const EventCardDetails = ({ events, event }) => {
   useEffect(() => {
     getPins();
@@ -41,7 +53,7 @@ const EventCardDetails = ({ events, event }) => {
         eventAPIid: event.eventId,
       })
       .then((response) => {
-        // console.log('POST SUCCESS', response);
+        console.log('POST SUCCESS', response);
       })
       .then(getPins)
       .catch((err) => console.error('POST ERROR', err));
@@ -79,8 +91,8 @@ const EventCardDetails = ({ events, event }) => {
   const { name, url, info } = events;
 
   const getDetails = () => {
-    // console.log('navigate', event.eventId);
-    navigate(`/details/?id=${event.eventId}`);
+    console.log('navigate', event.eventId);
+    navigate(`/eventDetails/?id=${event.eventId}`);
   };
 
   return (
