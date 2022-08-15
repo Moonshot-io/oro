@@ -83,7 +83,7 @@ const EventCardDetails = ({ events, event }) => {
       <Paper
         sx={{
           p: 2,
-          margin: 'auto auto 10px auto',
+          margin: 'auto auto 10px auto auto 10px auto',
           maxWidth: 500,
           flexGrow: 1,
           backgroundColor: (theme) =>
