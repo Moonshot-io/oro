@@ -2,40 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import EventCardDetails from '../components/EventCardDetails';
->>>>>>> c56d926 (Update EventListings.tsx)
-import TextField from '@mui/material/TextField';
+
 import eventDummy from '../../server/database/data/eventDummy';
-
-
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: '#9B27B0',
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: '#9B27B0',
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#1A76D2',
-    },
-    '&:hover fieldset': {
-      borderColor: '#BDBDBD',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#9B27B0',
-    },
-  },
-});
-
-
-const fontColor = {
-  style: { color: '#9B27B0' }
-};
-
 const EventListings: React.FC = () => {
 
+  // const [events, setEvents] = useState([]);
 
-  const [ keyword, setKeyword ] = useState('');
+  // BELOW FUNCTION TO BE USED TO REMOVE PUNCTUATION FROM SEARCH QUERY
+  // const punctuationless = req.query.keyword
+  // .replace(/[']/g, '')
+  // .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")
+  // .replace(/\s{1,}/g, "+")
+  // .toLowerCase();
+
+  // EVENT LISTING URL
+  // https://www.ticketmaster.com/event/${eventIdHere}
+
+  const [ keyword, setKeyword ] = useState('jane\'s addiction');
   const [events, setEvents] = useState(eventDummy);
 
   const getEvents = () => {

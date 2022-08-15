@@ -19,7 +19,8 @@ const Img = styled('img')({
 });
 
 
-const EventCardDetails = ({ events, event }) => {
+const EventCardDetails = ({events, event}) => {
+
   useEffect(() => {
     getPins();
   }, []);
@@ -100,7 +101,7 @@ const EventCardDetails = ({ events, event }) => {
         }}
       >
 
-        <Grid container spacing={4} alignItems='center'>
+        <Grid container spacing={4} alignItems='center' alignItems='center'>
           <Grid item>
             <ButtonBase
               sx={ { width: 128, height: 128 } }
@@ -114,6 +115,7 @@ const EventCardDetails = ({ events, event }) => {
               <Grid item xs>
                 <Typography variant="body2" gutterBottom>
                   {event.eventName}
+                  {event.eventName}
                   {event.artistInfo.map(artist => (
                     <div>
                       {artist.artistName}
@@ -124,6 +126,7 @@ const EventCardDetails = ({ events, event }) => {
                   {event.venueInfo.map(venue => (
                     <div>
                       {Object.values(venue.address)}
+                      
                       <br/>
                       {venue.city}, {venue.state} {venue.postalCode}
                     </div>
