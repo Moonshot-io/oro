@@ -11,6 +11,8 @@ import Login from '../pages/Login';
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';
 import { UserContextProvider } from '../context/UserContext';
+import EventDetails from '../pages/EventDetails';
+import EventFeed from '../pages/EventFeed';
 import Navbar from '../components/Navbar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -42,6 +44,7 @@ const App: React.FC = () => {
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/notifications' element={<Notifications />} />
                 <Route path='/eventListings' element={<EventListings />} />
+                <Route path='/eventFeed' element={<EventFeed />} />
                 <Route path='/songFinder' element={<SongFinder />} />
                 <Route path='/artists' element={<Artists />} />
                 <Route path='/details' element={<EventDetails />} />
