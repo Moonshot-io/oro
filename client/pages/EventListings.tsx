@@ -43,7 +43,7 @@ const EventListings: React.FC = () => {
     axios.get('/events/list', { params: { keyword: keyword } })
 >>>>>>> c56d926 (Update EventListings.tsx)
       .then((responseObj) => {
-        console.log('GETEVENTS RESPONSEOBJ', responseObj);
+        // console.log('GETEVENTS RESPONSEOBJ', responseObj);
         setEvents(responseObj.data.events);
       })
       .catch(err => console.error(err));
@@ -51,8 +51,8 @@ const EventListings: React.FC = () => {
 
   useEffect(() => {
     getEvents();
-    console.log(keyword);
-    console.log('EVENTS', events);
+    // console.log(keyword);
+    // console.log('EVENTS', events);
   }, []);
 
   const enterClick = (e) => {

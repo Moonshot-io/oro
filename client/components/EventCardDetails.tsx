@@ -35,6 +35,7 @@ const EventCardDetails = ({ events, event }) => {
   const [pins, setPins] = useState(['foo', 'bar']);
 
   const postEvent = () => {
+<<<<<<< HEAD
     axios
       .post('/events/list/pins', {
         userId: 1,
@@ -42,6 +43,14 @@ const EventCardDetails = ({ events, event }) => {
       })
       .then((response) => {
         console.log('POST SUCCESS', response);
+=======
+    axios.post('/events/list/pins', {
+      userId: 1,
+      eventAPIid: event.eventId
+    })
+      .then(response => {
+        // console.log('POST SUCCESS', response);
+>>>>>>> 085600b (updated images for artists, commented out console logs)
       })
       .then(getPins)
       .catch((err) => console.error('POST ERROR', err));
@@ -74,7 +83,7 @@ const EventCardDetails = ({ events, event }) => {
   const image = event.artistInfo[0].artistImages[0].url;
 
   const getDetails = () => {
-    console.log('navigate', event.eventId);
+    // console.log('navigate', event.eventId);
     navigate(`/eventDetails/?id=${event.eventId}`);
   };
 
