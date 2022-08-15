@@ -30,7 +30,7 @@ const CssTextField = styled(TextField)({
 
 const fontColor = {
   style: { color: '#9B27B0' }
-}
+};
 
 const EventListings: React.FC = () => {
 
