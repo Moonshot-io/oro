@@ -44,15 +44,12 @@ const EventDetails: React.FC = () => {
   const theme = createTheme();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth='lg'>
-        <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={5} sx={{ mt: 3 }}></Grid>
-        </main>
-      </Container>
-    </ThemeProvider>
+    <Container maxWidth='lg'>
+      <main>
+        <MainFeaturedPost post={mainFeaturedPost} />
+        <Grid container spacing={5} sx={{ mt: 3 }}></Grid>
+      </main>
+    </Container>
   );
 };
 
