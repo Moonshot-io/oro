@@ -26,18 +26,6 @@ const themeDark = createTheme({
     },
   },
 });
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-const themeDark = createTheme({
-  palette: {
-    background: {
-      default: '#1A2027',
-    },
-    text: {
-      primary: '#1A2027',
-    },
-  },
-});
 
 const App: React.FC = () => {
   // update React.FC, .FC deprecated?

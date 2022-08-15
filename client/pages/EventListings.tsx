@@ -1,42 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { styled } from '@mui/material/styles';
 import EventCardDetails from '../components/EventCardDetails';
-
+import TextField from '@mui/material/TextField';
 import eventDummy from '../../server/database/data/eventDummy';
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#9B27B0',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#9B27B0',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#1A76D2',
+    },
+    '&:hover fieldset': {
+      borderColor: '#BDBDBD',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#9B27B0',
+    },
+  },
+});
+
+const fontColor = {
+  style: { color: '#9B27B0' },
+};
+
 const EventListings: React.FC = () => {
-  // const [events, setEvents] = useState([]);
-
-  // BELOW FUNCTION TO BE USED TO REMOVE PUNCTUATION FROM SEARCH QUERY
-  // const punctuationless = req.query.keyword
-  // .replace(/[']/g, '')
-  // .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")
-  // .replace(/\s{1,}/g, "+")
-  // .toLowerCase();
-
-  // EVENT LISTING URL
-  // https://www.ticketmaster.com/event/${eventIdHere}
-
-  const [keyword, setKeyword] = useState("jane's addiction");
+  const [keyword, setKeyword] = useState('');
   const [events, setEvents] = useState(eventDummy);
 
   const getEvents = () => {
-    // const punctuationless: string = keyword
-    // .replace(/[']/g, '')
-    // .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")
-    // .replace(/\s{1,}/g, "+")
-    // .toLowerCase();
     axios
       .get('/events/list', { params: { keyword: keyword } })
       .then((responseObj) => {
-        // console.log('GETEVENTS RESPONSEOBJ', responseObj);
         setEvents(responseObj.data.events);
       })
       .catch((err) => console.error(err));
   };
+
   useEffect(() => {
     getEvents();
-    // console.log(keyword);
-    // console.log('EVENTS', events);
+    console.log(keyword);
+    console.log('EVENTS', events);
   }, []);
 
   const enterClick = (e) => {
@@ -51,15 +60,21 @@ const EventListings: React.FC = () => {
 
   return (
     <div>
-      <div>Hello EventListings</div>
-      <input
-        placeholder='enter keywords here (e.g. artist, event, venue, city, state, date...'
-        type='text'
-        id=''
-        onChange={handleChange}
-        value={keyword}
-        onKeyDown={enterClick}
-      ></input>
+      <br />
+      <div>
+        <CssTextField
+          InputLabelProps={fontColor}
+          inputProps={fontColor}
+          id='keywordSearch'
+          color='secondary'
+          label='search events'
+          type='text'
+          onChange={handleChange}
+          value={keyword}
+          onKeyDown={enterClick}
+        />
+      </div>
+      <br />
       <div>
         {events.map((event) => (
           <EventCardDetails events={events} event={event} key={event.eventId} />
