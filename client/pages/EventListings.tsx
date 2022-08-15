@@ -6,14 +6,33 @@ import EventCardDetails from '../components/EventCardDetails';
 import eventDummy from '../../server/database/data/eventDummy';
 const EventListings: React.FC = () => {
 
-  // const [events, setEvents] = useState([]);
 
-  // BELOW FUNCTION TO BE USED TO REMOVE PUNCTUATION FROM SEARCH QUERY
-  // const punctuationless = req.query.keyword
-  // .replace(/[']/g, '')
-  // .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")
-  // .replace(/\s{1,}/g, "+")
-  // .toLowerCase();
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#9B27B0',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#9B27B0',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#1A76D2',
+    },
+    '&:hover fieldset': {
+      borderColor: '#BDBDBD',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#9B27B0',
+    },
+  },
+});
+
+
+const fontColor = {
+  style: { color: '#9B27B0' }
+};
+
+const EventListings: React.FC = () => {
 
   // EVENT LISTING URL
   // https://www.ticketmaster.com/event/${eventIdHere}
