@@ -74,8 +74,8 @@ const EventCardDetails = ({ events, event }) => {
   const image = event.artistInfo[0].artistImages[0].url;
 
   const getDetails = () => {
-    // console.log('navigate', event.eventId);
-    navigate(`/details/?id=${event.eventId}`);
+    console.log('navigate', event.eventId);
+    navigate(`/eventDetails/?id=${event.eventId}`);
   };
 
   return (
