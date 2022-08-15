@@ -36,11 +36,6 @@ const EventCards = ({ events }) => {
   // }, []);
 
   const getDetails = (id) => {
-<<<<<<< HEAD
-    console.log('navigate', id);
-=======
-    // console.log('navigate', id);
->>>>>>> aeecc04 (commented out console logs, updated routing to details)
     navigate(`/details/?id=${id}`);
   };
 
