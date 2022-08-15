@@ -27,10 +27,6 @@ const EventDetails: React.FC = () => {
     }
   }, []);
 
-  // const eventDetails = getEventDetails('Z7r9jZ1AdFYep');
-
-  // console.log('EVENT DATA!!!!!', eventDetails);
-
   const mainFeaturedPost: {
     description?: string;
     image?: string;
