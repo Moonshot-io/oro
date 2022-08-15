@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import EventCardDetails from '../components/EventCardDetails';
->>>>>>> c56d926 (Update EventListings.tsx)
 import TextField from '@mui/material/TextField';
 import eventDummy from '../../server/database/data/eventDummy';
 
@@ -30,13 +30,12 @@ const CssTextField = styled(TextField)({
 
 const fontColor = {
   style: { color: '#9B27B0' }
-};
+}
 
 const EventListings: React.FC = () => {
 
 
   const [ keyword, setKeyword ] = useState('');
->>>>>>> c56d926 (Update EventListings.tsx)
   const [events, setEvents] = useState(eventDummy);
 
   const getEvents = () => {
@@ -47,6 +46,8 @@ const EventListings: React.FC = () => {
       })
       .catch(err => console.error(err));
   };
+
+
 
 
   useEffect(() => {
