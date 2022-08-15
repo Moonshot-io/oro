@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Router } from 'express';
+import { EventDetailsType } from '../../client/types';
 
 const eventDetailsRouter = Router();
 eventDetailsRouter.get('/', (req, res) => {
@@ -10,7 +11,7 @@ eventDetailsRouter.get('/', (req, res) => {
     )
     .then(({ data }) => {
       const singleEvent = data._embedded.events[0];
-      const eventDetails = {
+      const eventDetails: EventDetailsType = {
         name: singleEvent.name,
         image: singleEvent.images[0].url,
         dates: {
@@ -61,7 +62,7 @@ eventDetailsRouter.get('/', (req, res) => {
             },
           },
         },
-        ticketURL: singleEvent.url,
+        ticketURL: singleEvent.outlets ? singleEvent.outlets[1].url : '',
       };
       res.status(200).send(eventDetails);
     })

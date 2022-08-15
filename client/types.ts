@@ -52,5 +52,5 @@ export interface EventDetailsType {
   image: string;
   dates: DatesForEventDetailsType;
   venues: VenuesDetailsType;
-  ticketURL: string;
+  ticketURL?: string;
 }
