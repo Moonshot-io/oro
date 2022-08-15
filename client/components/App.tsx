@@ -29,26 +29,29 @@ const App: React.FC = () => {
   // update React.FC, .FC deprecated?
 
   return (
-    <EventContextProvider>
-      <UserContextProvider>
-        <ArtistContextProvider>
-          <div>
-            <header>
-              <Navbar />
-            </header>
-            <Routes>
-              <Route path='/home' element={<Home />} />
-              <Route path='/profile' element={<Profile />} />
-              <Route path='/notifications' element={<Notifications />} />
-              <Route path='/eventListings' element={<EventListings />} />
-              <Route path='/songFinder' element={<SongFinder />} />
-              <Route path='/artists' element={<Artists />} />
-              <Route path='/login' element={<Login />} />
-            </Routes>
-          </div>
-        </ArtistContextProvider>
-      </UserContextProvider>
-    </EventContextProvider>
+    <ThemeProvider theme={themeDark}>
+      <EventContextProvider>
+        <UserContextProvider>
+          <ArtistContextProvider>
+            <div>
+              <header>
+                <Navbar />
+              </header>
+              <Routes>
+                <Route path='/home' element={<Home />} />
+                <Route path='/profile' element={<Profile />} />
+                <Route path='/notifications' element={<Notifications />} />
+                <Route path='/eventListings' element={<EventListings />} />
+                <Route path='/songFinder' element={<SongFinder />} />
+                <Route path='/artists' element={<Artists />} />
+                <Route path='/details' element={<EventDetails />} />
+                <Route path='/login' element={<Login />} />
+              </Routes>
+            </div>
+          </ArtistContextProvider>
+        </UserContextProvider>
+      </EventContextProvider>
+    </ThemeProvider>
   );
 };
 
