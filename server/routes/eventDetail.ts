@@ -23,6 +23,9 @@ eventDetailsRouter.get('/', (req, res) => {
           timeTBA: singleEvent.dates.start.timeTBA,
           noSpecificTime: singleEvent.dates.start.noSpecificTime,
         },
+        //   ageRestrictions: {
+        //     legalAgeEnforced: singleEvent.ageRestrictions.legalAgeEnforced,
+        // },
         venues: {
           name: singleEvent._embedded.venues[0].name,
           type: singleEvent._embedded.venues[0].type,

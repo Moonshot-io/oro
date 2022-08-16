@@ -37,8 +37,6 @@ const EventDetails: React.FC = () => {
     image: eventDetails?.image,
   };
 
-  const theme = createTheme();
-
   return (
     <Container maxWidth='lg'>
       <main>
