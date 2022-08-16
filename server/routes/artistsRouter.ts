@@ -2,7 +2,7 @@ import { Router } from 'express';
 import axios from 'axios';
 const artistsRouter = Router();
 import prisma from '../database/db';
-
+console.log('artist router');
 artistsRouter.get('/events', (req, res) => {
   const { keyword } = req.query;
   // console.log(keyword);
@@ -28,7 +28,7 @@ artistsRouter.get('/events', (req, res) => {
 artistsRouter.get('/', (req, res) => {
   prisma.artistFollowing.findMany()
     .then((artistData) => {
-      // console.info(artistData);
+      console.info('get artists data');
       res.status(200).send(artistData);
     })
     .catch((err) => {

@@ -7,81 +7,81 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Users {
-  id Int @id @default(autoincrement())
-  googleId Int? @unique
-  fullName String
-  profileURL String?
-  email String @unique
-  fbId String? @unique
-  instaId String? @unique
-  twitterId String? @unique
-  snapchatId String? @unique
-  notifications Notifications[]
-  eventGallery EventPhotos[]
-  userEvents UserEvents[]
+  id              Int               @id @default(autoincrement())
+  googleId        String?           @unique
+  fullName        String
+  profileURL      String?
+  email           String            @unique
+  fbId            String?           @unique
+  instaId         String?           @unique
+  twitterId       String?           @unique
+  snapchatId      String?           @unique
+  notifications   Notifications[]
+  eventGallery    EventPhotos[]
+  userEvents      UserEvents[]
   artistFollowing ArtistFollowing[]
-  comments Comments[]
+  comments        Comments[]
 }
 
 model UserEvents {
-  id Int @id @default(autoincrement())
-  user Users @relation(fields: [userId], references: [id])
-  userId Int
+  id         Int    @id @default(autoincrement())
+  user       Users  @relation(fields: [userId], references: [id])
+  userId     Int
   eventAPIid String
 }
 
 // artistFollowing Model
 model ArtistFollowing {
-  id Int @id @default(autoincrement())
-  user Users @relation(fields: [userId], references: [id])
-  userId Int
+  id         Int    @id @default(autoincrement())
+  user       Users  @relation(fields: [userId], references: [id])
+  userId     Int
   artistName String
-  bio String
-  ticketId String
-  youtube String
-  twitter String
-  facebook String
-  instagram String
-  itunes String
-  wiki String
-  homepage String
-  image String
+  bio        String
+  ticketId   String
+  youtube    String
+  twitter    String
+  facebook   String
+  instagram  String
+  itunes     String
+  wiki       String
+  homepage   String
+  image      String
 }
 
 // Notifications Model
 model Notifications {
-  id Int @id @default(autoincrement())
-  user Users @relation(fields: [userId], references: [id])
-  userId Int
-  commentId Comments[]
+  id         Int        @id @default(autoincrement())
+  user       Users      @relation(fields: [userId], references: [id])
+  userId     Int
+  commentId  Comments[]
   created_at DateTime
 }
 
 model EventPhotos {
-  id Int @id @default(autoincrement())
-  user Users @relation(fields: [userId], references: [id])
-  userId Int
-  photoUrl String
+  id          Int      @id @default(autoincrement())
+  user        Users    @relation(fields: [userId], references: [id])
+  userId      Int
+  photoUrl    String
   deleteToken String
-  eventAPIid String
-  created_at DateTime
-  comments Comments @relation(fields: [commentsId], references: [id])
-  commentsId Int
+  eventAPIid  String
+  created_at  DateTime
+  comments    Comments @relation(fields: [commentsId], references: [id])
+  commentsId  Int
 }
 
 model Comments {
-  id Int @id @default(autoincrement())
-  user Users @relation(fields: [userId], references: [id])
-  userId Int
-  photoId EventPhotos[]
-  comment String
-  notifications Notifications @relation(fields: [notificationsId], references: [id])
+  id              Int           @id @default(autoincrement())
+  user            Users         @relation(fields: [userId], references: [id])
+  userId          Int
+  photoId         EventPhotos[]
+  comment         String
+  notifications   Notifications @relation(fields: [notificationsId], references: [id])
   notificationsId Int
-  created_at DateTime
+  created_at      DateTime
 }
 
 // //MODELS
@@ -173,7 +173,6 @@ model Comments {
 
 //   @@id([usersId, friendId])
 // }
-
 
 //NOTES:
 //https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations

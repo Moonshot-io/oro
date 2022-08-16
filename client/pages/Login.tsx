@@ -5,7 +5,7 @@ import GoogleButton from 'react-google-button';
 const Login = () => {
 
   const redirectToGoogle = () => {
-    window.open('/auth/auth/google', '_self');
+    window.open('/auth/google', '_self');
   };
 
   return (
