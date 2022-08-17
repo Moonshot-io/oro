@@ -8,10 +8,15 @@ import eventListingsRouter from './routes/eventListingsRouter';
 import artistsRouter from './routes/artistsRouter';
 import songFinderRouter from './routes/songFinder';
 import eventDetailsRouter from './routes/eventDetail';
+
 import profileRouter from './routes/profile';
 
-// import app from './routes/auth';
-// import passportAuth from '../passport';
+import eventFeedRouter from './routes/eventFeed';
+import profileRouter from './routes/profile';
+import commentsRouter from './routes/comments';
+import prisma from './database/db';
+import passport from 'passport';
+
 
 // console.log('index server');
 const app = express();
@@ -27,6 +32,8 @@ app.use('/songs', songFinderRouter);
 app.use('/eventDetails', eventDetailsRouter);
 // app.use('/auth', app);
 app.use('/profile', profileRouter);
+app.use('/comments', commentsRouter);
+app.use('/eventFeed', eventFeedRouter);
 
 // AUTH-----------------
 require('dotenv').config();
