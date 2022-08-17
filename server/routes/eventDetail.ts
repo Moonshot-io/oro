@@ -65,7 +65,7 @@ eventDetailsRouter.get('/', (req, res) => {
             },
           },
         },
-        ticketURL: singleEvent.url,
+        ticketURL: singleEvent.outlets ? singleEvent.outlets[1].url : '',
       };
       res.status(200).send(eventDetails);
     })
