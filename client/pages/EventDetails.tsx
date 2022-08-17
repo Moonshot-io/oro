@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { EventContext } from '../context/EventContext';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 // import GitHubIcon from '@mui/icons-material/GitHub';
 // import FacebookIcon from '@mui/icons-material/Facebook';
 // import TwitterIcon from '@mui/icons-material/Twitter';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import Header from './Header';
 import MainFeaturedPost from '../components/MainFeaturedPost';
 import { useSearchParams } from 'react-router-dom';
