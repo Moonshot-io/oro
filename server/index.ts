@@ -77,7 +77,7 @@ app.use(
   }),
 );
 app.use(passport.initialize());
-app.use(passport.session()); // Why did you remove me Vincent?!
+app.use(passport.session()) // Why did you remove me Vincent?!
 
 // console.log('passport file');
 passport.use(new GoogleStrategy(
