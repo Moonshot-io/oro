@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Comments from '../components/Comments';
-import {Button, Fab, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton } from '../styles/material';
+import {Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton } from '../styles/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { styled } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -12,29 +12,75 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { UserContext } from '../context/UserContext';
 
-const FeedPhoto: React.FC = (props) => {
+interface FeedPhotoProps {
+  photo: {
+    userId?: string;
+    photoUrl: string;
+    eventAPIid: string;
+    id: number;
+    created_at?: string;
+    caption?: string;
+    deleteToken?: string | null;
+  },
+  updateFeed: () => void;
+}
+
+
+const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
 
-  const {photo, updateFeed} = props;
-  const [profilePic, setProfilePic] = useState('');
-  const [expanded, setExpanded] = React.useState(false);
-  const [captionText, setCaptionText] = useState('');
-  const [editor, setEditor] = useState(false);
-  const [deleterOpen, setDeleterOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [owner, setOwner] = useState(false);
+  const [profilePic, setProfilePic] = useState<string>('');
+  const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [captionText, setCaptionText] = useState<string>('');
+  const [editor, setEditor] = useState<boolean>(false);
+  const [deleterOpen, setDeleterOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [owner, setOwner] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const [feedPhoto, setFeedPhoto] = useState({});
+  const [feedPhoto, setFeedPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null}>({
+    userId: '',
+    photoUrl: '',
+    eventAPIid: '',
+    id: 0,
+    created_at: '',
+    caption: '',
+    deleteToken: null,
+  });
+  const getAvatar = (id) => {
+    axios.get('/api/eventFeed/avatar', {
+      params: {
+        userId: id,
+      }
+    })
+      .then((userProfile) => {
+        setProfilePic(userProfile.data);
+      })
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
-    if (currentUserInfo.id === photo.userId) {
+
+    updateFeed();
+  }, [profilePic]);
+  useEffect(() => {
+    if (currentUserInfo?.id === feedPhoto.userId) {
       setOwner(true);
     }
-    getAvatar();
+    getAvatar(feedPhoto.userId);
+  }, [feedPhoto]);
+  
+  useEffect(() => {
+    setFeedPhoto(photo);
   }, []);
+
+  useEffect(() => {
+    updateFeed();
+  }, [profilePic]);
 
   const ExpandMore = styled((props) => {
     const { ...other } = props;
@@ -50,17 +96,7 @@ const FeedPhoto: React.FC = (props) => {
     setExpanded(!expanded);
   };
 
-  const getAvatar = async () => {
-    await axios.get('/api/eventFeed/avatar', {
-      params: {
-        userId: photo.userId
-      }
-    })
-      .then((userProfile) => {
-        setProfilePic(userProfile.data);
-      })
-      .catch((err) => console.error(err));
-  };
+
 
   const handleEdit = (e) => {
     setCaptionText(e.target.value);
@@ -117,38 +153,18 @@ const FeedPhoto: React.FC = (props) => {
             data: {
               commentId: comment.id,
             }
-          })
-            .then(() => console.info(`${comment.id} DELETED`))
-            .catch((err) => console.error(err));
+          });
         });
-      })
-      .catch((err) => console.error(err));
+      });
   };
 
   const closeDeleter = () => {
     setDeleterOpen(false);
   };
 
-  // const getMenuOption = () => {
-  //   if (owner) {
-  //     return (
-
-  //     );
-  //   }
-  // };
-
 
   return (
     <div>
-      {/* <Modal style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} sx={{overflow: 'scroll'}} open={modalStatus} onClose={handleClose}>
-        <Box sx={{margin: 'auto', bgcolor: inverseMode, width: 400, alignItems: 'left', justifyContent: 'left', pt: '20px', outline: 'none'}}>
-
-          <img width='350px' height='auto' src={photo.photoUrl}/>
-          <Grid container sx={{mt: '20px'}}>
-            <Comments photo={photo}/>
-          </Grid>
-        </Box>
-      </Modal> */}
       <Card sx={{ maxWidth: 400, margin: 'auto', mt: '20px'}}>
         <Dialog open={deleterOpen}>
           <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your photo?</Typography>
@@ -179,13 +195,13 @@ const FeedPhoto: React.FC = (props) => {
         {/* {getMenuOption()} */}
         <CardHeader
           avatar={
-            currentUserInfo.id === photo.userId
+            currentUserInfo?.id === photo.userId
               ? <Link to='/profile'>
                 <Avatar src={profilePic} />
               </Link>
               : <Link to={`/user/?id=${photo.userId}`}>
-                  <Avatar src={profilePic} />
-                </Link>
+                <Avatar src={profilePic} />
+              </Link>
           }
           subheader={<Typography textAlign='right' sx={{ bgcolor: inverseMode }}>{moment(photo.created_at).calendar()}</Typography>}
           sx={{ bgcolor: inverseMode }}
@@ -203,7 +219,9 @@ const FeedPhoto: React.FC = (props) => {
               {!editor && photo.caption}
             </span>
 
-            {editor && <OutlinedInput onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{ bgcolor: inverseMode }} placeholder={photo.caption} value={captionText} onChange={handleEdit}/>}
+            <div>
+              {editor && <OutlinedInput onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{ bgcolor: inverseMode }} placeholder={photo.caption} value={captionText} onChange={handleEdit}/>}
+            </div>
 
             {editor &&
             <Button sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>

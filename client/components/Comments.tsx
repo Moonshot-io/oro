@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import {Fab, OutlinedInput } from '../styles/material';
+import {Fab} from '../styles/material';
 import SendIcon from '@mui/icons-material/Send';
 import Comment from './Comment';
 import { useTheme } from '@mui/material/styles';
@@ -9,16 +9,17 @@ import { CssTextField } from '../styles/material';
 
 interface UserPictureProps {
   photo: {
-    userId: string;
+    id: number;
+    userId?: string;
     photoUrl: string;
     eventAPIid: string;
-    create_at: string;
+    created_at?: string;
     caption?: string;
-    deleteToken?: string;
+    deleteToken?: string | null;
   };
-};
+}
 
-const Comments: React.FC = (props) => {
+const Comments: React.FC<UserPictureProps> = ({photo}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -27,20 +28,11 @@ const Comments: React.FC = (props) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
 
-  const {photo} = props;
 
 
   // const [commentsOpen, setCommentsOpen] = useState(false);
-  const [message, setMessage] = useState('');
-  const [comments, setComments] = useState([]);
-
-  // const showComments = () => {
-  //   if (commentsOpen) {
-  //     setCommentsOpen(false);
-  //   } else {
-  //     setCommentsOpen(true);
-  //   }
-  // };
+  const [message, setMessage] = useState<string>('');
+  const [comments, setComments] = useState<Array<{id: number; userId: string; photoUrl: string; comment: string; edited: boolean; crated_at: string;}>>([]);
 
   const fontColor = {
     style: { color: '#9B27B0' }
@@ -70,7 +62,7 @@ const Comments: React.FC = (props) => {
     await axios.post('/api/comments', {
       comment: message,
       photoUrl: photo.photoUrl,
-      userId: currentUserInfo.id,
+      userId: currentUserInfo?.id,
       ownerId: photo.userId,
 
 
@@ -93,7 +85,7 @@ const Comments: React.FC = (props) => {
 
 
   return (
-    <div>
+    <div id='comments-container'>
 
       {comments.map((comment, i) => {
         return (

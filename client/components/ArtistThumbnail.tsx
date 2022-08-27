@@ -36,7 +36,7 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) 
 
     favesObj[artistId] = true;
     window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
-    const userId = currentUserInfo.id;
+    const userId = currentUserInfo?.id;
     axios.put('/api/favArtists/update', { params: { artist: artistId, user: userId } })
       .then(() => {
         setThumbFav(true);
@@ -75,14 +75,14 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) 
 
     window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
 
-    const userId = currentUserInfo.id;
+    const userId = currentUserInfo?.id;
     axios.put('/api/favArtists/update', { params: { artist: artistId, user: userId } })
       .then(() => {
         setThumbFav(false);
-        getFaveArtists(currentUserInfo.id);
+        getFaveArtists(currentUserInfo?.id);
       })
       .catch(err => {
-        getFaveArtists(currentUserInfo.id);
+        getFaveArtists(currentUserInfo?.id);
         setThumbFav(false);
         console.error(err);
       }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import Notification from '../components/Notification';
-import {OutlinedInput, Fab, Button, Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton } from '../styles/material';
+import {Button} from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 
 const NotificationsFeed: React.FC = () => {
@@ -15,18 +15,20 @@ const NotificationsFeed: React.FC = () => {
 
   useEffect(() => {
     getNotifications();
-    axios.put('/api/notifications', {
-      userId: currentUserInfo.id,
-    })
-      .then(() => {})
-      .catch((err) => console.error(err));
   }, []);
+
+  useEffect(() => {
+    axios.put('/api/notifications', {
+      userId: currentUserInfo?.id,
+    });
+
+  }, [notifications]);
 
 
   const getNotifications = () => {
     axios.get('/api/notifications', {
       params: {
-        userId: currentUserInfo.id
+        userId: currentUserInfo?.id
       }
     })
       .then((notificationsObj) => {
@@ -40,11 +42,9 @@ const NotificationsFeed: React.FC = () => {
   const clearNotifications = () => {
     axios.delete('/api/notifications/all', {
       data: {
-        userId: currentUserInfo.id,
+        userId: currentUserInfo?.id,
       }
-    })
-      .then(() => console.info('deleted'))
-      .catch((err) => console.error(err));
+    });
     setNotifications([]);
   };
 

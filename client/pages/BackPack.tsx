@@ -77,7 +77,7 @@ const BackPack: React.FC = () => {
 
   const getUserEvents = () => {
     axios
-      .get(`/api/profile/events/${currentUserInfo.id}`)
+      .get(`/api/profile/events/${currentUserInfo?.id}`)
       .then(({ data }) => {
         setUserEvents(data);
       })

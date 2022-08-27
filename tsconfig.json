@@ -41,7 +41,7 @@
     "strictPropertyInitialization": true,
     // "noUnusedLocals": true,
     // "noEmitOnError": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true
   },

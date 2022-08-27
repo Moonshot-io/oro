@@ -49,10 +49,10 @@ eventFeedRouter.get('/avatar', async (req, res) => {
     }
   })
     .then((data) => {
-      res.status(200).send(data?.profileURL)
+      res.status(200).send(data?.profileURL);
     })
     .catch(() => {
-      res.sendStatus(500)
+      res.sendStatus(500);
 
     });
 });

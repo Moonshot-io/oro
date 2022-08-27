@@ -89,7 +89,7 @@ const Navbar = (props) => {
 
   let isLoggedIn = false;
 
-  if (currentUserInfo.id) {
+  if (currentUserInfo?.id) {
     isLoggedIn = true;
   }
 
@@ -100,7 +100,7 @@ const Navbar = (props) => {
   const AccountBlock = () => {
     const account = [
       ['/profile', <Link to='/profile' style={{ textDecoration: 'none' }} key={'profile'}>
-        <img src={profile} className='nav-icons avatar'/>Account</Link>],
+        <img src={currentUserInfo?.profileURL} className='nav-icons avatar'/>Account</Link>],
       ['/chat', <Link to='/chat' style={{ textDecoration: 'none' }} key={'chat'}> <ForumIcon className='nav-icons'/>Chat</Link>],
       ['/notifications', <Link to='/notifications' style={{ textDecoration: 'none' }} key={'notifications'}>
         <Badge badgeContent={notif} color="primary" >

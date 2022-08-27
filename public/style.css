@@ -5,3 +5,20 @@
 #profile-photo:hover {
   opacity: 1.0;
 } */
+
+#photo-dialog {
+  margin: 0px;
+}
+
+/* body {
+    background-color: #1A2027;
+    color: #1A2027;
+} */
+
+.chat-list{
+  float:left;
+}
+
+.chat{
+  float:right;
+}

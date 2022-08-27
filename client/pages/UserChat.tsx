@@ -53,7 +53,7 @@ const UserChat: React.FC = () => {
   useEffect(()=>{console.info('CHAT', document.querySelectorAll(" p > div "))}, [])
 
   // useEffect(() => {
-  //   if (!currentUserInfo.id) {
+  //   if (!currentUserInfo?.id) {
   //     navigate('/login');
   //   // } else if(currentUser) {
   //   //   setCurrentUser(currentUser);
@@ -67,7 +67,7 @@ const UserChat: React.FC = () => {
 
   //WORKING LOGIN REDIRECT
   useEffect(() => {
-    if (!currentUserInfo.id) {
+    if (!currentUserInfo?.id) {
       navigate('/login');
       }
     }, [currentUserInfo]);

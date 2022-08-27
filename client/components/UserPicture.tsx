@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Comments from './Comments';
 import {
@@ -37,7 +37,8 @@ interface UserPictureProps {
     create_at: string;
     caption?: string;
     deleteToken?: string;
-  };
+  },
+  getUserPhotos: any
 };
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -48,7 +49,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 
+<<<<<<< HEAD
 const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
+=======
+const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -81,7 +86,10 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
         setEditor(false);
         setOpen(false);
       })
+<<<<<<< HEAD
       .then(() => window.location.reload(false))
+=======
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
       .then(() => setOpenSnack(true))
       .catch((err) => console.error(err));
   };
@@ -129,6 +137,10 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
             .catch((err) => console.error(err));
         })
       })
+<<<<<<< HEAD
+=======
+      .then(getUserPhotos())
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
       .catch((err) => console.log(err));
   };
 
@@ -136,6 +148,15 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
     setDeleterOpen(false)
   };
 
+<<<<<<< HEAD
+=======
+  // useEffect(() => {
+  //   getUserPhotos();
+  // }, []);
+
+  console.log(photo);
+
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
   return (
     <div>
       <ImageListItem >
@@ -150,12 +171,20 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
       <Dialog
         open={open}
         onClose={handleClose}
+<<<<<<< HEAD
+=======
+        id='photo-dialog'
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
       >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
             {
               currentUserInfo.id === photo.userId
+<<<<<<< HEAD
               ? <><IconButton onClick={openDeleter}>
+=======
+                ? <><IconButton onClick={openDeleter}>
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
                   <Tooltip title="Delete Photo" placement="top-start">
                     <DeleteOutlinedIcon sx={{ color: inverseMode }} />
                   </Tooltip>
@@ -163,6 +192,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
                     <Tooltip title="Edit Caption" placement="top-start">
                       <EditOutlinedIcon sx={{ color: inverseMode }} />
                     </Tooltip>
+<<<<<<< HEAD
                   </IconButton></>
               : 
             <IconButton
@@ -179,12 +209,48 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
             >
               <CloseRoundedIcon />
             </IconButton>
+=======
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    color="secondary"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                      position: 'absolute',
+                      right: 8,
+                      top: 8,
+                      color: "secondary",
+                    }}
+                  >
+                    <CloseRoundedIcon />
+                  </IconButton></>
+                :
+                <IconButton
+                  edge="end"
+                  color="secondary"
+                  onClick={handleClose}
+                  aria-label="close"
+                  sx={{
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: "secondary",
+                  }}
+                >
+                  <CloseRoundedIcon />
+                </IconButton>
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
             }
           </Toolbar>
         </AppBar>
         <DialogContent sx={{ bgcolor: inverseMode, colors: inverseMode, padding: '0px' }}>
           <Box sx={{ margin: 'auto', bgcolor: inverseMode, width: 'auto', alignItems: 'center', justifyContent: 'center' }}>
+<<<<<<< HEAD
             <img width='300px' height='auto' margin='auto' src={photo.photoUrl} />
+=======
+            <img className='user-img' max-width='400px' height='auto' src={photo.photoUrl} />
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
             <Dialog open={deleterOpen} onClose={closeDeleter}>
               <Typography textAlign='center' sx={{ color: inverseMode, m: '7px' }}>Are you sure you want to delete your photo?</Typography>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>

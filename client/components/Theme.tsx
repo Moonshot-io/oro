@@ -165,6 +165,12 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   text-align: left;
 }
 
+@media only screen and (min-width: 400px){
+  .user-img {
+    
+  }
+  }
+
 `;
 interface Props {
   children?: ReactNode

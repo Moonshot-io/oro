@@ -2,20 +2,38 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 type User = {
-  id: string;
-  fullName: string;
-  profileURL: string;
-  email: string;
-  fbId: string;
-  instaId: string;
-  twitterId: string;
+  currentUserInfo: {
+    id: string;
+    fullName: string;
+    profileURL?: string;
+    email: string;
+    fbId?: string;
+    instaId?: string;
+    twitterId?: string;
+  }
 }
 
 const UserContext = React.createContext<Partial<User>>({});
 
 const UserContextProvider = ({ children }) => {
-  const [userEvents, setUserEvents] = useState([]);
-  const [currentUserInfo, setCurrentUserInfo] = useState([]);
+  const [currentUserInfo, setCurrentUserInfo] = useState
+    <{
+      id: string;
+      fullName: string;
+      profileURL?: string;
+      email: string;
+      fbId?: string;
+      instaId?: string;
+      twitterId?: string;
+    }>({
+      id: '',
+      fullName: '',
+      profileURL: '',
+      email: '',
+      fbId: '',
+      instaId: '',
+      twitterId: '',
+    });
   const [userContacts, setUserContacts] = useState([]);
 
   const logoutUser = () => {
@@ -53,7 +71,7 @@ const UserContextProvider = ({ children }) => {
 
   const getUserContacts = () => {
     if (currentUserInfo) {
-      axios.get('/api/users/allusers', { params: { id: currentUserInfo.id } })
+      axios.get('/api/users/allusers', { params: { id: currentUserInfo?.id } })
         .then(resObj => {
           setUserContacts(resObj.data);
         });
@@ -62,12 +80,9 @@ const UserContextProvider = ({ children }) => {
 
   const appProps = {
     userContacts,
-    userEvents,
-    setUserEvents,
-    // getUserEvents,
     logoutUser,
     currentUserInfo,
-    getCurrentUser
+    getCurrentUser,
   };
 
   return (

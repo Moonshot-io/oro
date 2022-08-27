@@ -36,12 +36,12 @@ const App: React.FC = () => {
   const [profilePic, setProfilePic] = useState('');
 
   const getNotifications = () => {
-    if (currentUserInfo.id === undefined) {
+    if (currentUserInfo?.id === undefined) {
       setNotifications(0);
     } else {
       axios.get('/api/notifications', {
         params: {
-          userId: currentUserInfo.id
+          userId: currentUserInfo?.id
         }
       })
         .then((notifData) => {
@@ -57,12 +57,12 @@ const App: React.FC = () => {
   };
 
   const getAvatar = async () => {
-    if (currentUserInfo.id === undefined) {
+    if (currentUserInfo?.id === undefined) {
       setProfilePic(null);
     } else {
       await axios.get('/api/eventFeed/avatar', {
         params: {
-          userId: currentUserInfo.id
+          userId: currentUserInfo?.id
         }
       })
         .catch(() => console.info('no notifications'));

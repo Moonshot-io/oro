@@ -12,7 +12,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div align='center'>
       <br></br>
       <h3>
    Please Login to Use Our App

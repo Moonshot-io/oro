@@ -1,18 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import {Paper, Modal, Box, Grid, Typography} from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import Comments from './Comments';
 import {Avatar} from '../styles/material';
 import moment from 'moment';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-const Notification: React.FC = (props) => {
+interface NotificationProps {
+  notif: {
+    commentId: number;
+    created_at: string;
+    id: number;
+    read: boolean;
+    type: string;
+    userId: string;
+  }
+}
+const Notification: React.FC<NotificationProps> = ({notif}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-  const {notif} = props;
   const [person, setPerson] = useState('');
   const [text, setText] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
@@ -64,7 +72,7 @@ const Notification: React.FC = (props) => {
 
   useEffect(() => {
     if (notif.read === false) {
-      setRead(false)
+      setRead(false);
     }
     getPerson();
     getType();

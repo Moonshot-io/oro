@@ -99,7 +99,7 @@ const Profile: React.FC = () => {
 
   const getUserEvents = () => {
     axios
-      .get(`/api/profile/events/${currentUserInfo.id}`)
+      .get(`/api/profile/events/${currentUserInfo?.id}`)
       .then(({ data }) => {
         setUserEvents(data);
       })
@@ -108,7 +108,7 @@ const Profile: React.FC = () => {
 
   const getUserPhotos = () => {
     axios
-      .get(`/api/profile/event_photos/${currentUserInfo.id}`)
+      .get(`/api/profile/event_photos/${currentUserInfo?.id}`)
       .then(({ data }) => {
         setUserPhotos(data);
       })
@@ -127,10 +127,6 @@ const Profile: React.FC = () => {
     setOpen(false);
   };
 
-  const handleSnackClick = () => {
-    setOpenSnack(true);
-  };
-
   const handleSnackClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -144,7 +140,7 @@ const Profile: React.FC = () => {
 
   const handleUpdate = async () => {
     axios
-      .put(`/api/profile/${currentUserInfo.id}`, {
+      .put(`/api/profile/${currentUserInfo?.id}`, {
         socialMedia: {
           facebook: `${facebookLink}` || null,
           instagram: `${instagramLink}` || null,
@@ -173,9 +169,13 @@ const Profile: React.FC = () => {
     getUserEvents();
   }, []);
 
+<<<<<<< HEAD
 
 
   if (currentUserInfo.id) {
+=======
+  if (currentUserInfo?.id) {
+>>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
     return (
       <div>
         <Avatar
@@ -195,7 +195,6 @@ const Profile: React.FC = () => {
           <Dialog
             open={open}
             onClose={handleClose}
-            sx={{ bgcolor: inverseMode, colors: inverseMode }}
           >
             <DialogTitle sx={{ bgcolor: inverseMode, colors: inverseMode }}>
               Update Profile
@@ -342,7 +341,7 @@ const Profile: React.FC = () => {
             </div>
           );
         })}
-        <UserPhotos photos={userPhotos} getUserEvents={getUserEvents} />
+        <UserPhotos photos={userPhotos} getUserPhotos={getUserPhotos} />
       </div>
     );
   } else if (!currentUserInfo.length) {

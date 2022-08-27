@@ -45,7 +45,7 @@ const EventCardDetails = ({events, event}) => {
 
   const postEvent = () => {
     axios.post('/api/events/list/pins', {
-      userId: currentUserInfo.id,
+      userId: currentUserInfo?.id,
       eventAPIid: event.eventId
     })
       .then(getPins)
