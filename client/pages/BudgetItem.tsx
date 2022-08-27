@@ -17,10 +17,10 @@ const fontColor = {
 function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
   return (
     <Grid container sx={{ mt: '20px' }}>
-      <Grid xs={2}>
+      <Grid item xs={2}>
         <span>{label}</span>
       </Grid>
-      <Grid xs={8}>
+      <Grid item xs={8}>
         <CssTextField
           InputLabelProps={fontColor}
           inputProps={fontColor}
@@ -32,7 +32,7 @@ function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
           fullWidth
         />
       </Grid>
-      <Grid xs={1}>
+      <Grid item xs={1}>
         <span>: ${value ?? 0}</span>
       </Grid>
     </Grid>

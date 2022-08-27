@@ -55,7 +55,6 @@ const TravelPlanner: React.FC = () => {
   const handleOpen = (content: React.SetStateAction<Location | null>) => {
     setModalContent(content);
     setOpen(true);
-    // console.log('data', content);
   };
   const handleClose = () => {
     setModalContent(null);
@@ -65,7 +64,6 @@ const TravelPlanner: React.FC = () => {
   const fetchLocations = async () => {
     const { city } = location.state as { city: string };
     const { data } = await axios.get(`/api/travelPlanner/locations/${city}`);
-    console.log('data', data.data);
     setLocations(data.data);
   };
 

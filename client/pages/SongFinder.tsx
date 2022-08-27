@@ -9,11 +9,9 @@ import { UserContext } from '../context/UserContext';
 
 window.oncontextmenu = function (event: any) {
   // eslint-disable-next-line no-console
-  // console.log(event); // prints [object PointerEvent]
 
   const pointerEvent = event as PointerEvent;
   // eslint-disable-next-line no-console
-  // console.log(`window.oncontextmenu: ${pointerEvent.pointerType}`);
 
   if (pointerEvent.pointerType === 'touch') {
     // context menu was triggerd by long press
@@ -54,11 +52,9 @@ const SongFinder: React.FC = () => {
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({audio: true},
       () => {
-        // console.log('Permission Granted');
         setIsBlocked(true);
       },
       () => {
-        // console.log("Permission Denied");
         setIsBlocked(false);
       });
   }, []);
@@ -80,13 +76,10 @@ const SongFinder: React.FC = () => {
   // }, [artist]);
 
   useEffect(() => {
-    console.log('getting artist faves');
     if (artist) {
-      console.log(artist);
       axios.get(`/api/favArtists/${currentUserInfo.id}`)
         .then((results) => {
-          console.log(results, artist);
-          results.data.allArtists.forEach((artistObj: { artistName: string; }) => {
+          results.data.allArtists.forEach((artistObj) => {
             if (artistObj.artistName === artist) {
               setFavorited(true);
             }
@@ -116,9 +109,7 @@ const SongFinder: React.FC = () => {
   }, [previewSource]);
 
   const start = () => {
-    console.log('recording---');
     if (isBlocked) {
-      // console.log('Permission Denied');
     } else {
       Mp3Recorder.start()
         .catch((e) => console.error(e));
@@ -126,7 +117,6 @@ const SongFinder: React.FC = () => {
   };
 
   const stop = () => {
-    console.log('stop recording');
     Mp3Recorder.stop().getMp3()
       .then(([blob]) => {
         const reader = new FileReader();
@@ -142,7 +132,7 @@ const SongFinder: React.FC = () => {
         setLyrics([]);
         setFavorited(false);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.error(e));
   };
 
   const getLyrics = () => {
@@ -171,7 +161,6 @@ const SongFinder: React.FC = () => {
   };
 
   const removeFavorites = () => {
-    console.log('remove from faves');
     axios.put('/api/favArtists/update', {
       params: {
         artist: artist,

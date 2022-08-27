@@ -21,31 +21,27 @@ commentsRouter.get('/', async (req, res) => {
     }
   })
     .then((data) => {
-      // console.log(data);
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     });
 });
 commentsRouter.get('/comment', async (req, res) => {
   let {commentId} = req.query;
-  // console.log(commentId);
   commentId = parseInt(commentId);
-  // console.log(typeof commentId);
 
   await prisma.comments.findUnique({
     where: {
-      id: commentId, //<<<<<<<<
+      id: commentId,
     }
   })
     .then((data) => {
-      // console.log(data);
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     });
 });
@@ -61,12 +57,11 @@ commentsRouter.post('/', async (req, res) => {
     }
   })
     .then(async (data) => {
-      // console.log(data);
       res.status(200).send(data);
 
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     });
 });

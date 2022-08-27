@@ -12,27 +12,18 @@ const Artists = () => {
   const artistContext = useContext(ArtistContext);
   const {artistData, getFaveArtists } = artistContext;
   const {allArtists, artists} = artistData;
-  const [singleArtist, setSingleArtist] = useState(null);
-  const [favs, setFaves] = useState(true);
+  const [singleArtist, setSingleArtist] = useState('none');
 
-  const updateSingle = (name) => {
+  const updateSingle = (name: string) => {
     setSingleArtist(name);
   };
 
   const resetSingle = () => {
-    setSingleArtist(null);
+    setSingleArtist('none');
   };
   useEffect(() => {
     getFaveArtists(currentUserInfo.id);
   }, []);
-
-  useEffect(() => {
-    console.log('added faves');
-  }, [favs]);
-
-  const favUpdated = ((bool) => {
-    setFaves(bool);
-  });
 
   if (currentUserInfo.id === undefined) {
     return (
@@ -41,9 +32,9 @@ const Artists = () => {
         <Login/>
       </div>
     );
-  } else if (singleArtist !== null) {
+  } else if (singleArtist !== 'none' && allArtists) {
     const current = allArtists.filter((obj) => obj.artistName == singleArtist);
-    if (!current[0].image.length) {
+    if (!current[0].image) {
       const musicImages = ['music', 'band', 'concert', 'music-festival', 'rock-concert', 'musical', 'guitar', 'singer', 'opera'];
       current.image = `https://source.unsplash.com/random/?${musicImages[Math.floor(Math.random() * musicImages.length + 1)]}`;
     }
@@ -57,7 +48,6 @@ const Artists = () => {
               <ArtistInfoCard
                 resetSingle={resetSingle}
                 artistProps={current[0]}
-                getFaveArtists={getFaveArtists}
                 key={`artistObj${current[0].artistName}`}/>
             </Grid>
           </Grid>
@@ -65,6 +55,11 @@ const Artists = () => {
       </div>
     );
   } else if (artists === true && Array.isArray(allArtists)) {
+    const favesObj = {};
+    allArtists.forEach((child) => {
+      favesObj[child.id] = true;
+      window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
+    });
     return (
       <div>
         <h1>Artists</h1>
@@ -83,7 +78,6 @@ const Artists = () => {
                     updateSingle={updateSingle}
                     artistProps={artObj}
                     favorite={artists}
-                    favUpdated={favUpdated}
                     getFaveArtists={getFaveArtists}
                     key={`artistObj${index}`}/>
                 </Grid>
@@ -110,6 +104,8 @@ const Artists = () => {
               return (
                 <Grid item key={`art${index}`} xs={12} sm={4} md={3}>
                   <ArtistThumbnail
+                    favorite={artists}
+                    getFaveArtists={getFaveArtists}
                     updateSingle={updateSingle}
                     artistProps={artObj} key={`artistObj${index}`}/>
                 </Grid>

@@ -45,13 +45,12 @@ const UserChat: React.FC = () => {
   const [ currentChat, setCurrentChat ] = useState(undefined);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log('CURRENTUSER', currentUser);
     if(currentUser){
-        socket.current = io('http://localhost:5000');
+        socket.current = io('/');
         socket.current.emit('add-user', currentUser.id)
     }
   }, [currentUser]);
-  useEffect(()=>{console.log('CHAT', document.querySelectorAll(" p > div "))}, [])
+  useEffect(()=>{console.info('CHAT', document.querySelectorAll(" p > div "))}, [])
 
   // useEffect(() => {
   //   if (!currentUserInfo.id) {

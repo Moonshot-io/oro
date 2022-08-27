@@ -17,7 +17,7 @@ const OtherUser: React.FC = () => {
     googleId: '',
     fullName: '',
     profileURL: '',
-    fbId: '', 
+    fbId: '',
     instaId: '',
     twitterId: '',
   });

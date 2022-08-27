@@ -21,7 +21,6 @@ const Comment: React.FC = (props) => {
   const [profilePic, setProfilePic] = useState('');
 
   useEffect(() => {
-    console.log(comment)
     getAvatar();
   }, []);
 
@@ -51,7 +50,6 @@ const Comment: React.FC = (props) => {
   };
 
   const handleEdit = (e) => {
-    console.log(e.target.value);
     setCommentText(e.target.value);
   }
 

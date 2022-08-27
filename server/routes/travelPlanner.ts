@@ -23,7 +23,6 @@ travelPlannerRouter.get('/location/:locationId', (req, res) => {
   axios
     .get(url)
     .then(({ data }) => {
-      //   console.log(data);
       res.status(200).send(data);
     })
     .catch((error) => {

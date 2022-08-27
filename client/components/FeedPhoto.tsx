@@ -110,7 +110,7 @@ const FeedPhoto: React.FC = (props) => {
       }
     })
       .then((commentData) => {
-        setDeleterOpen(false)
+        setDeleterOpen(false);
         updateFeed();
         commentData.data.forEach((comment) => {
           axios.delete('/api/notifications', {
@@ -118,19 +118,18 @@ const FeedPhoto: React.FC = (props) => {
               commentId: comment.id,
             }
           })
-            .then(() => console.log(`${comment.id} DELETED`))
+            .then(() => console.info(`${comment.id} DELETED`))
             .catch((err) => console.error(err));
-        })
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const closeDeleter = () => {
-    setDeleterOpen(false)
+    setDeleterOpen(false);
   };
 
   // const getMenuOption = () => {
-  //   console.log('menuuuu');
   //   if (owner) {
   //     return (
 

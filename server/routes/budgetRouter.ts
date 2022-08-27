@@ -5,7 +5,6 @@ import { Router } from 'express';
 const budgetRouter = Router();
 budgetRouter.post('/events/budget/:_id', async (req, res) => {
   const { eventId, tickets, food, drinks, parking, merch, travel } = req.body;
-  console.log(req.body);
   await prisma.budget
     .create({
       data: {
@@ -18,11 +17,10 @@ budgetRouter.post('/events/budget/:_id', async (req, res) => {
       },
     })
     .then((data) => {
-      console.log(data);
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     });
 });

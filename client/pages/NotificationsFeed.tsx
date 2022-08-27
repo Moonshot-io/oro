@@ -43,7 +43,7 @@ const NotificationsFeed: React.FC = () => {
         userId: currentUserInfo.id,
       }
     })
-      .then(() => console.log('deleted'))
+      .then(() => console.info('deleted'))
       .catch((err) => console.error(err));
     setNotifications([]);
   };

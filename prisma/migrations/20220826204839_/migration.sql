@@ -1,19 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Post` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Post" DROP CONSTRAINT "Post_authorId_fkey";
-
--- DropTable
-DROP TABLE "Post";
-
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "Messages" (
     "id" SERIAL NOT NULL,
@@ -152,9 +136,6 @@ CREATE UNIQUE INDEX "Users_snapchatId_key" ON "Users"("snapchatId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ArtistFollowing_artistName_key" ON "ArtistFollowing"("artistName");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Comments_photoUrl_key" ON "Comments"("photoUrl");
 
 -- AddForeignKey
 ALTER TABLE "Messages" ADD CONSTRAINT "Messages_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

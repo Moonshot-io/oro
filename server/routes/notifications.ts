@@ -14,11 +14,10 @@ notificationsRouter.get('/', async (req, res) => {
     }
   })
     .then((data) => {
-      // console.log(data);
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     });
 
@@ -29,7 +28,7 @@ notificationsRouter.post('/', async (req, res) => {
   await prisma.notifications.create({
     data: {
       userId: ownerId,
-      commentId, 
+      commentId,
       type: 'comment',
     }
   }).then((data) => {
@@ -50,13 +49,12 @@ notificationsRouter.put('/', async (req, res) => {
     }
   })
     .then((data) => {
-      console.log(data);
       res.sendStatus(200);
     })
     .catch((err) => {
       res.sendStatus(500);
-    })
-})
+    });
+});
 
 notificationsRouter.delete('/all', async (req, res) => {
   const {userId} = req.body;
@@ -70,10 +68,10 @@ notificationsRouter.delete('/all', async (req, res) => {
       res.sendStatus(200);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
-    })
-})
+    });
+});
 
 notificationsRouter.delete('/', async (req, res) => {
   const {commentId} = req.body;
@@ -92,14 +90,14 @@ notificationsRouter.delete('/', async (req, res) => {
           res.sendStatus(200);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           res.sendStatus(500);
-        })
+        });
 
     })
     .catch((err) => {
-      console.log(err);
-    })
-})
+      console.error(err);
+    });
+});
 
 export default notificationsRouter;

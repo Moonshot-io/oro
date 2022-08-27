@@ -59,7 +59,6 @@ eventListingsRouter.get('/list', (req, res) => {
 });
 
 eventListingsRouter.post('/list/pins', (req, res) => {
-  // console.log('POST REQ', req.body, 'POST RES', res)
   const pinObj = req.body;
   prisma.userEvents.create({
     data: pinObj

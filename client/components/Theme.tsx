@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactNode } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { StyledProvider } from '../styles/material';
 import { ThemeContext } from '../context/ThemeContext';
@@ -166,9 +166,11 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 }
 
 `;
-
+interface Props {
+  children?: ReactNode
+}
 // Global Theme Export
-export const Theme = ({ children }) => {
+export const Theme = ({ children }: Props) => {
   const themeContext = useContext(ThemeContext);
   const {mode} = themeContext;
   return (

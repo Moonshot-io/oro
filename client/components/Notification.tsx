@@ -47,7 +47,6 @@ const Notification: React.FC = (props) => {
       .then((commentData) => {
         axios.get(`/api/profile/${commentData.data.userId}`)
           .then((commenterData) => {
-            console.log(commenterData);
             setPerson(commenterData.data.fullName);
             setUserAvatar(commenterData.data.profileURL);
             setPhotoUrl(commentData.data.photoUrl);

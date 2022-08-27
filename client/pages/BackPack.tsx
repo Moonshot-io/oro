@@ -57,7 +57,6 @@ const formatCurrency = (number) => {
 
 const BackPack: React.FC = () => {
   const globalData = useContext(UserContext);
-  console.log('global data here', globalData);
   let { currentUserInfo } = globalData;
 
   const [userEvents, setUserEvents] = useState([]);
@@ -72,7 +71,6 @@ const BackPack: React.FC = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  //console.log('currentUserInfo', currentUserInfo);
   useEffect(() => {
     getUserEvents();
   }, []);
@@ -81,7 +79,6 @@ const BackPack: React.FC = () => {
     axios
       .get(`/api/profile/events/${currentUserInfo.id}`)
       .then(({ data }) => {
-        console.log(data);
         setUserEvents(data);
       })
       .catch((err) => console.error(err));
@@ -139,10 +136,10 @@ const EventItem = function ({
     try {
       axios
         .post(url, budgetList)
-        .then((resp) => console.log('Successful budget'))
-        .catch((err) => console.log(err));
+        .then((resp) => console.info('Successful budget'))
+        .catch((err) => console.error(err));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (

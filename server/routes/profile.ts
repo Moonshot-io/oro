@@ -27,7 +27,6 @@ profileRouter.get('/events/:_id', (req, res) => {
           return userEventsArr;
         }))
         .then(eventsArr => {
-          // console.log(eventsArr);
           res.status(200).send(eventsArr);
         })
         .catch(err => console.error(err));
@@ -70,7 +69,6 @@ profileRouter.put('/:_id', (req, _res) => {
   const { _id } = req.params;
   const { socialMedia } = req.body;
   const { facebook, instagram, twitter } = socialMedia;
-  console.log(_id, socialMedia);
   prisma.users.update({
     where: { id: _id },
     data: { fbId: facebook, instaId: instagram, twitterId: twitter },

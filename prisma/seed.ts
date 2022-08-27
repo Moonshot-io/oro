@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import prisma from '../server/database/db';
 
 const generateSeed = async () => {

@@ -99,7 +99,7 @@ model Comments {
   id         Int      @id @default(autoincrement())
   user       Users    @relation(fields: [userId], references: [id])
   userId     String
-  photoUrl   String   
+  photoUrl   String
   comment    String
   edited     Boolean  @default(false)
   created_at DateTime @default(now())
@@ -107,8 +107,6 @@ model Comments {
 
 model Budget {
   id           Int            @id @default(autoincrement())
-  // event        UserEvents     @relation(fields: [eventId], references: [id])
-  // eventId      Int
   Tickets      Int
   Food         Int
   Drinks       Int
@@ -127,122 +125,5 @@ model EventBudgets {
   @@id([eventId, budgetId])
 }
 
-// //MODELS
-
-// model ArtistUsersJoin {
-//   user     Users           @relation(fields: [userId], references: [id])
-//   userId   String
-//   artist   ArtistFollowing @relation(fields: [artistId], references: [id])
-//   artistId Int
-
-//   @@id([userId, artistId])
-// }
-
-// artistFollowing Model
-// model ArtistFollowing {
-//   id         Int               @id @default(autoincrement())
-//   users      ArtistUsersJoin[]
-//   artistName String
-//   bio        String
-//   ticketId   String
-//   youtube    String
-//   twitter    String
-//   facebook   String
-//   instagram  String
-//   itunes     String
-//   wiki       String
-//   homepage   String
-//   image      String
-// }
-
-// // POI Model
-// model Points {
-//   id Int @id @default(autoincrement())
-//   photo String
-//   title String @unique
-//   description String
-//   address String
-//   date DateTime
-//   totalBudget Int
-//   currentFunds Int
-//   tags Tags[]
-//   tagsId Int
-//   trips PoiTrips[]
-//   votes PoiVotes[]
-//   users PoiUsers[]
-// }
-
-// model Trips {
-//   id Int @id @default(autoincrement())
-//   photo String
-//   title String @unique
-//   description String
-//   address String
-//   startDate DateTime
-//   endDate DateTime
-//   totalBudget Int
-//   currentFunds Int
-//   owner Users @relation(fields: [ownerId], references: [id])
-//   ownerId Int
-//   attendees TripsUsers[]
-//   poi PoiTrips[]
-//   status String
-// }
-
-// // RELATION TABLES ------------------
-// // ✔️POI TRIPS
-// model PoiTrips {
-//   trips Trips @relation(fields: [tripsId], references: [id])
-//   tripsId Int
-//   poi Points @relation(fields: [poiId], references: [id])
-//   poiId Int
-
-//   @@id([tripsId, poiId])
-// }
-
-// // ✔️POI Votes Join
-// model PoiVotes {
-//   users Users @relation(fields: [usersId], references: [id])
-//   usersId Int
-//   poi Points @relation(fields: [poiId], references: [id])
-//   poiId Int
-//   votes Int
-
-//   @@id([poiId, usersId])
-// }
-
-// // ✔️ POI Users Join
-// model PoiUsers {
-//   users Users @relation(fields: [usersId], references: [id])
-//   usersId Int
-//   poi Points @relation(fields: [poiId], references: [id])
-//   poiId Int
-
-//   @@id([usersId, poiId])
-// }
-
-// // ✔️Users Trips Join
-// model TripsUsers {
-//   users Users @relation(fields: [usersId], references: [id])
-//   usersId Int
-//   trips Trips @relation(fields: [tripsId], references: [id])
-//   tripsId Int
-//   contributions Int
-
-//   @@id([usersId, tripsId])
-// }
-
-// // Friends Join Table
-// model FriendsJoin {
-//   sendee Users @relation("sendee", fields: [usersId], references: [id])
-//   usersId Int
-//   friends Users @relation("friends", fields: [friendId], references: [id])
-//   friendId Int
-//   status String
-
-//   @@id([usersId, friendId])
-// }
-
 //NOTES:
 //https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations
-//

@@ -28,7 +28,7 @@ const EventFeed: React.FC = () => {
   const [caption, setCaption] = useState('');
 
   const eventId = searchParams.get('id');
-  let eventPhotos = [];
+  const eventPhotos = [];
 
   useEffect(() => {
     if (photo) {
@@ -65,7 +65,7 @@ const EventFeed: React.FC = () => {
         setEventName(eventData.data.name);
       })
       .catch((err) => console.error(err));
-  }
+  };
 
   useEffect(() => {
     getEvent();
@@ -90,8 +90,9 @@ const EventFeed: React.FC = () => {
         userId: currentUserInfo.id,
         caption,
       })
-        .then(() => {
+        .then((data) => {
           updateFeed();
+
         })
         .catch((err) => console.error(err));
 

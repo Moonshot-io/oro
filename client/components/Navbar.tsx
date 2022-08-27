@@ -180,14 +180,13 @@ const Navbar = (props) => {
                 <Divider style={{width: '100%', height: '1%'}} sx={{ borderColor: iconColors, opacity: 0.2 }}/>
                 {
                   isLoggedIn
-                    ? <>{AccountBlock()}
+                    ? <div>{AccountBlock()}
                       <MenuItem onClick={() => { isLoggedIn ? handleCloseNavMenu('/home') : handleCloseNavMenu('/login'); }}>
                         <Link to='/home' style={{ textDecoration: 'none' }} key={'logout'} onClick={logoutUser}>
                           <LogoutIcon className='nav-icons'/>
                           Logout
                         </Link>
-                      </MenuItem>
-                    </>
+                      </MenuItem> </div>
                     :
                     <MenuItem onClick={() => { isLoggedIn ? handleCloseNavMenu('/home') : handleCloseNavMenu('/login'); }}>
                       <Link to='/login' style={{ textDecoration: 'none' }} key={'login'}>

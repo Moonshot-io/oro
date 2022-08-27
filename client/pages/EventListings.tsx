@@ -29,8 +29,6 @@ const EventListings: React.FC = () => {
 
   useEffect(() => {
     getEvents();
-    // console.log(keyword);
-    // console.log('EVENTS', events);
   }, []);
 
   const enterClick = (e) => {

@@ -22,7 +22,6 @@ import { EventContextProvider } from '../context/EventContext';
 // import { ThemeContext } from '../context/ThemeContext';
 import { Container } from '../components/Container';
 import BackPack from '../pages/BackPack';
-// import { io } from 'socket.io-client';
 import { UserContext } from '../context/UserContext';
 
 // https://styled-components.com/docs/api#createglobalstyle
@@ -52,14 +51,6 @@ const App: React.FC = () => {
     }
   };
 
-
-  // useEffect(() => {
-  //   console.log(currentUserInfo.id);
-  // }, []);
-
-  // useEffect(() => {
-  //   // setSocket(io('http://localhost:3000'));
-  // }, [currentUser]);
   const navClick = () => {
     getNotifications();
     getAvatar();
@@ -74,11 +65,7 @@ const App: React.FC = () => {
           userId: currentUserInfo.id
         }
       })
-        .then((userProfile) => {
-          setProfilePic(userProfile.data);
-        })
-        .catch(() => console.log('no notifications'));
-
+        .catch(() => console.info('no notifications'));
     }
   };
 

@@ -26,12 +26,8 @@ const EventDetails: React.FC = () => {
   const inverseMode = theme.palette.secondary.main;
 
   const getDetails = () => {
-    // console.log('navigate', event.eventId);
-    // navigate(`/eventFeed/?id=${event.eventId}`);
     navigate(`/eventFeed/?id=${idEvent}`);
   };
-
-  // console.log('THIS IS THE ID', idEvent);
 
   useEffect(() => {
     if (idEvent !== null) {
