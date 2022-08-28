@@ -9,6 +9,7 @@ import menuIcon from '@mui/icons-material/Menu';
 import menu from '@mui/material/Menu';
 import box from '@mui/material/Box';
 import drawer from '@mui/material/Drawer';
+import listItemAvatar from '@mui/material/ListItemAvatar';
 import button from '@mui/material/Button';
 import list from '@mui/material/List';
 import divider from '@mui/material/Divider';
@@ -78,13 +79,16 @@ import arrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import nightlightIcon from '@mui/icons-material/Nightlight';
 import priceChangeIcon from '@mui/icons-material/PriceChange';
 import forumIcon from '@mui/icons-material/Forum';
-
 import loginIcon from '@mui/icons-material/Login';
 import arrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import emailIcon from '@mui/icons-material/Email';
 import logoutIcon from '@mui/icons-material/Logout';
+<<<<<<< HEAD
+export const ListItemAvatar = listItemAvatar;
+=======
 
 
+>>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
 export const AccountCircleIcon = accountCircleIcon;
 export const ArrowCircleUpIcon = arrowCircleUpIcon;
 export const LogoutIcon = logoutIcon;
