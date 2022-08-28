@@ -50,6 +50,7 @@ import infoIcon from '@mui/icons-material/Info';
 import descriptionIcon from '@mui/icons-material/Description';
 import arrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import muiAccordion from '@mui/material/Accordion';
+import accountCircleIcon from '@mui/icons-material/AccountCircle';
 import muiAccordionSummary from '@mui/material/AccordionSummary';
 import muiAccordionDetails from '@mui/material/AccordionDetails';
 import outlinedInput from '@mui/material/OutlinedInput';
@@ -84,6 +85,7 @@ import emailIcon from '@mui/icons-material/Email';
 import logoutIcon from '@mui/icons-material/Logout';
 
 
+export const AccountCircleIcon = accountCircleIcon;
 export const ArrowCircleUpIcon = arrowCircleUpIcon;
 export const LogoutIcon = logoutIcon;
 export const EmailIcon = emailIcon;
