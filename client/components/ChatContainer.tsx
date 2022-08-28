@@ -65,41 +65,6 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth'});
   }, [messages]);
 
-  //   return (
-  //     <div>
-  //       <React.Fragment>
-  //       <Container >
-  //         <Box sx={{ bgcolor: '#cfe8fc', height: '55vh' }}>
-  //           {/* <Messages/> */}
-  //           <ChatBox>
-  //           <div className="chat-messages">
-
-  //           {
-  //             messages.map((message, index) => {
-  //               return (
-  //                 <div key={uuidv4()} ref={scrollRef}>
-  //                   <div className={`message ${
-  //                     message.fromSelf ? 'sent' : 'received'
-  //                     }`}
-  //                   >
-  //                     <div className='content'>
-  //                       {message.text}
-  //                     </div>
-  //                   </div>
-  //                 </div>
-  //               )
-  //             })
-  //           }
-  //               </div>
-  //           </ChatBox>
-  //         </Box>
-  //         <ChatInput handleSendMsg={handleSendMsg} />
-  //       </Container>
-  //     </React.Fragment>
-  //     </div>
-  //   );
-  // };
-
   return (
     <Box>
 
@@ -117,8 +82,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
             </div>
           </div>
           {/* <Logout /> */}
-        </div> *
-        <div className="chat-messages">
+        </div> <div className="chat-messages">
           {messages.map((message) => {
             return (
               <div ref={scrollRef} key={uuidv4()}>
@@ -147,7 +111,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: 80vh;
+    height: 50vh;
     overflow: auto;
     .message {
       display: flex;
