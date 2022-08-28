@@ -70,7 +70,7 @@ const BackPack: React.FC = () => {
     axios
       .get(`/api/profile/events/${currentUserInfo?.id}`)
       .then(({ data }) => {
-        console.log('event data', data);
+        // console.log('event data', data);
         setUserEvents(data);
       })
       .catch((err) => console.error(err));
@@ -148,7 +148,7 @@ const EventItem = function ({
       userEventId: event.userEventId,
     };
     try {
-      console.log('budget data', data);
+      // console.log('budget data', data);
       axios
         .post(url, data)
         .then((resp) => console.info('Successful budget'))
