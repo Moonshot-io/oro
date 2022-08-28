@@ -27,7 +27,7 @@ Located at the top right of every page is a navigation burger menu which contain
       This is a more expanded page for specific events that the user is interested in. In it, users will find more information regarding the location, dates, and ticket purchasing information. The user also still has the ability to pin the event from this page.
 
       From here, the user can then navigate to either the Travel Information's page or the Event Feed.
-
+    
       - ### Travel Information
         If a user wishes to see what local travel accommodations are available for the location of their events, they will have access to all hotels in the area of the event with their ratings along with features and amenities.
       - ### Event Feed
@@ -46,7 +46,7 @@ Located at the top right of every page is a navigation burger menu which contain
 
   If users do not have any artists currently liked, they will be provided a list of recommended artists to follow to get started.
 
-- ### ACcount
+- ### Account 
   On this page, a user can see their current profile. Here, they can update their social media links for public viewing. It will also contain their upcoming events that they've pinned along with any photos they have posted on Event Feeds. Clicking a photo from the feed will allow them to directly see the comments on their photo.
 
 - ### Chat
@@ -73,14 +73,19 @@ Located at the top right of every page is a navigation burger menu which contain
 - eslint - Linter
 - Webpack - Module Bundler
 - TypeScript - javascript transpiler
+- NGinX
 
 ### database:
 
-We have a PostgreSQL database. We have all of our models located in prisma/schema.prisma.
+We have a PostgreSQL database. We have all of our models located in prisma/schema.prisma. 
 
 ### server:
 
-We have an express server. It is set up in server/index.js. All routes, with the exception of the birdSighting and BirdList routes, are stored in server/index.js. The bird routes are stored in server/routes.
+We have an express server. It is set up in server/index.ts. All server sided files are being transpiled with TypeScript into the /dist folder.
+
+### client:
+
+Our client sided files are being bundled via webpack into our public/bundle.js file.
 
 ### authentication
 
@@ -90,41 +95,50 @@ Our authentication is handled with oauth and passport. Our passport and google s
 
 We used several external apis for this project:
 
-- Cloudinary API - https://cloudinary.com/documentation/image_upload_api_reference
-   This api allows users to upload photos onto their profiles and on event profiles. It requires credentials, but the entire setup is free for what we've used in this project.
+- TicketMaster - Provided event information in a response object based on a variety of searchable criteria. Used to render information in our Event listings, Event Details, Event Feed, and  Favorite Artists features.
 
+- last.fm - Used to receive information pertaining to specific artists to receive their bio information to display in the Favorite Artists page.
 
-### front-end
+- AUDD.io - accurate music recognition API. Receives an audio file recorded from the users device and returns an object with several key information (song name, artist name, lyric information, album titles, etc.) regarding that song that is used in the SongFinder page. They have a short trial period to try it out and afterwards a payment plan is required. However, their Indie plan was $5 for 1000 requests for the month, which was much more than what we needed for our purposes.
 
-The front-end was built using React and React Router. In App.jsx we initialize our event data so that upon refresh of event profile, the most recent event data is rendered. In that same file we route our links and routes for the app.
+- Cloudinary - https://cloudinary.com/documentation/image_upload_api_reference
+   Media hosting site used to create url links for user-uploaded photos in the Event Feed and to create audio files for the SongFinder feature. It requires credentials, but the entire setup is free for what we've used in this project.
 
-The HashRouter can be found in client/index.jsx
-
-The styling is found in main.css and mapStyles.js.
+- TripAdvisor - API with hotel/travel information used to display hotel information based on location on our travel planning page.
 
 
 # Dev Setup:
 
-### Environment Variables Needed
+## Environment Variables Needed
 
-#### Google Auth
-- GOOGLE_CLIENT_ID=
-- GOOGLE_CLIENT_SECRET=
+- #### Google Auth
+  - GOOGLE_CLIENT_ID=
+  - GOOGLE_CLIENT_SECRET=
+  - GOOGLE_CALLBACK_URL=
 
-#### Cloudinary & Image Hosting
-- CLOUDINARY_NAME=
-- CLOUDINARY_API_KEY=
-- CLOUDINARY_API_SECRET=
-- CLOUDINARY_URL=
+- #### Cloudinary & Image Hosting
+  - CLOUDINARY_NAME=
+  - CLOUDINARY_API_KEY=
+  - CLOUDINARY_API_SECRET=
+  - CLOUDINARY_URL=
 
-#### AWS RDS Database (online DB)
-- RDS_HOSTNAME=
-- RDS_USERNAME=
-- RDS_PASSWORD=
-- RDS_PORT=
 
-#### Google Maps API
-- REACT_APP_GOOGLE_MAPS_API_KEY=
+- #### AWS RDS Database (online DB)
+  - DATABASE_URL=
+  - DATABASE_USERNAME=
+  - DATABASE_PASSWORD=
+  - DATABASE_PORT=
+
+- #### AUDD.io
+  - AUDD_TOKEN=
+
+- #### LASTFM (artist bio)
+  - LASTFM_API_KEY=
+  - LASTFM_SECRET=
+
+- ### Trip Advisor (hotel/travel)
+  - TRIP_ADVISOR_API_KEY=
+
 
 ## Google OAuth
 
@@ -147,24 +161,16 @@ Google Oauth requires a google cloud account. First create your account and then
 - First fork the repo and clone it to your local machine.
 - Collect all env keys
 - Run 'npm install' to install all dependencies
-- (if using local mysql) Open mysql, create and use a database called 'TakeAHike'
 - (if using RDS) Update .env to match your RDS specs
-- Run 'npm run dev' to start Webpack
-- Run 'npm run seed' to seed Database
+- Run 'npm run type' to start TypeScript transpiler
+- Run 'npm run build' to run Webpack bundler
 - Run 'npm start' to run the server
+- (optional) run npx prisma studio to see the database in browser.
 
 ### Known Bugs
+  - Event Feed
+    - When users post photos, their avatars are rendered incorrectly. The app will display the incorrect user. Also this allows for users to edit/delete photos that are not theirs.
 
-- If you input a non-land based coordinate when searching for Events, it will return an error.
-- If a user logs in, the redirect does not send the user back to the app, instead you have to hit back in the browser.
-- The user profile pulls the first record from the database, not necessarily the 'logged in' user.
 
 
 ## App Mockups
-![Trips](mockups/takeahike-trips.png)
-![Packing List](mockups/takeahike-quartermaster.png)
-![Checklist](mockups/takeahike-checklist.png)
-![Events](mockups/takeahike-Events.png)
-![Weather](mockups/takeahike-weather.png)
-![Map](mockups/takeahike-map.png)
-![Gallery](mockups/takeahike-gallery.png)
