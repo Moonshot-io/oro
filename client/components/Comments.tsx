@@ -32,7 +32,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
 
   // const [commentsOpen, setCommentsOpen] = useState(false);
   const [message, setMessage] = useState<string>('');
-  const [comments, setComments] = useState<Array<{id: number; userId: string; photoUrl: string; comment: string; edited: boolean; crated_at: string;}>>([]);
+  const [comments, setComments] = useState<Array<{id: number; userId: string; photoUrl: string; comment: string; edited: boolean; created_at: string;}>>([]);
 
   const fontColor = {
     style: { color: '#9B27B0' }
@@ -42,7 +42,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
     getComments();
   }, []);
 
-  const getComments = async () => {
+  const getComments = async (): Promise<void> => {
     await axios.get('/api/comments', {
       params: {
         photoUrl: photo.photoUrl
@@ -54,11 +54,11 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
       .catch((err) => console.error(err));
   };
 
-  const handleComment = (e) => {
+  const handleComment = (e: {target: {value: string}}): void => {
     setMessage(e.target.value);
   };
 
-  const handleSend = async () => {
+  const handleSend = async (): Promise<void> => {
     await axios.post('/api/comments', {
       comment: message,
       photoUrl: photo.photoUrl,
@@ -73,16 +73,13 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
         axios.post('/api/notifications', {
           ownerId: photo.userId,
           commentId: commentData.data.id,
-        })
-          .then((notificationData) => {
-            console.info('notif', notificationData);
-          })
-          .catch((err) => console.error(err));
+        });
 
       })
       .catch((err) => console.error(err));
   };
 
+  console.log(comments)
 
   return (
     <div id='comments-container'>

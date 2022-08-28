@@ -7,11 +7,14 @@ import { Box, Grid, Container, AppBar, Tooltip, UseTheme, Divider, Typography, T
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
+interface navPropsType {
+  notif: number
+}
 
-const Navbar = (props) => {
+const Navbar = (props: navPropsType) => {
   const { currentUserInfo, getCurrentUser, logoutUser } = useContext(UserContext);
 
-  const { notif, profile } = props;
+  const { notif } = props;
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -64,27 +67,19 @@ const Navbar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
-  const handleCloseNavMenu = (page) => {
+  const handleCloseNavMenu = (page?: any) => {
     if (page === '/home') {
-      logoutUser();
+      if (logoutUser) {
+        logoutUser();
+      }
     }
     setAnchorElNav(null);
-    navigate(page);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    navigate(page, { replace: true });
   };
 
   let isLoggedIn = false;
@@ -94,8 +89,10 @@ const Navbar = (props) => {
   }
 
   useEffect(() => {
-    getCurrentUser();
-  }, []);
+    if (getCurrentUser) {
+      getCurrentUser();
+    }
+  }, [getCurrentUser]);
 
   const AccountBlock = () => {
     const account = [
@@ -126,7 +123,7 @@ const Navbar = (props) => {
                 {pages.map((page, index) => (
                   <Button
                     key={`page${index}`}
-                    onClick={handleCloseNavMenu}
+                    onClick={()=>{ handleCloseNavMenu(); }}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     {page[1]}
@@ -167,7 +164,7 @@ const Navbar = (props) => {
                   horizontal: 'left',
                 }}
                 open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
+                onClose={()=>{ handleCloseNavMenu(); }}
                 sx={{
                   display: { xs: 'block', md: 'block', lg: 'block' },
                 }}

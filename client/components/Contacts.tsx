@@ -58,9 +58,9 @@ const Contacts = ({changeChat}) => {
   const inverseMode = theme.palette.secondary.main;
 
   const currentUser = currentUserInfo;
-  const [currentUserName, setCurrentUserName ] = useState(undefined);
-  const [ currentUserImage, setCurrentUserImage ] = useState(undefined);
-  const [ currentSelected, setCurrentSelected ] = useState(undefined);
+  const [currentUserName, setCurrentUserName ] = useState('');
+  const [ currentUserImage, setCurrentUserImage ] = useState('');
+  const [ currentSelected, setCurrentSelected ] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = React.useState(false);
 
@@ -71,14 +71,16 @@ const Contacts = ({changeChat}) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+
   useEffect(() => {
     if (currentUser) {
       setCurrentUserName(currentUser.fullName);
-      setCurrentUserImage(currentUser.profileURL);
+      if(currentUser.profileURL){
+        setCurrentUserImage(currentUser.profileURL);
+      }
     }
   }, [currentUser]);
-  const changeCurrentChat = (index, contact) => {
+  const changeCurrentChat = (index:number, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
   };

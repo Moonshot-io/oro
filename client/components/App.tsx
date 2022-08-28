@@ -24,8 +24,6 @@ import { Container } from '../components/Container';
 import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
 
-// https://styled-components.com/docs/api#createglobalstyle
-
 const App: React.FC = () => {
   // update React.FC, .FC deprecated?
   // const themeContext = useContext(ThemeContext);

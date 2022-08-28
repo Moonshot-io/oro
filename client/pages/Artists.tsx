@@ -23,7 +23,7 @@ const Artists = () => {
   };
   useEffect(() => {
     getFaveArtists(currentUserInfo?.id);
-  }, []);
+  }, [currentUserInfo?.id, getFaveArtists]);
 
   if (currentUserInfo?.id === undefined) {
     return (
@@ -34,9 +34,9 @@ const Artists = () => {
     );
   } else if (singleArtist !== 'none' && allArtists) {
     const current = allArtists.filter((obj) => obj.artistName == singleArtist);
-    if (!current[0].image) {
+    if (current && !current[0].image) {
       const musicImages = ['music', 'band', 'concert', 'music-festival', 'rock-concert', 'musical', 'guitar', 'singer', 'opera'];
-      current.image = `https://source.unsplash.com/random/?${musicImages[Math.floor(Math.random() * musicImages.length + 1)]}`;
+      current[0].image = `https://source.unsplash.com/random/?${musicImages[Math.floor(Math.random() * musicImages.length + 1)]}`;
     }
     return (
       <div>

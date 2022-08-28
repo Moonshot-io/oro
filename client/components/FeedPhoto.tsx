@@ -51,7 +51,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
     caption: '',
     deleteToken: null,
   });
-  const getAvatar = (id) => {
+  const getAvatar = (id: string): void => {
     axios.get('/api/eventFeed/avatar', {
       params: {
         userId: id,
@@ -73,7 +73,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
     }
     getAvatar(feedPhoto.userId);
   }, [feedPhoto]);
-  
+
   useEffect(() => {
     setFeedPhoto(photo);
   }, []);
@@ -92,16 +92,16 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
     }),
   }));
 
-  const handleExpandClick = () => {
+  const handleExpandClick = (): void => {
     setExpanded(!expanded);
   };
 
 
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: {target: {value: string}}): void => {
     setCaptionText(e.target.value);
   };
-  const handleSubmitEdit = () => {
+  const handleSubmitEdit = (): void => {
     axios.put('/api/eventFeed', {
       photoUrl: photo.photoUrl,
       caption: captionText,
@@ -114,32 +114,32 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
       .catch((err) => console.error(err));
   };
 
-  const openEditor = () => {
+  const openEditor = (): void => {
     setMenuOpen(false);
     setEditor(true);
   };
 
-  const closeEditor = () => {
+  const closeEditor = (): void => {
     setEditor(false);
     setCaptionText('');
   };
 
-  const openDeleter = () => {
+  const openDeleter = (): void => {
     setDeleterOpen(true);
     setMenuOpen(false);
   };
 
-  const openMenu = (event) => {
+  const openMenu = (event: {currentTarget: null}) => {
     setMenuOpen(true);
     setAnchorEl(event.currentTarget);
   };
 
-  const closeMenu = () => {
+  const closeMenu = (): void => {
     setMenuOpen(false);
     setAnchorEl(null);
   };
 
-  const deletePhoto = () => {
+  const deletePhoto = (): void => {
     axios.delete('/api/eventFeed', {
       data: {
         photoUrl: photo.photoUrl,
@@ -158,7 +158,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
       });
   };
 
-  const closeDeleter = () => {
+  const closeDeleter = (): void => {
     setDeleterOpen(false);
   };
 

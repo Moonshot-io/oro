@@ -11,7 +11,8 @@ interface UserPhotosProps {
     create_at: string;
     caption?: string;
     deleteToken?: string;
-  }[];
+  }[],
+  getUserPhotos: any;
 };
 
 const UserPhotos: React.FC<UserPhotosProps> = ({ photos, getUserPhotos }) => {

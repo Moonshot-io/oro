@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { styled } from '@mui/material/styles';
 import EventCardDetails from '../components/EventCardDetails';
-// import TextField from '@mui/material/TextField';
 import eventDummy from '../../server/database/data/eventDummy';
 import { CssTextField } from '../styles/material';
 
@@ -31,13 +29,13 @@ const EventListings: React.FC = () => {
     getEvents();
   }, []);
 
-  const enterClick = (e) => {
+  const enterClick = (e: { keyCode: number; }) => {
     if (e.keyCode === 13) {
       getEvents();
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: HTMLInputElement; }) => {
     setKeyword(e.target.value);
   };
 
@@ -52,7 +50,6 @@ const EventListings: React.FC = () => {
         {
           events.map((event, index) => (
             <EventCardDetails
-              events={ events }
               event={event}
               key={`event${index}`}
             />

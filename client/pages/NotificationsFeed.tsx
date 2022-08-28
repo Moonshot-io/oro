@@ -10,7 +10,7 @@ const NotificationsFeed: React.FC = () => {
   const {currentUserInfo} = userContext;
   const theme = useTheme();
   const inverseMode = theme.palette.secondary.main;
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
 
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const NotificationsFeed: React.FC = () => {
   }, [notifications]);
 
 
-  const getNotifications = () => {
+  const getNotifications = (): void => {
     axios.get('/api/notifications', {
       params: {
         userId: currentUserInfo?.id
@@ -39,7 +39,7 @@ const NotificationsFeed: React.FC = () => {
       });
   };
 
-  const clearNotifications = () => {
+  const clearNotifications = (): void => {
     axios.delete('/api/notifications/all', {
       data: {
         userId: currentUserInfo?.id,

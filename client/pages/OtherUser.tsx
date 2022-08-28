@@ -81,7 +81,7 @@ const OtherUser: React.FC = () => {
           </Grid>
         </Box>
       </div>
-      <UserPhotos photos={userPhotos} />
+      <UserPhotos photos={userPhotos} getUserPhotos={getUserPhotos} />
     </div>
   );
 };

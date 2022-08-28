@@ -1,18 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-import { useTheme } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { InfoIcon } from '../styles/material';
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import PushPinIcon from '@mui/icons-material/PushPin';
+import { InfoIcon, Grid, Styled, UseTheme, Typography, ButtonBase, PushPinIcon } from '../styles/material';
 import axios from 'axios';
 
-const Img = styled('img')({
+const Img = Styled('img')({
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',
@@ -20,15 +13,12 @@ const Img = styled('img')({
 });
 
 
-const EventCardDetails = ({events, event}) => {
+const EventCardDetails = ({event}) => {
   const { currentUserInfo } = useContext(UserContext);
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-  // <YouTubeIcon key={'youtube'} sx={{ color: iconColors }} />
-  // <CardContent sx={{ bgcolor: inverseMode }}></CardContent>
-  // <Typography paragraph sx={{ bgcolor: inverseMode }}></Typography>
   useEffect(() => {
     getPins();
   }, []);
@@ -123,7 +113,7 @@ const EventCardDetails = ({events, event}) => {
         <Grid item>
           <PushPinIcon
             id={event.eventId}
-            color={pins.includes(event.eventId) ? '#1A76D2' : iconColors}
+            htmlColor={pins.includes(event.eventId) ? '#1A76D2' : iconColors}
             onClick={ handleClick }
             sx={{ mr: '20px' }}
           />

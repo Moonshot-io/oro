@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Paper, Grid, OutlinedInput, Fab, Button, Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton } from '../styles/material';
+import { Paper, Grid, OutlinedInput, Button, Avatar, Typography, IconButton } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import { UserContext } from '../context/UserContext';
@@ -36,7 +36,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
     getAvatar();
   }, []);
 
-  const getAvatar = async () => {
+  const getAvatar = async (): Promise<void> => {
     await axios.get('/api/eventFeed/avatar', {
       params: {
         userId: comment.userId
@@ -48,7 +48,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
       .catch((err) => console.error(err));
   };
 
-  const deleteComment = () => {
+  const deleteComment = (): void => {
     axios.delete('/api/comments', {
       data: {
         id: comment.id,
@@ -61,7 +61,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
       .catch((err) => console.error(err));
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: {target: {value: string}}) => {
     setCommentText(e.target.value);
   };
 
@@ -78,20 +78,20 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
       .catch((err) => console.error(err));
   };
 
-  const openEditor = () => {
+  const openEditor = (): void => {
     setEditor(true);
   };
 
-  const closeEditor = () => {
+  const closeEditor = (): void => {
     setEditor(false);
     setCommentText('');
   };
 
-  const openDeleter = () => {
+  const openDeleter = (): void => {
     setDeleterOpen(true);
   };
 
-  const closeDeleter = () => {
+  const closeDeleter = (): void => {
     setDeleterOpen(false);
   };
   const getEditDeleteOptions = () => {

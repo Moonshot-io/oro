@@ -1,20 +1,17 @@
-import React, { useEffect, useContext, useCallback, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 import { styled } from '@mui/material/styles';
-import moment from 'moment';
 import {
   ArrowForwardIosSharpIcon,
   MuiAccordion,
   MuiAccordionSummary,
   MuiAccordionDetails,
   Typography,
-  List,
-  ListItem,
   Button,
+  UseTheme
 } from '../styles/material';
 import BudgetItem from './BudgetItem';
 import axios from 'axios';
-import { useTheme } from '@mui/material/styles';
 const Accordion = styled((props) => (
   <MuiAccordion children={''} disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -51,29 +48,23 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-const formatCurrency = (number) => {
+const formatCurrency = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 const BackPack: React.FC = () => {
   const globalData = useContext(UserContext);
-  let { currentUserInfo } = globalData;
+  const { currentUserInfo } = globalData;
 
   const [userEvents, setUserEvents] = useState([]);
   const [expanded, setExpanded] = React.useState('panel1');
 
-  const theme = useTheme();
-  const iconColors = theme.palette.secondary.contrastText;
+  const theme = UseTheme();
   const inverseMode = theme.palette.secondary.main;
-  // <YouTubeIcon key={'youtube'} sx={{ color: iconColors }} />
-  // <CardContent sx={{ bgcolor: inverseMode }}></CardContent>
-  // <Typography paragraph sx={{ bgcolor: inverseMode }}></Typography>
+
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  useEffect(() => {
-    getUserEvents();
-  }, []);
 
   const getUserEvents = () => {
     axios
@@ -83,10 +74,15 @@ const BackPack: React.FC = () => {
       })
       .catch((err) => console.error(err));
   };
+  useEffect(() => {
+    getUserEvents();
+  }, []);
 
   return (
     <div>
-      {userEvents.map((event, index) => {
+      {
+        Array.isArray(userEvents) ?
+    userEvents.map((event, index) => {
         return (
           <EventItem
             event={event}
@@ -97,7 +93,18 @@ const BackPack: React.FC = () => {
             handleChange={handleChange}
           />
         );
-      })}
+      }) : (
+        <EventItem
+          event={event}
+          index={0}
+          inverseMode={inverseMode}
+          expanded={expanded}
+          key={'none'}
+          handleChange={handleChange}
+        />
+      )
+
+}
     </div>
   );
 };
@@ -131,7 +138,7 @@ const EventItem = function ({
   );
 
   const handleSubmit = async () => {
-    const url = `api/events/budgetsubmit`;
+    const url = 'api/events/budgetsubmit';
 
     try {
       axios

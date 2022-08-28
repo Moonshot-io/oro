@@ -10,7 +10,13 @@ type User = {
     fbId?: string;
     instaId?: string;
     twitterId?: string;
-  }
+  },
+  getCurrentUser: ()=>void,
+  logoutUser: ()=>void,
+  userContacts: {
+    profileURL: string
+    fullName: string
+  }[]
 }
 
 const UserContext = React.createContext<Partial<User>>({});
@@ -39,9 +45,15 @@ const UserContextProvider = ({ children }) => {
   const logoutUser = () => {
     axios
       .post('/logout')
-      .then(() => {
-        setCurrentUserInfo([]);
-      })
+      .then(() => setCurrentUserInfo({
+        id: '',
+        fullName: '',
+        profileURL: '',
+        email: '',
+        fbId: '',
+        instaId: '',
+        twitterId: '',
+      }))
       .catch((err) => {
         console.error(err);
       });

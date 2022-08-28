@@ -33,6 +33,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': "error",
     'react-hooks/exhaustive-deps': "warn",
     'react/prop-types': "off",
+    'react/no-children-prop': 'disable',
     'eol-last': 'error',
     // Indentation
     'no-mixed-spaces-and-tabs': 2,

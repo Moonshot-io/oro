@@ -21,14 +21,30 @@ const ExpandMore = Styled((props: ExpandMoreProps) => {
   }),
 }));
 
+interface artistPropsType {
+  artistProps: {
+  id: number,
+  artistName: string,
+  bio: string,
+  ticketId: string,
+  youtube: string,
+  twitter: string,
+  facebook: string,
+  instagram: string,
+  itunes: string,
+  wiki: string,
+  homepage: string,
+  image: string,
+  },
+  resetSingle: ()=>void;
+}
 
-const ArtistInfoCard = ({artistProps, resetSingle}) => {
+const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
-  // const [favorite, setFavorite] = useState(false);
   const [events, setEvents] = useState(
     [{
       name: 'No events found',
@@ -65,7 +81,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}) => {
     setExpanded(!expanded);
   };
 
-  const getArtistEvents = (artist) => {
+  const getArtistEvents = (artist: string) => {
     const noSpecialChars: string = artist
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     axios.get('/api/favArtists/events', { params: { keyword: noSpecialChars } })
@@ -124,7 +140,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}) => {
             <Typography>
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
-                  {Object.keys(socials).map((social, index) => {
+                  {Object.keys(socials).map((social:string, index) => {
                     return (
                       <Grid item key={`social${index}`}>
                         <IconButton>

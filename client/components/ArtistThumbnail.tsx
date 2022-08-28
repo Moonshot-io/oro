@@ -3,7 +3,28 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Card,	CardHeader,	CardMedia, UseTheme, FavoriteIcon, IconButton, Tooltip } from '../styles/material';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) => {
+
+interface artistPropsType {
+  artistProps: {
+  id: number,
+  artistName: string,
+  bio: string,
+  ticketId: string,
+  youtube: string,
+  twitter: string,
+  facebook: string,
+  instagram: string,
+  itunes: string,
+  wiki: string,
+  homepage: string,
+  image: string,
+  },
+  updateSingle: (name:string)=>void;
+  favorite: boolean;
+  getFaveArtists: (id:string | undefined)=>void;
+}
+
+const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:artistPropsType) => {
   const favesLocalData = window.localStorage.getItem('userFaves');
   if (!favesLocalData) {
     window.localStorage.setItem('userFaves', JSON.stringify({}));
@@ -20,7 +41,7 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) 
   } = artistProps;
 
   const { currentUserInfo } = useContext(UserContext);
-  const handleClick = (name) => {
+  const handleClick = (name:string) => {
     navigate(`/artists/${name}`);
     updateSingle(name);
   };
@@ -50,11 +71,11 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) 
 
   const getLocalStorage = ()=>{
     const favesLocalData = window.localStorage.getItem('userFaves');
-    let favesObj: object;
+    let favesObj: {0: boolean};
     if (favesLocalData) {
       favesObj = JSON.parse(favesLocalData);
     } else {
-      favesObj = {};
+      favesObj = {0: false};
     }
 
     return favesObj;
@@ -64,12 +85,12 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) 
 
   const handleUnfollow = (artistId: number) => {
     const favesLocalData = window.localStorage.getItem('userFaves');
-    let favesObj: object;
+    let favesObj: {0: boolean};
     if (favesLocalData) {
       favesObj = JSON.parse(favesLocalData);
       favesObj[artistId] = false;
     } else {
-      favesObj = {};
+      favesObj = {0: false};
       favesObj[artistId] = false;
     }
 
@@ -91,10 +112,10 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}) 
 
   useEffect(()=>{
     setThumbFav(favorite);
-  }, [thumbFav]);
+  }, [favorite, thumbFav]);
   useEffect(()=>{
     setThumbFav(favorite);
-  }, []);
+  }, [favorite]);
 
   return (
     <Card sx={{ bgcolor: inverseMode,

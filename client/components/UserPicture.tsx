@@ -31,6 +31,7 @@ export interface SimpleDialogProps {
 
 interface UserPictureProps {
   photo: {
+    id: number;
     userId: string;
     photoUrl: string;
     eventAPIid: string;
@@ -39,7 +40,7 @@ interface UserPictureProps {
     deleteToken?: string;
   },
   getUserPhotos: any
-};
+}
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -48,12 +49,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
-
-<<<<<<< HEAD
-const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserEvents }) => {
-=======
 const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -86,10 +82,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
         setEditor(false);
         setOpen(false);
       })
-<<<<<<< HEAD
-      .then(() => window.location.reload(false))
-=======
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
+
       .then(() => setOpenSnack(true))
       .catch((err) => console.error(err));
   };
@@ -125,7 +118,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
       }
     })
       .then((commentData) => {
-        setDeleterOpen(false)
+        setDeleterOpen(false);
         setOpen(false);
         commentData.data.forEach((comment) => {
           axios.delete('/api/notifications', {
@@ -133,30 +126,17 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
               commentId: comment.id,
             }
           })
-            .then(() => console.log(`${comment.id} DELETED`))
             .catch((err) => console.error(err));
-        })
+        });
       })
-<<<<<<< HEAD
-=======
       .then(getUserPhotos())
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
       .catch((err) => console.log(err));
   };
 
   const closeDeleter = () => {
-    setDeleterOpen(false)
+    setDeleterOpen(false);
   };
 
-<<<<<<< HEAD
-=======
-  // useEffect(() => {
-  //   getUserPhotos();
-  // }, []);
-
-  console.log(photo);
-
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
   return (
     <div>
       <ImageListItem >
@@ -171,20 +151,13 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
       <Dialog
         open={open}
         onClose={handleClose}
-<<<<<<< HEAD
-=======
         id='photo-dialog'
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
       >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
             {
-              currentUserInfo.id === photo.userId
-<<<<<<< HEAD
-              ? <><IconButton onClick={openDeleter}>
-=======
+              currentUserInfo?.id === photo.userId
                 ? <><IconButton onClick={openDeleter}>
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
                   <Tooltip title="Delete Photo" placement="top-start">
                     <DeleteOutlinedIcon sx={{ color: inverseMode }} />
                   </Tooltip>
@@ -192,24 +165,6 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                     <Tooltip title="Edit Caption" placement="top-start">
                       <EditOutlinedIcon sx={{ color: inverseMode }} />
                     </Tooltip>
-<<<<<<< HEAD
-                  </IconButton></>
-              : 
-            <IconButton
-              edge="end"
-              color="secondary"
-              onClick={handleClose}
-              aria-label="close"
-              sx={{
-                position: 'absolute',
-                right: 8,
-                top: 8,
-                color: "secondary",
-              }}
-            >
-              <CloseRoundedIcon />
-            </IconButton>
-=======
                   </IconButton>
                   <IconButton
                     edge="end"
@@ -220,7 +175,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                       position: 'absolute',
                       right: 8,
                       top: 8,
-                      color: "secondary",
+                      color: 'secondary',
                     }}
                   >
                     <CloseRoundedIcon />
@@ -235,22 +190,17 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                     position: 'absolute',
                     right: 8,
                     top: 8,
-                    color: "secondary",
+                    color: 'secondary',
                   }}
                 >
                   <CloseRoundedIcon />
                 </IconButton>
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
             }
-          </Toolbar>
-        </AppBar>
+          </Toolbar >
+        </AppBar >
         <DialogContent sx={{ bgcolor: inverseMode, colors: inverseMode, padding: '0px' }}>
           <Box sx={{ margin: 'auto', bgcolor: inverseMode, width: 'auto', alignItems: 'center', justifyContent: 'center' }}>
-<<<<<<< HEAD
-            <img width='300px' height='auto' margin='auto' src={photo.photoUrl} />
-=======
-            <img className='user-img' max-width='400px' height='auto' src={photo.photoUrl} />
->>>>>>> d0fdeffe9cb8e1d6c01af491cce7d5c7a73b05d9
+            <img width='370px' height='auto' src={photo.photoUrl} />
             <Dialog open={deleterOpen} onClose={closeDeleter}>
               <Typography textAlign='center' sx={{ color: inverseMode, m: '7px' }}>Are you sure you want to delete your photo?</Typography>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>
@@ -284,24 +234,24 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
             <Grid container>
               <Comments photo={photo} />
             </Grid>
-          </Box>
-        </DialogContent>
-      </Dialog>
-      <Snackbar
-        open={openSnack}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity='success'
-          sx={{ width: '100%' }}
-        >
-          Caption Updated
-        </Alert>
-      </Snackbar>
-    </div>
-  )
-}
+          </Box >
+        </DialogContent >
+      </Dialog >
+  <Snackbar
+    open={openSnack}
+    autoHideDuration={3000}
+    onClose={handleSnackClose}
+  >
+    <Alert
+      onClose={handleClose}
+      severity='success'
+      sx={{ width: '100%' }}
+    >
+      Caption Updated
+    </Alert>
+  </Snackbar>
+    </div >
+  );
+};
 
 export default UserPicture;

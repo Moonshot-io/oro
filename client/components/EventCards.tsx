@@ -31,7 +31,7 @@ const EventCards = ({ events }) => {
   const id = events.id;
   const { name, url, info } = events;
 
-  const getDetails = (id) => {
+  const getDetails = (id:string) => {
     navigate(`/details/?id=${id}`);
   };
 

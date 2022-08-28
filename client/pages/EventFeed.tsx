@@ -1,32 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import {OutlinedInput, Fab, Box, Button, Typography} from '../styles/material';
 
 import { UserContext } from '../context/UserContext';
-import FeedPhoto from '../components/FeedPhoto';
-import Dialog from '@mui/material/Dialog';
-import { useTheme } from '@mui/material/styles';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {useSearchParams } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
+import FeedPhoto from '../components/FeedPhoto';
+
+import {OutlinedInput, Fab, Box, Button, Typography} from '../styles/material';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import Dialog from '@mui/material/Dialog';
 
 
 const EventFeed: React.FC = () => {
+  const userContext = useContext(UserContext);
+  const {currentUserInfo} = userContext;
+  
+  const [previewSource, setPreviewSource] = useState<string | ArrayBuffer | null>('');
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [feedPhotos, setFeedPhotos] = useState<Array<{caption?: string; created_at: string; deleteToken: string | null; eventAPIid: string; id: number; photoUrl: string; userId: string;}>>([]);
+  const [eventName, setEventName] = useState<string>('');
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [caption, setCaption] = useState<string>('');
+
+  const [searchParams] = useSearchParams();
+  const eventId: string | null = searchParams.get('id');
+  
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
-
-  const userContext = useContext(UserContext);
-  const {currentUserInfo} = userContext;
-  const [previewSource, setPreviewSource] = useState();
-  const [photo, setPhoto] = useState(null);
-  const [feedPhotos, setFeedPhotos] = useState([]);
-  const [searchParams] = useSearchParams();
-  const [eventName, setEventName] = useState('');
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [caption, setCaption] = useState('');
-  const eventId = searchParams.get('id');
-
   useEffect(() => {
     if (photo) {
       const reader = new FileReader();
@@ -38,7 +40,7 @@ const EventFeed: React.FC = () => {
     }
   }, [photo]);
 
-  const updateFeed = () => {
+  const updateFeed = (): void => {
     axios.get('/api/eventFeed', {
       params: {
         eventId,
@@ -50,7 +52,7 @@ const EventFeed: React.FC = () => {
       })
       .catch((err) => console.error(err));
   };
-  const getEvent = () => {
+  const getEvent = (): void => {
     axios.get('/api/eventDetails', {
       params: {
         id: eventId
@@ -67,14 +69,14 @@ const EventFeed: React.FC = () => {
     updateFeed();
   }, []);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: {target: {files: FileList}}): void => {
     setPhoto(e.target.files[0]);
     setDialogOpen(true);
   };
 
 
 
-  const handleFileUpload = () => {
+  const handleFileUpload = (): void => {
     if (photo) {
       const formData = new FormData();
       formData.append('myFile', photo, photo.name);
@@ -94,16 +96,16 @@ const EventFeed: React.FC = () => {
     }
   };
 
-  const closeDialog = () => {
+  const closeDialog = (): void => {
     setDialogOpen(false);
     setCaption('');
   };
 
-  const handleCaption = (e) => {
+  const handleCaption = (e: {target: {value: string}}) => {
     setCaption(e.target.value);
   };
 
-  const uploadPhoto = async () => {
+  const uploadPhoto = async (): Promise<void> => {
     await document.getElementById('fileUpload')?.click();
   };
 
@@ -139,7 +141,7 @@ const EventFeed: React.FC = () => {
         {renderFeed()}
       </div>
       <Box sx={{position: 'sticky'}}>
-        <OutlinedInput sx={{mt: '20px', display: 'none'}} accept="image/*" type='file' id='fileUpload' name='image' onChange={handleFileChange}/>
+        <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onChange={handleFileChange}/>
         <Fab
           size='small'
           onClick={uploadPhoto}

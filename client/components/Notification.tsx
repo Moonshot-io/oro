@@ -21,15 +21,15 @@ const Notification: React.FC<NotificationProps> = ({notif}) => {
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-  const [person, setPerson] = useState('');
-  const [text, setText] = useState('');
-  const [photoUrl, setPhotoUrl] = useState('');
-  const [modalStatus, setModalStatus] = useState(false);
-  const [photo, setPhoto] = useState(null);
-  const [userAvatar, setUserAvatar] = useState('');
-  const [read, setRead] = useState(true);
+  const [person, setPerson] = useState<string>('');
+  const [text, setText] = useState<string>('');
+  const [photoUrl, setPhotoUrl] = useState<string>('');
+  const [modalStatus, setModalStatus] = useState<boolean>(false);
+  const [photo, setPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null} | null>(null);
+  const [userAvatar, setUserAvatar] = useState<string>('');
+  const [read, setRead] = useState<boolean>(true);
 
-  const getPhoto = () => {
+  const getPhoto = (): void => {
     axios.get('/api/eventFeed/photo', {
       params: {
         photoUrl,
@@ -46,7 +46,7 @@ const Notification: React.FC<NotificationProps> = ({notif}) => {
   }, [photoUrl]);
 
 
-  const getPerson = () => {
+  const getPerson = (): void => {
     axios.get('/api/comments/comment', {
       params: {
         commentId: notif.commentId,
@@ -64,7 +64,7 @@ const Notification: React.FC<NotificationProps> = ({notif}) => {
       .catch((err) => console.error(err));
   };
 
-  const getType = () => {
+  const getType = (): void => {
     if (notif.type === 'comment') {
       setText(' commented on your photo');
     }
@@ -78,12 +78,12 @@ const Notification: React.FC<NotificationProps> = ({notif}) => {
     getType();
   }, []);
 
-  const handleOpen = () => {
+  const handleOpen = (): void => {
     setRead(true);
     setModalStatus(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setModalStatus(false);
   };
 

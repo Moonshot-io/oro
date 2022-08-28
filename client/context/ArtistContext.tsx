@@ -23,7 +23,7 @@ interface artistTypeProps {
     }[],
   artists: boolean},
   setArtistData: object,
-  getFaveArtists: (id: number) => void,
+  getFaveArtists: (id: string | undefined) => void,
 }
 
 const ArtistContext = React.createContext({} as artistTypeProps);
@@ -49,7 +49,7 @@ const ArtistContextProvider = ({ children }: Props) => {
     }
   );
 
-  const getFaveArtists = (id: number) => {
+  const getFaveArtists = (id: string | undefined) => {
     if (id) {
       axios.get(`/api/favArtists/${id}`)
         .then((artistData) => {

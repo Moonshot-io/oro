@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import MicRecorder from 'mic-recorder-to-mp3';
+const MicRecorder = require('mic-recorder-to-mp3');
 import axios from 'axios';
 import { Accordion, AccordionSummary, AccordionDetails, Button, Grid, Fab} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -46,7 +46,8 @@ const SongFinder: React.FC = () => {
   const [albumTitle, setAlbumTitle] = useState<string>('');
   const [albumImage, setAlbumImage] = useState<string>('');
   const [favorited, setFavorited] = useState<boolean>(false);
-  const [lyrics, setLyrics] = useState([]);
+  const [lyrics, setLyrics] = useState<Array<string>>([]);
+  const [recording, setRecording] = useState<boolean>(false);
   // const [deleteToken, setDeleteToken] = useState('');
 
   useEffect(() => {
@@ -108,18 +109,21 @@ const SongFinder: React.FC = () => {
 
   }, [previewSource]);
 
-  const start = () => {
+  const start = (): void => {
+    setRecording(true);
     if (isBlocked) {
       console.log('permission denied');
     } else {
       Mp3Recorder.start()
+        .then(() => setTimeout(stop, 5000))
         .catch((e) => console.error(e));
     }
   };
 
-  const stop = () => {
+  const stop = (): void => {
+    setRecording(false);
     Mp3Recorder.stop().getMp3()
-      .then(([blob]) => {
+      .then(([buffer, blob]) => {
         const reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = async () => {
@@ -150,7 +154,7 @@ const SongFinder: React.FC = () => {
     }
   };
 
-  const addToFavorites = () => {
+  const addToFavorites = (): void => {
     axios.post('/api/favArtists', {
       artistName: artist,
       userId: currentUserInfo?.id
@@ -161,7 +165,7 @@ const SongFinder: React.FC = () => {
       .catch((err) => console.error(err));
   };
 
-  const removeFavorites = () => {
+  const removeFavorites = (): void => {
     axios.put('/api/favArtists/update', {
       params: {
         artist: artist,
@@ -249,9 +253,17 @@ const SongFinder: React.FC = () => {
           {/* <Grid item xs = {4}></Grid> */}
         </Grid>
       </div>
+      <div>
+        {recording && 'Audio is recording, please wait'}
+      </div>
+      {!recording && 'click to start recording'}
+      {recording &&
+        <Fab sx={{ bgcolor: inverseMode }} variant='circular'>
+          <img height='40px' width='auto' src='https://northshorecenter.org/nscpa_2020/wp-content/plugins/dkddi-events-addon/images/balls.gif'/>
+        </Fab>}
 
       <div style={{marginTop: '10px'}}>
-        <Fab sx={{ bgcolor: inverseMode }} variant='circular' onMouseDown={start} onMouseUp={stop}><MusicNote sx={{ color: iconColors }}></MusicNote></Fab>
+        {!recording && <Fab sx={{ bgcolor: inverseMode }} variant='circular' onClick={start}><MusicNote sx={{ color: iconColors }}></MusicNote></Fab>}
       </div>
     </div>
   );

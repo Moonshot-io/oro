@@ -1,14 +1,8 @@
-import * as React from 'react';
-import React, { useState, useEffect, useContext } from 'react';
-import {Box, Grid, Item} from '../styles/material';
-import { UserContext } from '../context/UserContext';
+import React, { useEffect } from 'react';
+import {Box, Grid } from '../styles/material';
 
 
 const Home: React.FC = () => {
-
-  const userContext = useContext(UserContext);
-  const {value} = userContext;
-
   useEffect(() => {
     // getUser();
   }, []);
@@ -22,7 +16,7 @@ const Home: React.FC = () => {
       </Grid>
     </Box>
   );
-}
+};
 
 
 export default Home;
