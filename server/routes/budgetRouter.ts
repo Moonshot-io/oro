@@ -3,17 +3,28 @@ import axios from 'axios';
 import { Router } from 'express';
 
 const budgetRouter = Router();
-budgetRouter.post('/events/budget/:_id', async (req, res) => {
-  const { eventId, tickets, food, drinks, parking, merch, travel } = req.body;
+budgetRouter.post('/', async (req, res) => {
+  const {
+    userEventId,
+
+    Tickets,
+    Food,
+    Drinks,
+    Parking,
+    Merch,
+    Travel,
+  } = req.body;
+  // console.log(req.body);
   await prisma.budget
     .create({
       data: {
-        Food: food,
-        Tickets: tickets,
-        Parking: parking,
-        Merch: merch,
-        Travel: travel,
-        Drinks: drinks,
+        Food,
+        Tickets,
+        Parking,
+        Merch,
+        Travel,
+        Drinks,
+        userEventId: userEventId,
       },
     })
     .then((data) => {

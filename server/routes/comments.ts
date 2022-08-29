@@ -30,8 +30,10 @@ commentsRouter.get('/', async (req, res) => {
 });
 commentsRouter.get('/comment', async (req, res) => {
   let {commentId} = req.query;
-  commentId = parseInt(commentId);
 
+  commentId = parseInt(commentId);
+  // console.log(commentId);
+  // console.log(typeof commentId);
   await prisma.comments.findUnique({
     where: {
       id: commentId,

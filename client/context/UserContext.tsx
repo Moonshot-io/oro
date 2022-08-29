@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
 type User = {
@@ -10,58 +10,59 @@ type User = {
     fbId?: string;
     instaId?: string;
     twitterId?: string;
-  },
-  getCurrentUser: ()=>void,
-  logoutUser: ()=>void,
+  };
+  getCurrentUser: () => void;
+  logoutUser: () => void;
   userContacts: {
-    profileURL: string
-    fullName: string
-  }[]
-}
+    profileURL: string;
+    fullName: string;
+  }[];
+};
 
 const UserContext = React.createContext<Partial<User>>({});
 
 const UserContextProvider = ({ children }) => {
-  const [currentUserInfo, setCurrentUserInfo] = useState
-    <{
-      id: string;
-      fullName: string;
-      profileURL?: string;
-      email: string;
-      fbId?: string;
-      instaId?: string;
-      twitterId?: string;
-    }>({
-      id: '',
-      fullName: '',
-      profileURL: '',
-      email: '',
-      fbId: '',
-      instaId: '',
-      twitterId: '',
-    });
+  const [currentUserInfo, setCurrentUserInfo] = useState<{
+    id: string;
+    fullName: string;
+    profileURL?: string;
+    email: string;
+    fbId?: string;
+    instaId?: string;
+    twitterId?: string;
+  }>({
+    id: '',
+    fullName: '',
+    profileURL: '',
+    email: '',
+    fbId: '',
+    instaId: '',
+    twitterId: '',
+  });
   const [userContacts, setUserContacts] = useState([]);
 
   const logoutUser = () => {
     axios
       .post('/logout')
-      .then(() => setCurrentUserInfo({
-        id: '',
-        fullName: '',
-        profileURL: '',
-        email: '',
-        fbId: '',
-        instaId: '',
-        twitterId: '',
-      }))
+      .then(() =>
+        setCurrentUserInfo({
+          id: '',
+          fullName: '',
+          profileURL: '',
+          email: '',
+          fbId: '',
+          instaId: '',
+          twitterId: '',
+        })
+      )
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const getCurrentUser = async () => {
+  const getCurrentUser = () => {
     // Once user logs in, get user info
-    await axios
+    axios
       .get('/hidden')
       .then(({ data }) => {
         // set state to user info
@@ -79,16 +80,17 @@ const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     getUserContacts();
-  }, [currentUserInfo]);
+  }, [currentUserInfo.id]);
 
-  const getUserContacts = () => {
+  const getUserContacts = useCallback(() => {
     if (currentUserInfo) {
-      axios.get('/api/users/allusers', { params: { id: currentUserInfo?.id } })
-        .then(resObj => {
+      axios
+        .get('/api/users/allusers', { params: { id: currentUserInfo?.id } })
+        .then((resObj) => {
           setUserContacts(resObj.data);
         });
     }
-  };
+  }, [currentUserInfo.id]);
 
   const appProps = {
     userContacts,

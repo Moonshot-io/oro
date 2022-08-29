@@ -186,8 +186,8 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
               <MenuItem onClick={openEditor}>edit caption</MenuItem>
               <MenuItem onClick={openDeleter}>delete photo</MenuItem>
             </Menu>
-            <IconButton onClick={openMenu}>
-              <MoreHorizIcon sx={{color: inverseMode}}/>
+            <IconButton>
+              <MoreHorizIcon onClick={openMenu} sx={{color: inverseMode}}/>
             </IconButton>
           </Typography>
         </Paper>
