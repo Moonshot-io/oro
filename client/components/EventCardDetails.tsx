@@ -114,7 +114,7 @@ const EventCardDetails = ({event}) => {
 
   return (
     <div>
-    
+
     <Card sx={{ maxWidth: 'flex' }}>
     <CardHeader color='secondary' sx={{color:'secondary', fontColor: 'secondary'}}
       avatar={

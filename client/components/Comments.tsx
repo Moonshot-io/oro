@@ -79,8 +79,6 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
       .catch((err) => console.error(err));
   };
 
-  console.log(comments)
-
   return (
     <div id='comments-container'>
 
