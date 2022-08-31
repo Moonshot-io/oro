@@ -46,8 +46,12 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on('msg-receive', (msg) => {
-        setArrivalMessage({fromSelf: false, text: msg});
+      socket.current.on('msg-receive', (data) => {
+        console.log('SOCKET', socket)
+        console.log('data', data, 'currentchat', currentChat)
+        if(data.senderId === currentChat.id){
+          setArrivalMessage({fromSelf: false, text: data.text});
+        }
       });
     }
   });
@@ -67,7 +71,6 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
 
   return (
     <Box>
-
       <Container>
         <div className="chat-header">
           <div className="user-details">
