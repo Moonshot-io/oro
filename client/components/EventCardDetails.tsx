@@ -178,6 +178,7 @@ const EventCardDetails = ({event}) => {
     </Collapse>
   </Card>
   <br/>
-};
-
+  </div>
+);
+        };
 export default EventCardDetails;

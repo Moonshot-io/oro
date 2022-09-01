@@ -45,7 +45,7 @@ const ArtistContextProvider = ({ children }: Props) => {
       homepage: 'http://www.beyonce.com/',
       image: 'https://s1.ticketm.net/dam/a/7ce/49c8082f-fe10-43f3-be6e-a9c8a87807ce_655591_RETINA_LANDSCAPE_16_9.jpg'
     }],
-    artists: true,
+    artists: false,
     }
   );
 

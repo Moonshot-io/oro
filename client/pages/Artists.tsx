@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import ArtistInfoCard from '../components/ArtistCards';
 import { ArtistContext } from '../context/ArtistContext';
 import { UserContext } from '../context/UserContext';
-import {Box,	Grid} from '../styles/material';
+import {Box,	Grid, Button, UseTheme} from '../styles/material';
 import ArtistThumbnail from '../components/ArtistThumbnail';
 import Login from './Login';
 
@@ -13,6 +13,10 @@ const Artists = () => {
   const {artistData, getFaveArtists } = artistContext;
   const {allArtists, artists} = artistData;
   const [singleArtist, setSingleArtist] = useState('none');
+  const [faveUpdated, setFaveUpdated] = useState(false);
+  const theme = UseTheme();
+  const iconColors = theme.palette.secondary.contrastText;
+  const inverseMode = theme.palette.secondary.main;
 
   const updateSingle = (name: string) => {
     setSingleArtist(name);
@@ -23,9 +27,17 @@ const Artists = () => {
   };
   useEffect(() => {
     getFaveArtists(currentUserInfo?.id);
-  }, [currentUserInfo?.id, getFaveArtists]);
+    setFaveUpdated(!faveUpdated);
+  }, []);
+  useEffect(() => {
+    getFaveArtists(currentUserInfo?.id);
+  }, [faveUpdated]);
 
-  if (currentUserInfo?.id === undefined) {
+  const saveUpdates = () => {
+    setFaveUpdated(!faveUpdated);
+  }
+
+  if (currentUserInfo?.id === '') {
     return (
       <div>
         <h1>Please login to view artists</h1>
@@ -113,6 +125,7 @@ const Artists = () => {
             })
             }
           </Grid>
+          <Button onClick={saveUpdates} sx={{ bgcolor: inverseMode, mt: '40px' }}>Save Updates</Button>
         </Box>
       </div>
     );

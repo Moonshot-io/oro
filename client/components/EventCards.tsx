@@ -43,7 +43,8 @@ const EventCards = ({ events }) => {
         maxWidth: 500,
         flexGrow: 1,
         backgroundColor: theme.palette.primary.main,
-        color: theme.palette.secondary.main
+        color: theme.palette.secondary.main,
+        textAlign: 'left',
       }}
     >
       <Grid container spacing={2}>
