@@ -82,6 +82,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
         setCaptionText('');
         setEditor(false);
         setOpen(false);
+        getUserPhotos();
       })
       .then(() => setOpenSnack(true))
       .catch((err) => console.error(err));
@@ -128,18 +129,14 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           })
             .catch((err) => console.error(err));
         });
+        getUserPhotos();
       })
-      .then(getUserPhotos())
       .catch((err) => console.log(err));
   };
 
   const closeDeleter = () => {
     setDeleterOpen(false);
   };
-
-  // useEffect(() => {
-  //   getUserPhotos();
-  // }, []);
 
   return (
     <div>
