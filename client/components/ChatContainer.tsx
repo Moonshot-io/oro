@@ -13,6 +13,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [sender, setSender] = useState(null);
   const userContext = useContext(UserContext);
   const { currentUserInfo } = userContext;
   useEffect(() => {
@@ -46,8 +47,17 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on('msg-receive', (msg) => {
-        setArrivalMessage({fromSelf: false, text: msg});
+      socket.current.on('msg-receive', async (data) => {
+        const {senderId} = data;
+        if(sender !== currentChat.id){
+          setArrivalMessage(() => {
+            if(currentChat.id === senderId){
+              return {fromSelf: false, text: data.text}
+            } else{
+              return null;
+            }
+          })
+        }
       });
     }
   });
@@ -67,7 +77,6 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
 
   return (
     <Box>
-
       <Container>
         <div className="chat-header">
           <div className="user-details">

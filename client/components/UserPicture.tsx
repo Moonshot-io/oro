@@ -82,7 +82,11 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
         setCaptionText('');
         setEditor(false);
         setOpen(false);
+<<<<<<< HEAD
         getUserPhotos();
+=======
+        getUserPhotos()
+>>>>>>> 908e12236609672aa9bf1f1ee05d23007b415ea6
       })
       .then(() => setOpenSnack(true))
       .catch((err) => console.error(err));
