@@ -13,6 +13,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [sender, setSender] = useState(null);
   const userContext = useContext(UserContext);
   const { currentUserInfo } = userContext;
   useEffect(() => {
@@ -46,8 +47,17 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on('msg-receive', (msg) => {
-        setArrivalMessage({fromSelf: false, text: msg});
+      socket.current.on('msg-receive', async (data) => {
+        const {senderId} = data;
+        if(sender !== currentChat.id){
+          setArrivalMessage(() => {
+            if(currentChat.id === senderId){
+              return {fromSelf: false, text: data.text}
+            } else{
+              return null;
+            }
+          })
+        }
       });
     }
   });
@@ -65,44 +75,8 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth'});
   }, [messages]);
 
-  //   return (
-  //     <div>
-  //       <React.Fragment>
-  //       <Container >
-  //         <Box sx={{ bgcolor: '#cfe8fc', height: '55vh' }}>
-  //           {/* <Messages/> */}
-  //           <ChatBox>
-  //           <div className="chat-messages">
-
-  //           {
-  //             messages.map((message, index) => {
-  //               return (
-  //                 <div key={uuidv4()} ref={scrollRef}>
-  //                   <div className={`message ${
-  //                     message.fromSelf ? 'sent' : 'received'
-  //                     }`}
-  //                   >
-  //                     <div className='content'>
-  //                       {message.text}
-  //                     </div>
-  //                   </div>
-  //                 </div>
-  //               )
-  //             })
-  //           }
-  //               </div>
-  //           </ChatBox>
-  //         </Box>
-  //         <ChatInput handleSendMsg={handleSendMsg} />
-  //       </Container>
-  //     </React.Fragment>
-  //     </div>
-  //   );
-  // };
-
   return (
     <Box>
-
       <Container>
         <div className="chat-header">
           <div className="user-details">
@@ -117,8 +91,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
             </div>
           </div>
           {/* <Logout /> */}
-        </div> *
-        <div className="chat-messages">
+        </div> <div className="chat-messages">
           {messages.map((message) => {
             return (
               <div ref={scrollRef} key={uuidv4()}>
@@ -147,7 +120,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: 80vh;
+    height: 50vh;
     overflow: auto;
     .message {
       display: flex;

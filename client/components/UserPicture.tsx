@@ -81,6 +81,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
         setCaptionText('');
         setEditor(false);
         setOpen(false);
+        getUserPhotos()
       })
 
       .then(() => setOpenSnack(true))

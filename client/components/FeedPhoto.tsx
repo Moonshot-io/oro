@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Comments from '../components/Comments';
-import {Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton } from '../styles/material';
+import {Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar} from '../styles/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { styled } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -22,11 +23,12 @@ interface FeedPhotoProps {
     caption?: string;
     deleteToken?: string | null;
   },
-  updateFeed: () => void;
+  updateFeed: () => void,
+  deleteSnack: () => void;
 }
 
 
-const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
+const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -41,6 +43,10 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [owner, setOwner] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [openCaptionSnack, setOpenCaptionSnack] = useState<boolean>(false);
+
   // const [feedPhoto, setFeedPhoto] = useState({});
   const [feedPhoto, setFeedPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null}>({
     userId: '',
@@ -110,6 +116,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
         setCaptionText('');
         setEditor(false);
         updateFeed();
+        setOpenCaptionSnack(true);
       })
       .catch((err) => console.error(err));
   };
@@ -148,6 +155,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
       .then((commentData) => {
         setDeleterOpen(false);
         updateFeed();
+        deleteSnack();
         commentData.data.forEach((comment) => {
           axios.delete('/api/notifications', {
             data: {
@@ -155,12 +163,33 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
             }
           });
         });
-      });
+      })
   };
 
   const closeDeleter = (): void => {
     setDeleterOpen(false);
   };
+
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  });
+  
+
+  const handleSnackClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenCaptionSnack(false);
+
+  };
+
 
 
   return (
@@ -186,8 +215,8 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
               <MenuItem onClick={openEditor}>edit caption</MenuItem>
               <MenuItem onClick={openDeleter}>delete photo</MenuItem>
             </Menu>
-            <IconButton onClick={openMenu}>
-              <MoreHorizIcon sx={{color: inverseMode}}/>
+            <IconButton>
+              <MoreHorizIcon onClick={openMenu} sx={{color: inverseMode}}/>
             </IconButton>
           </Typography>
         </Paper>
@@ -261,6 +290,21 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed}) => {
           </CardContent>
         </Collapse>
       </Card>
+
+      <Snackbar
+        open={openCaptionSnack}
+        autoHideDuration={3000}
+        onClose={handleSnackClose}
+      >
+        <Alert
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          Caption Updated
+        </Alert>
+      </Snackbar>
+
+
     </div>
   );
 };

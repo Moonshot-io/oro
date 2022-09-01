@@ -147,11 +147,13 @@ body {
   background: ${(props) => props.theme.palette.primary.main};
   color: ${(props) => props.theme.palette.primary.contrastText};
 }
+
 }
 
 .nav-icons {
   margin-right: 10px;
 }
+
 
 .avatar {
     text-align: center;

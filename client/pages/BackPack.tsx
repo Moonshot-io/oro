@@ -8,7 +8,7 @@ import {
   MuiAccordionDetails,
   Typography,
   Button,
-  UseTheme
+  UseTheme,
 } from '../styles/material';
 import BudgetItem from './BudgetItem';
 import axios from 'axios';
@@ -70,6 +70,7 @@ const BackPack: React.FC = () => {
     axios
       .get(`/api/profile/events/${currentUserInfo?.id}`)
       .then(({ data }) => {
+        // console.log('event data', data);
         setUserEvents(data);
       })
       .catch((err) => console.error(err));
@@ -80,20 +81,20 @@ const BackPack: React.FC = () => {
 
   return (
     <div>
-      {
-        Array.isArray(userEvents) ?
-    userEvents.map((event, index) => {
-        return (
-          <EventItem
-            event={event}
-            index={index}
-            inverseMode={inverseMode}
-            expanded={expanded}
-            key={index}
-            handleChange={handleChange}
-          />
-        );
-      }) : (
+      {Array.isArray(userEvents) ? (
+        userEvents.map((event, index) => {
+          return (
+            <EventItem
+              event={event}
+              index={index}
+              inverseMode={inverseMode}
+              expanded={expanded}
+              key={index}
+              handleChange={handleChange}
+            />
+          );
+        })
+      ) : (
         <EventItem
           event={event}
           index={0}
@@ -102,9 +103,7 @@ const BackPack: React.FC = () => {
           key={'none'}
           handleChange={handleChange}
         />
-      )
-
-}
+      )}
     </div>
   );
 };
@@ -138,11 +137,20 @@ const EventItem = function ({
   );
 
   const handleSubmit = async () => {
-    const url = 'api/events/budgetsubmit';
-
+    const url = `api/budget`;
+    const data = {
+      Tickets: budgetList[0].value,
+      Food: budgetList[1].value,
+      Parking: budgetList[3].value,
+      Travel: budgetList[5].value,
+      Merch: budgetList[4].value,
+      Drinks: budgetList[2].value,
+      userEventId: event.userEventId,
+    };
     try {
+      // console.log('budget data', data);
       axios
-        .post(url, budgetList)
+        .post(url, data)
         .then((resp) => console.info('Successful budget'))
         .catch((err) => console.error(err));
     } catch (err) {

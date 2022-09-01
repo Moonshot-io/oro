@@ -25,8 +25,9 @@ model UserEvents {
   user         Users          @relation(fields: [userId], references: [id])
   userId       String
   eventAPIid   String
+  Budget       Budget?         @relation(fields: [budgetId], references: [id])
+  budgetId     Int?
   EventBudgets EventBudgets[]
-  // Budget       Budget[]
 }
 
 model Users {
@@ -113,6 +114,8 @@ model Budget {
   Parking      Int
   Merch        Int
   Travel       Int
+  userEventId  Int
+  UserEvents   UserEvents[]
   EventBudgets EventBudgets[]
 }
 
