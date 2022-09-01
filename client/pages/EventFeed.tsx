@@ -24,6 +24,7 @@ const EventFeed: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [caption, setCaption] = useState<string>('');
   const [openDeleteSnack, setOpenDeleteSnack] = useState(false);
+  const [openUploadSnack, setOpenUploadSnack] = useState(false);
 
   const [searchParams] = useSearchParams();
   const eventId: string | null = searchParams.get('id');
@@ -86,6 +87,11 @@ const EventFeed: React.FC = () => {
   // useEffect(() => {
 
   // }, [feedPhotos]);
+  // useEffect(() => {
+  //   if (openUploadSnack) {
+  //     setOpenUploadSnack(false);
+  //   }
+  // }, [openUploadSnack])
 
 
   const handleFileUpload = (): void => {
@@ -106,6 +112,7 @@ const EventFeed: React.FC = () => {
         setPreviewSource(null);
         setCaption('');
         updateFeed();
+        setOpenUploadSnack(true);
 
       })
       .catch((err) => console.error(err));
@@ -122,6 +129,7 @@ const EventFeed: React.FC = () => {
     }
 
     setOpenDeleteSnack(false);
+    setOpenUploadSnack(false);
 
   };
 
@@ -207,6 +215,20 @@ const EventFeed: React.FC = () => {
           sx={{ width: '100%' }}
         >
           Photo Deleted
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openUploadSnack}
+        autoHideDuration={3000}
+        onClose={handleSnackClose}
+      >
+        <Alert
+          onClose={handleSnackClose}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          Photo Uploaded
         </Alert>
       </Snackbar>
     </div>
