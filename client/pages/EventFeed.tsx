@@ -7,8 +7,9 @@ import { useTheme } from '@mui/material/styles';
 
 import FeedPhoto from '../components/FeedPhoto';
 
-import {OutlinedInput, Fab, Box, Button, Typography} from '../styles/material';
+import {OutlinedInput, Fab, Box, Button, Typography, Snackbar} from '../styles/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
 
 
@@ -22,6 +23,8 @@ const EventFeed: React.FC = () => {
   const [eventName, setEventName] = useState<string>('');
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [caption, setCaption] = useState<string>('');
+  const [openDeleteSnack, setOpenDeleteSnack] = useState(false);
+  const [openUploadSnack, setOpenUploadSnack] = useState(false);
 
   const [searchParams] = useSearchParams();
   const eventId: string | null = searchParams.get('id');
@@ -29,6 +32,10 @@ const EventFeed: React.FC = () => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
+
+  const deleteSnack = () => {
+    setOpenDeleteSnack(true);
+  };
   useEffect(() => {
     if (photo) {
       const reader = new FileReader();
@@ -37,6 +44,8 @@ const EventFeed: React.FC = () => {
       reader.onloadend = () => {
         setPreviewSource(reader.result);
       };
+    } else {
+      setPreviewSource('');
     }
   }, [photo]);
 
@@ -47,8 +56,9 @@ const EventFeed: React.FC = () => {
       }
     })
       .then((responseObj) => {
-        setPhoto(null);
         setFeedPhotos([...responseObj.data]);
+        setPhoto(null);
+        setPreviewSource(null);
       })
       .catch((err) => console.error(err));
   };
@@ -74,31 +84,59 @@ const EventFeed: React.FC = () => {
     setDialogOpen(true);
   };
 
+  // useEffect(() => {
+
+  // }, [feedPhotos]);
+  // useEffect(() => {
+  //   if (openUploadSnack) {
+  //     setOpenUploadSnack(false);
+  //   }
+  // }, [openUploadSnack])
 
 
   const handleFileUpload = (): void => {
-    if (photo) {
-      const formData = new FormData();
-      formData.append('myFile', photo, photo.name);
 
-      axios.post('/api/eventFeed', {
-        imageData: previewSource,
-        eventId,
-        userId: currentUserInfo?.id,
-        caption,
+    const formData = new FormData();
+    formData.append('myFile', photo, photo.name);
+
+    axios.post('/api/eventFeed', {
+      imageData: previewSource,
+      eventId,
+      userId: currentUserInfo?.id,
+      caption,
+    })
+      .then((data) => {
+        setDialogOpen(false);
+        setFeedPhotos(feedPhotos => [data.data, ...feedPhotos]);
+        setPhoto(null);
+        setPreviewSource(null);
+        setCaption('');
+        updateFeed();
+        setOpenUploadSnack(true);
+
       })
-        .then((data) => {
-          setDialogOpen(false);
-          setFeedPhotos(feedPhotos => [data.data, ...feedPhotos]);
-        })
-        .catch((err) => console.error(err));
+      .catch((err) => console.error(err));
 
+  };
+
+  
+  const handleSnackClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
     }
+
+    setOpenDeleteSnack(false);
+    setOpenUploadSnack(false);
+
   };
 
   const closeDialog = (): void => {
     setDialogOpen(false);
     setCaption('');
+    setPhoto(null);
   };
 
   const handleCaption = (e: {target: {value: string}}) => {
@@ -109,13 +147,21 @@ const EventFeed: React.FC = () => {
     await document.getElementById('fileUpload')?.click();
   };
 
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  });
+  
+
   const renderFeed = () => {
     return (
       <div>
         {feedPhotos.map((photo, i) => {
           return (
             <div key={i} margin-top="30px">
-              <FeedPhoto updateFeed={updateFeed} photo={photo}/>
+              <FeedPhoto deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
             </div>
           );
         })}
@@ -141,7 +187,7 @@ const EventFeed: React.FC = () => {
         {renderFeed()}
       </div>
       <Box sx={{position: 'sticky'}}>
-        <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onChange={handleFileChange}/>
+        <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onClick={(event) => {event.target.value = null}} onChange={handleFileChange}/>
         <Fab
           size='small'
           onClick={uploadPhoto}
@@ -157,6 +203,34 @@ const EventFeed: React.FC = () => {
           <AddPhotoAlternateIcon/>
         </Fab>
       </Box>
+
+      <Snackbar
+        open={openDeleteSnack}
+        autoHideDuration={3000}
+        onClose={handleSnackClose}
+      >
+        <Alert
+          onClose={handleSnackClose}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          Photo Deleted
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openUploadSnack}
+        autoHideDuration={3000}
+        onClose={handleSnackClose}
+      >
+        <Alert
+          onClose={handleSnackClose}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          Photo Uploaded
+        </Alert>
+      </Snackbar>
     </div>
   );
 
