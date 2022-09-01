@@ -3,6 +3,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CircularProgress,
   Divider,
   Grid,
   Modal,
@@ -10,21 +11,24 @@ import {
 } from '@mui/material';
 import { Box, Stack, styled } from '@mui/system';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Item } from '../styles/material';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import { EventContext } from '../context/EventContext';
+import { CircleRounded } from '@mui/icons-material';
 
-type Location = {
+interface Hotel {
   location_id: string;
   name: string;
   address_obj: {
     state: string;
     country: string;
     address_string: string;
+    postalcode?: string;
   };
-};
+}
+
+type HotelDetails = Partial<HotelDetailsResponse>;
 
 const style = {
   position: 'absolute' as const,
@@ -39,72 +43,81 @@ const style = {
 };
 
 const TravelPlanner: React.FC = () => {
-  const location = useLocation();
-  const [locations, setLocations] = useState<Array<Location>>([]);
+  const [hotels, setHotels] = useState<Array<Hotel>>([]);
   const [open, setOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<Location | null>(null);
+  const [hotelDetails, setHotelDetails] = useState<HotelDetails | null>(null);
 
+  const { eventDetails } = useContext(EventContext);
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-  // <YouTubeIcon key={'youtube'} sx={{ color: iconColors }} />
-  // <CardContent sx={{ bgcolor: inverseMode }}></CardContent>
-  // <Typography paragraph sx={{ bgcolor: inverseMode }}></Typography>
-
-  const handleOpen = (content: React.SetStateAction<Location | null>) => {
-    setModalContent(content);
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setModalContent(null);
-    setOpen(false);
-  };
-
-  const fetchLocations = async () => {
-    const { city } = location.state as { city: string };
-    const { data } = await axios.get(`/api/travelPlanner/locations/${city}`);
-    setLocations(data.data);
-  };
+  const fetchLocations = useCallback(async () => {
+    const city = eventDetails?.venues.city.name;
+    const state = eventDetails?.venues.state.name;
+    if (city && state) {
+      const { data } = await axios.get(
+        `/api/travelPlanner/hotels?state=${state}&city=${city}`
+      );
+      setHotels(data.data);
+    }
+  }, [eventDetails]);
 
   useEffect(() => {
     fetchLocations();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchLocations]);
+
+  const handleOpen = async (hotel: Hotel | null) => {
+    if (hotel?.location_id) {
+      setOpen(true);
+      const { data } = await axios.get(
+        `/api/travelPlanner/hotels/${hotel.location_id}`
+      );
+      setHotelDetails(data);
+    }
+  };
+  const handleClose = () => {
+    setHotelDetails(null);
+    setOpen(false);
+  };
+
+  const rating = Number(hotelDetails?.rating);
 
   return (
     <Grid spacing={2}>
-      {locations.map((loc) => {
-        const image = `https://source.unsplash.com/random/?${loc.name}`;
-        return (
-          <Grid xs={8} key={loc.location_id}>
-            <Card
-              sx={{
-                minWidth: 275,
-                ml: 'auto',
-                mr: 'auto',
-                bgcolor: inverseMode,
-              }}
-            >
-              <CardContent>
-                <img src={image} width='80%' object-fit='cover' />
-                <Typography variant='h5' component='div'>
-                  {loc.name}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button
-                  size='small'
-                  onClick={() => handleOpen(loc)}
-                  sx={{ bgcolor: inverseMode, ml: 'auto', mr: 'auto' }}
-                >
-                  View
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        );
-      })}
+      {hotels
+        .filter((hotel) => !!hotel.address_obj.postalcode)
+        .map((hotel) => {
+          const image = `https://source.unsplash.com/random/?${hotel.name}`;
+          return (
+            <Grid xs={8} key={hotel.location_id}>
+              <Card
+                sx={{
+                  minWidth: 275,
+                  ml: 'auto',
+                  mr: 'auto',
+                  bgcolor: inverseMode,
+                }}
+              >
+                <CardContent>
+                  <img src={image} width='80%' object-fit='cover' />
+                  <Typography variant='h5' component='div'>
+                    {hotel.name}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size='small'
+                    onClick={() => handleOpen(hotel)}
+                    sx={{ bgcolor: inverseMode, ml: 'auto', mr: 'auto' }}
+                  >
+                    View
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          );
+        })}
       <Modal
         open={open}
         onClose={handleClose}
@@ -112,157 +125,87 @@ const TravelPlanner: React.FC = () => {
         aria-describedby='Modal for viewing a location'
       >
         <Box sx={style}>
-          <Typography variant='h3' textAlign={'left'}>
-            {' '}
-            About
-          </Typography>
-
-          <Stack direction={'row'} columnGap={2}>
-            <Stack style={{ width: '50%' }} direction={'column'}>
-              <Stack direction={'row'} textAlign={'left'}>
-                <Typography variant='h3'>4.5</Typography>
-                <Stack ml={2}>
-                  <b>Excellent</b>
-                  <Typography variant='h6' textAlign={'left'}>
-                    5.771
-                  </Typography>
-                </Stack>
-              </Stack>
-              <Stack>#11 of 154 hotels in Memphis</Stack>
-              <Typography variant='h6' textAlign={'left'}>
-                Travelers choice
+          {hotelDetails ? (
+            <>
+              <Typography variant='h3' textAlign={'left'}>
+                {hotelDetails.name}
               </Typography>
               <br />
               <Divider />
               <br />
-              <Typography variant='h6' textAlign={'left'}>
-                {' '}
-                11 of 154 hotels in Memphis 11 of 154 hotels in Memphis
-              </Typography>
-              <br />
-              <Divider />
-              <br />
-              <Typography variant='h6' textAlign={'left'}>
-                sugget edits to impvoe what{' '}
-              </Typography>
-              <Typography variant='h6' textAlign={'left'}>
-                {' '}
-                <b>
-                  <u>Improve the listing</u>
-                </b>{' '}
-              </Typography>
-            </Stack>
+              <Stack direction={'row'} columnGap={2}>
+                <Stack style={{ width: '50%' }} direction={'column'}>
+                  <Stack direction={'row'} textAlign={'left'}>
+                    <Typography variant='h3'>{rating || ''}</Typography>
+                    <Stack ml={2}>
+                      <b>
+                        {rating < 2
+                          ? 'Poor'
+                          : rating < 3
+                          ? 'Fair'
+                          : rating < 4
+                          ? 'Good'
+                          : rating < 5
+                          ? 'Excellent'
+                          : ''}
+                      </b>
+                      <Typography variant='h6' textAlign={'left'}>
+                        {hotelDetails.num_reviews} reviews
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                  <Stack>{hotelDetails.ranking_data?.ranking_string}</Stack>
+                  {hotelDetails.awards?.map((award) => {
+                    return (
+                      <Typography variant='h6' textAlign={'left'}>
+                        <img src={award.images.small} /> {award.display_name}
+                      </Typography>
+                    );
+                  })}
+                  <br />
+                  <Divider />
+                  <br />
+                  <p>{hotelDetails.description}</p>
+                  <br />
+                  <Divider />
+                  <br />
+                  <Typography textAlign={'left'}>
+                    <a
+                      href={hotelDetails.web_url}
+                      rel='noreferrer nofollow'
+                      target='_blank'
+                      style={{ color: '#fff' }}
+                    >
+                      Click here for more information on TripAdvisor
+                    </a>
+                  </Typography>
+                </Stack>
 
-            <Stack style={{ width: '50%' }} direction={'column'}>
-              <Typography variant='h6' textAlign={'left'}>
-                <b>Property amenties</b>
-              </Typography>
-              <Stack mb={3} direction={'row'} columnGap={3}>
-                <Stack direction={'column'}>
-                  <Typography>
-                    <AcUnitIcon fontSize='small' /> Valet pargking{' '}
+                <Stack style={{ width: '50%' }} direction={'column'}>
+                  <Typography variant='h5' textAlign={'left'}>
+                    <b>Property Amenities</b>
                   </Typography>
-                  <Typography>
-                    <AcUnitIcon fontSize='small' /> Valet pargking{' '}
-                  </Typography>
-                  <Typography>
-                    <AcUnitIcon fontSize='small' /> Valet pargking{' '}
-                  </Typography>
+                  <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
+                    {hotelDetails.amenities?.slice(0, 10).map((amenity) => {
+                      return (
+                        <div style={{ textAlign: 'left', width: '50%' }}>
+                          - {amenity}
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {Number(hotelDetails.amenities?.length) > 10 && (
+                    <Typography variant='h6' textAlign={'left'}>
+                      And {Number(hotelDetails.amenities?.length) - 10} more...
+                    </Typography>
+                  )}
                 </Stack>
-                <Stack direction={'column'}>
-                  <Typography>
-                    <AcUnitIcon fontSize='small' /> Valet pargking{' '}
-                  </Typography>
-                  <Typography>
-                    <AcUnitIcon fontSize='small' /> Valet pargking{' '}
-                  </Typography>
-                  <Typography>
-                    <AcUnitIcon fontSize='small' /> Valet pargking{' '}
-                  </Typography>
-                </Stack>
+                <br />
               </Stack>
-              <Typography variant='h6'>
-                <b>show more </b>
-              </Typography>
-              <br />
-              <Typography mb={3} variant='h6' textAlign={'left'}>
-                <b>Room features</b>
-              </Typography>
-              <Stack direction={'row'} columnGap={3}>
-                <Stack direction={'column'}>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                </Stack>
-                <Stack direction={'column'}>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <br />
-
-              <Typography mb={3} variant='h6' textAlign={'left'}>
-                <b>Room features</b>
-              </Typography>
-              <br />
-              <Stack direction={'row'} columnGap={3}>
-                <Stack direction={'column'}>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                </Stack>
-                <Stack direction={'column'}>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                  <Stack direction={'row'}>
-                    <AcUnitIcon fontSize='small' />{' '}
-                    <Typography ml={3}>Valet pargking</Typography>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Typography variant='h6' textAlign={'left'}>
-                <b>show more </b>
-              </Typography>
-              <br />
-            </Stack>
-          </Stack>
-          <Typography id='location-modal-title' variant='h6' component='h2'>
-            {modalContent?.name}
-          </Typography>
+            </>
+          ) : (
+            <CircularProgress />
+          )}
         </Box>
       </Modal>
     </Grid>
@@ -270,3 +213,108 @@ const TravelPlanner: React.FC = () => {
 };
 
 export default TravelPlanner;
+
+interface Subrating {
+  name: string;
+  localized_name: string;
+  rating_image_url: string;
+  value: string;
+}
+
+interface HotelDetailsResponse {
+  location_id: string;
+  name: string;
+  description: string;
+  web_url: string;
+  address_obj: {
+    street1: string;
+    street2?: string;
+    city: string;
+    state: string;
+    country: string;
+    postalcode: string;
+    address_string: string;
+  };
+  ancestors: [
+    {
+      level: string;
+      name: string;
+      location_id: string;
+    },
+    {
+      abbrv: string;
+      level: string;
+      name: string;
+      location_id: string;
+    },
+    {
+      level: string;
+      name: string;
+      location_id: string;
+    }
+  ];
+  latitude: string;
+  longitude: string;
+  timezone: string;
+  phone: string;
+  write_review: string;
+  ranking_data: {
+    geo_location_id: string;
+    ranking_string: string;
+    geo_location_name: string;
+    ranking_out_of: string;
+    ranking: string;
+  };
+  rating: string;
+  rating_image_url: string;
+  num_reviews: string;
+  review_rating_count: {
+    '1': string;
+    '2': string;
+    '3': string;
+    '4': string;
+    '5': string;
+  };
+  subratings: {
+    '0': Subrating;
+    '1': Subrating;
+    '2': Subrating;
+    '3': Subrating;
+    '4': Subrating;
+    '5': Subrating;
+  };
+  photo_count: string;
+  see_all_photos: string;
+  price_level: string;
+  amenities: string[];
+  parent_brand: string;
+  brand: string;
+  category: {
+    name: string;
+    localized_name: string;
+  };
+  subcategory: {
+    name: string;
+    localized_name: string;
+  }[];
+  styles: string[];
+  neighborhood_info: {
+    location_id: string;
+    name: string;
+  }[];
+  trip_types: {
+    name: string;
+    localized_name: string;
+    value: string;
+  }[];
+  awards: {
+    award_type: string;
+    year: string;
+    images: {
+      small: string;
+      large: string;
+    };
+    categories: string[];
+    display_name: string;
+  }[];
+}
