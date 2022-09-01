@@ -140,10 +140,10 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any): void; (
     onlineUsers.set(userId, socket.id);
   });
 
-  socket.on('send-msg', (data: { receiverId: any; text: any; }) => {
+  socket.on('send-msg', (data: { receiverId: string;}) => {
     const sendUserSocket = onlineUsers.get(data.receiverId);
     if (sendUserSocket) {
-      socket.to(sendUserSocket).emit('msg-receive', data.text);
+      socket.to(sendUserSocket).emit('msg-receive', data);
     }
   });
 });
