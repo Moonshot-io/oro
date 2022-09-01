@@ -8,7 +8,7 @@ const eventListingsRouter = Router();
 
 eventListingsRouter.get('/list', (req, res) => {
   const { keyword } = req.query;
-  axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=5&classificationName=[music, concert, festival]&keyword=${keyword}&apikey=${process.env.TICKETMASTER_API_KEY}`)
+  axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=20&classificationName=[music, concert, festival]&keyword=${keyword}&apikey=${process.env.TICKETMASTER_API_KEY}`)
     .then((responseObj) => {
       let venueInfo;
       const events = responseObj.data._embedded.events.filter((event) => {
