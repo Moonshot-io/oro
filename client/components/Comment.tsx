@@ -124,7 +124,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           </Link> */}
         </Grid>
         <Grid item xs={10} sm={10} md={10}>
-          <Paper sx={{width: '20',  wordWrap: 'break-word'}}>
+          <Paper className='commentsPaper' sx={{width: '20',  wordWrap: 'break-word'}}>
             <Dialog open={deleterOpen}>
               <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deleteComment}>DELETE</Button>

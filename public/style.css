@@ -54,3 +54,7 @@
 #comments-container {
   margin: auto;
 }
+
+.commentsPaper {
+  word-break: break-all;
+}
