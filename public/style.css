@@ -22,3 +22,35 @@
 .chat{
   float:right;
 }
+
+.commentTime {
+  float:left;
+}
+
+.editDelete {
+  float:right;
+}
+
+.edit {
+  margin: 0px 5px 0px 0px
+}
+
+.edit:hover {
+  font-weight: 900;
+}
+
+
+.delete {
+  margin: 0px 0px 0px 5px;
+}
+.delete:hover {
+  font-weight: 900;
+}
+
+.comments {
+  margin: 0px 0px 10px
+}
+
+#comments-container {
+  margin: auto;
+}
