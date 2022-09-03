@@ -177,7 +177,7 @@ const EventFeed: React.FC = () => {
       </h1>
       <Dialog open={dialogOpen}>
         <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
-          <OutlinedInput placeholder='enter caption here' sx={{maxLength: 30}} value={caption} onChange={handleCaption}/>
+          <OutlinedInput placeholder='enter caption here' inputProps={{maxLength: 30}} value={caption} onChange={handleCaption}/>
         </Typography>
         <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button>
         <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>

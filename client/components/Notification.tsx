@@ -103,7 +103,7 @@ const Notification: React.FC<NotificationProps> = ({notif}) => {
             <Box sx={{margin: 'auto', bgcolor: inverseMode, width: 350, alignItems: 'center', justifyContent: 'center', pt: '20px', outline: 'none'}}>
 
               <img width='300px' height='auto' src={photoUrl}/>
-              <Grid container sx={{mt: '20px'}}>
+              <Grid container sx={{mt: '20px', width: '20'}}>
                 {photo && <Comments photo={photo}/>}
               </Grid>
             </Box>
