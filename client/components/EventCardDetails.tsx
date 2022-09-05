@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-import { InfoIcon, Grid, Styled, UseTheme, Typography, ButtonBase, PushPinIcon, Card, CardHeader, CardMedia, CardContent, Collapse, IconButton, Button } from '../styles/material';
+import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, IconButton, Button } from '../styles/material';
 import axios from 'axios';
 import { IconButtonProps } from '@mui/material/IconButton';
 

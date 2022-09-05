@@ -21,12 +21,15 @@ const EventListings: React.FC = () => {
 
   const [ keyword, setKeyword ] = useState('');
   const [events, setEvents] = useState(eventDummy);
+  const [allEvents, setAllEvents] = useState(eventDummy);
+  const [city, setCity] = useState('any');
 
   const getEvents = () => {
     axios.get('/api/events/list', { params: { keyword } })
       .then((responseObj) => {
         console.log(responseObj.data.events);
         setEvents(responseObj.data.events);
+        setAllEvents(responseObj.data.events);
       })
       .catch(err => console.error(err));
   };
@@ -35,6 +38,10 @@ const EventListings: React.FC = () => {
   useEffect(() => {
     getEvents();
   }, []);
+
+  useEffect(() => {
+    updateEvents(city);
+  }, [city]);
 
 
 
@@ -53,10 +60,19 @@ const EventListings: React.FC = () => {
   }
 
   const updateEvents = (city) => {
-    const filteredEvents = events.filter((event) => {
-      return event.venueInfo[0].city = city;
+    setCity(city);
+    if(city === 'all'){
+      setEvents(allEvents);
+    } else {
+    const filteredEvents = allEvents.filter((event) => {
+      return event.venueInfo[0].city === city;
     })
-    setEvents(filteredEvents);
+    if(!filteredEvents.length){
+      setEvents([...allEvents]);
+    } else {
+      setEvents([...filteredEvents]);
+    }
+  }
   }
 
   return (
@@ -80,7 +96,7 @@ const EventListings: React.FC = () => {
           )
           }}/>
         </Grid>
-        <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={events} /></Grid>
+        <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
         <Grid xs={2} sm={2} md={1}>
           <Tooltip title='sort date'>
           <IconButton onClick={handleSort}><SortIcon/></IconButton>
