@@ -99,19 +99,19 @@ const EventCardDetails = ({event}) => {
 
   return (
     <div>
-      <Card variant='outlined' sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
-      <Typography><h3>{date}</h3></Typography>
-        <CardHeader
-          title={<Typography>
-            <h1>{event.eventName}</h1>
-          </Typography>} />
+      <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
+      <Typography variant="h5">{date}</Typography>
+        <div><CardHeader style={{display: "block", overflow: "hidden", textOverflow: "ellipsis", width: '90%'}}
+          title={<Typography variant="h5" noWrap>
+            {event.eventName}
+          </Typography>} /></div>
         <CardMedia
           component="img"
           height="flex"
           image={image} />
         <CardContent>
           <Grid container spacing={2} mt="10px">
-            <Grid xs={6}>
+            <Grid xs={6} sm={6}>
               <Button variant="contained" onClick={handleClick} ><IconButton aria-label="add to favorites">
                 <PushPinIcon
                   id={event.eventId}
@@ -120,7 +120,7 @@ const EventCardDetails = ({event}) => {
               </IconButton> {pins.includes(event.eventId) ? 'saved' : 'save'}
               </Button>
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={6} sm={6}>
               <Button variant="contained" onClick={getDetails}><IconButton aria-label="settings">
                 <InfoIcon  />
               </IconButton>
