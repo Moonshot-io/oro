@@ -78,7 +78,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
       })
       .catch((err) => console.error(err));
   };
-  
+
 
   return (
     <div id='comments-container'>
@@ -89,7 +89,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
         );
       })}
 
-      <CssTextField onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} inputProps={fontColor} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
+      <CssTextField onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} multiline={true} inputProps={{fontColor, maxLength: 150}} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
       <Fab variant='extended' type='submit' onClick={handleSend}
         sx={{bgcolor: iconColors, ml: '20px', mt: '15px'}}><SendIcon sx={{ color: inverseMode }}/></Fab>
     </div>

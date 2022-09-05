@@ -242,20 +242,23 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
           sx={{ bgcolor: inverseMode }}
         />
         <CardContent sx={{ bgcolor: inverseMode }}>
-          <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
             {/* {photo.caption} */}
+            <Typography variant='subtitle1' sx={{ bgcolor: inverseMode }}>
+
             <span>
               {!editor && photo.caption}
             </span>
 
             <div>
-              {editor && <OutlinedInput onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{ bgcolor: inverseMode }} placeholder={photo.caption} value={captionText} onChange={handleEdit}/>}
+              {editor && <OutlinedInput inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{ bgcolor: inverseMode }} placeholder={photo.caption} value={captionText} onChange={handleEdit}/>}
             </div>
+            </Typography>
 
+          <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
             {editor &&
             <Button sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>
               <Typography variant='body2' sx={{ color: inverseMode }}>
-                confirm changes
+                confirm
               </Typography>
             </Button>}
 
