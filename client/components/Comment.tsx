@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import { UserContext } from '../context/UserContext';
 import Dialog from '@mui/material/Dialog';
+import Input from '@mui/material/Input';
 
 interface CommentProps {
   comment: {
@@ -94,31 +95,23 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const closeDeleter = (): void => {
     setDeleterOpen(false);
   };
-  const getEditDeleteOptions = () => {
-    if (comment.userId === currentUserInfo?.id) {
-      return (
-        <Typography textAlign='right' sx={{ color: iconColors, mb: '20px' }}>
-          <span onClick={openEditor}>
-            edit
-          </span>
-          <span>
-            |
-          </span>
-          <span onClick={openDeleter}>
-            delete
-          </span>
-        </Typography>
-      );
-    }
-  };
+  // const getEditDeleteOptions = () => {
+  //   if (comment.userId === currentUserInfo?.id) {
+  //     return (
+  //       <span>
+
+  //       </span>
+  //     );
+  //   }
+  // };
 
 
   return (
-    <div>
-      <Grid container spacing={4}>
+    <div className='comments'>
+      <Grid container>
         <Grid item xs={2} sm={2} md={2}>
           {
-            currentUserInfo.id === comment.userId
+            currentUserInfo?.id === comment.userId
             ? <Link to='/profile'>
               <Avatar src={profilePic} />
             </Link>
@@ -130,22 +123,50 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
             <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic}/>
           </Link> */}
         </Grid>
-        <Grid item xs={8} sm={8} md={8}>
-          <Paper>
+        <Grid item xs={10} sm={10} md={10}>
+          <div className="commentsPaper" sx={{width: '20',  wordWrap: 'break-word'}}>
             <Dialog open={deleterOpen}>
               <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deleteComment}>DELETE</Button>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
             </Dialog>
-            {!editor && <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>{comment.comment} {comment.edited && ' (edited)'}</Typography>}
-            {!editor && <Typography textAlign='right' sx={{ color: inverseMode, mb: '20px' }}>{moment(comment.created_at).calendar()}</Typography>}
+            {!editor &&
+              <Typography textAlign='left' sx={{ color: iconColors, ml: '5px', mr: '5px'}}>
+                 {comment.comment}
+                 {comment.edited && ' (edited)'}
+              </Typography>}
             <Typography variant='body2' sx={{ bgcolor: iconColors }}>
-              {editor && <OutlinedInput onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: inverseMode}} placeholder={comment.comment} value={commentText} onChange={handleEdit}/>}
+              {editor && <OutlinedInput inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: inverseMode}} placeholder={comment.comment} value={commentText} onChange={handleEdit}/>}
             </Typography>
             {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm changes</Button>}
             {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeEditor}>cancel</Button>}
-          </Paper>
-          {getEditDeleteOptions()}
+          </div>
+            <Typography sx={{ color: iconColors, fontSize: '12px'}}>
+            {!editor &&
+              <div>
+                <span className='commentTime'>
+                  {moment(comment.created_at).calendar()}
+                </span>
+                {currentUserInfo?.id === comment.userId &&
+                <div className='editDelete'>
+                  <span className='edit' onClick={openEditor}>
+                    edit
+                  </span>
+
+                  <span className='divider'>
+                    |
+                  </span>
+
+                  <span className='delete' onClick={openDeleter}>
+                    delete
+                  </span>
+                </div>
+                  }
+
+              </div>
+                  }
+                </Typography>
+        {/* {getEditDeleteOptions()} */}
         </Grid>
       </Grid>
     </div>

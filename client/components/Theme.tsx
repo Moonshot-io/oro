@@ -154,6 +154,10 @@ body {
   margin-right: 10px;
 }
 
+.commentsPaper {
+  background: #dbdbdb;
+}
+
 
 .avatar {
     text-align: center;

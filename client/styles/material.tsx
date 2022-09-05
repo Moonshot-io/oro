@@ -31,7 +31,7 @@ import cardContent from '@mui/material/CardContent';
 import cardActions from '@mui/material/CardActions';
 import collapse from '@mui/material/Collapse';
 import iconButton from '@mui/material/IconButton';
-
+import searchIcon from '@mui/icons-material/Search';
 import typography from '@mui/material/Typography';
 import favoriteIcon from '@mui/icons-material/Favorite';
 import expandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -83,12 +83,21 @@ import loginIcon from '@mui/icons-material/Login';
 import arrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import emailIcon from '@mui/icons-material/Email';
 import logoutIcon from '@mui/icons-material/Logout';
-<<<<<<< HEAD
+import Purple  from '@mui/material/colors/purple';
+import inputLabel from '@mui/material/InputLabel';
+import formControl from '@mui/material/FormControl';
+import sortIcon from '@mui/icons-material/Sort';
+import select, { SelectChangeEvent } from '@mui/material/Select';
+import inputAdornment from '@mui/material/InputAdornment';
+
+export const InputAdornment = inputAdornment;
+export const SortIcon = sortIcon;
+export const Select = select;
+export const FormControl = formControl;
+export const InputLabel = inputLabel;
+export const purple = Purple;
+export const SearchIcon = searchIcon;
 export const ListItemAvatar = listItemAvatar;
-=======
-
-
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
 export const AccountCircleIcon = accountCircleIcon;
 export const ArrowCircleUpIcon = arrowCircleUpIcon;
 export const LogoutIcon = logoutIcon;

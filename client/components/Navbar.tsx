@@ -135,10 +135,10 @@ const Navbar = (props: navPropsType) => {
   }
 
   useEffect(() => {
-    if (!currentUserInfo.id) {
+    if (!currentUserInfo?.id) {
       getCurrentUser();
     }
-  }, [currentUserInfo.id]);
+  }, [currentUserInfo?.id]);
 
   const AccountBlock = () => {
     const account = [
