@@ -124,14 +124,14 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           </Link> */}
         </Grid>
         <Grid item xs={10} sm={10} md={10}>
-          <Paper sx={{width: '20',  wordWrap: 'break-word'}}>
+          <div className="commentsPaper" sx={{width: '20',  wordWrap: 'break-word'}}>
             <Dialog open={deleterOpen}>
               <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deleteComment}>DELETE</Button>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
             </Dialog>
             {!editor &&
-              <Typography textAlign='left' sx={{ color: inverseMode, ml: '5px', mr: '5px'}}>
+              <Typography textAlign='left' sx={{ color: iconColors, ml: '5px', mr: '5px'}}>
                  {comment.comment}
                  {comment.edited && ' (edited)'}
               </Typography>}
@@ -140,9 +140,9 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
             </Typography>
             {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm changes</Button>}
             {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeEditor}>cancel</Button>}
-          </Paper>
+          </div>
             <Typography sx={{ color: iconColors, fontSize: '12px'}}>
-            {!editor && 
+            {!editor &&
               <div>
                 <span className='commentTime'>
                   {moment(comment.created_at).calendar()}
@@ -150,15 +150,15 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
                 {currentUserInfo?.id === comment.userId &&
                 <div className='editDelete'>
                   <span className='edit' onClick={openEditor}>
-                    edit             
+                    edit
                   </span>
 
                   <span className='divider'>
                     |
                   </span>
-                  
+
                   <span className='delete' onClick={openDeleter}>
-                    delete          
+                    delete
                   </span>
                 </div>
                   }
