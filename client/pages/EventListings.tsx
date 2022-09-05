@@ -4,6 +4,7 @@ import EventCardDetails from '../components/EventCardDetails';
 import Dropdown from '../components/Dropdown';
 import eventDummy from '../../server/database/data/eventDummy';
 import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box } from '../styles/material';
+import { Typography } from '@mui/material';
 
 const fontColor = {
   style: { color: '#9B27B0' }
@@ -23,15 +24,28 @@ const EventListings: React.FC = () => {
   const [events, setEvents] = useState(eventDummy);
   const [allEvents, setAllEvents] = useState(eventDummy);
   const [city, setCity] = useState('any');
-
+  const [eventsExist, setEventsExist] = useState(true);
   const getEvents = () => {
     axios.get('/api/events/list', { params: { keyword } })
       .then((responseObj) => {
+        console.log(responseObj.data);
+        if(responseObj.data === false){
+          setEventsExist(false);
+          setEvents([]);
+          setAllEvents([]);
+        } else {
         console.log(responseObj.data.events);
         setEvents(responseObj.data.events);
         setAllEvents(responseObj.data.events);
+        setEventsExist(true);
+        }
       })
-      .catch(err => console.error(err));
+      .catch((err) => {
+        setEventsExist(false);
+        setEvents([]);
+        setAllEvents([]);
+        console.error(err);
+      });
   };
 
 
@@ -74,7 +88,7 @@ const EventListings: React.FC = () => {
     }
   }
   }
-
+if(eventsExist){
   return (
     <div>
       <h1>Search for Events</h1>
@@ -117,6 +131,43 @@ const EventListings: React.FC = () => {
       </Grid>
     </div>
   );
+      } else {
+        return (
+          <div>
+            <h1>Search for Events</h1>
+            <br/>
+            <Box>
+            <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
+        >
+            <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={fontColor}
+                sx={{ mb: '15px'}} id="keywordSearch"
+                color="secondary" label="search events" type='text'
+                onChange={ handleChange } value={keyword} onKeyDown={enterClick}
+                InputProps={{endAdornment:
+                (
+                  <InputAdornment position="end">
+                    <ColorButton onClick={getEvents} sx={{bgColor:purple[500]}}>
+                    <SearchIcon />
+                    </ColorButton>
+                  </InputAdornment>
+                )
+                }}/>
+              </Grid>
+              <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
+              <Grid xs={2} sm={2} md={1}>
+                <Tooltip title='sort date'>
+                <IconButton onClick={handleSort}><SortIcon/></IconButton>
+                </Tooltip>
+                </Grid>
+            </Grid></Box><br/>
+                <h3>No Events Found</h3>
+                <h4>Please try another search.</h4>
+          </div>
+        );
+
+
+
+      }
 };
 
 export default EventListings;
