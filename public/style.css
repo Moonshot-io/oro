@@ -22,3 +22,11 @@
 .chat{
   float:right;
 }
+
+#social-media {
+  justify-content: center;
+}
+
+#panel1d-header {
+  justify-content: space-between;
+}
