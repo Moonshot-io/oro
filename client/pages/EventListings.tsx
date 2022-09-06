@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EventCardDetails from '../components/EventCardDetails';
+import Dropdown from '../components/Dropdown';
 import eventDummy from '../../server/database/data/eventDummy';
-import { CssTextField, Grid, SearchIcon, Button, Styled, purple, Grid } from '../styles/material';
+import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box } from '../styles/material';
 
 const fontColor = {
   style: { color: '#9B27B0' }
@@ -24,6 +25,7 @@ const EventListings: React.FC = () => {
   const getEvents = () => {
     axios.get('/api/events/list', { params: { keyword } })
       .then((responseObj) => {
+        console.log(responseObj.data.events);
         setEvents(responseObj.data.events);
       })
       .catch(err => console.error(err));
@@ -33,6 +35,8 @@ const EventListings: React.FC = () => {
   useEffect(() => {
     getEvents();
   }, []);
+
+
 
   const enterClick = (e: { keyCode: number; }) => {
     if (e.keyCode === 13) {
@@ -44,24 +48,49 @@ const EventListings: React.FC = () => {
     setKeyword(e.target.value);
   };
 
+  const handleSort = () => {
+    console.log('sort date');
+  }
+
+  const updateEvents = (city) => {
+    const filteredEvents = events.filter((event) => {
+      return event.venueInfo[0].city = city;
+    })
+    setEvents(filteredEvents);
+  }
+
   return (
     <div>
       <h1>Search for Events</h1>
       <br/>
-      <Grid container spacing={0}
-  direction="column"
-  alignItems="center"
-  justifyContent="center"
-  style={{ maxHeight: '50vh' }}>
-      <Grid xs={6}><CssTextField InputLabelProps={fontColor} inputProps={fontColor}
-          sx={{ mb: '15px'}} id="keywordSearch" color="secondary" label="search events" type='text' onChange={ handleChange } value={keyword} onKeyDown={enterClick}/>
-          <ColorButton mt="50%"onClick={getEvents} size='large' variant="contained"><SearchIcon /></ColorButton>
+      <Box>
+      <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
+  >
+      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={fontColor}
+          sx={{ mb: '15px'}} id="keywordSearch"
+          color="secondary" label="search events" type='text'
+          onChange={ handleChange } value={keyword} onKeyDown={enterClick}
+          InputProps={{endAdornment:
+          (
+            <InputAdornment position="end">
+              <ColorButton onClick={getEvents} sx={{bgColor:purple[500]}}>
+              <SearchIcon />
+              </ColorButton>
+            </InputAdornment>
+          )
+          }}/>
         </Grid>
-      </Grid><br/>
+        <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={events} /></Grid>
+        <Grid xs={2} sm={2} md={1}>
+          <Tooltip title='sort date'>
+          <IconButton onClick={handleSort}><SortIcon/></IconButton>
+          </Tooltip>
+          </Grid>
+      </Grid></Box><br/>
       <Grid container spacing={2}>
         {
           events.map((event, index) => (
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6}>
             <EventCardDetails
               event={event}
               key={`event${index}`}

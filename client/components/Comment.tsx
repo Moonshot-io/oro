@@ -7,6 +7,8 @@ import moment from 'moment';
 import { UserContext } from '../context/UserContext';
 import Dialog from '@mui/material/Dialog';
 import Input from '@mui/material/Input';
+import { ThemeContext } from '../context/ThemeContext';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 interface CommentProps {
   comment: {
@@ -30,6 +32,8 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const [commentText, setCommentText] = useState<string>('');
   const [editor, setEditor] = useState<boolean>(false);
   const [deleterOpen, setDeleterOpen] = useState<boolean>(false);
+  const themeContext = useContext(ThemeContext);
+  const { mode, toggleMode } = themeContext;
 
   const [profilePic, setProfilePic] = useState<string>('');
 
@@ -124,25 +128,28 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           </Link> */}
         </Grid>
         <Grid item xs={10} sm={10} md={10}>
-          <Paper className='commentsPaper' sx={{bgcolor: '#0b2545', width: '20',  wordWrap: 'break-word'}}>
+          {/* <Paper className='commentsPaper' sx={{bgcolor: '#0b2545', width: '20',  wordWrap: 'break-word'}}> */}
+          <div className={mode === 'dark' ? 'commentsPaperDark' : 'commentsPaperLight'}>
             <Dialog open={deleterOpen}>
               <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deleteComment}>DELETE</Button>
               <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
             </Dialog>
             {!editor &&
-              <Typography textAlign='left' sx={{ color: inverseMode, ml: '10px', mr: '10px'}}>
-                 {comment.comment}
-                 {comment.edited && ' (edited)'}
+              <Typography textAlign='left' sx={mode === 'dark' ? {color: iconColors} : {color: iconColors}}>
+                 <div className='comment'>
+                  {comment.comment}
+                  {comment.edited && ' (edited)'}
+                 </div>
               </Typography>}
-            <Typography variant='body2' sx={{ bgcolor: iconColors }}>
-              {editor && <OutlinedInput inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: inverseMode}} placeholder={comment.comment} value={commentText} onChange={handleEdit}/>}
+            <Typography variant='body2' sx={{ bgcolor: '#dbdbdb' }}>
+              {editor && <OutlinedInput fullWidth={true} inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: iconColors}} placeholder={comment.comment} value={commentText} onChange={handleEdit}/>}
             </Typography>
-            {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm changes</Button>}
+            {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm</Button>}
             {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeEditor}>cancel</Button>}
-          </Paper>
+          </div>
             <Typography sx={{ color: iconColors, fontSize: '12px'}}>
-            {!editor && 
+            {!editor &&
               <div>
                 <span className='commentTime'>
                   {moment(comment.created_at).calendar()}
@@ -150,15 +157,15 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
                 {currentUserInfo?.id === comment.userId &&
                 <div className='editDelete'>
                   <span className='edit' onClick={openEditor}>
-                    edit             
+                    edit
                   </span>
 
                   <span className='divider'>
                     |
                   </span>
-                  
+
                   <span className='delete' onClick={openDeleter}>
-                    delete          
+                    delete
                   </span>
                 </div>
                   }

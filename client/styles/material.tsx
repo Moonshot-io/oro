@@ -84,7 +84,17 @@ import arrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import emailIcon from '@mui/icons-material/Email';
 import logoutIcon from '@mui/icons-material/Logout';
 import Purple  from '@mui/material/colors/purple';
+import inputLabel from '@mui/material/InputLabel';
+import formControl from '@mui/material/FormControl';
+import sortIcon from '@mui/icons-material/Sort';
+import select, { SelectChangeEvent } from '@mui/material/Select';
+import inputAdornment from '@mui/material/InputAdornment';
 
+export const InputAdornment = inputAdornment;
+export const SortIcon = sortIcon;
+export const Select = select;
+export const FormControl = formControl;
+export const InputLabel = inputLabel;
 export const purple = Purple;
 export const SearchIcon = searchIcon;
 export const ListItemAvatar = listItemAvatar;
