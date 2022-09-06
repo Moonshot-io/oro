@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 import FeedPhoto from '../components/FeedPhoto';
 
-import {OutlinedInput, Fab, Box, Button, Typography, Snackbar} from '../styles/material';
+import {OutlinedInput, Fab, Box, Button, Typography, Grid, Snackbar} from '../styles/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
@@ -176,11 +176,15 @@ const EventFeed: React.FC = () => {
         {eventName}
       </h1>
       <Dialog open={dialogOpen}>
+        <img width='220px' height='auto' src={`${previewSource}`}/>
+
         <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
-          <OutlinedInput placeholder='enter caption here' inputProps={{maxLength: 30}} value={caption} onChange={handleCaption}/>
+          <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
         </Typography>
-        <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button>
-        <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
+
+        {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
+        <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
+
       </Dialog>
 
       <div>
