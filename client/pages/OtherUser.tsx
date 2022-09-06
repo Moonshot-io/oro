@@ -6,21 +6,21 @@ import { Box, Grid, Link, IconButton, FacebookIcon, InstagramIcon, TwitterIcon, 
 
 const OtherUser: React.FC = () => {
   const [userInfo, setUserInfo] = useState
-  <{
-    googleId: string;
-    fullName: string;
-    profileURL: string;
-    fbId?: string;
-    instaId?: string;
-    twitterId?: string;
-  }>({
-    googleId: '',
-    fullName: '',
-    profileURL: '',
-    fbId: '',
-    instaId: '',
-    twitterId: '',
-  });
+    <{
+      googleId: string;
+      fullName: string;
+      profileURL: string;
+      fbId?: string;
+      instaId?: string;
+      twitterId?: string;
+    }>({
+      googleId: '',
+      fullName: '',
+      profileURL: '',
+      fbId: '',
+      instaId: '',
+      twitterId: '',
+    });
   const [userPhotos, setUserPhotos] = useState([]);
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
@@ -54,30 +54,45 @@ const OtherUser: React.FC = () => {
     <div>
       <h1>{userInfo['fullName']}</h1>
       <div id='profile_avatar'>
-          <Avatar
-            alt={userInfo['fullName']}
-            src={userInfo['profileURL']}
-            sx={{ width: 150, height: 150, mt: '30px', ml: 'auto', mr: 'auto' }}
-          />
-        </div>
+        <Avatar
+          alt={userInfo['fullName']}
+          src={userInfo['profileURL']}
+          sx={{ width: 150, height: 150, mt: '30px', ml: 'auto', mr: 'auto' }}
+        />
+      </div>
       <div>
         <Box>
           <Grid container spacing={2}>
-            <Grid item>
-              <Link href={userInfo.fbId}>
-                <IconButton><FacebookIcon /></IconButton>
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href={userInfo.instaId}>
-                <IconButton><InstagramIcon /></IconButton>
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href={userInfo.twitterId}>
-                <IconButton><TwitterIcon /></IconButton>
-              </Link>
-            </Grid>
+            {
+              userInfo.fbId
+                ?
+                <Grid item>
+                  <Link href={userInfo.fbId}>
+                    <IconButton><FacebookIcon /></IconButton>
+                  </Link>
+                </Grid>
+                : null
+            }
+            {
+              userInfo.instaId
+                ?
+                <Grid item>
+                  <Link href={userInfo.instaId}>
+                    <IconButton><InstagramIcon /></IconButton>
+                  </Link>
+                </Grid>
+                : null
+            }
+            {
+              userInfo.twitterId
+                ?
+                <Grid item>
+                  <Link href={userInfo.twitterId}>
+                    <IconButton><TwitterIcon /></IconButton>
+                  </Link>
+                </Grid>
+                : null
+            }
           </Grid>
         </Box>
       </div>

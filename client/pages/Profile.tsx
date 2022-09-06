@@ -284,28 +284,43 @@ const Profile = () => {
         </div>
         <div>
           <Box>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Link href={currentUserInfo.fbId}>
-                  <IconButton>
-                    <FacebookIcon />
-                  </IconButton>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href={currentUserInfo.instaId}>
-                  <IconButton>
-                    <InstagramIcon />
-                  </IconButton>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href={currentUserInfo.twitterId}>
-                  <IconButton>
-                    <TwitterIcon />
-                  </IconButton>
-                </Link>
-              </Grid>
+            <Grid container spacing={2} id='social-media'>
+              {
+                currentUserInfo.fbId
+                  ?
+                  <Grid item className='social-buttons'>
+                    <Link href={currentUserInfo.fbId}>
+                      <IconButton>
+                        <FacebookIcon />
+                      </IconButton>
+                    </Link>
+                  </Grid>
+                  : null
+              }
+              {
+                currentUserInfo.instaId
+                  ?
+                  <Grid item className='social-buttons'>
+                    <Link href={currentUserInfo.instaId}>
+                      <IconButton>
+                        <InstagramIcon />
+                      </IconButton>
+                    </Link>
+                  </Grid>
+                  : null
+              }
+              {
+                currentUserInfo.twitterId
+                  ?
+                  <Grid item className='social-buttons'>
+                    <Link href={currentUserInfo.twitterId}>
+                      <IconButton>
+                        <TwitterIcon />
+                      </IconButton>
+                    </Link>
+                  </Grid>
+                  : null
+              }
             </Grid>
           </Box>
         </div>
@@ -324,7 +339,7 @@ const Profile = () => {
                     id='panel1d-header'
                   >
                     <Typography>{event.name}</Typography>
-                    <Typography sx={{ justifyContent: 'flex-end' }}>
+                    <Typography>
                       {event.dates.start.localDate}
                     </Typography>
                   </AccordionSummary>
