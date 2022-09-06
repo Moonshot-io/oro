@@ -23,7 +23,7 @@ export default function ArtistBanner({artistDetails}) {
         color: '#fff',
         mb: 4,
         width: '100%',
-        height: { xs: '90%', md: '350px' },
+        height: { xs: '200px', md: '350px' },
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top',
@@ -46,10 +46,16 @@ export default function ArtistBanner({artistDetails}) {
         <Grid item md={6}>
           <Box
             sx={{
-              position: 'relative',
-              mt: { xs: '80%', md: '50%' } ,
-              p: { xs: 2, md: 4 },
-              pr: { md: 0 },
+                marginLeft: '15px',
+                top: { xs: 200, md: 350 },
+                right: 'auto',
+                bottom: 'auto',
+                left: 'inherit',
+                position: 'fixed'
+            //   position: 'relative',
+            //   mt: { xs: '80%', md: '50%' } ,
+            //   p: { xs: 2, md: 4 },
+            //   pr: { md: 0 },
             }}
           >
             <Typography
