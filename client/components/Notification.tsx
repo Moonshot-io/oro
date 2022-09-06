@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Paper, Modal, Box, Grid, Typography} from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import Comments from './Comments';
+import FeedPhoto from './FeedPhoto';
 import {Avatar} from '../styles/material';
 import moment from 'moment';
 
