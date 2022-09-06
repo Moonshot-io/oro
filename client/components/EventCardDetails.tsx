@@ -124,7 +124,7 @@ const EventCardDetails = ({event}) => {
               <Button variant="contained" onClick={getDetails}><IconButton aria-label="settings">
                 <InfoIcon  />
               </IconButton>
-                More info
+                Info
               </Button>
             </Grid>
           </Grid>

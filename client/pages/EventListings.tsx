@@ -3,8 +3,7 @@ import axios from 'axios';
 import EventCardDetails from '../components/EventCardDetails';
 import Dropdown from '../components/Dropdown';
 import eventDummy from '../../server/database/data/eventDummy';
-import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box } from '../styles/material';
-import { Typography } from '@mui/material';
+import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box, Typography } from '../styles/material';
 
 const fontColor = {
   style: { color: '#9B27B0' }
@@ -154,11 +153,11 @@ if(eventsExist){
                 }}/>
               </Grid>
               <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-              <Grid xs={2} sm={2} md={1}>
+              {/* <Grid xs={2} sm={2} md={1}>
                 <Tooltip title='sort date'>
                 <IconButton onClick={handleSort}><SortIcon/></IconButton>
                 </Tooltip>
-                </Grid>
+                </Grid> */}
             </Grid></Box><br/>
                 <h3>No Events Found</h3>
                 <h4>Please try another search.</h4>
