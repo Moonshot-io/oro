@@ -129,18 +129,14 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           })
             .catch((err) => console.error(err));
         });
+        getUserPhotos();
       })
-      .then(getUserPhotos())
       .catch((err) => console.error(err));
   };
 
   const closeDeleter = () => {
     setDeleterOpen(false);
   };
-
-  useEffect(() => {
-    getUserPhotos();
-  }, []);
 
   return (
     <div>

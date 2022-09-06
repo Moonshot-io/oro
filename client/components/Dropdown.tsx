@@ -8,7 +8,7 @@ export default function Dropdown({eventList, updateEvents}) {
   const [events, setEvents] = React.useState([...eventList]);
   const [label, setLabel] = React.useState('city');
   const [city, setCity] = React.useState('');
-  
+
   const handleChange = (event: SelectChangeEvent) => {
     setCity(event.target.value as string);
     const newCity = event.target.value;
