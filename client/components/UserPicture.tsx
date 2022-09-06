@@ -131,12 +131,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
         });
         getUserPhotos();
       })
-<<<<<<< HEAD
-      .catch((err) => console.log(err));
-=======
-      .then(getUserPhotos())
       .catch((err) => console.error(err));
->>>>>>> 820734759ddf2ea3915668e92ba9c03bb595a7ae
   };
 
   const closeDeleter = () => {
