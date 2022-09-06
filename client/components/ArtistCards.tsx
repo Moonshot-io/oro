@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { IconButtonProps } from '@mui/material/IconButton';
 import {
-  Box,	Grid,	Card,	CardHeader,	CardMedia,	CardContent,	CardActions,	Collapse,	Typography,	ExpandMoreIcon,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, ArrowBackIosNewIcon
+  Box,	Grid,	Card,	CardHeader,	CardMedia,	CardContent,	CardActions,	Collapse,	Typography,	ExpandMoreIcon,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, ArrowBackIosNewIcon, Fab
 } from '../styles/material';
 import EventCards from './EventCards';
+import ArtistBanner from './ArtistBanner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 interface ExpandMoreProps extends IconButtonProps {
@@ -97,76 +98,95 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
   };
 
   return (
-    <><Grid xs={2} sm={2} md={2} lg={2} mt="20px"><IconButton><ArrowBackIosNewIcon onClick={() => goBack()}/></IconButton></Grid>
-      <Card sx={{ bgcolor: inverseMode, mt: '40px' }}>
-        <CardHeader
-          title={artistName}
-          sx={{ bgcolor: inverseMode }} />
-        <CardMedia
-          component="img"
-          height="250"
-          image={image}
-          alt={artistName}
-          sx={{ bgcolor: inverseMode }} />
-        <CardContent sx={{ bgcolor: inverseMode }}>
-          <Typography noWrap variant="body2">
-            {bio}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing sx={{ bgcolor: inverseMode }}>
-          {/* <IconButton aria-label="add to favorites" onClick={()=>{ handleFavorite(id); }}>
-            {favorite ? <FavoriteIcon sx={{ color: '#AE66FF' }} /> : <FavoriteIcon sx={{ color: iconColors }} />}
-          </IconButton> */}
-          <ExpandMore
-            expand={expanded}
-            sx={{ color: iconColors }}
-            onClick={() => {
-              handleExpandClick();
-              getArtistEvents(artistName);
-            } }
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent id={artistName}>
-            <Typography paragraph sx={{ bgcolor: inverseMode }}>Bio:</Typography>
-            <Typography paragraph sx={{ bgcolor: inverseMode }}>
-              {bio}
-            </Typography>
-            <Typography paragraph sx={{ bgcolor: inverseMode }}>Socials:</Typography>
-            <Typography>
-              <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                  {Object.keys(socials).map((social:string, index) => {
-                    return (
-                      <Grid item key={`social${index}`}>
-                        <IconButton>
-                          <a href={socials[social][0]}>{socials[social][1]}</a>
-                        </IconButton>
+    <Box>
+        <Grid container>
+        <Box sx={{ position: 'sticky', zIndex: 'tooltip'}}>
+      <Fab
+        size='small'
+        onClick={() => goBack()}
+        sx={{
+          marginLeft: '15px',
+          top: 100,
+          right: 'auto',
+          bottom: 'auto',
+          left: 'inherit',
+          position: 'fixed'
+        }}>
+        <ArrowBackIosNewIcon onClick={() => goBack()} />
+      </Fab>
+    </Box>
+          <ArtistBanner artistDetails={artistProps} />
+          <Card sx={{ bgcolor: inverseMode, mt: '40px' }}>
+            <CardHeader
+              title={artistName}
+              sx={{ bgcolor: inverseMode }} />
+            <CardMedia
+              component="img"
+              height="250"
+              image={image}
+              alt={artistName}
+              sx={{ bgcolor: inverseMode }} />
+            <CardContent sx={{ bgcolor: inverseMode }}>
+              <Typography noWrap variant="body2">
+                {bio}
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing sx={{ bgcolor: inverseMode }}>
+              {/* <IconButton aria-label="add to favorites" onClick={()=>{ handleFavorite(id); }}>
+      {favorite ? <FavoriteIcon sx={{ color: '#AE66FF' }} /> : <FavoriteIcon sx={{ color: iconColors }} />}
+    </IconButton> */}
+              <ExpandMore
+                expand={expanded}
+                sx={{ color: iconColors }}
+                onClick={() => {
+                  handleExpandClick();
+                  getArtistEvents(artistName);
+                } }
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent id={artistName}>
+                <Typography paragraph sx={{ bgcolor: inverseMode }}>Bio:</Typography>
+                <Typography paragraph sx={{ bgcolor: inverseMode }}>
+                  {bio}
+                </Typography>
+                <Typography paragraph sx={{ bgcolor: inverseMode }}>Socials:</Typography>
+                <Typography>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid container spacing={2}>
+                      {Object.keys(socials).map((social: string, index) => {
+                        return (
+                          <Grid item key={`social${index}`}>
+                            <IconButton>
+                              <a href={socials[social][0]}>{socials[social][1]}</a>
+                            </IconButton>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Box>
+                </Typography>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid container spacing={2}>
+                    {events.length > 1
+                      ? <Grid item id={artistName}>
+                        <Typography paragraph sx={{ bgcolor: inverseMode }}>Events:</Typography>
+                        {events.map((eventObj, index) => {
+                          return <EventCards events={eventObj} key={`event${index}`} />;
+                        })}
                       </Grid>
-                    );
-                  })}
-                </Grid>
-              </Box>
-            </Typography>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={2}>
-                {events.length > 1
-                  ? <Grid item id={artistName}>
-                    <Typography paragraph sx={{ bgcolor: inverseMode }}>Events:</Typography>
-                    {events.map((eventObj, index) => {
-                      return <EventCards events={eventObj} key={`event${index}`} />;
-                    })}
+                      : <Typography paragraph sx={{ bgcolor: inverseMode }}>No Upcoming Events</Typography>}
                   </Grid>
-                  : <Typography paragraph sx={{ bgcolor: inverseMode }}>No Upcoming Events</Typography>}
-              </Grid>
-            </Box>
-          </CardContent>
-        </Collapse>
-      </Card></>
+                </Box>
+              </CardContent>
+            </Collapse>
+          </Card>
+        </Grid>
+      </Box>
   );
 };
 

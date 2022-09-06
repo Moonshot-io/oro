@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Router } from 'express';
-import { inspect } from 'node:util';
 import prisma from '../database/db';
 require('dotenv').config();
 
@@ -10,7 +9,7 @@ eventListingsRouter.get('/list', (req, res) => {
   const { keyword } = req.query;
   axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=20&classificationName=[music, concert, festival]&keyword=${keyword}&apikey=${process.env.TICKETMASTER_API_KEY}`)
     .then((responseObj) => {
-      let venueInfo;
+      if(responseObj.data._embedded){
       const events = responseObj.data._embedded.events.filter((event) => {
         return event._embedded;
       }).map((event) => {
@@ -46,15 +45,15 @@ eventListingsRouter.get('/list', (req, res) => {
           }
           return venueInfo;
         });
-
         newDataObj.venueInfo = venueInfo;
         newDataObj.artistInfo = artistInfo;
-
-
         return newDataObj;
       });
       res.status(200).send({events});
-    })
+    } else {
+      console.log('no events from server');
+      res.status(200).send('false');
+}})
     .catch(err => console.error(err));
 });
 
@@ -66,7 +65,6 @@ eventListingsRouter.post('/list/pins', (req, res) => {
     res.send(data).status(201);
   })
     .catch(err => {
-      console.error('BACKEND POST REQ ERR', err);
       res.sendStatus(500);
     });
 });
