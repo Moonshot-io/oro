@@ -29,7 +29,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
-  const [commentText, setCommentText] = useState<string>('');
+  const [commentText, setCommentText] = useState<string>(`${comment.comment}`);
   const [editor, setEditor] = useState<boolean>(false);
   const [deleterOpen, setDeleterOpen] = useState<boolean>(false);
   const themeContext = useContext(ThemeContext);
@@ -76,7 +76,6 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
       comment: commentText,
     })
       .then(() => {
-        setCommentText('');
         setEditor(false);
         getComments();
       })
@@ -89,7 +88,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
 
   const closeEditor = (): void => {
     setEditor(false);
-    setCommentText('');
+    setCommentText(`${comment.comment}`);
   };
 
   const openDeleter = (): void => {
@@ -143,10 +142,12 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
                  </div>
               </Typography>}
             <Typography variant='body2' sx={{ bgcolor: '#dbdbdb' }}>
-              {editor && <OutlinedInput fullWidth={true} inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: iconColors}} placeholder={comment.comment} value={commentText} onChange={handleEdit}/>}
+              {editor && <OutlinedInput fullWidth={true} inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: iconColors}} value={commentText} onChange={handleEdit}/>}
             </Typography>
-            {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm</Button>}
-            {editor && <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeEditor}>cancel</Button>}
+            <div>
+              {editor && <Button  fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm</Button>}
+              {editor && <Button fullWidth={true} variant='contained' size='small' sx={{bgcolor: iconColors }} onClick={closeEditor}>cancel</Button>}
+            </div>
           </div>
             <Typography sx={{ color: iconColors, fontSize: '12px'}}>
             {!editor &&
