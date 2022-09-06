@@ -46,12 +46,12 @@ export default function ArtistBanner({artistDetails}) {
         <Grid item md={6}>
           <Box
             sx={{
-                marginLeft: '15px',
-                top: { xs: 200, md: 350 },
+                marginLeft: '25px',
+                top: { xs: '125px', md: '250px' },
                 right: 'auto',
                 bottom: 'auto',
                 left: 'inherit',
-                position: 'fixed'
+                position: 'absolute'
             //   position: 'relative',
             //   mt: { xs: '80%', md: '50%' } ,
             //   p: { xs: 2, md: 4 },

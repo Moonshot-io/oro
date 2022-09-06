@@ -105,7 +105,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
         size='small'
         onClick={() => goBack()}
         sx={{
-          marginLeft: '15px',
+          marginLeft: '25px',
           top: 100,
           right: 'auto',
           bottom: 'auto',
