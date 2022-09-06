@@ -314,12 +314,12 @@ const Navbar = (props: navPropsType) => {
                     <MenuItem
                       onClick={() => {
                         isLoggedIn
-                          ? handleCloseNavMenu('/home')
+                          ? handleCloseNavMenu('/')
                           : handleCloseNavMenu('/login');
                       }}
                     >
                       <Link
-                        to='/home'
+                        to='/'
                         style={{ textDecoration: 'none' }}
                         key={'logout'}
                         onClick={logoutUser}
