@@ -226,6 +226,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   text-align: left;
 }
 
+.css-1betqn-MuiAccordionSummary-content {
+  justify-content: space-between;
+}
+
 `;
 interface Props {
   children?: ReactNode
