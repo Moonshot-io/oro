@@ -110,11 +110,6 @@ if(eventsExist){
           }}/>
         </Grid>
         <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-        <Grid xs={2} sm={2} md={1}>
-          <Tooltip title='sort date'>
-          <IconButton onClick={handleSort}><SortIcon/></IconButton>
-          </Tooltip>
-          </Grid>
       </Grid></Box><br/>
       <Grid container spacing={2}>
         {
@@ -153,11 +148,6 @@ if(eventsExist){
                 }}/>
               </Grid>
               <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-              {/* <Grid xs={2} sm={2} md={1}>
-                <Tooltip title='sort date'>
-                <IconButton onClick={handleSort}><SortIcon/></IconButton>
-                </Tooltip>
-                </Grid> */}
             </Grid></Box><br/>
                 <h3>No Events Found</h3>
                 <h4>Please try another search.</h4>
