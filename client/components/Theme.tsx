@@ -152,6 +152,7 @@ body {
 
 .nav-icons {
   margin-right: 10px;
+  color: ${(props) => props.theme.palette.primary.main};
 }
 
 .comment {
