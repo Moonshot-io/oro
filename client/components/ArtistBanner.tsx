@@ -76,37 +76,39 @@ export default function ArtistBanner({artistDetails}) {
               {artistDetails.artistName}
             </Typography>
           </Box>
-          <Box
-            sx={{
-                marginLeft: 'auto',
-                top: { xs: '125px', md: '250px' },
-                right: '25px',
-                bottom: 'auto',
-                left: 'inherit',
-                position: 'absolute'
-            }}
-          >
-            <Typography
-              variant='h3'
-              gutterBottom
-              >
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={1}>
-                      {Object.keys(socials).map((social: string, index) => {
-                        return (
-                          <Grid item key={`social${index}`}>
-                            <IconButton>
-                              <Link href={socials[social][0]} sx={{color: '#ffffff'}}>{socials[social][1]}</Link>
-                            </IconButton>
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
-                  </Box>
-                </Typography>
-          </Box>
         </Grid>
       </Grid>
     </Paper>
   );
 }
+
+
+<Box
+sx={{
+    marginLeft: 'auto',
+    top: { xs: '125px', md: '250px' },
+    right: '25px',
+    bottom: 'auto',
+    left: 'inherit',
+    position: 'absolute'
+}}
+>
+{/* <Typography
+  variant='h3'
+  gutterBottom
+  >
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={1}>
+          {Object.keys(socials).map((social: string, index) => {
+            return (
+              <Grid item key={`social${index}`}>
+                <IconButton>
+                  <Link href={socials[social][0]} sx={{color: '#ffffff'}}>{socials[social][1]}</Link>
+                </IconButton>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    </Typography>
+</Box> */}
