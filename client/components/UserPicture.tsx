@@ -174,7 +174,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                   aria-label="close"
                   sx={{
                     position: 'absolute',
-                    right: 8,
+                    right: 12,
                     top: 8,
                     color: 'secondary',
                   }}
@@ -189,7 +189,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                   aria-label="close"
                   sx={{
                     position: 'absolute',
-                    right: 8,
+                    right: 12,
                     top: 8,
                     color: 'secondary',
                   }}

@@ -357,35 +357,37 @@ const Profile = () => {
                       alt={event.name}
                     />
                     <List>
-                      <ListItem className='event-category'>
+                      <ListItem>
                         <strong>Venue: </strong>
                         &nbsp;
                       </ListItem>
-                      <ListItem className='event-info'>
+                      <ListItem>
                         {event._embedded.venues[0].name}
                       </ListItem>
                       <Divider />
-                      <ListItem className='event-category'>
+                      <ListItem>
                         <strong>Location: </strong>
                         &nbsp;
                       </ListItem>
-                      <ListItem className='event-info'>
+                      <ListItem>
                         {event._embedded.venues[0].address.line1},{' '}
                         {event._embedded.venues[0].city.name},{' '}
                         {event._embedded.venues[0].postalCode}
                       </ListItem>
-                      <ListItem className='event-category'>
+                      <Divider />
+                      <ListItem>
                         <strong>Ticket sale starts: </strong>
                         &nbsp;
                       </ListItem>
-                      <ListItem className='event-info'>
+                      <ListItem>
                         {moment(event.sales.public.startDateTime).format('llll')}
                       </ListItem>
-                      <ListItem className='event-category'>
+                      <Divider />
+                      <ListItem>
                         <strong>Ticket sale ends: </strong>
                         &nbsp;
                       </ListItem>
-                      <ListItem className='event-info'>
+                      <ListItem>
                         {moment(event.sales.public.endDateTime).format('llll')}
                       </ListItem>
                       <Button
