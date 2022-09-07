@@ -25,18 +25,22 @@ export default function ArtistBanner({artistDetails}) {
         facebook: [facebook, <FacebookIcon key={'fb'} sx={{ color: '#FFFFFF' }}/>],
         instagram: [instagram, <InstagramIcon key={'insta'} sx={{ color: '#FFFFFF' }}/>],
         homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ color: '#FFFFFF' }}/>],
-    }
+        itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ color: '#FFFFFF' }}/>],
+        wiki: [wiki, <QuizIcon key={'wiki'} sx={{ color: '#FFFFFF' }}/>],
+      };
 
   return (
     <Paper
       sx={{
         position: 'relative',
-        width: '100%',
-        backgroundRepeat: 'repeat-x',
+        color: '#fff',
         mb: 4,
-        backgroundSize: 'cover',
+        width: '100%',
+        height: { xs: '200px', md: '350px' },
+        backgroundSize: 'contain',
+        backgroundRepeat: 'repeat-x',
         backgroundPosition: 'top',
-        backgroundImage: `url(${artistDetails.image})`,
+        backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.80), rgba(44, 50, 142, 0.80)), url(${artistDetails.image})`,
       }}
     >
       {/* Increase the priority of the hero background image */}
