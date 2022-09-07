@@ -167,6 +167,9 @@ body {
   width: auto;
   border-radius: 10px;
 }
+// .uploadButton :hover{
+//   border: 2px solid black;
+// }
 
 .commentsPaperDark {
   background: #dbdbdb;

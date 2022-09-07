@@ -36,7 +36,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
 interface navPropsType {
-  notif: number;
+  notif: {commentId: number; created_at: string; id: number; read: boolean; type: string; userId: string;}[]
 }
 
 const Navbar = (props: navPropsType) => {
@@ -52,6 +52,7 @@ const Navbar = (props: navPropsType) => {
   const { mode, toggleMode } = themeContext;
 
   const navigate = useNavigate();
+
 
   const pages = [
     [
@@ -163,8 +164,9 @@ const Navbar = (props: navPropsType) => {
           to='/notifications'
           style={{ textDecoration: 'none' }}
           key={'notifications'}
+          onClick={() => console.log('hello')}
         >
-          <Badge badgeContent={notif} color='primary'>
+          <Badge badgeContent={notif.length && notif.filter((notification) => notification.read === false).length} color='primary'>
             <EmailIcon className='nav-icons' />
           </Badge>
           Notifications
