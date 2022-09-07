@@ -234,6 +234,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   justify-content: space-between;
 }
 
+.css-1q30djv-MuiListItem-root {
+  padding-bottom: 2px;
+}
+
 `;
 interface Props {
   children?: ReactNode
