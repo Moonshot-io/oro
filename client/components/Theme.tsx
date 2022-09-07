@@ -152,6 +152,7 @@ body {
 
 .nav-icons {
   margin-right: 10px;
+  color: ${(props) => props.theme.palette.primary.main};
 }
 
 .comment {
@@ -166,6 +167,9 @@ body {
   width: auto;
   border-radius: 10px;
 }
+// .uploadButton :hover{
+//   border: 2px solid black;
+// }
 
 .commentsPaperDark {
   background: #dbdbdb;
