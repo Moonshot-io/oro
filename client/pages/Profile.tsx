@@ -28,11 +28,13 @@ import {
   Link,
   Snackbar,
   CardMedia,
+  Divider
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import GoogleButton from 'react-google-button';
 
 interface eventType {
   name: string;
@@ -125,6 +127,10 @@ const Profile = () => {
   // const startDate = moment(userEvents.sales.public.startDateTime).format('LLLL');
   // const endDate = moment(userEvents.sales.public.endDateTime).format('LLLL');
   // const eventDate =
+
+  const redirectToGoogle = () => {
+    window.open('/auth/google', '_self');
+  };
 
   const getUserEvents = () => {
     axios
@@ -340,7 +346,7 @@ const Profile = () => {
                   >
                     <Typography>{event.name}</Typography>
                     <Typography>
-                      {event.dates.start.localDate}
+                      {moment(event.dates.start.localDate).format('ll')}
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{ bgcolor: inverseMode }}>
@@ -351,21 +357,35 @@ const Profile = () => {
                       alt={event.name}
                     />
                     <List>
-                      <ListItem>
-                        <strong>Venue: </strong> {event._embedded.venues[0].name}
+                      <ListItem className='event-category'>
+                        <strong>Venue: </strong>
+                        &nbsp;
                       </ListItem>
-                      <ListItem>
-                        <strong>Location: </strong>{' '}
+                      <ListItem className='event-info'>
+                        {event._embedded.venues[0].name}
+                      </ListItem>
+                      <Divider />
+                      <ListItem className='event-category'>
+                        <strong>Location: </strong>
+                        &nbsp;
+                      </ListItem>
+                      <ListItem className='event-info'>
                         {event._embedded.venues[0].address.line1},{' '}
                         {event._embedded.venues[0].city.name},{' '}
                         {event._embedded.venues[0].postalCode}
                       </ListItem>
-                      <ListItem>
-                        <strong>Ticket sale starts: </strong>{' '}
+                      <ListItem className='event-category'>
+                        <strong>Ticket sale starts: </strong>
+                        &nbsp;
+                      </ListItem>
+                      <ListItem className='event-info'>
                         {moment(event.sales.public.startDateTime).format('llll')}
                       </ListItem>
-                      <ListItem>
-                        <strong>Ticket sale ends: </strong>{' '}
+                      <ListItem className='event-category'>
+                        <strong>Ticket sale ends: </strong>
+                        &nbsp;
+                      </ListItem>
+                      <ListItem className='event-info'>
                         {moment(event.sales.public.endDateTime).format('llll')}
                       </ListItem>
                       <Button
@@ -385,7 +405,14 @@ const Profile = () => {
       </div>
     );
   } else if (!currentUserInfo?.id) {
-    return <h1>Please Sign In To View Profile</h1>;
+    return (
+      <div>
+        <h1>Please Sign In To View Profile</h1>
+        <form action="/auth/google" id='google-button'>
+          <GoogleButton onClick={redirectToGoogle} />
+        </form>
+      </div>
+    );
   }
 };
 
