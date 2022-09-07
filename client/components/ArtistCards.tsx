@@ -132,9 +132,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{ bgcolor: inverseMode }}>
-              {/* <IconButton aria-label="add to favorites" onClick={()=>{ handleFavorite(id); }}>
-      {favorite ? <FavoriteIcon sx={{ color: '#AE66FF' }} /> : <FavoriteIcon sx={{ color: iconColors }} />}
-    </IconButton> */}
               <ExpandMore
                 expand={expanded}
                 sx={{ color: iconColors }}
