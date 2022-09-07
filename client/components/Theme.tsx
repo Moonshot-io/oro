@@ -167,6 +167,9 @@ body {
   width: auto;
   border-radius: 10px;
 }
+// .uploadButton :hover{
+//   border: 2px solid black;
+// }
 
 .commentsPaperDark {
   background: #dbdbdb;
@@ -229,6 +232,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1betqn-MuiAccordionSummary-content {
   justify-content: space-between;
+}
+
+.css-1q30djv-MuiListItem-root {
+  padding-bottom: 2px;
 }
 
 `;
