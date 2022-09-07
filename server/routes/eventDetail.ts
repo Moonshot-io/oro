@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Router } from 'express';
+import prisma from '../database/db';
 
 const eventDetailsRouter = Router();
 eventDetailsRouter.get('/', (req, res) => {
@@ -11,8 +12,17 @@ eventDetailsRouter.get('/', (req, res) => {
     .then(({ data }) => {
       const singleEvent = data._embedded.events[0];
       const eventDetails = {
+        id: singleEvent.id,
         name: singleEvent.name,
-        image: singleEvent.images[0].url,
+        image: singleEvent.images[3].url,
+        sales: {
+          public: {
+            startDateTime: singleEvent.sales.public.startDateTime,
+            startTBD: singleEvent.sales.public.startTBD,
+            startTBA: singleEvent.sales.public.startTBA,
+            endDateTime: singleEvent.sales.public.endDateTime,
+          },
+        },
         dates: {
           localDate: singleEvent.dates.start.localDate,
           localTime: singleEvent.dates.start.localTime,
@@ -22,6 +32,22 @@ eventDetailsRouter.get('/', (req, res) => {
           timeTBA: singleEvent.dates.start.timeTBA,
           noSpecificTime: singleEvent.dates.start.noSpecificTime,
         },
+        promoter: {
+          id: singleEvent.promoter.id,
+          name: singleEvent.promoter.name,
+          description: singleEvent.promoter.description,
+        },
+        ageRestrictions: {
+          legalAgeEnforced: singleEvent.ageRestrictions.legalAgeEnforced,
+        },
+        boxOfficeInfo: {
+          phoneNumberDetail: singleEvent._embedded.venues[0].phoneNumberDetail,
+          openHoursDetail: singleEvent._embedded.venues[0].openHoursDetail,
+          acceptedPaymentDetail:
+            singleEvent._embedded.venues[0].acceptedPaymentDetail,
+          willCallDetail: singleEvent._embedded.venues[0].willCallDetail,
+        },
+
         venues: {
           name: singleEvent._embedded.venues[0].name,
           type: singleEvent._embedded.venues[0].type,
@@ -68,4 +94,48 @@ eventDetailsRouter.get('/', (req, res) => {
     .catch((error) => console.error(error));
 });
 
+eventDetailsRouter.post('/pins', (req, res) => {
+  const pinObj = req.body;
+  prisma.userEvents
+    .create({
+      data: pinObj,
+    })
+    .then((data) => {
+      res.send(data).status(201);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.error(err);
+    });
+});
+
+eventDetailsRouter.get('/pins', (req, res) => {
+  prisma.userEvents
+    .findMany()
+    .then((eventData) => {
+      res.send(eventData).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).end();
+    });
+});
+
+eventDetailsRouter.delete('/pins/:id', (req, res) => {
+  const { id } = req.params;
+  prisma.userEvents
+    .deleteMany({
+      where: {
+        eventAPIid: {
+          contains: id,
+        },
+      },
+    })
+    .then((results) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+    });
+});
 export default eventDetailsRouter;

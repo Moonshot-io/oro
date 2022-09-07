@@ -47,10 +47,40 @@ export interface VenuesDetailsType {
   };
 }
 
+export interface SalesDetailsType {
+  public: {
+    startDateTime: string;
+    startTBD: boolean;
+    startTBA: boolean;
+    endDateTime: string;
+  };
+}
+
+export interface PromoterDetailsType {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface AgeRestrictionType {
+  legalAgeEnforced: boolean;
+}
+
+export interface BoxOfficeInfoType {
+  phoneNumberDetail: string;
+  openHoursDetail: string;
+  acceptedPaymentDetail: string;
+  willCallDetail: string;
+}
 export interface EventDetailsType {
+  id: string;
   name: string;
   image: string;
+  sales: SalesDetailsType;
   dates: DatesForEventDetailsType;
+  promoter: PromoterDetailsType;
+  ageRestriction: AgeRestrictionType;
+  boxOfficeInfo: BoxOfficeInfoType;
   venues: VenuesDetailsType;
   ticketURL: string;
 }
