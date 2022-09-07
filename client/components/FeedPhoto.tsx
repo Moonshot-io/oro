@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Comments from '../components/Comments';
-import {Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar} from '../styles/material';
+import {Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar, CssTextField} from '../styles/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { styled } from '@mui/material';
@@ -37,7 +37,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
   const [profilePic, setProfilePic] = useState<string>('');
   const [expanded, setExpanded] = React.useState<boolean>(false);
-  const [captionText, setCaptionText] = useState<string>('');
+  const [captionText, setCaptionText] = useState<string>(`${photo.caption}`);
   const [editor, setEditor] = useState<boolean>(false);
   const [deleterOpen, setDeleterOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -113,7 +113,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
       caption: captionText,
     })
       .then(() => {
-        setCaptionText('');
         setEditor(false);
         updateFeed();
         setOpenCaptionSnack(true);
@@ -128,7 +127,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
   const closeEditor = (): void => {
     setEditor(false);
-    setCaptionText('');
+    setCaptionText(`${photo.caption}`);
   };
 
   const openDeleter = (): void => {
@@ -250,7 +249,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
             </span>
 
             <div>
-              {editor && <OutlinedInput inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{ bgcolor: inverseMode }} placeholder={photo.caption} value={captionText} onChange={handleEdit}/>}
+              {editor && <CssTextField inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} value={captionText} sx={{bgcolor: inverseMode }} onChange={handleEdit}/>}
             </div>
             </Typography>
 
