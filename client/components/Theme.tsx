@@ -155,11 +155,26 @@ body {
   color: ${(props) => props.theme.palette.primary.main};
 }
 
-.commentsPaper {
-  background: #dbdbdb;
+.comment {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
+.commentsPaperLight {
+  background: #30363c;
+  word-break: break-all;
+  word-wrap: break-word;
+  width: auto;
+  border-radius: 10px;
+}
 
+.commentsPaperDark {
+  background: #dbdbdb;
+  word-break: break-all;
+  word-wrap: break-word;
+  width: auto;
+  border-radius: 10px;
+}
 .avatar {
     text-align: center;
     object-fit: cover;
