@@ -22,10 +22,31 @@ interface themeType {
   },
   typography: {
     fontFamily: string,
+    h1: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h2: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h3: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h4: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h5: {
+      fontSize: string,
+      fontWeight: number,
+    },
     h6: {
       fontSize: string,
       fontWeight: number,
     },
+    body1: string,
   },
   components: {
     MuiMenuItem: {
@@ -62,10 +83,31 @@ const dark = createTheme({
   },
   typography: {
     fontFamily: 'Roboto',
+    h1: {
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
+    h2: {
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
+    h3: {
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
+    h4: {
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
+    h5: {
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
     h6: {
       fontSize: '1rem',
       fontWeight: 400,
     },
+    body1: 'p',
   },
   components: {
     MuiMenuItem: {
@@ -153,6 +195,28 @@ body {
 .nav-icons {
   margin-right: 10px;
   color: ${(props) => props.theme.palette.primary.main};
+}
+
+.home-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-text {
+  align-text: left;
+  background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#262B32' : '#DBDBDB'};
+  padding: 10px;
+  max-width: 80%;
+  margin: auto;
 }
 
 .comment {
