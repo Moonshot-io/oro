@@ -30,12 +30,12 @@ const App: React.FC = () => {
   const userContext = useContext(UserContext);
   const { currentUserInfo } = userContext;
 
-  const [notifications, setNotifications] = React.useState(0);
+  const [notifications, setNotifications] = React.useState([]);
   const [profilePic, setProfilePic] = useState('');
 
   const getNotifications = () => {
     if (currentUserInfo?.id === undefined) {
-      setNotifications(0);
+      setNotifications([]);
     } else {
       axios.get('/api/notifications', {
         params: {
@@ -43,7 +43,7 @@ const App: React.FC = () => {
         }
       })
         .then((notifData) => {
-          setNotifications(notifData.data.filter((notif) => !notif.read).length);
+          setNotifications(notifData.data);
         })
         .catch((err) => console.error(err));
     }
