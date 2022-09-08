@@ -61,6 +61,7 @@ const BackPack: React.FC = () => {
 
   const theme = UseTheme();
   const inverseMode = theme.palette.secondary.main;
+  const iconColors = theme.palette.secondary.contrastText;
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -88,6 +89,7 @@ const BackPack: React.FC = () => {
               event={event}
               index={index}
               inverseMode={inverseMode}
+              iconColors={iconColors}
               expanded={expanded}
               key={index}
               handleChange={handleChange}
@@ -111,7 +113,7 @@ const BackPack: React.FC = () => {
 const EventItem = function ({
   event,
   index,
-
+  iconColors,
   inverseMode,
   expanded,
   handleChange,
@@ -159,6 +161,9 @@ const EventItem = function ({
   };
   return (
     <div className="page-body" key={index}>
+      <Typography
+    variant="h2">Event Budgets</Typography>
+    <br></br>
       <Accordion
         sx={{ bgcolor: inverseMode }}
         expanded={expanded === `panel${index + 1}`}
@@ -185,11 +190,16 @@ const EventItem = function ({
           })}
           <>
             <div margin-top='20px'>
-              <Typography>
+              <Typography variant="h6">
                 Total: ${totalSum ? formatCurrency(totalSum) : 0}
               </Typography>
             </div>
-            <Button onClick={handleSubmit}>Submit Budget</Button>
+            <Button style={{
+        borderRadius: 5,
+        backgroundColor: {inverseMode},
+    }}
+    variant="contained"
+    onClick={handleSubmit}>Save Budget</Button>
           </>
         </AccordionDetails>
       </Accordion>

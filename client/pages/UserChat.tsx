@@ -51,6 +51,8 @@ const UserChat: React.FC = () => {
   return (
     <div className="page-body">
       <div>
+      <Typography
+    variant="h2">Chat</Typography>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" sx={{ bgcolor: inverseMode }}>
             <Toolbar>

@@ -15,9 +15,10 @@ const Login = () => {
 
   return (
     <div className="page-body">
-      <h1>
+      <Typography
+    variant="h2">
         Please Login to Use Our App
-      </h1>
+      </Typography>
       <form action="/auth/google" id='google-button'>
         <GoogleButton onClick={redirectToGoogle} />
       </form>

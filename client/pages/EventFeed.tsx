@@ -172,10 +172,14 @@ const EventFeed: React.FC = () => {
   if (!feedPhotos.length) {
     return (
       <div className="page-body">
-        <Typography variant='h4' sx={{ color: inverseMode }}>
-          {eventName} Event Feed
+        <Typography variant='h2' sx={{ color: inverseMode }}>
+         Event Feed
         </Typography>
-
+        <br></br>
+        <Typography variant='h4' sx={{ color: inverseMode }}>
+          {eventName}
+        </Typography>
+      <br></br>
         <Typography variant='body1' sx={{ color: inverseMode }}>
           Looks like there are no photos yet, start the party yourself by uploading one!
         </Typography>

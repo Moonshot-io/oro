@@ -1,6 +1,6 @@
 /* eslint-disable func-style */
 import React from 'react';
-import { CssTextField, Grid } from '../styles/material';
+import { CssTextField, Grid, InputAdornment, AttachMoneyIcon  } from '../styles/material';
 
 type BudgetItemProps = {
   label: string;
@@ -16,10 +16,7 @@ function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
   return (
     <div className="page-body">
     <Grid container sx={{ mt: '20px' }}>
-      <Grid item xs={2}>
-        <span>{label}</span>
-      </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={12}>
         <CssTextField
           InputLabelProps={fontColor}
           inputProps={fontColor}
@@ -29,12 +26,17 @@ function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
           value={value}
           onChange={onChange}
           fullWidth
+          InputProps={{startAdornment:
+            (
+              <InputAdornment position="start" sx={{color: '#9B27B0'}}>
+                <AttachMoneyIcon
+                />
+              </InputAdornment>
+            )}}
         />
       </Grid>
-      <Grid item xs={1}>
-        <span>: ${value ?? 0}</span>
-      </Grid>
     </Grid>
+    <br></br>
     </div>
   );
 }

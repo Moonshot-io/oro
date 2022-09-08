@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserPhotos from '../components/UserPhotos';
 import { useTheme } from '@mui/material/styles';
-import { Box, Grid, Link, IconButton, FacebookIcon, InstagramIcon, TwitterIcon, Avatar } from '../styles/material';
+import { Box, Grid, Link, IconButton, FacebookIcon, InstagramIcon, TwitterIcon, Avatar, Typography } from '../styles/material';
 
 const OtherUser: React.FC = () => {
   const [userInfo, setUserInfo] = useState
@@ -52,7 +52,8 @@ const OtherUser: React.FC = () => {
 
   return (
     <div className="page-body">
-      <h1>{userInfo['fullName']}</h1>
+      <Typography
+    variant="h2">{userInfo['fullName']}</Typography>
       <div id='profile_avatar'>
         <Avatar
           alt={userInfo['fullName']}
