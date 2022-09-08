@@ -185,7 +185,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
   ) {
     return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
   });
-  
+
 
   const handleSnackClose = (
     event?: React.SyntheticEvent | Event,
@@ -199,6 +199,16 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
   };
 
+  const inputStyle = {
+    style: {
+      WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
+      "&:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 1000px #9B27B0 inset",
+      },
+      '-webkit-text-fill-color': '#9B27B0',
+      maxLength: 30,
+    }
+  };
 
 
   return (
@@ -259,7 +269,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
             </span>
 
             <div>
-              {editor && <CssTextField inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} value={captionText} sx={{bgcolor: inverseMode }} onChange={handleEdit}/>}
+              {editor && <CssTextField inputProps={inputStyle} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} value={captionText} sx={{bgcolor: inverseMode }} onChange={handleEdit}/>}
             </div>
             </Typography>
 

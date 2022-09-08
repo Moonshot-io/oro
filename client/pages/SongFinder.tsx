@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 const MicRecorder = require('mic-recorder-to-mp3');
 import axios from 'axios';
-import { Accordion, AccordionSummary, AccordionDetails, Button, Grid, Fab} from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutline} from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
 import { UserContext } from '../context/UserContext';
+import {Typography, UseTheme, Button, Grid, Fab } from '../styles/material'
 
 window.oncontextmenu = function (event: any) {
   // eslint-disable-next-line no-console
@@ -31,7 +31,7 @@ window.oncontextmenu = function (event: any) {
 const Mp3Recorder = new MicRecorder({ bitRate: 128});
 
 const SongFinder: React.FC = () => {
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const userContext = useContext(UserContext);
@@ -198,8 +198,9 @@ const SongFinder: React.FC = () => {
 
 
   return (
-    <div>
-      <h1>SongFinder</h1>
+    <div className="page-body">
+      <Typography
+    variant="h2">SongFinder</Typography>
 
       <div>
         <Grid container>

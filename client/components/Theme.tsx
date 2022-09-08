@@ -22,10 +22,31 @@ interface themeType {
   },
   typography: {
     fontFamily: string,
+    h1: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h2: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h3: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h4: {
+      fontSize: string,
+      fontWeight: number,
+    },
+    h5: {
+      fontSize: string,
+      fontWeight: number,
+    },
     h6: {
       fontSize: string,
       fontWeight: number,
     },
+    body1: string,
   },
   components: {
     MuiMenuItem: {
@@ -62,7 +83,32 @@ const dark = createTheme({
   },
   typography: {
     fontFamily: 'Roboto',
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 600,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 550,
+      marginTop: '2.25rem',
+    },
+    h3: {
+      fontSize: '1.75rem',
+      fontWeight: 500,
+    },
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 450,
+    },
+    h5: {
+      fontSize: '1.25rem',
+      fontWeight: 425,
+    },
     h6: {
+      fontSize: '1.25rem',
+      fontWeight: 400,
+    },
+    body1: {
       fontSize: '1rem',
       fontWeight: 400,
     },
@@ -77,10 +123,16 @@ const dark = createTheme({
               hover: '#FFD371',
               disabled: '#9B9B9B'
             }
-          }
-        }
+          },
+          input: {
+            '&:-webkit-autofill': {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+            },
+            '-webkit-text-fill-color': '#9B27B0'
+          },
+        },
       }
-    }
+    },
   }
 });
 
@@ -101,7 +153,32 @@ const light = createTheme({
   },
   typography: {
     fontFamily: 'Roboto',
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 600,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 550,
+      marginTop: '2.25rem',
+    },
+    h3: {
+      fontSize: '1.75rem',
+      fontWeight: 500,
+    },
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 450,
+    },
+    h5: {
+      fontSize: '1.25rem',
+      fontWeight: 425,
+    },
     h6: {
+      fontSize: '1.25rem',
+      fontWeight: 400,
+    },
+    body1: {
       fontSize: '1rem',
       fontWeight: 400,
     },
@@ -116,11 +193,17 @@ const light = createTheme({
               hover: 'blue',
               disabled: '#9B9B9B'
             }
+          },
+          input: {
+            '&:-webkit-autofill': {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+            },
+            '-webkit-text-fill-color': '#9B27B0'
           }
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 });
 
 
@@ -147,7 +230,13 @@ body {
   background: ${(props) => props.theme.palette.primary.main};
   color: ${(props) => props.theme.palette.primary.contrastText};
 }
+}
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .nav-icons {
@@ -155,9 +244,41 @@ body {
   color: ${(props) => props.theme.palette.primary.main};
 }
 
+.home-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-body {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.home-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-text {
+  align-text: left;
+  background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#262B32' : '#DBDBDB'};
+  padding-bottom: 10px;
+  max-width: 80%;
+  margin: auto;
+}
+
 .comment {
   margin-right: 10px;
   margin-left: 10px;
+}
+
+
+.MuiTypography-h2 {
+  margin-top: 100px;
 }
 
 .commentsPaperLight {
@@ -232,6 +353,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1betqn-MuiAccordionSummary-content {
   justify-content: space-between;
+}
+
+.css-1q30djv-MuiListItem-root {
+  padding-bottom: 2px;
 }
 
 `;

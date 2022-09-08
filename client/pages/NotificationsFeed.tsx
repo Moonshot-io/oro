@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import Notification from '../components/Notification';
-import {Button} from '../styles/material';
-import { useTheme } from '@mui/material/styles';
+import {Button, Typography, UseTheme} from '../styles/material';
 
 const NotificationsFeed: React.FC = ({notif}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
-  const theme = useTheme();
+  const theme = UseTheme();
   const inverseMode = theme.palette.secondary.main;
   const [notifications, setNotifications] = useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
 
@@ -53,8 +52,9 @@ const NotificationsFeed: React.FC = ({notif}) => {
 
 
   return (
-    <div >
-      <h1>Notifications</h1>
+    <div className="page-body">
+      <Typography
+    variant="h2">Notifications</Typography>
       <Button sx={{ bgcolor: inverseMode }} onClick={clearNotifications}>Clear Notifications</Button>
       <div>
         {notifications.map((notif, i) => {

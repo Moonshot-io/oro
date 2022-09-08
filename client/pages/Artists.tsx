@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import ArtistInfoCard from '../components/ArtistCards';
 import { ArtistContext } from '../context/ArtistContext';
 import { UserContext } from '../context/UserContext';
-import {Box,	Grid, Button, UseTheme} from '../styles/material';
+import {Box,	Grid, Button, UseTheme, Typography} from '../styles/material';
 import ArtistThumbnail from '../components/ArtistThumbnail';
 import Login from './Login';
 
@@ -39,8 +39,7 @@ const Artists = () => {
 
   if (currentUserInfo?.id === '') {
     return (
-      <div>
-        <h1>Please login to view artists</h1>
+      <div className="page-body">
         <Login/>
       </div>
     );
@@ -51,7 +50,7 @@ const Artists = () => {
       current[0].image = `https://source.unsplash.com/random/?${musicImages[Math.floor(Math.random() * musicImages.length + 1)]}`;
     }
     return (
-      <div>
+      <div className="page-body">
         <Box sx={{
           flexGrow: 1,
           height: '100%' }}>
@@ -73,8 +72,9 @@ const Artists = () => {
       window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
     });
     return (
-      <div>
-        <h1>Artists</h1>
+      <div className="page-body">
+            <Typography
+    variant="h2">Artists</Typography>
         <Box sx={{
           flexGrow: 1,
           height: '100%' }}>
@@ -102,7 +102,7 @@ const Artists = () => {
     );
   } else {
     return (
-      <div>
+      <div className="page-body">
         <h1>Start following artists</h1>
         <Box sx={{
           flexGrow: 1,

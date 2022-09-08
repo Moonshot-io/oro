@@ -31,12 +31,22 @@ export default function Dropdown({eventList, updateEvents}) {
          <MenuItem value="all">All</MenuItem>
           {(()=>{
             const cities = {};
+            console.log(eventList);
             return eventList.map((event)=>{
-            const cityName = event.venueInfo[0].city;
-            if(!cities[cityName]){
-                cities[cityName] = cityName;
-                return <MenuItem value={cityName}>{cityName}</MenuItem>
-            }
+
+              if(event.venueInfo){
+                const cityName = event.venueInfo[0].city;
+                if(!cities[cityName]){
+                    cities[cityName] = cityName;
+                    return <MenuItem value={cityName}>{cityName}</MenuItem>
+                }
+              } else {
+                const cityName = event.city;
+                if(!cities[cityName]){
+                    cities[cityName] = cityName;
+                    return <MenuItem value={cityName}>{cityName}</MenuItem>
+                }
+              }
           })})()}
         </Select>
       </FormControl>
