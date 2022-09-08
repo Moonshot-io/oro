@@ -1,14 +1,22 @@
-/* #profile-photo {
-  opacity: 0.5;
+#profile-photo {
+  opacity: 0.7;
+  height: 150px;
+  width: 100%;
+  max-width: 150px;
 }
 
 #profile-photo:hover {
   opacity: 1.0;
-} */
+}
 
 #photo-dialog {
   margin: 0px;
 }
+
+/* #user-uploads {
+  display: flex;
+  justify-content: center;
+} */
 
 /* body {
     background-color: #1A2027;

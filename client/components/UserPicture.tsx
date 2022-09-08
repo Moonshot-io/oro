@@ -14,7 +14,8 @@ import {
   Typography,
   Button,
   OutlinedInput,
-  Snackbar
+  Snackbar,
+  Item
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
@@ -54,6 +55,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
+  const [photoEvent, setPhotoEvent] = useState([]);
   const [open, setOpen] = useState(false);
   const [captionText, setCaptionText] = useState('');
   const [editor, setEditor] = useState(false);
@@ -138,9 +140,21 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
     setDeleterOpen(false);
   };
 
+  const getPhotoEvent = () => {
+    axios.get(`/api/profile/photo_event/${photo.eventAPIid}`)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  }
+
+  useEffect(() => {
+    getPhotoEvent();
+  }, []);
+
   return (
     <div>
-      <ImageListItem >
+      {/* <Item > */}
         <img
           id='profile-photo'
           src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
@@ -148,7 +162,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           alt=""
           onClick={handleOpen}
         />
-      </ImageListItem>
+      {/* </Item> */}
       <Dialog
         open={open}
         onClose={handleClose}
