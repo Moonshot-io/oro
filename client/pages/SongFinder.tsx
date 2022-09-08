@@ -199,8 +199,12 @@ const SongFinder: React.FC = () => {
 
   return (
     <div className="page-body">
+<<<<<<< HEAD
       <Typography
     variant="h2">SongFinder</Typography>
+=======
+      <h1>SongFinder</h1>
+>>>>>>> e9a812cab18068583ec86ff983f5049aba3238e6
 
       <div>
         <Grid container>

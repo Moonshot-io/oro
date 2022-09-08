@@ -1,6 +1,6 @@
 import React, { DOMAttributes } from 'react';
 import GoogleButton from 'react-google-button';
-
+import {Typography} from '../styles/material'
 
 interface HTMLAttributes<T> extends DOMAttributes<T> {
   align: any;
