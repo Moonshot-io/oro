@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="page-body">
       <h1>
         Please Login to Use Our App
       </h1>

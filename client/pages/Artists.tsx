@@ -39,7 +39,7 @@ const Artists = () => {
 
   if (currentUserInfo?.id === '') {
     return (
-      <div>
+      <div className="page-body">
         <h1>Please login to view artists</h1>
         <Login/>
       </div>
@@ -51,7 +51,7 @@ const Artists = () => {
       current[0].image = `https://source.unsplash.com/random/?${musicImages[Math.floor(Math.random() * musicImages.length + 1)]}`;
     }
     return (
-      <div>
+      <div className="page-body">
         <Box sx={{
           flexGrow: 1,
           height: '100%' }}>
@@ -73,7 +73,7 @@ const Artists = () => {
       window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
     });
     return (
-      <div>
+      <div className="page-body">
         <h1>Artists</h1>
         <Box sx={{
           flexGrow: 1,
@@ -102,7 +102,7 @@ const Artists = () => {
     );
   } else {
     return (
-      <div>
+      <div className="page-body">
         <h1>Start following artists</h1>
         <Box sx={{
           flexGrow: 1,

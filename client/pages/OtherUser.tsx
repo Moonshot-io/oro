@@ -51,7 +51,7 @@ const OtherUser: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="page-body">
       <h1>{userInfo['fullName']}</h1>
       <div id='profile_avatar'>
         <Avatar

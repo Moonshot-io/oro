@@ -51,7 +51,7 @@ const NotificationsFeed: React.FC = () => {
 
 
   return (
-    <div>
+    <div className="page-body">
       <h1>Notifications</h1>
       <Button sx={{ bgcolor: inverseMode }} onClick={clearNotifications}>Clear Notifications</Button>
       <div>

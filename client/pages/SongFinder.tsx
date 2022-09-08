@@ -198,7 +198,7 @@ const SongFinder: React.FC = () => {
 
 
   return (
-    <div>
+    <div className="page-body">
       <h1>SongFinder</h1>
 
       <div>
