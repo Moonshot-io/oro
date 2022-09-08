@@ -84,30 +84,33 @@ const dark = createTheme({
   typography: {
     fontFamily: 'Roboto',
     h1: {
-      fontSize: '1rem',
-      fontWeight: 400,
+      fontSize: '2.5rem',
+      fontWeight: 600,
     },
     h2: {
-      fontSize: '1rem',
-      fontWeight: 400,
+      fontSize: '2rem',
+      fontWeight: 550,
     },
     h3: {
-      fontSize: '1rem',
-      fontWeight: 400,
+      fontSize: '1.75rem',
+      fontWeight: 500,
     },
     h4: {
-      fontSize: '1rem',
-      fontWeight: 400,
+      fontSize: '1.5rem',
+      fontWeight: 450,
     },
     h5: {
-      fontSize: '1rem',
-      fontWeight: 400,
+      fontSize: '1.25rem',
+      fontWeight: 425,
     },
     h6: {
+      fontSize: '1.25rem',
+      fontWeight: 400,
+    },
+    body1: {
       fontSize: '1rem',
       fontWeight: 400,
     },
-    body1: 'p',
   },
   components: {
     MuiMenuItem: {
@@ -143,7 +146,31 @@ const light = createTheme({
   },
   typography: {
     fontFamily: 'Roboto',
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 600,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 550,
+    },
+    h3: {
+      fontSize: '1.75rem',
+      fontWeight: 500,
+    },
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 450,
+    },
+    h5: {
+      fontSize: '1.25rem',
+      fontWeight: 425,
+    },
     h6: {
+      fontSize: '1.25rem',
+      fontWeight: 400,
+    },
+    body1: {
       fontSize: '1rem',
       fontWeight: 400,
     },
@@ -214,7 +241,7 @@ body {
 .home-text {
   align-text: left;
   background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#262B32' : '#DBDBDB'};
-  padding: 10px;
+  padding: 10px 10px;
   max-width: 80%;
   margin: auto;
 }

@@ -19,10 +19,16 @@ const Home: React.FC = () => {
   return (
     <div>
       <div className="home-body">
-    <Box sx={{ flexGrow: 1, mt:'50px'}}>
-    <div className='home-text home-body' background-color={inverseMode} text-align="left">
-    <Typography className='home-text home-body' sx={{ color: inverseMode }}>What is Vibe Society?</Typography>
-        <Typography className='home-text home-body' sx={{ color: inverseMode }}>
+    <Box sx={{ flexGrow: 1, mt:'40px'}}>
+    <div className='home-text home-body' background-color={inverseMode}>
+    <Typography
+    variant="h2"
+    align="left"
+    className='home-text home-body' sx={{ color: inverseMode }}>What is Vibe Society?</Typography>
+    <Typography
+    variant="body1"
+    align="left"
+    className='home-text home-body' sx={{ color: inverseMode }}>
         Vibe Society is a social app made for all types of music lovers. From the casual listener to the hardcore festival/concert goer, this app lets you discover new songs and keep up-to-date with where your favorite artists will be and plan your next adventures with ease.
         </Typography>
       </div>
