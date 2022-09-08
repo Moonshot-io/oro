@@ -16,7 +16,7 @@ import Dialog from '@mui/material/Dialog';
 const EventFeed: React.FC = () => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
-  
+
   const [previewSource, setPreviewSource] = useState<string | ArrayBuffer | null>('');
   const [photo, setPhoto] = useState<File | null>(null);
   const [feedPhotos, setFeedPhotos] = useState<Array<{caption?: string; created_at: string; deleteToken: string | null; eventAPIid: string; id: number; photoUrl: string; userId: string;}>>([]);
@@ -28,7 +28,7 @@ const EventFeed: React.FC = () => {
 
   const [searchParams] = useSearchParams();
   const eventId: string | null = searchParams.get('id');
-  
+
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -119,7 +119,7 @@ const EventFeed: React.FC = () => {
 
   };
 
-  
+
   const handleSnackClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -153,11 +153,11 @@ const EventFeed: React.FC = () => {
   ) {
     return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
   });
-  
+
 
   const renderFeed = () => {
     return (
-      <div>
+      <div className="page-body">
         {feedPhotos.map((photo, i) => {
           return (
             <div key={i} margin-top="30px">
@@ -171,26 +171,30 @@ const EventFeed: React.FC = () => {
 
   if (!feedPhotos.length) {
     return (
-      <div>
-        <Typography variant='h4' sx={{ color: inverseMode }}>
-          {eventName} Event Feed
+      <div className="page-body">
+        <Typography variant='h2' sx={{ color: inverseMode }}>
+         Event Feed
         </Typography>
-
+        <br></br>
+        <Typography variant='h4' sx={{ color: inverseMode }}>
+          {eventName}
+        </Typography>
+      <br></br>
         <Typography variant='body1' sx={{ color: inverseMode }}>
           Looks like there are no photos yet, start the party yourself by uploading one!
         </Typography>
 
         <Dialog open={dialogOpen}>
             <img width='220px' height='auto' src={`${previewSource}`}/>
-    
+
             <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
               <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
             </Typography>
-    
+
             {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
             <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
           </Dialog>
-    
+
           <div>
             {renderFeed()}
           </div>
@@ -216,22 +220,22 @@ const EventFeed: React.FC = () => {
     )
   } else {
       return (
-        <div>
+        <div className="page-body">
           <Typography variant='h4' sx={{ color: inverseMode }}>
             {eventName} Event Feed
           </Typography>
 
           <Dialog open={dialogOpen}>
             <img width='220px' height='auto' src={`${previewSource}`}/>
-    
+
             <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
               <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
             </Typography>
-    
+
             {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
             <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
           </Dialog>
-    
+
           <div>
             {renderFeed()}
           </div>
@@ -255,7 +259,7 @@ const EventFeed: React.FC = () => {
             <AddPhotoAlternateIcon sx={{color: 'white'}}/>
           </Fab>
           </Box>
-    
+
           <Snackbar
             open={openDeleteSnack}
             autoHideDuration={3000}
@@ -269,7 +273,7 @@ const EventFeed: React.FC = () => {
               Photo Deleted
             </Alert>
           </Snackbar>
-    
+
           <Snackbar
             open={openUploadSnack}
             autoHideDuration={3000}

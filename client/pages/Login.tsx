@@ -1,6 +1,6 @@
 import React, { DOMAttributes } from 'react';
 import GoogleButton from 'react-google-button';
-
+import {Typography} from '../styles/material'
 
 interface HTMLAttributes<T> extends DOMAttributes<T> {
   align: any;
@@ -14,10 +14,11 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>
+    <div className="page-body">
+      <Typography
+    variant="h2">
         Please Login to Use Our App
-      </h1>
+      </Typography>
       <form action="/auth/google" id='google-button'>
         <GoogleButton onClick={redirectToGoogle} />
       </form>

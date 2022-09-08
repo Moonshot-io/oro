@@ -84,16 +84,20 @@ const TravelPlanner: React.FC = () => {
   const rating = Number(hotelDetails?.rating);
 
   return (
-    <Grid spacing={2}>
+    <div className="page-body">
+    <Typography
+    variant="h2">Search for Hotels</Typography>
+    <br/>
+    <Box>
+    <Grid container style={{ gap: 10, maxHeight: '50vh', maxWidth: '100vh' }}>
       {hotels
         .filter((hotel) => !!hotel.address_obj.postalcode)
         .map((hotel) => {
           const image = `https://source.unsplash.com/random/?${hotel.name}`;
           return (
-            <Grid xs={8} key={hotel.location_id}>
+            <Grid xs={12} key={hotel.location_id}>
               <Card
                 sx={{
-                  minWidth: 275,
                   ml: 'auto',
                   mr: 'auto',
                   bgcolor: inverseMode,
@@ -209,6 +213,8 @@ const TravelPlanner: React.FC = () => {
         </Box>
       </Modal>
     </Grid>
+    </Box>
+    </div>
   );
 };
 

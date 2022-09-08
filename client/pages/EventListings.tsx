@@ -3,7 +3,7 @@ import axios from 'axios';
 import EventCardDetails from '../components/EventCardDetails';
 import Dropdown from '../components/Dropdown';
 import eventDummy from '../../server/database/data/eventDummy';
-import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box, Typography } from '../styles/material';
+import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box, Typography, UseTheme } from '../styles/material';
 
 const fontColor = {
   style: { color: '#9B27B0' }
@@ -18,6 +18,9 @@ const ColorButton = Styled(Button)(({ theme }) => ({
 }));
 
 const EventListings: React.FC = () => {
+  const theme = UseTheme();
+  const iconColors = theme.palette.secondary.contrastText;
+  const inverseMode = theme.palette.secondary.main;
 
   const [ keyword, setKeyword ] = useState('');
   const [events, setEvents] = useState(eventDummy);
@@ -87,15 +90,28 @@ const EventListings: React.FC = () => {
     }
   }
   }
+
+  const inputStyle = {
+    style: {
+      WebkitBoxShadow: `0 0 0 1000px ${iconColors} inset`,
+      "&:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 1000px #9B27B0 inset",
+      },
+      '-webkit-text-fill-color': '#9B27B0',
+      color: '#9B27B0',
+    }
+  };
+
 if(eventsExist){
   return (
-    <div>
-      <h1>Search for Events</h1>
+    <div className="page-body">
+   <Typography
+    variant="h2">Search for Events</Typography>
       <br/>
       <Box>
       <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
   >
-      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={fontColor}
+      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputStyle}
           sx={{ mb: '15px'}} id="keywordSearch"
           color="secondary" label="search events" type='text'
           onChange={ handleChange } value={keyword} onKeyDown={enterClick}
@@ -110,11 +126,6 @@ if(eventsExist){
           }}/>
         </Grid>
         <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-        <Grid xs={2} sm={2} md={1}>
-          <Tooltip title='sort date'>
-          <IconButton onClick={handleSort}><SortIcon/></IconButton>
-          </Tooltip>
-          </Grid>
       </Grid></Box><br/>
       <Grid container spacing={2}>
         {
@@ -132,13 +143,14 @@ if(eventsExist){
   );
       } else {
         return (
-          <div>
-            <h1>Search for Events</h1>
+          <div className="page-body">
+            <Typography
+    variant="h2">Search for Events</Typography>
             <br/>
             <Box>
             <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
         >
-            <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={fontColor}
+            <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputStyle}
                 sx={{ mb: '15px'}} id="keywordSearch"
                 color="secondary" label="search events" type='text'
                 onChange={ handleChange } value={keyword} onKeyDown={enterClick}
@@ -153,11 +165,6 @@ if(eventsExist){
                 }}/>
               </Grid>
               <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-              {/* <Grid xs={2} sm={2} md={1}>
-                <Tooltip title='sort date'>
-                <IconButton onClick={handleSort}><SortIcon/></IconButton>
-                </Tooltip>
-                </Grid> */}
             </Grid></Box><br/>
                 <h3>No Events Found</h3>
                 <h4>Please try another search.</h4>
