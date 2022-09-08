@@ -100,9 +100,9 @@ const EventCardDetails = ({event}) => {
   return (
     <div>
       <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
-      <Typography variant="h5">{date}</Typography>
+      <Typography variant="h6" pt="20px">{date}</Typography>
         <div><CardHeader style={{display: "block", overflow: "hidden", textOverflow: "ellipsis", width: '90%'}}
-          title={<Typography variant="h5" noWrap>
+          title={<Typography variant="h3" noWrap>
             {event.eventName}
           </Typography>} /></div>
         <CardMedia

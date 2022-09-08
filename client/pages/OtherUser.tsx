@@ -52,12 +52,8 @@ const OtherUser: React.FC = () => {
 
   return (
     <div className="page-body">
-<<<<<<< HEAD
       <Typography
     variant="h2">{userInfo['fullName']}</Typography>
-=======
-      <h1>{userInfo['fullName']}</h1>
->>>>>>> e9a812cab18068583ec86ff983f5049aba3238e6
       <div id='profile_avatar'>
         <Avatar
           alt={userInfo['fullName']}

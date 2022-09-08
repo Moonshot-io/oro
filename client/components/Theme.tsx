@@ -123,10 +123,16 @@ const dark = createTheme({
               hover: '#FFD371',
               disabled: '#9B9B9B'
             }
-          }
-        }
+          },
+          input: {
+            '&:-webkit-autofill': {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+            },
+            '-webkit-text-fill-color': '#9B27B0'
+          },
+        },
       }
-    }
+    },
   }
 });
 
@@ -186,11 +192,17 @@ const light = createTheme({
               hover: 'blue',
               disabled: '#9B9B9B'
             }
+          },
+          input: {
+            '&:-webkit-autofill': {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+            },
+            '-webkit-text-fill-color': '#9B27B0'
           }
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 });
 
 
@@ -217,7 +229,13 @@ body {
   background: ${(props) => props.theme.palette.primary.main};
   color: ${(props) => props.theme.palette.primary.contrastText};
 }
+}
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .nav-icons {
