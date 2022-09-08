@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import ArtistInfoCard from '../components/ArtistCards';
 import { ArtistContext } from '../context/ArtistContext';
 import { UserContext } from '../context/UserContext';
-import {Box,	Grid, Button, UseTheme} from '../styles/material';
+import {Box,	Grid, Button, UseTheme, Typography} from '../styles/material';
 import ArtistThumbnail from '../components/ArtistThumbnail';
 import Login from './Login';
 
@@ -40,7 +40,6 @@ const Artists = () => {
   if (currentUserInfo?.id === '') {
     return (
       <div className="page-body">
-        <h1>Please login to view artists</h1>
         <Login/>
       </div>
     );
@@ -74,7 +73,8 @@ const Artists = () => {
     });
     return (
       <div className="page-body">
-        <h1>Artists</h1>
+            <Typography
+    variant="h2">Artists</Typography>
         <Box sx={{
           flexGrow: 1,
           height: '100%' }}>

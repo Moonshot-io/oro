@@ -85,7 +85,8 @@ const TravelPlanner: React.FC = () => {
 
   return (
     <div className="page-body">
-    <h1>Search for Events</h1>
+    <Typography
+    variant="h2">Search for Hotels</Typography>
     <br/>
     <Box>
     <Grid container style={{ gap: 10, maxHeight: '50vh', maxWidth: '100vh' }}>
