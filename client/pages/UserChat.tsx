@@ -49,7 +49,7 @@ const UserChat: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="page-body">
       <div>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" sx={{ bgcolor: inverseMode }}>

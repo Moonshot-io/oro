@@ -90,6 +90,7 @@ const dark = createTheme({
     h2: {
       fontSize: '2rem',
       fontWeight: 550,
+      marginTop: '2.25rem',
     },
     h3: {
       fontSize: '1.75rem',
@@ -231,6 +232,11 @@ body {
   align-items: center;
 }
 
+.page-body {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .home-body {
   display: flex;
   flex-direction: column;
@@ -241,7 +247,7 @@ body {
 .home-text {
   align-text: left;
   background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#262B32' : '#DBDBDB'};
-  padding: 10px 10px;
+  padding-bottom: 10px;
   max-width: 80%;
   margin: auto;
 }
@@ -249,6 +255,11 @@ body {
 .comment {
   margin-right: 10px;
   margin-left: 10px;
+}
+
+
+.MuiTypography-h2 {
+  margin-top: 100px;
 }
 
 .commentsPaperLight {

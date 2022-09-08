@@ -80,7 +80,7 @@ const BackPack: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="page-body">
       {Array.isArray(userEvents) ? (
         userEvents.map((event, index) => {
           return (
@@ -158,7 +158,7 @@ const EventItem = function ({
     }
   };
   return (
-    <div key={index}>
+    <div className="page-body" key={index}>
       <Accordion
         sx={{ bgcolor: inverseMode }}
         expanded={expanded === `panel${index + 1}`}

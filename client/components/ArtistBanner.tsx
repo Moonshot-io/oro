@@ -30,6 +30,7 @@ export default function ArtistBanner({artistDetails}) {
       };
 
   return (
+    <div className="page-body">
     <Paper
       sx={{
         position: 'relative',
@@ -79,11 +80,12 @@ export default function ArtistBanner({artistDetails}) {
         </Grid>
       </Grid>
     </Paper>
+    </div>
   );
 }
 
 
-<Box
+{/* <Box
 sx={{
     marginLeft: 'auto',
     top: { xs: '125px', md: '250px' },
@@ -92,7 +94,7 @@ sx={{
     left: 'inherit',
     position: 'absolute'
 }}
->
+> */}
 {/* <Typography
   variant='h3'
   gutterBottom

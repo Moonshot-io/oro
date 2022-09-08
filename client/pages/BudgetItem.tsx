@@ -14,6 +14,7 @@ const fontColor = {
 
 function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
   return (
+    <div className="page-body">
     <Grid container sx={{ mt: '20px' }}>
       <Grid item xs={2}>
         <span>{label}</span>
@@ -34,6 +35,7 @@ function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
         <span>: ${value ?? 0}</span>
       </Grid>
     </Grid>
+    </div>
   );
 }
 export default BudgetItem;

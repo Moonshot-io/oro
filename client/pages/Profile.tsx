@@ -206,7 +206,7 @@ const Profile = () => {
 
   if (currentUserInfo?.id) {
     return (
-      <div>
+      <div className="page-body">
         <Avatar
           alt={currentUserInfo.fullName}
           src={currentUserInfo.profileURL}

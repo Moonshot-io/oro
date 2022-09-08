@@ -84,10 +84,10 @@ const TravelPlanner: React.FC = () => {
   const rating = Number(hotelDetails?.rating);
 
   return (
-    <div>
+    <div className="page-body">
     <h1>Search for Events</h1>
     <br/>
-    <Box ml='10%'>
+    <Box>
     <Grid container style={{ gap: 10, maxHeight: '50vh', maxWidth: '100vh' }}>
       {hotels
         .filter((hotel) => !!hotel.address_obj.postalcode)

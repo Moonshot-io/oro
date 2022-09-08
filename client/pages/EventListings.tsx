@@ -89,8 +89,9 @@ const EventListings: React.FC = () => {
   }
 if(eventsExist){
   return (
-    <div>
-      <h1>Search for Events</h1>
+    <div className="page-body">
+   <Typography
+    variant="h2">Search for Events</Typography>
       <br/>
       <Box>
       <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
