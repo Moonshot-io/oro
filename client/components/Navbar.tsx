@@ -1,6 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import VSLOGODark from './images/VSLOGO-dark.png';
+import VSLOGO from './images/VSLOGO.png';
 
 import {
   Box,
@@ -205,8 +207,8 @@ const Navbar = (props: navPropsType) => {
                 <img
                   src={
                     mode === 'dark'
-                      ? 'images/VSLOGO-dark.png'
-                      : 'images/VSLOGO.png'
+                      ? VSLOGODark
+                      : VSLOGO
                   }
                   height='75'
                 />

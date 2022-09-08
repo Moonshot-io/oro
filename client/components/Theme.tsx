@@ -160,6 +160,7 @@ const light = createTheme({
     h2: {
       fontSize: '2rem',
       fontWeight: 550,
+      marginTop: '2.25rem',
     },
     h3: {
       fontSize: '1.75rem',

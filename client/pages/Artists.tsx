@@ -40,7 +40,6 @@ const Artists = () => {
   if (currentUserInfo?.id === '') {
     return (
       <div className="page-body">
-        <h1>Please login to view artists</h1>
         <Login/>
       </div>
     );
