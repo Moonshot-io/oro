@@ -23,7 +23,7 @@
   float:right;
 }
 
-#social-media {
+.social-media {
   justify-content: center;
 }
 
@@ -42,7 +42,6 @@
 .edit:hover {
   font-weight: 900;
 }
-
 
 .delete {
   margin: 0px 0px 0px 5px;

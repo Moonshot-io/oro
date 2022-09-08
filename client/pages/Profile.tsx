@@ -291,7 +291,7 @@ const Profile = () => {
         </div>
         <div>
           <Box>
-            <Grid container spacing={2} id='social-media'>
+            <Grid container spacing={2} className='social-media'>
               {
                 currentUserInfo.fbId
                   ?
