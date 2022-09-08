@@ -57,6 +57,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
     caption: '',
     deleteToken: null,
   });
+  // const [feedPhoto, setFeedPhoto] = useState(photo);
   const getAvatar = (id: string): void => {
     axios.get('/api/eventFeed/avatar', {
       params: {
@@ -64,6 +65,9 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
       }
     })
       .then((userProfile) => {
+        if (currentUserInfo?.id === feedPhoto.userId) {
+          setOwner(true);
+        }
         setProfilePic(userProfile.data);
       })
       .catch((err) => console.error(err));
@@ -73,16 +77,20 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
     updateFeed();
   }, [profilePic]);
+
   useEffect(() => {
-    if (currentUserInfo?.id === feedPhoto.userId) {
-      setOwner(true);
-    }
     getAvatar(feedPhoto.userId);
   }, [feedPhoto]);
 
+  // useEffect(() => {
+  //   if (currentUserInfo?.id === photo.userId) {
+  //     setOwner(true);
+  //   }
+  //   setFeedPhoto(photo);
+  // }, []);
   useEffect(() => {
     setFeedPhoto(photo);
-  }, []);
+  }, [photo])
 
   useEffect(() => {
     updateFeed();

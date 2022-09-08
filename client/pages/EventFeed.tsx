@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useReducer } from 'react';
 import axios from 'axios';
 
 import { UserContext } from '../context/UserContext';
@@ -25,6 +25,7 @@ const EventFeed: React.FC = () => {
   const [caption, setCaption] = useState<string>('');
   const [openDeleteSnack, setOpenDeleteSnack] = useState(false);
   const [openUploadSnack, setOpenUploadSnack] = useState(false);
+  // const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const [searchParams] = useSearchParams();
   const eventId: string | null = searchParams.get('id');
@@ -48,6 +49,7 @@ const EventFeed: React.FC = () => {
       setPreviewSource('');
     }
   }, [photo]);
+
 
   const updateFeed = (): void => {
     axios.get('/api/eventFeed', {
@@ -107,7 +109,7 @@ const EventFeed: React.FC = () => {
     })
       .then((data) => {
         setDialogOpen(false);
-        setFeedPhotos(feedPhotos => [data.data, ...feedPhotos]);
+        // setFeedPhotos(feedPhotos => [data.data, ...feedPhotos]);
         setPhoto(null);
         setPreviewSource(null);
         setCaption('');
@@ -155,19 +157,13 @@ const EventFeed: React.FC = () => {
   });
   
 
-  const renderFeed = () => {
-    return (
-      <div>
-        {feedPhotos.map((photo, i) => {
-          return (
-            <div key={i} margin-top="30px">
-              <FeedPhoto deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
+  // const renderFeed = () => {
+  //   return (
+  //     <div>
+
+  //     </div>
+  //   );
+  // };
 
   if (!feedPhotos.length) {
     return (
@@ -190,10 +186,6 @@ const EventFeed: React.FC = () => {
             {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
             <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
           </Dialog>
-    
-          <div>
-            {renderFeed()}
-          </div>
 
         <Box sx={{position: 'sticky'}}>
         <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onClick={(event) => {event.target.value = null}} onChange={handleFileChange}/>
@@ -233,7 +225,13 @@ const EventFeed: React.FC = () => {
           </Dialog>
     
           <div>
-            {renderFeed()}
+            {feedPhotos.map((photo, i) => {
+            return (
+              <div margin-top="30px">
+                <FeedPhoto deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
+              </div>
+            );
+          })}
           </div>
           <Box sx={{position: 'sticky'}}>
             <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onClick={(event) => {event.target.value = null}} onChange={handleFileChange}/>
