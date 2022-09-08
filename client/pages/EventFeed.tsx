@@ -8,9 +8,12 @@ import { useTheme } from '@mui/material/styles';
 import FeedPhoto from '../components/FeedPhoto';
 
 import {OutlinedInput, Fab, Box, Button, Typography, Grid, Snackbar} from '../styles/material';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 const EventFeed: React.FC = () => {
@@ -25,6 +28,9 @@ const EventFeed: React.FC = () => {
   const [caption, setCaption] = useState<string>('');
   const [openDeleteSnack, setOpenDeleteSnack] = useState(false);
   const [openUploadSnack, setOpenUploadSnack] = useState(false);
+
+  const themeContext = useContext(ThemeContext);
+  const { mode, toggleMode } = themeContext;
   // const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const [searchParams] = useSearchParams();
@@ -220,8 +226,8 @@ const EventFeed: React.FC = () => {
               <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
             </Typography>
     
-            {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
-            <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
+            <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}><TaskAltIcon sx={{color: 'green'}}/></Button>
+            <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}><DoDisturbAltIcon sx={{color: 'red'}}/></Button>
           </Dialog>
     
           <div>
@@ -241,7 +247,7 @@ const EventFeed: React.FC = () => {
             onClick={uploadPhoto}
             sx={{
               ml: '20px',
-              bgcolor: '#51AFF7',
+              bgcolor: mode === 'dark' ? '#51AFF7' : '#533483',
               // boxShadow: 3,
               // border: '1px solid black',
               margin: 0,
@@ -276,6 +282,7 @@ const EventFeed: React.FC = () => {
             <Alert
               onClose={handleSnackClose}
               severity='success'
+              color='info'
               sx={{ width: '100%' }}
             >
               Photo Uploaded
