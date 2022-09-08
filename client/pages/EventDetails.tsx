@@ -116,7 +116,7 @@ const EventDetails: React.FC = () => {
 
   const theme = useTheme();
   const inverseMode = theme.palette.secondary.main;
-
+  const iconColors = theme.palette.secondary.contrastText;
   const getDetails = () => {
     navigate(`/eventFeed/?id=${idEvent}`);
   };
@@ -155,12 +155,12 @@ const EventDetails: React.FC = () => {
       <Grid sx={{ mt: 3, alignItems: 'center' }}>
         <DetailCard detail={eventDetails} />
         <Grid>
-          <Button sx={{ bgcolor: inverseMode }} onClick={handleClick}>
+          <Button sx={{ bgcolor: iconColors }} onClick={handleClick}>
             Travel Information
           </Button>
         </Grid>
         <Grid>
-          <Button sx={{ bgcolor: inverseMode }} onClick={getDetails}>
+          <Button sx={{ bgcolor: iconColors }} onClick={getDetails}>
             Event Feed
           </Button>
         </Grid>

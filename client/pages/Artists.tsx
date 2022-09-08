@@ -5,7 +5,7 @@ import { UserContext } from '../context/UserContext';
 import {Box,	Grid, Button, UseTheme, Typography} from '../styles/material';
 import ArtistThumbnail from '../components/ArtistThumbnail';
 import Login from './Login';
-
+import ArtistBanner from '../components/ArtistBanner';
 const Artists = () => {
   const { currentUserInfo } = useContext(UserContext);
 
@@ -50,20 +50,21 @@ const Artists = () => {
       current[0].image = `https://source.unsplash.com/random/?${musicImages[Math.floor(Math.random() * musicImages.length + 1)]}`;
     }
     return (
-      <div className="page-body">
+      <><ArtistBanner artistDetails={current[0]} /><div className="page-body">
         <Box sx={{
           flexGrow: 1,
-          height: '100%' }}>
+          height: '100%'
+        }}>
           <Grid container spacing={2}>
             <Grid item key={`art${current[0].artistName}`} xs={12} sm={12} md={12}>
               <ArtistInfoCard
                 resetSingle={resetSingle}
                 artistProps={current[0]}
-                key={`artistObj${current[0].artistName}`}/>
+                key={`artistObj${current[0].artistName}`} />
             </Grid>
           </Grid>
         </Box>
-      </div>
+      </div></>
     );
   } else if (artists === true && Array.isArray(allArtists)) {
     const favesObj = {};
@@ -103,7 +104,7 @@ const Artists = () => {
   } else {
     return (
       <div className="page-body">
-        <h1>Start following artists</h1>
+        <Typography variant="h2">Start following artists</Typography>
         <Box sx={{
           flexGrow: 1,
           height: '100%' }}>
@@ -125,7 +126,6 @@ const Artists = () => {
             })
             }
           </Grid>
-          <Button onClick={saveUpdates} sx={{ bgcolor: inverseMode, mt: '40px' }}>Save Updates</Button>
         </Box>
       </div>
     );
