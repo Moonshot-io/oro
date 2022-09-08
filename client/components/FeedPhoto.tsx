@@ -65,9 +65,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
       }
     })
       .then((userProfile) => {
-        if (currentUserInfo?.id === feedPhoto.userId) {
-          setOwner(true);
-        }
         setProfilePic(userProfile.data);
       })
       .catch((err) => console.error(err));
@@ -79,6 +76,11 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
   }, [profilePic]);
 
   useEffect(() => {
+    if (currentUserInfo?.id === feedPhoto.userId) {
+      setOwner(true);
+    } else {
+      setOwner(false);
+    }
     getAvatar(feedPhoto.userId);
   }, [feedPhoto]);
 
