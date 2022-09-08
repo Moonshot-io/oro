@@ -164,7 +164,6 @@ const Navbar = (props: navPropsType) => {
           to='/notifications'
           style={{ textDecoration: 'none' }}
           key={'notifications'}
-          onClick={() => console.log('hello')}
         >
           <Badge badgeContent={notif.length && notif.filter((notification) => notification.read === false).length} color='primary'>
             <EmailIcon className='nav-icons' />

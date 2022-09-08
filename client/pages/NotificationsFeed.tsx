@@ -5,7 +5,7 @@ import Notification from '../components/Notification';
 import {Button} from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 
-const NotificationsFeed: React.FC = () => {
+const NotificationsFeed: React.FC = ({notif}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = useTheme();
@@ -14,7 +14,9 @@ const NotificationsFeed: React.FC = () => {
 
 
   useEffect(() => {
-    getNotifications();
+    setNotifications([...notif]);
+    // console.log(notif);
+    // getNotifications();
   }, []);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const NotificationsFeed: React.FC = () => {
 
 
   return (
-    <div>
+    <div >
       <h1>Notifications</h1>
       <Button sx={{ bgcolor: inverseMode }} onClick={clearNotifications}>Clear Notifications</Button>
       <div>
