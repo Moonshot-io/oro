@@ -116,7 +116,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           {
             currentUserInfo?.id === comment.userId
             ? <Link to='/profile'>
-              <Avatar src={profilePic} />
+              <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic} />
             </Link>
             : <Link to={`/user/?id=${comment.userId}`}>
                 <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic} />

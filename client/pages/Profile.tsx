@@ -102,7 +102,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo } = useContext(UserContext);
+  const { currentUserInfo, getCurrentUser } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -184,6 +184,7 @@ const Profile = () => {
       })
       .then(() => setOpenSnack(true))
       .then(() => handleClose())
+      .then(() => getCurrentUser())
       .catch((err) => console.error(err));
   };
 
