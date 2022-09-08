@@ -34,10 +34,6 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
   const [message, setMessage] = useState<string>('');
   const [comments, setComments] = useState<Array<{id: number; userId: string; photoUrl: string; comment: string; edited: boolean; created_at: string;}>>([]);
 
-  const fontColor = {
-    style: { color: '#9B27B0' }
-  };
-
   useEffect(() => {
     getComments();
   }, []);
@@ -79,6 +75,21 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
       .catch((err) => console.error(err));
   };
 
+  const inputStyle = {
+    style: {
+      WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
+      "&:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 1000px #9B27B0 inset",
+      },
+      '-webkit-text-fill-color': '#9B27B0',
+      color: '#9B27B0',
+    }
+  };
+
+  const fontColor = {
+    style: { color: '#9B27B0' }
+  };
+
   return (
     <div id='comments-container'>
 
@@ -88,7 +99,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
         );
       })}
 
-      <CssTextField placeholder='add comment' onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} multiline={true} inputProps={{fontColor, maxLength: 150}} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
+      <CssTextField placeholder='add comment' onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} multiline={true} inputProps={{inputStyle, maxLength: 150}} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
       <Fab variant='extended' type='submit' onClick={handleSend}
         sx={{bgcolor: iconColors, ml: '20px', mt: '15px'}}><SendIcon sx={{ color: inverseMode }}/></Fab>
     </div>

@@ -163,24 +163,24 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                     <DeleteOutlinedIcon sx={{ color: inverseMode }} />
                   </Tooltip>
                 </IconButton><IconButton onClick={openEditor}>
-                    <Tooltip title="Edit Caption" placement="top-start">
-                      <EditOutlinedIcon sx={{ color: inverseMode }} />
-                    </Tooltip>
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    color="secondary"
-                    onClick={handleClose}
-                    aria-label="close"
-                    sx={{
-                      position: 'absolute',
-                      right: 8,
-                      top: 8,
-                      color: 'secondary',
-                    }}
-                  >
-                    <CloseRoundedIcon />
-                  </IconButton></>
+                  <Tooltip title="Edit Caption" placement="top-start">
+                    <EditOutlinedIcon sx={{ color: inverseMode }} />
+                  </Tooltip>
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  color="secondary"
+                  onClick={handleClose}
+                  aria-label="close"
+                  sx={{
+                    position: 'absolute',
+                    right: 12,
+                    top: 8,
+                    color: 'secondary',
+                  }}
+                >
+                  <CloseRoundedIcon />
+                </IconButton></>
                 :
                 <IconButton
                   edge="end"
@@ -189,7 +189,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                   aria-label="close"
                   sx={{
                     position: 'absolute',
-                    right: 8,
+                    right: 12,
                     top: 8,
                     color: 'secondary',
                   }}

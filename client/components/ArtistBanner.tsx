@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { Box, Grid, Typography, Paper } from '../styles/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, Grid, Typography, Paper, UseTheme, IconButton, YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, Styled, Link  } from '../styles/material';
+
+
 export default function ArtistBanner({artistDetails}) {
-  const navigate = useNavigate();
+    const theme = UseTheme();
+    const iconColors = theme.palette.secondary.contrastText;
+    const inverseMode = theme.palette.secondary.main;
+
   const {
     artistName,
     bio,
@@ -15,19 +19,29 @@ export default function ArtistBanner({artistDetails}) {
     wiki,
     youtube } = artistDetails;
 
+    const socials = {
+        youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ color: '#FFFFFF' }} />],
+        twitter: [twitter, <TwitterIcon key={'twitter'} sx={{ color: '#FFFFFF' }}/>],
+        facebook: [facebook, <FacebookIcon key={'fb'} sx={{ color: '#FFFFFF' }}/>],
+        instagram: [instagram, <InstagramIcon key={'insta'} sx={{ color: '#FFFFFF' }}/>],
+        homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ color: '#FFFFFF' }}/>],
+        itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ color: '#FFFFFF' }}/>],
+        wiki: [wiki, <QuizIcon key={'wiki'} sx={{ color: '#FFFFFF' }}/>],
+      };
+
   return (
+    <div className="page-body">
     <Paper
       sx={{
         position: 'relative',
-        backgroundColor: 'grey.800',
         color: '#fff',
         mb: 4,
         width: '100%',
-        height: { xs: '90%', md: '350px' },
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
+        height: { xs: '200px', md: '350px' },
+        backgroundSize: 'contain',
+        backgroundRepeat: 'repeat-x',
         backgroundPosition: 'top',
-        backgroundImage: `url(${artistDetails.image})`,
+        backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.80), rgba(44, 50, 142, 0.80)), url(${artistDetails.image})`,
       }}
     >
       {/* Increase the priority of the hero background image */}
@@ -46,10 +60,12 @@ export default function ArtistBanner({artistDetails}) {
         <Grid item md={6}>
           <Box
             sx={{
-              position: 'relative',
-              mt: { xs: '80%', md: '50%' } ,
-              p: { xs: 2, md: 4 },
-              pr: { md: 0 },
+                marginLeft: '25px',
+                top: { xs: '125px', md: '250px' },
+                right: 'auto',
+                bottom: 'auto',
+                left: 'inherit',
+                position: 'absolute'
             }}
           >
             <Typography
@@ -60,12 +76,41 @@ export default function ArtistBanner({artistDetails}) {
             >
               {artistDetails.artistName}
             </Typography>
-            {/* <Typography variant='h5' color='inherit' paragraph>
-              {post.description}
-            </Typography> */}
           </Box>
         </Grid>
       </Grid>
     </Paper>
+    </div>
   );
 }
+
+
+{/* <Box
+sx={{
+    marginLeft: 'auto',
+    top: { xs: '125px', md: '250px' },
+    right: '25px',
+    bottom: 'auto',
+    left: 'inherit',
+    position: 'absolute'
+}}
+> */}
+{/* <Typography
+  variant='h3'
+  gutterBottom
+  >
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={1}>
+          {Object.keys(socials).map((social: string, index) => {
+            return (
+              <Grid item key={`social${index}`}>
+                <IconButton>
+                  <Link href={socials[social][0]} sx={{color: '#ffffff'}}>{socials[social][1]}</Link>
+                </IconButton>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    </Typography>
+</Box> */}

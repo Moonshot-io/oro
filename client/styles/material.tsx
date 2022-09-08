@@ -89,7 +89,9 @@ import formControl from '@mui/material/FormControl';
 import sortIcon from '@mui/icons-material/Sort';
 import select, { SelectChangeEvent } from '@mui/material/Select';
 import inputAdornment from '@mui/material/InputAdornment';
+import attachMoneyIcon from '@mui/icons-material/AttachMoney';
 
+export const AttachMoneyIcon = attachMoneyIcon;
 export const InputAdornment = inputAdornment;
 export const SortIcon = sortIcon;
 export const Select = select;

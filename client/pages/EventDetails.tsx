@@ -78,6 +78,7 @@ function DetailCard({ detail }): JSX.Element {
 
   console.log('event detail', detail);
   return (
+    <div className="page-body">
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
         <Typography
@@ -102,6 +103,7 @@ function DetailCard({ detail }): JSX.Element {
         <Button variant='contained' onClick={handleClick}></Button>
       </CardActions>
     </Card>
+    </div>
   );
 }
 
@@ -145,6 +147,7 @@ const EventDetails: React.FC = () => {
   };
 
   return (
+    <div className="page-body">
     <Container maxWidth='lg'>
       <main>
         <MainFeaturedPost post={mainFeaturedPost} />
@@ -163,6 +166,7 @@ const EventDetails: React.FC = () => {
         </Grid>
       </Grid>
     </Container>
+    </div>
   );
 };
 

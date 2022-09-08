@@ -16,7 +16,7 @@ import Dialog from '@mui/material/Dialog';
 const EventFeed: React.FC = () => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
-  
+
   const [previewSource, setPreviewSource] = useState<string | ArrayBuffer | null>('');
   const [photo, setPhoto] = useState<File | null>(null);
   const [feedPhotos, setFeedPhotos] = useState<Array<{caption?: string; created_at: string; deleteToken: string | null; eventAPIid: string; id: number; photoUrl: string; userId: string;}>>([]);
@@ -28,7 +28,7 @@ const EventFeed: React.FC = () => {
 
   const [searchParams] = useSearchParams();
   const eventId: string | null = searchParams.get('id');
-  
+
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -119,7 +119,7 @@ const EventFeed: React.FC = () => {
 
   };
 
-  
+
   const handleSnackClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -153,11 +153,11 @@ const EventFeed: React.FC = () => {
   ) {
     return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
   });
-  
+
 
   const renderFeed = () => {
     return (
-      <div>
+      <div className="page-body">
         {feedPhotos.map((photo, i) => {
           return (
             <div key={i} margin-top="30px">
@@ -169,82 +169,128 @@ const EventFeed: React.FC = () => {
     );
   };
 
-  return (
-    <div>
-
-      <h1>
-        {eventName}
-      </h1>
-      <Dialog open={dialogOpen}>
-        <img width='220px' height='auto' src={`${previewSource}`}/>
-
-        <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
-          <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
+  if (!feedPhotos.length) {
+    return (
+      <div className="page-body">
+        <Typography variant='h2' sx={{ color: inverseMode }}>
+         Event Feed
+        </Typography>
+        <br></br>
+        <Typography variant='h4' sx={{ color: inverseMode }}>
+          {eventName}
+        </Typography>
+      <br></br>
+        <Typography variant='body1' sx={{ color: inverseMode }}>
+          Looks like there are no photos yet, start the party yourself by uploading one!
         </Typography>
 
-        {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
-        <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
+        <Dialog open={dialogOpen}>
+            <img width='220px' height='auto' src={`${previewSource}`}/>
 
-      </Dialog>
+            <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
+              <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
+            </Typography>
 
-      <div>
-        {renderFeed()}
-      </div>
-      <Box sx={{position: 'sticky'}}>
+            {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
+            <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
+          </Dialog>
+
+          <div>
+            {renderFeed()}
+          </div>
+
+        <Box sx={{position: 'sticky'}}>
         <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onClick={(event) => {event.target.value = null}} onChange={handleFileChange}/>
-        <Fab
-          size='small'
-          onClick={uploadPhoto}
-          sx={{
-            ml: '20px',
-            bgcolor: inverseMode,
-            margin: 0,
-            top: 'auto',
-            right: 20,
-            bottom: 20,
-            left: 'auto',
-            position: 'fixed'}}>
-          <AddPhotoAlternateIcon/>
-        </Fab>
-      </Box>
+          <Fab
+            size='large'
+            onClick={uploadPhoto}
+            sx={{
+              ml: '20px',
+              bgcolor: inverseMode,
+              margin: 0,
+              top: 'auto',
+              right: 20,
+              bottom: 20,
+              left: 'auto',
+              position: 'fixed'}}>
+            <AddPhotoAlternateIcon sx={{color: iconColors}}/>
+          </Fab>
+        </Box>
+      </div>
+    )
+  } else {
+      return (
+        <div className="page-body">
+          <Typography variant='h4' sx={{ color: inverseMode }}>
+            {eventName} Event Feed
+          </Typography>
 
-      <Snackbar
-        open={openDeleteSnack}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        <Alert
-          onClose={handleSnackClose}
-          severity='success'
-          sx={{ width: '100%' }}
-        >
-          Photo Deleted
-        </Alert>
-      </Snackbar>
+          <Dialog open={dialogOpen}>
+            <img width='220px' height='auto' src={`${previewSource}`}/>
 
-      <Snackbar
-        open={openUploadSnack}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        <Alert
-          onClose={handleSnackClose}
-          severity='success'
-          sx={{ width: '100%' }}
-        >
-          Photo Uploaded
-        </Alert>
-      </Snackbar>
-    </div>
-  );
+            <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
+              <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
+            </Typography>
 
-  // } else {
-  //   return (
-  //     <div>
-  //       Please Log in to use the app
-  //     </div>
-  //   )
-  // }
+            {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
+            <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
+          </Dialog>
+
+          <div>
+            {renderFeed()}
+          </div>
+          <Box sx={{position: 'sticky'}}>
+            <OutlinedInput sx={{mt: '20px', display: 'none', accept: 'image/*'}} type='file' id='fileUpload' name='image' onClick={(event) => {event.target.value = null}} onChange={handleFileChange}/>
+            <Fab
+            className='uploadButton'
+            size='large'
+            onClick={uploadPhoto}
+            sx={{
+              ml: '20px',
+              bgcolor: '#51AFF7',
+              // boxShadow: 3,
+              // border: '1px solid black',
+              margin: 0,
+              top: 'auto',
+              right: 20,
+              bottom: 20,
+              left: 'auto',
+              position: 'fixed'}}>
+            <AddPhotoAlternateIcon sx={{color: 'white'}}/>
+          </Fab>
+          </Box>
+
+          <Snackbar
+            open={openDeleteSnack}
+            autoHideDuration={3000}
+            onClose={handleSnackClose}
+          >
+            <Alert
+              onClose={handleSnackClose}
+              severity='success'
+              sx={{ width: '100%' }}
+            >
+              Photo Deleted
+            </Alert>
+          </Snackbar>
+
+          <Snackbar
+            open={openUploadSnack}
+            autoHideDuration={3000}
+            onClose={handleSnackClose}
+          >
+            <Alert
+              onClose={handleSnackClose}
+              severity='success'
+              sx={{ width: '100%' }}
+            >
+              Photo Uploaded
+            </Alert>
+          </Snackbar>
+        </div>
+      );
+
+  }
 };
 
 export default EventFeed;

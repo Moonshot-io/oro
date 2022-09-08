@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButtonProps } from '@mui/material/IconButton';
 import {
-  Box,	Grid,	Card,	CardHeader,	CardMedia,	CardContent,	CardActions,	Collapse,	Typography,	ExpandMoreIcon,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, ArrowBackIosNewIcon, Fab
+  Box,	Grid, Typography,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, Button, ArrowBackIosNewIcon, Fab, purple,
 } from '../styles/material';
 import EventCards from './EventCards';
 import ArtistBanner from './ArtistBanner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Dropdown from '../components/Dropdown';
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
 
+const fontColor = {
+  style: { color: '#9B27B0' }
+};
+
+const ColorButton = Styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: purple[500],
+  '&:hover': {
+    backgroundColor: purple[700],
+  },
+}));
 const ExpandMore = Styled((props: ExpandMoreProps) => {
   const { ...other } = props;
   return <IconButton {...other} />;
@@ -46,12 +58,17 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
   const inverseMode = theme.palette.secondary.main;
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
+  const [ keyword, setKeyword ] = useState('');
+  const [allEvents, setAllEvents] = useState([]);
+  const [city, setCity] = useState('any');
+  const [eventsExist, setEventsExist] = useState(true);
   const [events, setEvents] = useState(
     [{
       name: 'No events found',
       image: '/images/patrick-perkins-pay-artists.jpg',
       description: 'There are currently no events found for this artist.',
       id: 1001,
+      city: 'New Orleans'
     }]
   );
   const {
@@ -69,13 +86,13 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
 
 
   const socials = {
-    youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ color: iconColors }} />],
-    twitter: [twitter, <TwitterIcon key={'twitter'} sx={{ color: iconColors }}/>],
-    facebook: [facebook, <FacebookIcon key={'fb'} sx={{ color: iconColors }}/>],
-    instagram: [instagram, <InstagramIcon key={'insta'} sx={{ color: iconColors }}/>],
-    homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ color: iconColors }}/>],
-    itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ color: iconColors }}/>],
-    wiki: [wiki, <QuizIcon key={'wiki'} sx={{ color: iconColors }}/>],
+    youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ color: inverseMode }} />],
+    twitter: [twitter, <TwitterIcon key={'twitter'} sx={{ color: inverseMode }}/>],
+    facebook: [facebook, <FacebookIcon key={'fb'} sx={{ color: inverseMode }}/>],
+    instagram: [instagram, <InstagramIcon key={'insta'} sx={{ color: inverseMode }}/>],
+    homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ color: inverseMode }}/>],
+    itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ color: inverseMode }}/>],
+    wiki: [wiki, <QuizIcon key={'wiki'} sx={{ color: inverseMode }}/>],
   };
 
   const handleExpandClick = () => {
@@ -97,6 +114,29 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
     navigate('/artists');
   };
 
+  useEffect(()=>{
+    getArtistEvents(artistName);
+  },[])
+
+  const updateEvents = (city) => {
+    setCity(city);
+    if(city === 'all'){
+      setEvents(allEvents);
+    } else {
+    const filteredEvents = allEvents.filter((event) => {
+      return event.venueInfo[0].city === city;
+    })
+    if(!filteredEvents.length){
+      setEvents([...allEvents]);
+    } else {
+      setEvents([...filteredEvents]);
+    }
+  }
+  }
+  // useEffect(() => {
+  //   updateEvents(city);
+  // }, [city]);
+
   return (
     <Box>
         <Grid container>
@@ -105,7 +145,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
         size='small'
         onClick={() => goBack()}
         sx={{
-          marginLeft: '15px',
+          marginLeft: '25px',
           top: 100,
           right: 'auto',
           bottom: 'auto',
@@ -116,7 +156,63 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
       </Fab>
     </Box>
           <ArtistBanner artistDetails={artistProps} />
-          <Card sx={{ bgcolor: inverseMode, mt: '40px' }}>
+
+          <Box>
+            <Grid container>
+            <Grid xs={12} sm={8}>
+            <Typography variant="body2" align="left">
+                {bio}
+              </Typography>
+            </Grid>
+            <Grid xs={12} sm={4}>
+            <Typography>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid container spacing={2}>
+                      {Object.keys(socials).map((social: string, index) => {
+                        return (
+                          <Grid item key={`social${index}`}>
+                            <IconButton>
+                              <a href={socials[social][0]}>{socials[social][1]}</a>
+                            </IconButton>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Box>
+                </Typography>
+                </Grid>
+                </Grid>
+                <Box>
+      <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
+  >
+        <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
+      </Grid></Box><br/>
+                <Grid>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid container>
+                    {events.length > 1
+                      ?                        <><Typography paragraph sx={{ color: inverseMode }}>Events:</Typography><Grid container id={artistName}>
+                    {events.map((eventObj, index) => {
+
+                      return (
+                        <Grid item xs={12} md={6}>
+                          <EventCards events={eventObj} key={`event${index}`} />
+                        </Grid>);
+                    })}
+                  </Grid></>
+                      : <Typography paragraph sx={{ color: inverseMode }}>No Upcoming Events</Typography>}
+                  </Grid>
+                </Box>
+                </Grid>
+          </Box>
+          </Grid>
+          </Box>
+
+  );
+};
+export default ArtistInfoCard;
+
+          {/* <Card sx={{ bgcolor: inverseMode, mt: '40px' }}>
             <CardHeader
               title={artistName}
               sx={{ bgcolor: inverseMode }} />
@@ -132,9 +228,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{ bgcolor: inverseMode }}>
-              {/* <IconButton aria-label="add to favorites" onClick={()=>{ handleFavorite(id); }}>
-      {favorite ? <FavoriteIcon sx={{ color: '#AE66FF' }} /> : <FavoriteIcon sx={{ color: iconColors }} />}
-    </IconButton> */}
               <ExpandMore
                 expand={expanded}
                 sx={{ color: iconColors }}
@@ -150,7 +243,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent id={artistName}>
-                <Typography paragraph sx={{ bgcolor: inverseMode }}>Bio:</Typography>
                 <Typography paragraph sx={{ bgcolor: inverseMode }}>
                   {bio}
                 </Typography>
@@ -186,8 +278,4 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
             </Collapse>
           </Card>
         </Grid>
-      </Box>
-  );
-};
-
-export default ArtistInfoCard;
+      </Box> */}

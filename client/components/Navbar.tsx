@@ -1,6 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import VSLOGODark from './images/VSLOGO-dark.png';
+import VSLOGO from './images/VSLOGO.png';
 
 import {
   Box,
@@ -36,7 +38,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
 interface navPropsType {
-  notif: number;
+  notif: {commentId: number; created_at: string; id: number; read: boolean; type: string; userId: string;}[]
 }
 
 const Navbar = (props: navPropsType) => {
@@ -52,6 +54,7 @@ const Navbar = (props: navPropsType) => {
   const { mode, toggleMode } = themeContext;
 
   const navigate = useNavigate();
+
 
   const pages = [
     [
@@ -163,8 +166,9 @@ const Navbar = (props: navPropsType) => {
           to='/notifications'
           style={{ textDecoration: 'none' }}
           key={'notifications'}
+          onClick={() => console.log('hello')}
         >
-          <Badge badgeContent={notif} color='primary'>
+          <Badge badgeContent={notif.length && notif.filter((notification) => notification.read === false).length} color='primary'>
             <EmailIcon className='nav-icons' />
           </Badge>
           Notifications
@@ -203,8 +207,8 @@ const Navbar = (props: navPropsType) => {
                 <img
                   src={
                     mode === 'dark'
-                      ? 'images/VSLOGO-dark.png'
-                      : 'images/VSLOGO.png'
+                      ? VSLOGODark
+                      : VSLOGO
                   }
                   height='75'
                 />
