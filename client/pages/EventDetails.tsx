@@ -155,12 +155,12 @@ const EventDetails: React.FC = () => {
       <Grid sx={{ mt: 3, alignItems: 'center' }}>
         <DetailCard detail={eventDetails} />
         <Grid>
-          <Button sx={{ bgcolor: iconColors }} onClick={handleClick}>
+          <Button sx={{ bgcolor: inverseMode }} onClick={handleClick}>
             Travel Information
           </Button>
         </Grid>
         <Grid>
-          <Button sx={{ bgcolor: iconColors }} onClick={getDetails}>
+          <Button sx={{ bgcolor: inverseMode }} onClick={getDetails}>
             Event Feed
           </Button>
         </Grid>
