@@ -4,7 +4,7 @@ import axios from 'axios';
 import Notification from '../components/Notification';
 import {Button, Typography, UseTheme} from '../styles/material';
 
-const NotificationsFeed: React.FC = () => {
+const NotificationsFeed: React.FC = ({notif}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = UseTheme();
@@ -13,7 +13,9 @@ const NotificationsFeed: React.FC = () => {
 
 
   useEffect(() => {
-    getNotifications();
+    setNotifications([...notif]);
+    // console.log(notif);
+    // getNotifications();
   }, []);
 
   useEffect(() => {

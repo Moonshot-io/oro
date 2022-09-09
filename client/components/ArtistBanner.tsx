@@ -30,12 +30,13 @@ export default function ArtistBanner({artistDetails}) {
       };
 
   return (
-    <div className="page-body">
     <Paper
       sx={{
         position: 'relative',
         color: '#fff',
         mb: 4,
+        ml: 0,
+        mr: 0,
         width: '100%',
         height: { xs: '200px', md: '350px' },
         backgroundSize: 'contain',
@@ -44,7 +45,6 @@ export default function ArtistBanner({artistDetails}) {
         backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.80), rgba(44, 50, 142, 0.80)), url(${artistDetails.image})`,
       }}
     >
-      {/* Increase the priority of the hero background image */}
       {<img style={{ display: 'none' }} src={artistDetails.image} />}
       <Box
         sx={{
@@ -80,37 +80,5 @@ export default function ArtistBanner({artistDetails}) {
         </Grid>
       </Grid>
     </Paper>
-    </div>
   );
 }
-
-
-{/* <Box
-sx={{
-    marginLeft: 'auto',
-    top: { xs: '125px', md: '250px' },
-    right: '25px',
-    bottom: 'auto',
-    left: 'inherit',
-    position: 'absolute'
-}}
-> */}
-{/* <Typography
-  variant='h3'
-  gutterBottom
-  >
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
-          {Object.keys(socials).map((social: string, index) => {
-            return (
-              <Grid item key={`social${index}`}>
-                <IconButton>
-                  <Link href={socials[social][0]} sx={{color: '#ffffff'}}>{socials[social][1]}</Link>
-                </IconButton>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
-    </Typography>
-</Box> */}

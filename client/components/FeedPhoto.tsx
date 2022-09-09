@@ -57,6 +57,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
     caption: '',
     deleteToken: null,
   });
+  // const [feedPhoto, setFeedPhoto] = useState(photo);
   const getAvatar = (id: string): void => {
     axios.get('/api/eventFeed/avatar', {
       params: {
@@ -73,16 +74,25 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
     updateFeed();
   }, [profilePic]);
+
   useEffect(() => {
     if (currentUserInfo?.id === feedPhoto.userId) {
       setOwner(true);
+    } else {
+      setOwner(false);
     }
     getAvatar(feedPhoto.userId);
   }, [feedPhoto]);
 
+  // useEffect(() => {
+  //   if (currentUserInfo?.id === photo.userId) {
+  //     setOwner(true);
+  //   }
+  //   setFeedPhoto(photo);
+  // }, []);
   useEffect(() => {
     setFeedPhoto(photo);
-  }, []);
+  }, [photo])
 
   useEffect(() => {
     updateFeed();
@@ -265,18 +275,19 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
           <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
             {editor &&
+            <Button sx={{ bgcolor: iconColors }} onClick={closeEditor}>
+              <Typography variant='body2' sx={{ color: inverseMode }}>
+                cancel
+              </Typography>
+            </Button>}
+            
+            {editor &&
             <Button sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>
               <Typography variant='body2' sx={{ color: inverseMode }}>
                 confirm
               </Typography>
             </Button>}
 
-            {editor &&
-            <Button sx={{ bgcolor: iconColors }} onClick={closeEditor}>
-              <Typography variant='body2' sx={{ color: inverseMode }}>
-                cancel
-              </Typography>
-            </Button>}
             {/* <span onClick={openEditor}>
               <Typography textAlign='right' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>edit</Typography>
             </span> */}

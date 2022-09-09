@@ -3,7 +3,7 @@ import { IconButtonProps } from '@mui/material/IconButton';
 import {
   Box,	Grid, Typography,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, Button, ArrowBackIosNewIcon, Fab, purple,
 } from '../styles/material';
-import EventCards from './EventCards';
+import EventCards from './ArtistEventCards';
 import ArtistBanner from './ArtistBanner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -84,6 +84,22 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
     youtube,
   } = artistProps;
 
+  const removeHref = ()=>{
+    const bioArr = bio.split(' ');
+    let newBio = '';
+    let i = 0;
+    while(bioArr[i][0] !== '<'){
+      newBio += bioArr[i] + ' ';
+      i++;
+    }
+    newBio = newBio.slice(0, newBio.length - 1);
+    console.log(newBio[newBio.length - 1]);
+    if(newBio[newBio.length - 1] !== '.'){
+      newBio += '.';
+    }
+    return newBio;
+  }
+
 
   const socials = {
     youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ color: inverseMode }} />],
@@ -138,115 +154,32 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
   // }, [city]);
 
   return (
-    <Box>
+      <Box>
         <Grid container>
-        <Box sx={{ position: 'sticky', zIndex: 'tooltip'}}>
-      <Fab
-        size='small'
-        onClick={() => goBack()}
-        sx={{
-          marginLeft: '25px',
-          top: 100,
-          right: 'auto',
-          bottom: 'auto',
-          left: 'inherit',
-          position: 'fixed'
-        }}>
-        <ArrowBackIosNewIcon onClick={() => goBack()} />
-      </Fab>
-    </Box>
-          <ArtistBanner artistDetails={artistProps} />
+          <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
+            <Fab
+              size='small'
+              onClick={() => goBack()}
+              sx={{
+                marginLeft: '25px',
+                top: 100,
+                right: 'auto',
+                bottom: 'auto',
+                left: 'inherit',
+                position: 'fixed'
+              }}>
+              <ArrowBackIosNewIcon onClick={() => goBack()} />
+            </Fab>
+          </Box>
 
           <Box>
             <Grid container>
-            <Grid xs={12} sm={8}>
-            <Typography variant="body2" align="left">
-                {bio}
-              </Typography>
-            </Grid>
-            <Grid xs={12} sm={4}>
-            <Typography>
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                      {Object.keys(socials).map((social: string, index) => {
-                        return (
-                          <Grid item key={`social${index}`}>
-                            <IconButton>
-                              <a href={socials[social][0]}>{socials[social][1]}</a>
-                            </IconButton>
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
-                  </Box>
+              <Grid xs={12} sm={8}>
+                <Typography variant="body1" align="left">
+                  {removeHref()}
                 </Typography>
-                </Grid>
-                </Grid>
-                <Box>
-      <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
-  >
-        <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-      </Grid></Box><br/>
-                <Grid>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Grid container>
-                    {events.length > 1
-                      ?                        <><Typography paragraph sx={{ color: inverseMode }}>Events:</Typography><Grid container id={artistName}>
-                    {events.map((eventObj, index) => {
-
-                      return (
-                        <Grid item xs={12} md={6}>
-                          <EventCards events={eventObj} key={`event${index}`} />
-                        </Grid>);
-                    })}
-                  </Grid></>
-                      : <Typography paragraph sx={{ color: inverseMode }}>No Upcoming Events</Typography>}
-                  </Grid>
-                </Box>
-                </Grid>
-          </Box>
-          </Grid>
-          </Box>
-
-  );
-};
-export default ArtistInfoCard;
-
-          {/* <Card sx={{ bgcolor: inverseMode, mt: '40px' }}>
-            <CardHeader
-              title={artistName}
-              sx={{ bgcolor: inverseMode }} />
-            <CardMedia
-              component="img"
-              height="250"
-              image={image}
-              alt={artistName}
-              sx={{ bgcolor: inverseMode }} />
-            <CardContent sx={{ bgcolor: inverseMode }}>
-              <Typography noWrap variant="body2">
-                {bio}
-              </Typography>
-            </CardContent>
-            <CardActions disableSpacing sx={{ bgcolor: inverseMode }}>
-              <ExpandMore
-                expand={expanded}
-                sx={{ color: iconColors }}
-                onClick={() => {
-                  handleExpandClick();
-                  getArtistEvents(artistName);
-                } }
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent id={artistName}>
-                <Typography paragraph sx={{ bgcolor: inverseMode }}>
-                  {bio}
-                </Typography>
-                <Typography paragraph sx={{ bgcolor: inverseMode }}>Socials:</Typography>
+              </Grid>
+              <Grid xs={12} sm={4}>
                 <Typography>
                   <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
@@ -262,20 +195,34 @@ export default ArtistInfoCard;
                     </Grid>
                   </Box>
                 </Typography>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Grid container spacing={2}>
-                    {events.length > 1
-                      ? <Grid item id={artistName}>
-                        <Typography paragraph sx={{ bgcolor: inverseMode }}>Events:</Typography>
-                        {events.map((eventObj, index) => {
-                          return <EventCards events={eventObj} key={`event${index}`} />;
-                        })}
-                      </Grid>
-                      : <Typography paragraph sx={{ bgcolor: inverseMode }}>No Upcoming Events</Typography>}
-                  </Grid>
-                </Box>
-              </CardContent>
-            </Collapse>
-          </Card>
+              </Grid>
+            </Grid>
+            <Box>
+              <Grid container style={{ gap: 15, maxHeight: '50vh' }} alignItems="left"
+              >
+                <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
+              </Grid></Box><br />
+            <Grid>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container>
+                  {events.length > 1
+                    ? <><Typography paragraph sx={{ color: inverseMode }}>Events:</Typography><Grid container id={artistName}>
+                      {events.map((eventObj, index) => {
+
+                        return (
+                          <Grid item xs={12} md={6}>
+                            <EventCards events={eventObj} key={`event${index}`} />
+                          </Grid>);
+                      })}
+                    </Grid></>
+                    : <Typography paragraph sx={{ color: inverseMode }}>No Upcoming Events</Typography>}
+                </Grid>
+              </Box>
+            </Grid>
+          </Box>
         </Grid>
-      </Box> */}
+      </Box>
+
+  );
+};
+export default ArtistInfoCard;
