@@ -51,7 +51,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
-
 const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
