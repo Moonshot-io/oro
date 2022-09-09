@@ -29,6 +29,7 @@ interface themeType {
     h2: {
       fontSize: string,
       fontWeight: number,
+      color: string
     },
     h3: {
       fontSize: string,
@@ -69,15 +70,15 @@ interface themeType {
 const dark = createTheme({
   palette: {
     primary: {
-      main: '#1A2027',
-      contrastText: '#F3F3F3',
+      main: '#1A2027', // main dark
+      contrastText: '#03a9f4', // highlight
     },
     secondary: {
-      main: '#F3F3F3',
-      contrastText: '#1A2027',
+      main: '#232c35', // off shade dark
+      contrastText: '#F0F2F5', // off white
     },
     text: {
-      primary: '#1A2027',
+      primary: '#F0F2F5',
     },
     mode: 'dark',
   },
@@ -91,6 +92,7 @@ const dark = createTheme({
       fontSize: '2rem',
       fontWeight: 550,
       marginTop: '2.25rem',
+      color: '#03a9f4'
     },
     h3: {
       fontSize: '1.75rem',
@@ -128,7 +130,7 @@ const dark = createTheme({
             '&:-webkit-autofill': {
               '-webkit-box-shadow': '0 0 0 100px #000 inset',
             },
-            '-webkit-text-fill-color': '#9B27B0'
+            '-webkit-text-fill-color': '#a352ff'
           },
         },
       }
@@ -139,15 +141,15 @@ const dark = createTheme({
 const light = createTheme({
   palette: {
     primary: {
-      main: '#F3F3F3',
-      contrastText: '#1A2027',
+      main: '#F0F2F5',
+      contrastText: '#03a9f4',
     },
     secondary: {
-      main: '#1A2027',
-      contrastText: '#F3F3F3',
+      main: '#ffffff',
+      contrastText: '#1A2027',
     },
     text: {
-      primary: '#F3F3F3',
+      primary: '#1A2027',
     },
     mode: 'light',
   },
@@ -161,6 +163,7 @@ const light = createTheme({
       fontSize: '2rem',
       fontWeight: 550,
       marginTop: '2.25rem',
+      color: '#03a9f4',
     },
     h3: {
       fontSize: '1.75rem',
@@ -198,7 +201,7 @@ const light = createTheme({
             '&:-webkit-autofill': {
               '-webkit-box-shadow': '0 0 0 100px #000 inset',
             },
-            '-webkit-text-fill-color': '#9B27B0'
+            '-webkit-text-fill-color': '#a352ff'
           }
         },
       },
@@ -216,7 +219,7 @@ const GlobalTheme = createGlobalStyle`
     margin: 0;
     height: 100vh;
     background: ${(props: themeType) => props.theme.palette.primary.main};
-    color: ${(props) => props.theme.palette.primary.contrastText};
+    color: ${(props) => props.theme.palette.secondary.contrastText};
   }
 
 @media only screen and (min-width: 600px){
@@ -241,7 +244,7 @@ input:-webkit-autofill:active {
 
 .nav-icons {
   margin-right: 10px;
-  color: ${(props) => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.primary.contrastText};
 }
 
 .home-icons {
@@ -249,6 +252,7 @@ input:-webkit-autofill:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: ${(props) => props.theme.palette.primary.contrastText};
 }
 
 .page-body {
@@ -263,12 +267,16 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-.home-text {
+.home-text-box {
   align-text: left;
-  background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#262B32' : '#DBDBDB'};
+  background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#232c35' : '#FFFFFF'};
   padding-bottom: 10px;
   max-width: 80%;
   margin: auto;
+}
+
+.home-text {
+  color: ${ (props) => props.theme.palette.mode === 'dark' ? '#F0F2F5' : '#232c35'};
 }
 
 .comment {
@@ -282,7 +290,7 @@ input:-webkit-autofill:active {
 }
 
 .commentsPaperLight {
-  background: #30363c;
+  background: #232c35;
   word-break: break-all;
   word-wrap: break-word;
   width: auto;
@@ -293,7 +301,7 @@ input:-webkit-autofill:active {
 // }
 
 .commentsPaperDark {
-  background: #dbdbdb;
+  background: #fff;
   word-break: break-all;
   word-wrap: break-word;
   width: auto;
@@ -315,12 +323,73 @@ input:-webkit-autofill:active {
   color: #2e8b57;
 }
 
+/* #profile-photo {
+  opacity: 0.5;
+}
+
+#profile-photo:hover {
+  opacity: 1.0;
+} */
+
+#photo-dialog {
+  margin: 0px;
+}
+
+.chat-list{
+  float:left;
+}
+
+.chat{
+  float:right;
+}
+
+#social-media {
+  justify-content: center;
+}
+
+.commentTime {
+  float:left;
+}
+
+.editDelete {
+  float:right;
+}
+
+.edit {
+  margin: 0px 5px 0px 0px
+}
+
+.edit:hover {
+  font-weight: 900;
+}
+
+
+.delete {
+  margin: 0px 0px 0px 5px;
+}
+.delete:hover {
+  font-weight: 900;
+}
+
+.comments {
+  margin: 0px 0px 10px
+}
+
+#comments-container {
+  margin: auto;
+}
+
+#google-button {
+  display: flex;
+  justify-content: center;
+}
+
 .css-6hp17o-MuiList-root-MuiMenu-list {
-  background: ${(props) => props.theme.palette.primary.contrastText};
+  background: ${(props) => props.theme.palette.secondary.main};
 }
 
 a:-webkit-any-link {
-  color: ${(props) => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.secondary.contrastText};
 }
 
 .css-vj1n65-MuiGrid-root {

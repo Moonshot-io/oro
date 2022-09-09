@@ -1,19 +1,19 @@
-/* #profile-photo {
+/*  #profile-photo {
   opacity: 0.5;
 }
 
 #profile-photo:hover {
   opacity: 1.0;
-} */
+}
 
 #photo-dialog {
   margin: 0px;
 }
 
-/* body {
+body {
     background-color: #1A2027;
     color: #1A2027;
-} */
+}
 
 .chat-list{
   float:left;
@@ -63,3 +63,4 @@
   display: flex;
   justify-content: center;
 }
+*/
