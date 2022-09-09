@@ -8,13 +8,15 @@ import {
   CloseRoundedIcon,
   Dialog,
   DialogContent,
+  DialogTitle,
   AppBar,
   Toolbar,
   IconButton,
   Typography,
   Button,
   OutlinedInput,
-  Snackbar
+  Snackbar,
+  Item
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
@@ -49,11 +51,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
-
 const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
+  const [photoEvent, setPhotoEvent] = useState([]);
   const [open, setOpen] = useState(false);
   const [captionText, setCaptionText] = useState('');
   const [editor, setEditor] = useState(false);
@@ -138,17 +140,29 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
     setDeleterOpen(false);
   };
 
+  const getPhotoEvent = () => {
+    axios.get(`/api/profile/photo_event/${photo.eventAPIid}`)
+      .then(({ data }) => {
+        setPhotoEvent(data);
+      })
+      .catch((err) => console.error(err));
+  }
+
+  useEffect(() => {
+    getPhotoEvent();
+  }, []);
+
   return (
     <div>
-      <ImageListItem >
-        <img
-          id='profile-photo'
-          src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
-          srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-          alt=""
-          onClick={handleOpen}
-        />
-      </ImageListItem>
+      {/* <Item > */}
+      <img
+        id='profile-photo'
+        src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
+        srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+        alt=""
+        onClick={handleOpen}
+      />
+      {/* </Item> */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -158,44 +172,56 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           <Toolbar>
             {
               currentUserInfo?.id === photo.userId
-                ? <><IconButton onClick={openDeleter}>
-                  <Tooltip title="Delete Photo" placement="top-start">
-                    <DeleteOutlinedIcon sx={{ color: inverseMode }} />
-                  </Tooltip>
-                </IconButton><IconButton onClick={openEditor}>
-                  <Tooltip title="Edit Caption" placement="top-start">
-                    <EditOutlinedIcon sx={{ color: inverseMode }} />
-                  </Tooltip>
-                </IconButton>
-                <IconButton
-                  edge="end"
-                  color="secondary"
-                  onClick={handleClose}
-                  aria-label="close"
-                  sx={{
-                    position: 'absolute',
-                    right: 12,
-                    top: 8,
-                    color: 'secondary',
-                  }}
-                >
-                  <CloseRoundedIcon />
-                </IconButton></>
+                ? <>
+                  <IconButton onClick={openDeleter}>
+                    <Tooltip title="Delete Photo" placement="top-start">
+                      <DeleteOutlinedIcon sx={{ color: inverseMode }} />
+                    </Tooltip>
+                  </IconButton>
+                  <IconButton onClick={openEditor}>
+                    <Tooltip title="Edit Caption" placement="top-start">
+                      <EditOutlinedIcon sx={{ color: inverseMode }} />
+                    </Tooltip>
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    color="secondary"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                      position: 'absolute',
+                      right: 12,
+                      top: 8,
+                      color: 'secondary',
+                    }}
+                  >
+                    <CloseRoundedIcon />
+                  </IconButton>
+                  <br />
+                  <DialogTitle id='dialog-title' sx={{ color: inverseMode }}>
+                    {photoEvent.name}
+                  </DialogTitle>
+                </>
                 :
-                <IconButton
-                  edge="end"
-                  color="secondary"
-                  onClick={handleClose}
-                  aria-label="close"
-                  sx={{
-                    position: 'absolute',
-                    right: 12,
-                    top: 8,
-                    color: 'secondary',
-                  }}
-                >
-                  <CloseRoundedIcon />
-                </IconButton>
+                <>
+                  <DialogTitle id='dialog-title' sx={{ color: inverseMode }}>
+                    {photoEvent.name}
+                  </DialogTitle>
+                  <IconButton
+                    edge="end"
+                    color="secondary"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                      position: 'absolute',
+                      right: 12,
+                      top: 8,
+                      color: 'secondary',
+                    }}
+                  >
+                    <CloseRoundedIcon />
+                  </IconButton>
+                </>
             }
           </Toolbar>
         </AppBar>
