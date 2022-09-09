@@ -8,6 +8,7 @@ import {
   CloseRoundedIcon,
   Dialog,
   DialogContent,
+  DialogTitle,
   AppBar,
   Toolbar,
   IconButton,
@@ -142,8 +143,8 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
 
   const getPhotoEvent = () => {
     axios.get(`/api/profile/photo_event/${photo.eventAPIid}`)
-      .then((data) => {
-        console.log(data);
+      .then(({ data }) => {
+        setPhotoEvent(data);
       })
       .catch((err) => console.error(err));
   }
@@ -155,13 +156,13 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
   return (
     <div>
       {/* <Item > */}
-        <img
-          id='profile-photo'
-          src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
-          srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-          alt=""
-          onClick={handleOpen}
-        />
+      <img
+        id='profile-photo'
+        src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
+        srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+        alt=""
+        onClick={handleOpen}
+      />
       {/* </Item> */}
       <Dialog
         open={open}
@@ -172,44 +173,55 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           <Toolbar>
             {
               currentUserInfo?.id === photo.userId
-                ? <><IconButton onClick={openDeleter}>
-                  <Tooltip title="Delete Photo" placement="top-start">
-                    <DeleteOutlinedIcon sx={{ color: inverseMode }} />
-                  </Tooltip>
-                </IconButton><IconButton onClick={openEditor}>
-                  <Tooltip title="Edit Caption" placement="top-start">
-                    <EditOutlinedIcon sx={{ color: inverseMode }} />
-                  </Tooltip>
-                </IconButton>
-                <IconButton
-                  edge="end"
-                  color="secondary"
-                  onClick={handleClose}
-                  aria-label="close"
-                  sx={{
-                    position: 'absolute',
-                    right: 12,
-                    top: 8,
-                    color: 'secondary',
-                  }}
-                >
-                  <CloseRoundedIcon />
-                </IconButton></>
+                ? <>
+                  <IconButton onClick={openDeleter}>
+                    <Tooltip title="Delete Photo" placement="top-start">
+                      <DeleteOutlinedIcon sx={{ color: inverseMode }} />
+                    </Tooltip>
+                  </IconButton>
+                  <IconButton onClick={openEditor}>
+                    <Tooltip title="Edit Caption" placement="top-start">
+                      <EditOutlinedIcon sx={{ color: inverseMode }} />
+                    </Tooltip>
+                  </IconButton>
+                  <DialogTitle>
+                    {photoEvent.name}
+                  </DialogTitle>
+                  <IconButton
+                    edge="end"
+                    color="secondary"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                      position: 'absolute',
+                      right: 12,
+                      top: 8,
+                      color: 'secondary',
+                    }}
+                  >
+                    <CloseRoundedIcon />
+                  </IconButton>
+                </>
                 :
-                <IconButton
-                  edge="end"
-                  color="secondary"
-                  onClick={handleClose}
-                  aria-label="close"
-                  sx={{
-                    position: 'absolute',
-                    right: 12,
-                    top: 8,
-                    color: 'secondary',
-                  }}
-                >
-                  <CloseRoundedIcon />
-                </IconButton>
+                <>
+                  <DialogTitle id='dialog-title'>
+                    {photoEvent.name}
+                  </DialogTitle>
+                  <IconButton
+                    edge="end"
+                    color="secondary"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                      position: 'absolute',
+                      right: 12,
+                      top: 8,
+                      color: 'secondary',
+                    }}
+                  >
+                    <CloseRoundedIcon />
+                  </IconButton>
+                </>
             }
           </Toolbar>
         </AppBar>
