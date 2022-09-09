@@ -1,8 +1,28 @@
 #profile-photo {
   opacity: 0.7;
-  height: 150px;
+  height: 100px;
   width: 100%;
-  max-width: 150px;
+}
+
+@media only screen and (min-width: 750px) {
+  #profile-photo {
+    height: 125px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #profile-photo {
+    height: 150px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  #profile-photo {
+    height: 175px;
+    width: 100%;
+  }
 }
 
 #profile-photo:hover {
@@ -13,10 +33,10 @@
   margin: 0px;
 }
 
-/* #user-uploads {
-  display: flex;
-  justify-content: center;
-} */
+#user-uploads {
+  justify-content: space-between;
+  padding-top: 20px;
+}
 
 /* body {
     background-color: #1A2027;
@@ -69,4 +89,8 @@
 #google-button {
   display: flex;
   justify-content: center;
+}
+
+#event-name-accordian {
+  justify-content: flex-start;
 }

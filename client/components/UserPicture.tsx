@@ -183,9 +183,6 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                       <EditOutlinedIcon sx={{ color: inverseMode }} />
                     </Tooltip>
                   </IconButton>
-                  <DialogTitle>
-                    {photoEvent.name}
-                  </DialogTitle>
                   <IconButton
                     edge="end"
                     color="secondary"
@@ -200,10 +197,14 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                   >
                     <CloseRoundedIcon />
                   </IconButton>
+                  <br />
+                  <DialogTitle id='dialog-title' sx={{ color: inverseMode }}>
+                    {photoEvent.name}
+                  </DialogTitle>
                 </>
                 :
                 <>
-                  <DialogTitle id='dialog-title'>
+                  <DialogTitle id='dialog-title' sx={{ color: inverseMode }}>
                     {photoEvent.name}
                   </DialogTitle>
                   <IconButton
