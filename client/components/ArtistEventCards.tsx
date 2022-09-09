@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import moment from 'moment';
-import { useTheme } from '@mui/material/styles';
 
 import {
   Grid,
@@ -13,6 +12,9 @@ import {
   CalendarMonthIcon,
   InfoIcon,
   DescriptionIcon,
+  Button,
+  UseTheme,
+  Link
 } from '../styles/material';
 
 const Img = styled('img')({
@@ -23,13 +25,16 @@ const Img = styled('img')({
 });
 
 const EventCards = ({ events }) => {
-  const theme = useTheme();
+  const theme = UseTheme();
   const navigate = useNavigate();
   let date = events.dates.start.dateTime;
   date = moment(date).add(1, 'day').format('MMMM Do YYYY');
   const image = events.images[0].url;
   const id = events.id;
   const { name, url, info } = events;
+
+  const iconColors = theme.palette.secondary.contrastText;
+  const inverseMode = theme.palette.secondary.main;
 
   const getDetails = (id:string) => {
     navigate(`/details/?id=${id}`);
@@ -66,22 +71,23 @@ const EventCards = ({ events }) => {
               <Typography variant='h6' paragraph>{name}</Typography>
             </Grid>
             <Grid item>
-              <CalendarMonthIcon sx={{ color: theme.palette.primary.contrastText }}/>
+              <CalendarMonthIcon sx={{ color: theme.palette.primary.contrastText,mr:"5px" }}/>
               {date}
             </Grid>
             {info ? (
               <Grid item>
-                <DescriptionIcon sx={{ color: theme.palette.primary.contrastText }}/>
+                <DescriptionIcon sx={{ color: theme.palette.primary.contrastText, mr:"5px" }}/>
                 {info}
               </Grid>
             ) : (
               <Grid item>
-                <DescriptionIcon sx={{ color: theme.palette.primary.contrastText }}/> No event details
+                <DescriptionIcon sx={{ color: theme.palette.primary.contrastText, mr:"5px" }}/> No event details
               </Grid>
             )}
             <Grid item>
-              <LocalActivityIcon sx={{ color: theme.palette.primary.contrastText }}/>
-              {url}
+              <Link href={url} style={{ textDecoration: 'none' }}>
+            <Button variant='contained' sx={{ bgColor: inverseMode }}><LocalActivityIcon sx={{ color: inverseMode, mr:"5px"}} /> Buy Tickets</Button>
+            </Link>
             </Grid>
           </Grid>
         </Grid>
