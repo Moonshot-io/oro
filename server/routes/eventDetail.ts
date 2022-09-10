@@ -95,7 +95,6 @@ eventDetailsRouter.get('/', (req, res) => {
 });
 
 eventDetailsRouter.post('/pins', (req, res) => {
-  console.log('Test');
   const pinObj = req.body;
   prisma.userEvents
     .create({
