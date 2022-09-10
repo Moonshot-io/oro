@@ -90,4 +90,13 @@ profileRouter.put('/:_id', (req, _res) => {
     .catch((err) => console.error(err));
 });
 
+profileRouter.get('/photo_event/:_id', (req, res) => {
+  const { _id } = req.params;
+  axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=${TICKETMASTER_API_KEY}&id=${_id}`)
+    .then(({data}) => {
+      res.status(200).send(data._embedded.events[0]);
+    })
+    .catch(err => console.error(err));
+})
+
 export default profileRouter;
