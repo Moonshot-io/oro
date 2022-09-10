@@ -359,6 +359,15 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   padding-bottom: 2px;
 }
 
+.notificationIMG {
+  max-width: 100%;
+  max-height: 50px;
+}
+
+.notificationBody {
+  margin: auto;
+}
+
 `;
 interface Props {
   children?: ReactNode
