@@ -95,8 +95,8 @@ const EventCardDetails = ({event}) => {
   };
 
   const navigate = useNavigate();
-  let date = event.eventDate;
-  date = moment(date).add(1, 'day').format('MMMM Do YYYY');
+  // let date = event.eventDate;
+  // date = moment(date).add(1, 'day').format('MMMM Do YYYY');
   const image = event.artistInfo[0].artistImages[1].url;
 
   const getDetails = () => {
@@ -110,7 +110,7 @@ const EventCardDetails = ({event}) => {
   return (
     <div>
       <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
-      <Typography variant="h6" pt="20px">{date}</Typography>
+      <Typography variant="h6" pt="20px">{moment(event.eventDate).add(1, 'day').format('MMMM Do YYYY')}</Typography>
         <div><CardHeader style={{display: "block", overflow: "hidden", textOverflow: "ellipsis", width: '90%'}}
           title={<Typography variant="h3" noWrap>
             {event.eventName}

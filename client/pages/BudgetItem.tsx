@@ -19,7 +19,7 @@ function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-  const inputStyle = {
+  const inputstyle = {
     style: {
       WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
       "&:-webkit-autofill": {
@@ -36,7 +36,7 @@ function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
       <Grid item xs={12}>
         <CssTextField
           InputLabelProps={fontColor}
-          inputProps={inputStyle}
+          inputProps={inputstyle}
           color='secondary'
           label={`Enter Your ${label} Budget`}
           variant='outlined'

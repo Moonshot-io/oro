@@ -91,7 +91,7 @@ const EventListings: React.FC = () => {
   }
   }
 
-  const inputStyle = {
+  const inputstyle = {
     style: {
       WebkitBoxShadow: `0 0 0 1000px ${iconColors} inset`,
       "&:-webkit-autofill": {
@@ -111,7 +111,7 @@ if(eventsExist){
       <Box>
       <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
   >
-      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputStyle}
+      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputstyle}
           sx={{ mb: '15px'}} id="keywordSearch"
           color="secondary" label="search events" type='text'
           onChange={ handleChange } value={keyword} onKeyDown={enterClick}
@@ -150,7 +150,7 @@ if(eventsExist){
             <Box>
             <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
         >
-            <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputStyle}
+            <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputstyle}
                 sx={{ mb: '15px'}} id="keywordSearch"
                 color="secondary" label="search events" type='text'
                 onChange={ handleChange } value={keyword} onKeyDown={enterClick}
