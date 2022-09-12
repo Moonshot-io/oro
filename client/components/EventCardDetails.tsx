@@ -59,7 +59,17 @@ const EventCardDetails = ({event}) => {
   const postEvent = () => {
     axios.post('/api/events/list/pins', {
       userId: currentUserInfo?.id,
-      eventAPIid: event.eventId
+      eventAPIid: event.eventId,
+      name: event.eventName,
+      date: event.eventDate,
+      image: event.eventImg,
+      venue: event.venueInfo[0].venueName,
+      address: event.venueInfo[0].address.line1,
+      city: event.venueInfo[0].city,
+      state: event.venueInfo[0].state,
+      postalCode: event.venueInfo[0].postalCode,
+      startDate: event.startDate,
+      endDate: event.endDate
     })
       .then(getPins)
       .catch(err => console.error('POST ERROR', err));
