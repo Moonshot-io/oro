@@ -359,6 +359,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   padding-bottom: 2px;
 }
 
+.css-11lq3yg-MuiGrid-root {
+  padding: 10px 12.5px 0px 0px;
+}
+
 `;
 interface Props {
   children?: ReactNode
