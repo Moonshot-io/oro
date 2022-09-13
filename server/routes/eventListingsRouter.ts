@@ -10,15 +10,18 @@ eventListingsRouter.get('/list', (req, res) => {
   axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=20&classificationName=[music, concert, festival]&keyword=${keyword}&apikey=${process.env.TICKETMASTER_API_KEY}`)
     .then((responseObj) => {
       if(responseObj.data._embedded){
-      const events = responseObj.data._embedded.events.filter((event) => {
+      const events = responseObj.data._embedded.events.filter((event: { _embedded: any; }) => {
         return event._embedded;
-      }).map((event) => {
+      }).map((event: { dates: { start: { dateTime: any; }; }; id: any; name: any; images: { url: any; }[]; sales: { public: { startDateTime: any; endDateTime: any; }; }; _embedded: { attractions: any[]; venues: any[]; }; }) => {
         const newDataObj = {
           eventDate: event.dates.start.dateTime,
           eventId: event.id,
-          eventName: event.name
+          eventName: event.name,
+          eventImg: event.images[0].url,
+          startDate: event.sales.public.startDateTime,
+          endDate: event.sales.public.endDateTime,
         };
-        const artistInfo = event._embedded.attractions.map(attraction => {
+        const artistInfo = event._embedded.attractions.map((attraction: { name: any; id: any; images: any; }) => {
           const artistInfo = {
             artistName: attraction.name,
             artistId: attraction.id,
@@ -27,7 +30,7 @@ eventListingsRouter.get('/list', (req, res) => {
           return artistInfo;
         });
 
-        const venueInfo = event._embedded.venues.map(venue => {
+        const venueInfo = event._embedded.venues.map((venue: { id: any; name: any; address: any; city: { name: any; }; stateCode: any; country: { name: any; }; postalCode: any; location: any; images: any; state: { name: null; }; }) => {
           const venueInfo = {
             venueId: venue.id,
             venueName: venue.name,
