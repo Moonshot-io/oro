@@ -359,15 +359,9 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   padding-bottom: 2px;
 }
 
-<<<<<<< HEAD
 .css-11lq3yg-MuiGrid-root {
   padding: 10px 12.5px 0px 0px;
 }
-=======
-
-.css-11lq3yg-MuiGrid-root {
-  padding: 10px 12.5px 0px 0px;
->>>>>>> b26add3984d2896e5d8dfb2e729b9d6079a0d7ca
 
 .notificationIMG {
   max-width: 100%;
