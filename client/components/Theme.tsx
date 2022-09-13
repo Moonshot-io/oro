@@ -235,13 +235,6 @@ body {
 }
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-}
-
 .nav-icons {
   margin-right: 10px;
   color: ${(props) => props.theme.palette.primary.contrastText};
@@ -396,18 +389,6 @@ a:-webkit-any-link {
 margin-top: 20px;
 }
 
-.css-9425fu-MuiOutlinedInput-notchedOutline {
-  border-color: ${(props) => props.theme.palette.primary.main};
-}
-
-.css-1xc75p7-MuiFormLabel-root-MuiInputLabel-root {
-  color: ${(props) => props.theme.palette.primary.main};
-}
-
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-  color: ${(props) => props.theme.palette.primary.contrastText};
-}
-
 .css-v2i77y-MuiInputBase-input-MuiFilledInput-input {
   background: ${(props) => props.theme.palette.primary.main};
 }
@@ -422,6 +403,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1betqn-MuiAccordionSummary-content {
   justify-content: space-between;
+}
+
+.icon-buttons {
+  padding: 5px;
 }
 
 .css-1q30djv-MuiListItem-root {

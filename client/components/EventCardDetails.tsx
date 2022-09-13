@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, IconButton, Button } from '../styles/material';
+import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, IconButton, Button, ColorButton } from '../styles/material';
 import axios from 'axios';
 import { IconButtonProps } from '@mui/material/IconButton';
 
@@ -112,18 +112,18 @@ const EventCardDetails = ({event}) => {
         <CardContent>
           <Grid container spacing={2} mt="10px">
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={handleClick} ><IconButton aria-label="add to favorites">
+              <Button variant="contained" onClick={handleClick}>
                 <PushPinIcon
+                className="icon-buttons"
                   id={event.eventId}
                   htmlColor={pins.includes(event.eventId) ? '#1A76D2' : '#C1C1C1'}
                   />
-              </IconButton> {pins.includes(event.eventId) ? 'saved' : 'save'}
+              {pins.includes(event.eventId) ? 'saved' : 'save'}
               </Button>
             </Grid>
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={getDetails}><IconButton aria-label="settings">
-                <InfoIcon  />
-              </IconButton>
+              <Button variant="contained" onClick={getDetails} sx={{ bgColor: '#a352ff' }}>
+                <InfoIcon  className="icon-buttons" />
                 Info
               </Button>
             </Grid>

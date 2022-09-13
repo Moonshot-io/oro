@@ -120,10 +120,10 @@ export const Item = Styled(paper)(({ theme }) => ({
 export const TextField = textField;
 export const CssTextField = Styled(TextField)({
   '& label.Mui-focused': {
-    color: '#9B27B0',
+    color: '#a352ff',
   },
   '& .MuiInput-underline:after': {
-    borderBottomColor: '#9B27B0',
+    borderBottomColor: '#a352ff',
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
@@ -133,11 +133,18 @@ export const CssTextField = Styled(TextField)({
       borderColor: '#BDBDBD',
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#9B27B0',
+      borderColor: '#a352ff',
     },
   },
 });
-
+export	const	Button	=	button;
+export const ColorButton = Styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText('#a352ff'),
+  backgroundColor: '#a352ff',
+  '&:hover': {
+    backgroundColor: '#a352ff',
+  },
+}));
 
 // export styled;
 export const GradeIcon = gradeIcon;
@@ -158,7 +165,6 @@ export const OutlinedInput = outlinedInput;
 export const Fab = fab;
 export	const	Box	=	box;
 export	const	Drawer	=	drawer;
-export	const	Button	=	button;
 export	const	List	=	list;
 export	const	Divider	=	divider;
 export	const	ListItem	=	listitem;

@@ -13,7 +13,7 @@ interface ExpandMoreProps extends IconButtonProps {
 }
 
 const fontColor = {
-  style: { color: '#9B27B0' }
+  style: { color: '#a352ff' }
 };
 
 const ColorButton = Styled(Button)(({ theme }) => ({
