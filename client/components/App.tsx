@@ -24,11 +24,14 @@ import { EventContextProvider } from '../context/EventContext';
 import { Container } from '../components/Container';
 import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const App: React.FC = () => {
   // update React.FC, .FC deprecated?
   // const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+
   const { currentUserInfo } = userContext;
   const location = useLocation();
 
@@ -45,7 +48,13 @@ const App: React.FC = () => {
         }
       })
         .then((notifData) => {
-          setNotifications([...notifData.data]);
+          console.log(notifData);
+          if (notifData.data.length) {
+            setNotifications([...notifData.data]);
+            // navigate('/notifications');
+          } else {
+            setNotifications([]);
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -78,7 +87,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/notifications' element={<NotificationsFeed key={location.key} notif={notifications}/>} />
+            <Route path='/notifications' element={<NotificationsFeed key={location.key} getNotifications= {getNotifications} notif={notifications}/>} />
             <Route path='/backpack' element={<BackPack />} />
             <Route path='/eventListings' element={<EventListings />} />
             <Route path='/eventFeed' element={<EventFeed />} />
