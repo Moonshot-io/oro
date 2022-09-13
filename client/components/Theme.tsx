@@ -407,6 +407,7 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .icon-buttons {
   padding: 5px;
+  color: #1A2027;
 }
 
 .css-1q30djv-MuiListItem-root {

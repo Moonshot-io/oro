@@ -6,21 +6,6 @@ import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHe
 import axios from 'axios';
 import { IconButtonProps } from '@mui/material/IconButton';
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = Styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
 
 const Img = Styled('img')({
   margin: 'auto',
@@ -73,7 +58,8 @@ const EventCardDetails = ({event}) => {
       .catch(err => console.error('axios delete error', err));
   };
 
-  const handleClick = () => {
+  const handleClick = (eventId: string) => {
+    console.log(eventId);
     if (pins.includes(event.eventId)) {
       return deleteEvent();
     } else if (pins == ['foo', 'bar']) {
@@ -112,7 +98,7 @@ const EventCardDetails = ({event}) => {
         <CardContent>
           <Grid container spacing={2} mt="10px">
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={handleClick}>
+              <Button variant="contained" onClick={()=>{handleClick(event.eventId)} sx={{ backgroundColor: '#a352ff', color: '#1A2027' }}>
                 <PushPinIcon
                 className="icon-buttons"
                   id={event.eventId}
@@ -122,7 +108,7 @@ const EventCardDetails = ({event}) => {
               </Button>
             </Grid>
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={getDetails} sx={{ bgColor: '#a352ff' }}>
+              <Button variant="contained" onClick={getDetails} sx={{ backgroundColor: '#a352ff', color: '#1A2027' }}>
                 <InfoIcon  className="icon-buttons" />
                 Info
               </Button>
