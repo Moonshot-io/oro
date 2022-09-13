@@ -25,6 +25,16 @@ model UserEvents {
   user         Users          @relation(fields: [userId], references: [id])
   userId       String
   eventAPIid   String
+  name         String
+  date         String
+  image        String
+  venue        String
+  address      String
+  city         String
+  state        String
+  postalCode   String
+  startDate    String
+  endDate      String
   Budget       Budget?         @relation(fields: [budgetId], references: [id])
   budgetId     Int?
   EventBudgets EventBudgets[]
