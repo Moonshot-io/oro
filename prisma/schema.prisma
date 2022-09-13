@@ -35,7 +35,7 @@ model UserEvents {
   postalCode   String
   startDate    String?
   endDate      String?
-  Budget       Budget?         @relation(fields: [budgetId], references: [id])
+  Budget       Budget?        @relation(fields: [budgetId], references: [id])
   budgetId     Int?
   EventBudgets EventBudgets[]
 }
