@@ -4,7 +4,18 @@ import axios from 'axios';
 import Notification from '../components/Notification';
 import {Button, Typography, UseTheme} from '../styles/material';
 
-const NotificationsFeed: React.FC = ({notif}) => {
+interface NotificationProps {
+  notif: {
+    commentId: number;
+    created_at: string;
+    id: number;
+    read: boolean;
+    type: string;
+    userId: string;
+  }
+}
+
+const NotificationsFeed: React.FC<NotificationProps> = ({notif}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = UseTheme();
@@ -13,7 +24,7 @@ const NotificationsFeed: React.FC = ({notif}) => {
 
 
   useEffect(() => {
-    setNotifications([...notif]);
+    setNotifications(notif);
     // console.log(notif);
     // getNotifications();
   }, []);
@@ -26,19 +37,19 @@ const NotificationsFeed: React.FC = ({notif}) => {
   }, [notifications]);
 
 
-  const getNotifications = (): void => {
-    axios.get('/api/notifications', {
-      params: {
-        userId: currentUserInfo?.id
-      }
-    })
-      .then((notificationsObj) => {
-        setNotifications(notificationsObj.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const getNotifications = (): void => {
+  //   axios.get('/api/notifications', {
+  //     params: {
+  //       userId: currentUserInfo?.id
+  //     }
+  //   })
+  //     .then((notificationsObj) => {
+  //       setNotifications(notificationsObj.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   const clearNotifications = (): void => {
     axios.delete('/api/notifications/all', {
@@ -56,7 +67,7 @@ const NotificationsFeed: React.FC = ({notif}) => {
       <Typography
     variant="h2">Notifications</Typography>
       <Button sx={{ bgcolor: inverseMode }} onClick={clearNotifications}>Clear Notifications</Button>
-      <div>
+      <div >
         {notifications.map((notif, i) => {
           return (
             <div key={i}>
