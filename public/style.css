@@ -62,4 +62,13 @@ body {
   display: flex;
   justify-content: center;
 }
-*/
+
+#event-name-accordian {
+  justify-content: flex-start;
+}
+
+#dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -67,7 +67,7 @@ function DetailCard({ detail }): JSX.Element {
 
   const handleClick = () => {
     if (pins.includes(detail.id)) {
-      return deleteEvent();
+      return postEvent();
     } else if (pins == ['foo', 'bar']) {
       setPins(detail.id);
       return postEvent();
@@ -78,31 +78,31 @@ function DetailCard({ detail }): JSX.Element {
 
   console.log('event detail', detail);
   return (
-    <div className="page-body">
-    <Card sx={{ maxWidth: 345 }}>
-      <CardContent>
-        <Typography
-          color='text.secondary'
-          gutterBottom
-          variant='h5'
-          component='div'
-        >
-          {moment(detail?.dates?.localDate).format('LL')}
-        </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          {detail?.promoter?.name}
-          {detail?.sales?.public?.startDateTime}
-          {detail?.sales?.public?.endDateTime}
-          {detail?.venues?.address?.line1}
-          {detail?.venues?.city?.name}
-          {detail?.venues?.state?.name}
-          {detail?.venues?.postalCode}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button variant='contained' onClick={handleClick}></Button>
-      </CardActions>
-    </Card>
+    <div className='page-body'>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardContent>
+          <Typography
+            color='text.secondary'
+            gutterBottom
+            variant='h5'
+            component='div'
+          >
+            {moment(detail?.dates?.localDate).format('LL')}
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.promoter?.name}
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.venues?.address?.line1},{detail?.venues?.city?.name},
+            {detail?.venues?.state?.name},{detail?.venues?.postalCode}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button variant='contained' onClick={handleClick}>
+            Save
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   );
 }

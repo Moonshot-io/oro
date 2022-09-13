@@ -103,7 +103,6 @@ const EventFeed: React.FC = () => {
 
 
   const handleFileUpload = (): void => {
-
     const formData = new FormData();
     formData.append('myFile', photo, photo.name);
 
@@ -189,9 +188,9 @@ const EventFeed: React.FC = () => {
         <Dialog open={dialogOpen}>
             <img width='220px' height='auto' src={`${previewSource}`}/>
 
-            <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
-              <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
-            </Typography>
+            {/* <Typography variant='body2' sx={{ bgcolor: inverseMode }}> */}
+              <OutlinedInput sx={{ bgcolor: inverseMode }} fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
+            {/* </Typography> */}
 
             {/* <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}>UPLOAD</Button> */}
             <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}>cancel</Button>
@@ -237,7 +236,7 @@ const EventFeed: React.FC = () => {
           <div>
             {feedPhotos.map((photo, i) => {
             return (
-              <div margin-top="30px">
+              <div margin-top="30px" key={i}>
                 <FeedPhoto deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
               </div>
             );

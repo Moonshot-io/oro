@@ -90,6 +90,7 @@ import sortIcon from '@mui/icons-material/Sort';
 import select, { SelectChangeEvent } from '@mui/material/Select';
 import inputAdornment from '@mui/material/InputAdornment';
 import attachMoneyIcon from '@mui/icons-material/AttachMoney';
+import moreVertIcon from '@mui/icons-material/MoreVert';
 
 export const AttachMoneyIcon = attachMoneyIcon;
 export const InputAdornment = inputAdornment;
@@ -218,3 +219,4 @@ export const Toolbar = toolbar;
 export const Slide = slide;
 export const Avatar = avatar;
 export const Tooltip = tooltip;
+export const MoreVertIcon = moreVertIcon;

@@ -199,7 +199,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
 
   };
 
-  const inputStyle = {
+  const inputstyle = {
     style: {
       WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
       "&:-webkit-autofill": {
@@ -269,7 +269,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
             </span>
 
             <div>
-              {editor && <CssTextField inputProps={inputStyle} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} value={captionText} sx={{bgcolor: inverseMode }} onChange={handleEdit}/>}
+              {editor && <CssTextField inputProps={inputstyle} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} value={captionText} sx={{bgcolor: inverseMode }} onChange={handleEdit}/>}
             </div>
             </Typography>
 

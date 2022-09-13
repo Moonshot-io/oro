@@ -44,7 +44,17 @@ const EventCardDetails = ({event}) => {
   const postEvent = () => {
     axios.post('/api/events/list/pins', {
       userId: currentUserInfo?.id,
-      eventAPIid: event.eventId
+      eventAPIid: event.eventId,
+      name: event.eventName,
+      date: event.eventDate,
+      image: event.eventImg,
+      venue: event.venueInfo[0].venueName,
+      address: event.venueInfo[0].address.line1,
+      city: event.venueInfo[0].city,
+      state: event.venueInfo[0].state,
+      postalCode: event.venueInfo[0].postalCode,
+      startDate: event.startDate,
+      endDate: event.endDate
     })
       .then(getPins)
       .catch(err => console.error('POST ERROR', err));
@@ -71,8 +81,8 @@ const EventCardDetails = ({event}) => {
   };
 
   const navigate = useNavigate();
-  let date = event.eventDate;
-  date = moment(date).add(1, 'day').format('MMMM Do YYYY');
+  // let date = event.eventDate;
+  // date = moment(date).add(1, 'day').format('MMMM Do YYYY');
   const image = event.artistInfo[0].artistImages[1].url;
 
   const getDetails = () => {
@@ -86,7 +96,7 @@ const EventCardDetails = ({event}) => {
   return (
     <div>
       <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
-      <Typography variant="h6" pt="20px">{date}</Typography>
+      <Typography variant="h6" pt="20px">{moment(event.eventDate).add(1, 'day').format('MMMM Do YYYY')}</Typography>
         <div><CardHeader style={{display: "block", overflow: "hidden", textOverflow: "ellipsis", width: '90%'}}
           title={<Typography variant="h3" noWrap>
             {event.eventName}

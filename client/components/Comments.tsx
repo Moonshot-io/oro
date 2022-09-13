@@ -75,7 +75,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
       .catch((err) => console.error(err));
   };
 
-  const inputStyle = {
+  const inputstyle = {
     style: {
       WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
       "&:-webkit-autofill": {
@@ -99,7 +99,7 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
         );
       })}
 
-      <CssTextField placeholder='add comment' onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} multiline={true} inputProps={{inputStyle, maxLength: 150}} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
+      <CssTextField placeholder='add comment' onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} multiline={true} inputProps={{inputstyle, maxLength: 150}} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
       <Fab variant='extended' type='submit' onClick={handleSend}
         sx={{bgcolor: iconColors, ml: '20px', mt: '15px'}}><SendIcon sx={{ color: inverseMode }}/></Fab>
     </div>
