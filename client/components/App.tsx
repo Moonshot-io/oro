@@ -35,7 +35,7 @@ const App: React.FC = () => {
   const { currentUserInfo } = userContext;
   const location = useLocation();
 
-  const [notifications, setNotifications] = React.useState([]);
+  const [notifications, setNotifications] = React.useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
   const [profilePic, setProfilePic] = useState('');
 
   const getNotifications = () => {
@@ -48,13 +48,12 @@ const App: React.FC = () => {
         }
       })
         .then((notifData) => {
-          console.log(notifData);
-          if (notifData.data.length) {
+          // console.log(notifData);
+          // if (notifData.data.length) {
             setNotifications([...notifData.data]);
-            // navigate('/notifications');
-          } else {
-            setNotifications([]);
-          }
+          // } else {
+          //   setNotifications([]);
+          // }
         })
         .catch((err) => console.error(err));
     }

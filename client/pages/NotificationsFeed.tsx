@@ -26,11 +26,11 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
   const location = useLocation();
 
   useEffect(() => {
-    if (notif.length) {
+    // if (notif.length) {
       setNotifications([...notif]);
-    } else {
-      setNotifications([]);
-    }
+    // } else {
+    //   setNotifications([]);
+    // }
     // console.log(notif);
     // getNotifications();
   }, []);

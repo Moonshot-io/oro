@@ -45,6 +45,8 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
   const [editor, setEditor] = useState(false);
   const [deleterOpen, setDeleterOpen] = useState(false);
 
+  const [notification, setNotification] = useState<{commentId: number; created_at: string; id: number; read: boolean; type: string; userId: string;} | null>(null)
+
   const getPhotoEvent = () => {
     if (photo) {
       axios.get(`/api/profile/photo_event/${photo.eventAPIid}`)
@@ -76,6 +78,18 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
     getPhotoEvent();
   }, [photo])
 
+  useEffect(() => {
+    if (notification?.read === false) {
+      setRead(false);
+    }
+    getPerson();
+    getType();
+  }, [notification])
+
+    useEffect(() => {
+      setNotification(notif);
+    }, []);
+
   const handleEdit = (e) => {
     setCaptionText(e.target.value);
   };
@@ -84,7 +98,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
   const getPerson = (): void => {
     axios.get('/api/comments/comment', {
       params: {
-        commentId: notif.commentId,
+        commentId: notification?.commentId,
       }
     })
       .then((commentData) => {
@@ -100,20 +114,11 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
   };
 
   const getType = (): void => {
-    if (notif.type === 'comment') {
+    if (notification?.type === 'comment') {
       setText(' commented on your photo');
     }
   };
 
-  useEffect(() => {
-    if (notif.read === false) {
-      setRead(false);
-    }
-    console.log('test');
-    getNotifications();
-    getPerson();
-    getType();
-  }, []);
 
   const handleOpen = (): void => {
     setRead(true);
@@ -137,8 +142,8 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
     setDeleterOpen(true);
   };
 
-  const deletePhoto = () => {
-    axios.delete('/api/eventFeed', {
+  const deletePhoto = async () => {
+    await axios.delete('/api/eventFeed', {
       data: {
         photoUrl: photo.photoUrl,
       }
@@ -154,6 +159,8 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
           })
           .then(() => {
             getNotifications();
+          })
+          .then(() => {
             navigate('/notifications');
           })
           .catch((err) => console.error(err));
@@ -192,7 +199,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
 
       } */}
       {
-        photo && person &&
+        photo && person && notification?.id &&
         
         <Box >
       <Dialog
@@ -296,8 +303,8 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
           </Box>
         </DialogContent>
       </Dialog>
-      </Box>
-      }
+
+      
 
           <Paper onClick={handleOpen} sx={{m: 'auto', marginTop: '5px', bgcolor: inverseMode, color: iconColors}}>
             <Grid container sx={{m: 'auto', mr: '10px'}}>
@@ -306,7 +313,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
               </Grid>
 
               <Grid item xs={8} sx={{m: 'auto'}}>
-                <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>{!read && <b>*new*</b>} {person}{text} {moment(notif.created_at).fromNow()}</Typography>
+                <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>{!read && <b>*new*</b>} {person}{text} {moment(notification?.created_at).fromNow()}</Typography>
               </Grid>
 
               <Grid item xs={2} sx={{m: 'auto', p: 1}}>
@@ -314,6 +321,8 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
               </Grid>
             </Grid>
           </Paper>
+          </Box>
+          }
     </div>
   );
 };

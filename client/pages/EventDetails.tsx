@@ -160,7 +160,7 @@ const EventDetails: React.FC = () => {
             </Button>
           </Grid>
           <Grid>
-            <Button sx={{ bgcolor: iconColors }} onClick={getDetails}>
+            <Button sx={{ bgcolor: inverseMode }} onClick={getDetails}>
               Event Feed
             </Button>
           </Grid>
