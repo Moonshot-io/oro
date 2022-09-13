@@ -76,7 +76,7 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
       <div >
         {notifications.map((notif, i) => {
           return (
-            <div key={location.key}>
+            <div key={i}>
 
               <Notification key={location.key} getNotifications= {getNotifications} notif={notif}/>
             </div>
