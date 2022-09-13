@@ -1,13 +1,41 @@
-/* #profile-photo {
-  opacity: 0.5;
+#profile-photo {
+  opacity: 0.7;
+  height: 100px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 750px) {
+  #profile-photo {
+    height: 125px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #profile-photo {
+    height: 150px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  #profile-photo {
+    height: 175px;
+    width: 100%;
+  }
 }
 
 #profile-photo:hover {
   opacity: 1.0;
-} */
+}
 
 #photo-dialog {
   margin: 0px;
+}
+
+#user-uploads {
+  justify-content: space-between;
+  padding-top: 20px;
 }
 
 /* body {
@@ -23,7 +51,7 @@
   float:right;
 }
 
-#social-media {
+.social-media {
   justify-content: center;
 }
 
@@ -43,7 +71,6 @@
   font-weight: 900;
 }
 
-
 .delete {
   margin: 0px 0px 0px 5px;
 }
@@ -62,4 +89,14 @@
 #google-button {
   display: flex;
   justify-content: center;
+}
+
+#event-name-accordian {
+  justify-content: flex-start;
+}
+
+#dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

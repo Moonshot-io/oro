@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import { useLocation } from "react-router-dom";
 
 import Profile from '../pages/Profile';
 import Home from '../pages/Home';
@@ -29,6 +30,7 @@ const App: React.FC = () => {
   // const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
   const { currentUserInfo } = userContext;
+  const location = useLocation();
 
   const [notifications, setNotifications] = React.useState([]);
   const [profilePic, setProfilePic] = useState('');
@@ -43,7 +45,7 @@ const App: React.FC = () => {
         }
       })
         .then((notifData) => {
-          setNotifications(notifData.data);
+          setNotifications([...notifData.data]);
         })
         .catch((err) => console.error(err));
     }
@@ -76,7 +78,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/notifications' element={<NotificationsFeed />} />
+            <Route path='/notifications' element={<NotificationsFeed key={location.key} notif={notifications}/>} />
             <Route path='/backpack' element={<BackPack />} />
             <Route path='/eventListings' element={<EventListings />} />
             <Route path='/eventFeed' element={<EventFeed />} />

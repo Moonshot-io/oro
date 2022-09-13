@@ -39,30 +39,16 @@ import GoogleButton from 'react-google-button';
 interface eventType {
   name: string;
   id: string;
-  dates: {
-    start: {
-      localDate: string;
-    }
-  };
-  images: { url: string; }[];
-  _embedded: {
-    venues: {
-      name: string;
-      address: {
-        line1: string;
-      };
-      city: {
-        name: string;
-      };
-      postalCode: string;
-    }[]
-  };
-  sales: {
-    public: {
-      startDateTime: string;
-      endDateTime: string;
-    }
-  }
+  eventAPIid: string;
+  date: string;
+  image: string;
+  venue: string;
+  address: string;
+  city: string;
+  state: string; 
+  postalCode: string; 
+  startDate: string; 
+  endDate: string;
 }
 
 const Accordion = styled((props) => (
@@ -102,7 +88,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo } = useContext(UserContext);
+  const { currentUserInfo, getCurrentUser } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -184,6 +170,7 @@ const Profile = () => {
       })
       .then(() => setOpenSnack(true))
       .then(() => handleClose())
+      .then(() => getCurrentUser())
       .catch((err) => console.error(err));
   };
 
@@ -290,7 +277,7 @@ const Profile = () => {
         </div>
         <div>
           <Box>
-            <Grid container spacing={2} id='social-media'>
+            <Grid container spacing={2} className='social-media'>
               {
                 currentUserInfo.fbId
                   ?
@@ -346,14 +333,14 @@ const Profile = () => {
                   >
                     <Typography>{event.name}</Typography>
                     <Typography>
-                      {moment(event.dates.start.localDate).format('ll')}
+                      {moment(event.date).format('ll')}
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{ bgcolor: inverseMode }}>
                     <CardMedia
                       component='img'
                       height='194'
-                      image={event.images[0].url}
+                      image={event.image}
                       alt={event.name}
                     />
                     <List>
@@ -362,7 +349,7 @@ const Profile = () => {
                         &nbsp;
                       </ListItem>
                       <ListItem>
-                        {event._embedded.venues[0].name}
+                        {event.venue}
                       </ListItem>
                       <Divider />
                       <ListItem>
@@ -370,9 +357,10 @@ const Profile = () => {
                         &nbsp;
                       </ListItem>
                       <ListItem>
-                        {event._embedded.venues[0].address.line1},{' '}
-                        {event._embedded.venues[0].city.name},{' '}
-                        {event._embedded.venues[0].postalCode}
+                        {event.address},{' '}
+                        {event.city},{' '}
+                        {event.state},{' '}
+                        {event.postalCode}
                       </ListItem>
                       <Divider />
                       <ListItem>
@@ -380,7 +368,7 @@ const Profile = () => {
                         &nbsp;
                       </ListItem>
                       <ListItem>
-                        {moment(event.sales.public.startDateTime).format('llll')}
+                        {moment(event.startDate).format('llll')}
                       </ListItem>
                       <Divider />
                       <ListItem>
@@ -388,11 +376,11 @@ const Profile = () => {
                         &nbsp;
                       </ListItem>
                       <ListItem>
-                        {moment(event.sales.public.endDateTime).format('llll')}
+                        {moment(event.endDate).format('llll')}
                       </ListItem>
                       <Button
                         sx={{ bgcolor: iconColors, color: inverseMode }}
-                        onClick={() => navigate(`/details/?id=${event.id}`)}
+                        onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
                       >
                         More Details
                       </Button>

@@ -116,7 +116,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           {
             currentUserInfo?.id === comment.userId
             ? <Link to='/profile'>
-              <Avatar src={profilePic} />
+              <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic} />
             </Link>
             : <Link to={`/user/?id=${comment.userId}`}>
                 <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic} />
@@ -136,27 +136,27 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
             </Dialog>
             {!editor &&
               <Typography textAlign='left' sx={mode === 'dark' ? {color: iconColors} : {color: iconColors}}>
-                 <div className='comment'>
+                 <span className='comment'>
                   {comment.comment}
                   {comment.edited && ' (edited)'}
-                 </div>
+                 </span>
               </Typography>}
             <Typography variant='body2' sx={{ bgcolor: '#dbdbdb' }}>
               {editor && <OutlinedInput fullWidth={true} inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: iconColors}} value={commentText} onChange={handleEdit}/>}
             </Typography>
-            <div>
+            <span>
               {editor && <Button  fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>confirm</Button>}
               {editor && <Button fullWidth={true} variant='contained' size='small' sx={{bgcolor: iconColors }} onClick={closeEditor}>cancel</Button>}
-            </div>
+            </span>
           </div>
             <Typography sx={{ color: iconColors, fontSize: '12px'}}>
             {!editor &&
-              <div>
+              <span>
                 <span className='commentTime'>
                   {moment(comment.created_at).calendar()}
                 </span>
                 {currentUserInfo?.id === comment.userId &&
-                <div className='editDelete'>
+                <span className='editDelete'>
                   <span className='edit' onClick={openEditor}>
                     edit
                   </span>
@@ -168,10 +168,10 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
                   <span className='delete' onClick={openDeleter}>
                     delete
                   </span>
-                </div>
+                </span>
                   }
 
-              </div>
+              </span>
                   }
                 </Typography>
         {/* {getEditDeleteOptions()} */}

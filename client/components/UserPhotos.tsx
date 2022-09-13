@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageList } from '../styles/material';
+import { ImageList, Grid } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import UserPicture from './UserPicture';
 
@@ -21,15 +21,21 @@ const UserPhotos: React.FC<UserPhotosProps> = ({ photos, getUserPhotos }) => {
   const inverseMode = theme.palette.secondary.main;
 
   return (
-    <div>
-      <ImageList sx={{ margin: '8px' }} cols={3} rowHeight={128.67}>
+      <Grid 
+        container 
+        id='user-uploads'
+        spacing={{ xs: .5, md: 2 }}
+      >
         {photos.map((photo, index) => (
-          <div key={index}>
+          <Grid 
+            item 
+            key={index}
+            xs={3.8} md={3}
+            >
             <UserPicture photo={photo} getUserPhotos={getUserPhotos} />
-          </div>
+          </Grid>
         ))}
-      </ImageList>
-    </div>
+      </Grid>
   );
 };
 
