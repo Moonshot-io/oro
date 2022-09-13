@@ -25,7 +25,7 @@ const Home: React.FC = () => {
     <Typography
     variant="h2"
     align="left"
-    className='home-text-box-box home-body home-text'>What is Vibe Society?</Typography>
+    className='home-text-box home-body home-text'>What is Vibe Society?</Typography>
     <Typography
     variant="body1"
     align="left"

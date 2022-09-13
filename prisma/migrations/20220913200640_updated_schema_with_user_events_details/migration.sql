@@ -14,6 +14,17 @@ CREATE TABLE "UserEvents" (
     "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
     "eventAPIid" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "date" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "venue" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "state" TEXT NOT NULL,
+    "postalCode" TEXT NOT NULL,
+    "startDate" TEXT NOT NULL,
+    "endDate" TEXT NOT NULL,
+    "budgetId" INTEGER,
 
     CONSTRAINT "UserEvents_pkey" PRIMARY KEY ("id")
 );
@@ -104,6 +115,7 @@ CREATE TABLE "Budget" (
     "Parking" INTEGER NOT NULL,
     "Merch" INTEGER NOT NULL,
     "Travel" INTEGER NOT NULL,
+    "userEventId" INTEGER NOT NULL,
 
     CONSTRAINT "Budget_pkey" PRIMARY KEY ("id")
 );
@@ -145,6 +157,9 @@ ALTER TABLE "Messages" ADD CONSTRAINT "Messages_receiverId_fkey" FOREIGN KEY ("r
 
 -- AddForeignKey
 ALTER TABLE "UserEvents" ADD CONSTRAINT "UserEvents_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserEvents" ADD CONSTRAINT "UserEvents_budgetId_fkey" FOREIGN KEY ("budgetId") REFERENCES "Budget"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ArtistUsersJoin" ADD CONSTRAINT "ArtistUsersJoin_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

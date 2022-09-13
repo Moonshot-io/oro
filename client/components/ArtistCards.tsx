@@ -102,13 +102,13 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
 
 
   const socials = {
-    youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ color: inverseMode }} />],
-    twitter: [twitter, <TwitterIcon key={'twitter'} sx={{ color: inverseMode }}/>],
-    facebook: [facebook, <FacebookIcon key={'fb'} sx={{ color: inverseMode }}/>],
-    instagram: [instagram, <InstagramIcon key={'insta'} sx={{ color: inverseMode }}/>],
-    homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ color: inverseMode }}/>],
-    itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ color: inverseMode }}/>],
-    wiki: [wiki, <QuizIcon key={'wiki'} sx={{ color: inverseMode }}/>],
+    youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ className: 'home-icons' }} />],
+    twitter: [twitter, <TwitterIcon key={'twitter'} sx={{ className: 'home-icons' }}/>],
+    facebook: [facebook, <FacebookIcon key={'fb'} sx={{ className: 'home-icons' }}/>],
+    instagram: [instagram, <InstagramIcon key={'insta'} sx={{ className: 'home-icons' }}/>],
+    homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ className: 'home-icons' }}/>],
+    itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ className: 'home-icons' }}/>],
+    wiki: [wiki, <QuizIcon key={'wiki'} sx={{ className: 'home-icons' }}/>],
   };
 
   const handleExpandClick = () => {
@@ -155,7 +155,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
 
   return (
       <Box>
-        <Grid container>
+        <Grid>
           <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
             <Fab
               size='small'
@@ -171,6 +171,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               <ArrowBackIosNewIcon onClick={() => goBack()} />
             </Fab>
           </Box>
+          </Grid>
 
           <Box>
             <Grid container>
@@ -198,7 +199,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               </Grid>
             </Grid>
             <Box>
-              <Grid container style={{ gap: 15, maxHeight: '50vh' }} alignItems="left"
+              <Grid container style={{ gap: 15, maxHeight: '50vh' }}
               >
                 <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
               </Grid></Box><br />
@@ -206,7 +207,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container>
                   {events.length > 1
-                    ? <><Typography paragraph sx={{ color: inverseMode }}>Events:</Typography><Grid container id={artistName}>
+                    ? <><Typography variant="h2">Events:</Typography><Grid container id={artistName}>
                       {events.map((eventObj, index) => {
 
                         return (
@@ -220,7 +221,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               </Box>
             </Grid>
           </Box>
-        </Grid>
       </Box>
 
   );

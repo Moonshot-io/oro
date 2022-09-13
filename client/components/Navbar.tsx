@@ -156,7 +156,7 @@ const Navbar = (props: navPropsType) => {
       ],
       [
         '/chat',
-        <Link to='/chat' style={{ textDecoration: 'none', color: highlight }} key={'chat'}>
+        <Link to='/chat' style={{ textDecoration: 'none' }} key={'chat'}>
           {' '}
           <ForumIcon className='nav-icons' />
           Chat

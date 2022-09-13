@@ -14,7 +14,8 @@ import {
   DescriptionIcon,
   Button,
   UseTheme,
-  Link
+  Link,
+  ColorButton
 } from '../styles/material';
 
 const Img = styled('img')({
@@ -47,20 +48,20 @@ const EventCards = ({ events }) => {
         marginTop: 1,
         maxWidth: 500,
         flexGrow: 1,
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.secondary.main,
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText,
         textAlign: 'left',
       }}
     >
       <Grid container spacing={2}>
         <Grid item>
-          <ButtonBase
+          <ColorButton
             onClick={() => {
               getDetails(id);
             }}
           >
             <InfoIcon /> More details
-          </ButtonBase>
+          </ColorButton>
         </Grid>
         <Grid item xs={12} container>
           <Grid item container direction='column' spacing={2}>
@@ -86,7 +87,7 @@ const EventCards = ({ events }) => {
             )}
             <Grid item>
               <Link href={url} style={{ textDecoration: 'none' }}>
-            <Button variant='contained' sx={{ bgColor: inverseMode }}><LocalActivityIcon sx={{ color: inverseMode, mr:"5px"}} /> Buy Tickets</Button>
+            <ColorButton variant='contained'><LocalActivityIcon sx={{  mr:"5px"}} /> Buy Tickets</ColorButton>
             </Link>
             </Grid>
           </Grid>

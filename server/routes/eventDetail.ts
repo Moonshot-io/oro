@@ -11,6 +11,7 @@ eventDetailsRouter.get('/', (req, res) => {
     )
     .then(({ data }) => {
       const singleEvent = data._embedded.events[0];
+      console.log(singleEvent);
       const eventDetails = {
         id: singleEvent.id,
         name: singleEvent.name,

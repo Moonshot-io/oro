@@ -34,6 +34,7 @@ const EventCardDetails = ({event}) => {
   const getPins = () => {
     axios.get('/api/events/list/pins')
       .then(responseObj => {
+        console.log(responseObj.data);
         setPins(responseObj.data.map((event, index) => event.eventAPIid));
       })
       .catch(err => console.error('GET PINS', err));
@@ -42,6 +43,7 @@ const EventCardDetails = ({event}) => {
   const [ pins, setPins ] = useState(['foo', 'bar']);
 
   const postEvent = () => {
+    console.log('posting event', event.startDate, event.endDate);
     axios.post('/api/events/list/pins', {
       userId: currentUserInfo?.id,
       eventAPIid: event.eventId,
@@ -108,20 +110,20 @@ const EventCardDetails = ({event}) => {
         <CardContent>
           <Grid container spacing={2} mt="10px">
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={()=>{handleClick(event.eventId)} sx={{ backgroundColor: '#a352ff', color: '#1A2027' }}>
+              <ColorButton variant="contained" onClick={()=>{handleClick(event.eventId)}}>
                 <PushPinIcon
                 className="icon-buttons"
                   id={event.eventId}
                   htmlColor={pins.includes(event.eventId) ? '#1A76D2' : '#C1C1C1'}
                   />
               {pins.includes(event.eventId) ? 'saved' : 'save'}
-              </Button>
+              </ColorButton>
             </Grid>
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={getDetails} sx={{ backgroundColor: '#a352ff', color: '#1A2027' }}>
+              <ColorButton variant="contained" onClick={getDetails}>
                 <InfoIcon  className="icon-buttons" />
                 Info
-              </Button>
+              </ColorButton>
             </Grid>
           </Grid>
         </CardContent>

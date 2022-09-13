@@ -14,6 +14,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import ChatContainer from '../components/ChatContainer';
 import { io } from 'socket.io-client'
 import { useTheme } from '@mui/material/styles';
+import { ColorButton } from '../styles/material';
 
 const UserChat: React.FC = () => {
   const socket = useRef()
@@ -69,7 +70,7 @@ const UserChat: React.FC = () => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Messages
               </Typography>
-              <Button sx={{ color: iconColors }}>< RateReviewIcon /></Button>
+              <ColorButton>< RateReviewIcon /></ColorButton>
             </Toolbar>
           </AppBar>
         </Box>
