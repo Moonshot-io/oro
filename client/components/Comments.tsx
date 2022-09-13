@@ -79,15 +79,15 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
     style: {
       WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
       "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #9B27B0 inset",
+        WebkitBoxShadow: "0 0 0 1000px #a352ff inset",
       },
-      '-webkit-text-fill-color': '#9B27B0',
-      color: '#9B27B0',
+      '-webkit-text-fill-color': '#a352ff',
+      color: '#a352ff',
     }
   };
 
   const fontColor = {
-    style: { color: '#9B27B0' }
+    style: { color: '#a352ff' }
   };
 
   return (

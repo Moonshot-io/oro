@@ -8,6 +8,7 @@ import {
   MuiAccordionDetails,
   Typography,
   Button,
+  ColorButton,
   UseTheme,
 } from '../styles/material';
 import BudgetItem from './BudgetItem';
@@ -194,12 +195,11 @@ const EventItem = function ({
                 Total: ${totalSum ? formatCurrency(totalSum) : 0}
               </Typography>
             </div>
-            <Button style={{
+            <ColorButton style={{
         borderRadius: 5,
-        backgroundColor: {inverseMode},
     }}
     variant="contained"
-    onClick={handleSubmit}>Save Budget</Button>
+    onClick={handleSubmit}>Save Budget</ColorButton>
           </>
         </AccordionDetails>
       </Accordion>
