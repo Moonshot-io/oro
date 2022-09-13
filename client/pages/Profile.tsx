@@ -327,7 +327,9 @@ const Profile = () => {
                     aria-controls='panel1d-content'
                     id='panel1d-header'
                   >
-                    <Typography>{event.name}</Typography>
+                    <Typography sx={{ textAlign: 'initial' }}>
+                      {event.name}
+                    </Typography>
                     <Typography>
                       {moment(event.date).format('ll')}
                     </Typography>
