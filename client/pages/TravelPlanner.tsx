@@ -87,6 +87,7 @@ const TravelPlanner: React.FC = () => {
                   ml: 'auto',
                   mr: 'auto',
                   bgcolor: inverseMode,
+                  backgroundImage: 'none',
                 }}
               >
                 <CardContent>

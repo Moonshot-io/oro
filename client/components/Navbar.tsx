@@ -323,6 +323,7 @@ const Navbar = (props: navPropsType) => {
                           : handleCloseNavMenu('/login');
                       }}
                     >
+                      <Typography variant='h6' textAlign='center'>
                       <Link
                         to='/'
                         style={{ textDecoration: 'none' }}
@@ -332,6 +333,7 @@ const Navbar = (props: navPropsType) => {
                         <LogoutIcon className='nav-icons' />
                         Logout
                       </Link>
+                      </Typography>
                     </MenuItem>{' '}
                   </div>
                 ) : (
@@ -342,6 +344,7 @@ const Navbar = (props: navPropsType) => {
                         : handleCloseNavMenu('/login');
                     }}
                   >
+                    <Typography variant='h6' textAlign='center'>
                     <Link
                       to='/login'
                       style={{ textDecoration: 'none' }}
@@ -350,6 +353,7 @@ const Navbar = (props: navPropsType) => {
                       <LoginIcon className='nav-icons' />
                       Login
                     </Link>
+                    </Typography>
                   </MenuItem>
                 )}
               </Menu>

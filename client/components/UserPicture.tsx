@@ -176,7 +176,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
         onClose={handleClose}
         id='photo-dialog'
       >
-        <Card sx={{ maxWidth: 345, color: inverseMode }}>
+        <Card sx={{ maxWidth: 345, color: inverseMode, backgroundImage: 'none', }}>
           {
             currentUserInfo?.id === photo.userId
               ?

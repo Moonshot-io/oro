@@ -61,7 +61,7 @@ function DetailCard({ detail }): JSX.Element {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left'}}>
+      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left', backgroundImage: 'none',}}>
         <CardContent>
           <Typography
             color={iconColors}

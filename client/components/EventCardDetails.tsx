@@ -93,7 +93,7 @@ const EventCardDetails = ({event}) => {
 
   return (
     <div>
-      <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
+      <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex', backgroundImage:'none' }}>
       <Typography variant="h6" pt="20px">{moment(event.eventDate).add(1, 'day').format('MMMM Do YYYY')}</Typography>
         <div><CardHeader style={{display: "block", overflow: "hidden", textOverflow: "ellipsis", width: '90%'}}
           title={<Typography variant="h3" noWrap>
@@ -110,7 +110,6 @@ const EventCardDetails = ({event}) => {
                 <PushPinIcon
                 className="icon-buttons"
                   id={event.eventId}
-                  // htmlColor={pins.includes(event.eventId) ? '#1A76D2' : '#F0F2F5'}
                   />
               {pins.includes(event.eventId) ? 'saved' : 'save'}
               </ColorButton>

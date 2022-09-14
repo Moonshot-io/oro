@@ -62,6 +62,13 @@ interface themeType {
           }
         }
       }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: string,
+        }
+      }
     }
   }
 }
@@ -92,6 +99,7 @@ const dark = createTheme({
       fontSize: '2rem',
       fontWeight: 550,
       marginTop: '2.25rem',
+      marginBottom: '1rem',
       color: '#03a9f4'
     },
     h3: {
@@ -101,6 +109,7 @@ const dark = createTheme({
     h4: {
       fontSize: '1.5rem',
       fontWeight: 450,
+      marginTop: '2.25rem',
     },
     h5: {
       fontSize: '1.25rem',
@@ -135,6 +144,13 @@ const dark = createTheme({
         },
       }
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: '0px',
+        }
+      }
+    },
   }
 });
 
@@ -163,6 +179,7 @@ const light = createTheme({
       fontSize: '2rem',
       fontWeight: 550,
       marginTop: '2.25rem',
+      marginBottom: '1rem',
       color: '#03a9f4',
     },
     h3: {
@@ -172,6 +189,7 @@ const light = createTheme({
     h4: {
       fontSize: '1.5rem',
       fontWeight: 450,
+      marginTop: '2.25rem',
     },
     h5: {
       fontSize: '1.25rem',
@@ -205,6 +223,13 @@ const light = createTheme({
           }
         },
       },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: '1px',
+        }
+      }
     },
   },
 });
@@ -253,9 +278,23 @@ body {
   padding-right: 20px;
 }
 
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+}
+
 .home-body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-submit {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -284,7 +323,7 @@ body {
 }
 
 .commentsPaperLight {
-  background: #232c35;
+  background: #F0F2F5;
   word-break: break-all;
   word-wrap: break-word;
   width: auto;
@@ -295,7 +334,7 @@ body {
 // }
 
 .commentsPaperDark {
-  background: #fff;
+  background: #1A2027;
   word-break: break-all;
   word-wrap: break-word;
   width: auto;
@@ -366,7 +405,7 @@ body {
 }
 
 .comments {
-  margin: 0px 0px 10px
+  margin: 0px 0px 5px
 }
 
 #comments-container {
@@ -392,6 +431,10 @@ margin-top: 20px;
 
 .css-v2i77y-MuiInputBase-input-MuiFilledInput-input {
   background: ${(props) => props.theme.palette.primary.main};
+}
+
+.css-l31d51-MuiInputBase-root-MuiOutlinedInput-root {
+  padding-right: 0px;
 }
 
 .css-1gb7w2s-MuiGrid-root {

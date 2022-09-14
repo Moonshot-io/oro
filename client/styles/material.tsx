@@ -93,6 +93,11 @@ import attachMoneyIcon from '@mui/icons-material/AttachMoney';
 import moreVertIcon from '@mui/icons-material/MoreVert';
 import circularProgress from '@mui/material/CircularProgress';
 import stack from '@mui/material/Stack';
+import input from '@mui/material/Input';
+import sendIcon from '@mui/icons-material/Send';
+
+export const SendIcon = sendIcon;
+export const Input = input;
 
 export const Stack = stack;
 
