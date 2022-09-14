@@ -235,7 +235,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                 </div>
               </div>
               :
-              <div className='dialog-header'>
+              <div className='dialog-header' id='other-dialog-header'>
                 <CardHeader
                   title={photoEvent.name}
                   subheader={moment(photo.created_at).calendar()}

@@ -437,7 +437,6 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1l23jg-MuiTypography-root {
   opacity: 0.5;
-  font-size: 0.9rem;
 }
 
 @media only screen and (min-width: 375px) {
@@ -445,12 +444,20 @@ color: ${(props) => props.theme.palette.primary.contrastText};
     height: 100px;
     width: 100%;
   }
+
+  #other-dialog-header {
+    padding-left: 70px;
+  }
 }
 
 @media only screen and (min-width: 750px) {
   #profile-photo {
     height: 125px;
     width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 90px;
   }
 }
 
@@ -465,6 +472,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   #profile-photo {
     height: 175px;
     width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 90px;
   }
 }
 
