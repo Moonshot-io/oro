@@ -23,13 +23,11 @@ const EventListings: React.FC = () => {
   const getEvents = () => {
     axios.get('/api/events/list', { params: { keyword } })
       .then((responseObj) => {
-        console.log(responseObj.data);
         if(responseObj.data === false){
           setEventsExist(false);
           setEvents([]);
           setAllEvents([]);
         } else {
-        console.log(responseObj.data.events);
         setEvents(responseObj.data.events);
         setAllEvents(responseObj.data.events);
         setEventsExist(true);

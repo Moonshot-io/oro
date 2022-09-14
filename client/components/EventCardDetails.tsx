@@ -32,9 +32,8 @@ const EventCardDetails = ({event}) => {
   }, []);
 
   const getPins = () => {
-    axios.get('/api/events/list/pins')
+    axios.get(`/api/events/list/pins/${currentUserInfo?.id}`)
       .then(responseObj => {
-        console.log(responseObj.data);
         setPins(responseObj.data.map((event, index) => event.eventAPIid));
       })
       .catch(err => console.error('GET PINS', err));
@@ -63,7 +62,7 @@ const EventCardDetails = ({event}) => {
   };
 
   const deleteEvent = () => {
-    axios.delete('/api/events/list/pins', { data: { eventAPIid: event.eventId } })
+    axios.delete(`/api/events/list/pins/${currentUserInfo?.id}`, { data: { eventAPIid: event.eventId } })
       .then(() => {
         getPins();
       })

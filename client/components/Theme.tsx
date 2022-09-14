@@ -436,6 +436,32 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   font-size: 1rem;
 }
 
+@media only screen and (min-width: 750px) {
+  #profile-photo {
+    height: 125px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #profile-photo {
+    height: 150px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  #profile-photo {
+    height: 175px;
+    width: 100%;
+  }
+}
+
+#user-uploads {
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
 `;
 interface Props {
   children?: ReactNode

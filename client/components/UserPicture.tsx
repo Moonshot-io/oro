@@ -23,6 +23,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { UserContext } from '../context/UserContext';
 import Popover from '@mui/material/Popover';
+import { CardActionArea } from '@mui/material';
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -164,13 +165,22 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
 
   return (
     <div>
-      <img
+      <Card sx={{ maxWidth: 345 }} id='profile-photo'>
+        <CardActionArea>
+          <CardMedia
+            component='img'
+            image={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
+            alt={photoEvent.name}
+          />
+        </CardActionArea>
+      </Card>
+      {/* <img
         id='profile-photo'
         src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
         srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
         alt={photoEvent.name}
         onClick={handleOpen}
-      />
+      /> */}
       <Dialog
         open={open}
         onClose={handleClose}
