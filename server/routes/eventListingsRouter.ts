@@ -52,6 +52,7 @@ eventListingsRouter.get('/list', (req, res) => {
         newDataObj.artistInfo = artistInfo;
         return newDataObj;
       });
+      console.log({events});
       res.status(200).send({events});
     } else {
       console.log('no events from server');
@@ -62,10 +63,11 @@ eventListingsRouter.get('/list', (req, res) => {
 
 eventListingsRouter.post('/list/pins', (req, res) => {
   const pinObj = req.body;
+  console.log('pin object:', pinObj);
   prisma.userEvents.create({
     data: pinObj
   }).then((data) => {
-    res.send(data).status(201);
+    res.status(201).send(data);
   })
     .catch(err => {
       res.sendStatus(500);
@@ -75,7 +77,7 @@ eventListingsRouter.post('/list/pins', (req, res) => {
 eventListingsRouter.get('/list/pins', (req, res) => {
   prisma.userEvents.findMany()
     .then(eventData => {
-      res.send(eventData).status(200);
+      res.status(200).send(eventData);
     })
     .catch(err => {
       console.error(err);

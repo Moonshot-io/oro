@@ -21,8 +21,7 @@ import MainFeaturedPost from '../components/MainFeaturedPost';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 // import Sidebar from './Sidebar';
 // import Footer from './Footer';
-import { useTheme } from '@mui/material/styles';
-import { UseTheme, IconButton, PushPinIcon } from '../styles/material';
+import { UseTheme, IconButton, PushPinIcon, ColorButton } from '../styles/material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);
@@ -79,10 +78,10 @@ function DetailCard({ detail }): JSX.Element {
   console.log('event detail', detail);
   return (
     <div className='page-body'>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left'}}>
         <CardContent>
           <Typography
-            color='text.secondary'
+            color={iconColors}
             gutterBottom
             variant='h5'
             component='div'
@@ -93,14 +92,14 @@ function DetailCard({ detail }): JSX.Element {
             {detail?.promoter?.name}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {detail?.venues?.address?.line1},{detail?.venues?.city?.name},
-            {detail?.venues?.state?.name},{detail?.venues?.postalCode}
+            {detail?.venues?.address?.line1} <br></br>
+            {detail?.venues?.city?.name}, {detail?.venues?.state?.name}, {detail?.venues?.postalCode}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant='contained' onClick={handleClick}>
+          <ColorButton variant='contained' onClick={handleClick}>
             Save
-          </Button>
+          </ColorButton>
         </CardActions>
       </Card>
     </div>
@@ -114,8 +113,9 @@ const EventDetails: React.FC = () => {
 
   const idEvent = searchParams.get('id');
 
-  const theme = useTheme();
+  const theme = UseTheme();
   const inverseMode = theme.palette.secondary.main;
+  const highlight = theme.palette.secondary.main;
   const iconColors = theme.palette.secondary.contrastText;
   const getDetails = () => {
     navigate(`/eventFeed/?id=${idEvent}`);
@@ -147,25 +147,25 @@ const EventDetails: React.FC = () => {
   };
 
   return (
-    <div className='page-body'>
-      <Container maxWidth='lg'>
-        <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
-        </main>
-        <Grid sx={{ mt: 3, alignItems: 'center' }}>
-          <DetailCard detail={eventDetails} />
-          <Grid>
-            <Button sx={{ bgcolor: iconColors }} onClick={handleClick}>
-              Travel Information
-            </Button>
-          </Grid>
-          <Grid>
-            <Button sx={{ bgcolor: iconColors }} onClick={getDetails}>
-              Event Feed
-            </Button>
-          </Grid>
+    <div className="page-body">
+    <Container maxWidth='lg'>
+      <main>
+        <MainFeaturedPost post={mainFeaturedPost} />
+      </main>
+      <Grid sx={{ mt: 3, alignItems: 'center' }}>
+        <DetailCard detail={eventDetails} />
+        <Grid>
+          <ColorButton onClick={handleClick}>
+            Travel Information
+          </ColorButton>
         </Grid>
-      </Container>
+        <Grid>
+          <ColorButton onClick={getDetails}>
+            Event Feed
+          </ColorButton>
+        </Grid>
+      </Grid>
+    </Container>
     </div>
   );
 };

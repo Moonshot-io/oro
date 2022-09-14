@@ -31,11 +31,11 @@ model UserEvents {
   venue        String
   address      String
   city         String
-  state        String
+  state        String?
   postalCode   String
-  startDate    String
-  endDate      String
-  Budget       Budget?         @relation(fields: [budgetId], references: [id])
+  startDate    String?
+  endDate      String?
+  Budget       Budget?        @relation(fields: [budgetId], references: [id])
   budgetId     Int?
   EventBudgets EventBudgets[]
 }

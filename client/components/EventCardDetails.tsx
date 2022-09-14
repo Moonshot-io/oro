@@ -2,24 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, IconButton, Button } from '../styles/material';
+import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, IconButton, Button, ColorButton } from '../styles/material';
 import axios from 'axios';
 import { IconButtonProps } from '@mui/material/IconButton';
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = Styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 
 const Img = Styled('img')({
@@ -49,6 +34,7 @@ const EventCardDetails = ({event}) => {
   const getPins = () => {
     axios.get('/api/events/list/pins')
       .then(responseObj => {
+        console.log(responseObj.data);
         setPins(responseObj.data.map((event, index) => event.eventAPIid));
       })
       .catch(err => console.error('GET PINS', err));
@@ -57,6 +43,7 @@ const EventCardDetails = ({event}) => {
   const [ pins, setPins ] = useState(['foo', 'bar']);
 
   const postEvent = () => {
+    console.log('posting event', event.startDate, event.endDate);
     axios.post('/api/events/list/pins', {
       userId: currentUserInfo?.id,
       eventAPIid: event.eventId,
@@ -83,7 +70,8 @@ const EventCardDetails = ({event}) => {
       .catch(err => console.error('axios delete error', err));
   };
 
-  const handleClick = () => {
+  const handleClick = (eventId: string) => {
+    console.log(eventId);
     if (pins.includes(event.eventId)) {
       return deleteEvent();
     } else if (pins == ['foo', 'bar']) {
@@ -122,20 +110,20 @@ const EventCardDetails = ({event}) => {
         <CardContent>
           <Grid container spacing={2} mt="10px">
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={handleClick} ><IconButton aria-label="add to favorites">
+              <ColorButton variant="contained" onClick={()=>{handleClick(event.eventId)}}>
                 <PushPinIcon
+                className="icon-buttons"
                   id={event.eventId}
                   htmlColor={pins.includes(event.eventId) ? '#1A76D2' : '#C1C1C1'}
                   />
-              </IconButton> {pins.includes(event.eventId) ? 'saved' : 'save'}
-              </Button>
+              {pins.includes(event.eventId) ? 'saved' : 'save'}
+              </ColorButton>
             </Grid>
             <Grid xs={6} sm={6}>
-              <Button variant="contained" onClick={getDetails}><IconButton aria-label="settings">
-                <InfoIcon  />
-              </IconButton>
+              <ColorButton variant="contained" onClick={getDetails}>
+                <InfoIcon  className="icon-buttons" />
                 Info
-              </Button>
+              </ColorButton>
             </Grid>
           </Grid>
         </CardContent>

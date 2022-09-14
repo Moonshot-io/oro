@@ -49,6 +49,8 @@ const Navbar = (props: navPropsType) => {
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
+  const modeBgColor = theme.palette.primary.main;
+  const highlight = theme.palette.primary.contrastText;
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
@@ -191,7 +193,7 @@ const Navbar = (props: navPropsType) => {
   return (
     <AppBar
       position='sticky'
-      sx={{ bgcolor: inverseMode, paddingRight: '20px' }}
+      sx={{ background: 'transparent', bgcolor: modeBgColor, backgroundImage: modeBgColor, boxShadow: 'none', paddingRight: '20px' }}
     >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
@@ -206,8 +208,8 @@ const Navbar = (props: navPropsType) => {
                 <img
                   src={
                     mode === 'dark'
-                      ? VSLOGODark
-                      : VSLOGO
+                      ? VSLOGO
+                      : VSLOGODark
                   }
                   height='75'
                 />
@@ -215,7 +217,7 @@ const Navbar = (props: navPropsType) => {
               <Box
                 sx={{
                   flexGrow: 1,
-                  display: { xs: 'none', md: 'none', bgcolor: inverseMode },
+                  display: { xs: 'none', md: 'none', bgcolor: modeBgColor },
                   mr: '5px',
                 }}
               >
@@ -273,7 +275,7 @@ const Navbar = (props: navPropsType) => {
                 aria-haspopup='true'
                 onClick={handleOpenNavMenu}
               >
-                <MenuIcon sx={{ color: iconColors }} fontSize='large' />
+                <MenuIcon sx={{ color: highlight }} fontSize='large' />
               </IconButton>
               <Menu
                 id='menu-appbar'
