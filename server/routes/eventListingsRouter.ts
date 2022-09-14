@@ -52,7 +52,6 @@ eventListingsRouter.get('/list', (req, res) => {
         newDataObj.artistInfo = artistInfo;
         return newDataObj;
       });
-      console.log({events});
       res.status(200).send({events});
     } else {
       console.log('no events from server');
@@ -63,7 +62,6 @@ eventListingsRouter.get('/list', (req, res) => {
 
 eventListingsRouter.post('/list/pins', (req, res) => {
   const pinObj = req.body;
-  console.log('pin object:', pinObj);
   prisma.userEvents.create({
     data: pinObj
   }).then((data) => {
@@ -74,8 +72,11 @@ eventListingsRouter.post('/list/pins', (req, res) => {
     });
 });
 
-eventListingsRouter.get('/list/pins', (req, res) => {
-  prisma.userEvents.findMany()
+eventListingsRouter.get('/list/pins/:id', (req, res) => {
+  const { id } = req.params;
+  prisma.userEvents.findMany({
+    where: { userId: id }
+  })
     .then(eventData => {
       res.status(200).send(eventData);
     })
@@ -84,13 +85,16 @@ eventListingsRouter.get('/list/pins', (req, res) => {
       res.status(500).end();
     });
 
-  eventListingsRouter.delete('/list/pins', (req, res) => {
+  eventListingsRouter.delete('/list/pins/:id', (req, res) => {
     const { eventAPIid } = req.body;
+    const { id } = req.params;
+
     prisma.userEvents.deleteMany({
       where: {
         eventAPIid: {
           contains: eventAPIid
-        }
+        },
+        userId: id,
       }
     })
       .then(results => {

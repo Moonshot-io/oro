@@ -425,7 +425,6 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .notificationBody {
   margin: auto;
-
 }
 
 .css-1a4m082-MuiCardContent-root:last-child {
@@ -434,6 +433,66 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1drgtl0-MuiButtonBase-root-MuiIconButton-root {
   font-size: 1rem;
+}
+
+.css-1l23jg-MuiTypography-root {
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 375px) {
+  #profile-photo {
+    height: 100px;
+    width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 70px;
+  }
+
+  .css-davyib-MuiTypography-root {
+    width: 180px;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  #profile-photo {
+    height: 125px;
+    width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 90px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #profile-photo {
+    height: 150px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  #profile-photo {
+    height: 175px;
+    width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 90px;
+  }
+}
+
+#user-uploads {
+  padding: 20px 0px 20px 0px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 `;
