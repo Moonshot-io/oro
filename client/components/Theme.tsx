@@ -425,7 +425,6 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .notificationBody {
   margin: auto;
-
 }
 
 .css-1a4m082-MuiCardContent-root:last-child {
@@ -434,6 +433,18 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1drgtl0-MuiButtonBase-root-MuiIconButton-root {
   font-size: 1rem;
+}
+
+.css-1l23jg-MuiTypography-root {
+  opacity: 0.5;
+  font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 375px) {
+  #profile-photo {
+    height: 100px;
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 750px) {
@@ -458,8 +469,15 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 }
 
 #user-uploads {
+  padding: 20px 0px 20px 0px;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding-top: 20px;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 `;
