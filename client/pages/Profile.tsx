@@ -45,9 +45,9 @@ interface eventType {
   venue: string;
   address: string;
   city: string;
-  state: string; 
-  postalCode: string; 
-  startDate: string; 
+  state: string;
+  postalCode: string;
+  startDate: string;
   endDate: string;
 }
 
@@ -109,10 +109,6 @@ const Profile = () => {
   ) {
     return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
   });
-
-  // const startDate = moment(userEvents.sales.public.startDateTime).format('LLLL');
-  // const endDate = moment(userEvents.sales.public.endDateTime).format('LLLL');
-  // const eventDate =
 
   const redirectToGoogle = () => {
     window.open('/auth/google', '_self');
@@ -331,7 +327,9 @@ const Profile = () => {
                     aria-controls='panel1d-content'
                     id='panel1d-header'
                   >
-                    <Typography>{event.name}</Typography>
+                    <Typography sx={{ textAlign: 'initial' }}>
+                      {event.name}
+                    </Typography>
                     <Typography>
                       {moment(event.date).format('ll')}
                     </Typography>
@@ -356,12 +354,22 @@ const Profile = () => {
                         <strong>Location: </strong>
                         &nbsp;
                       </ListItem>
-                      <ListItem>
-                        {event.address},{' '}
-                        {event.city},{' '}
-                        {event.state},{' '}
-                        {event.postalCode}
-                      </ListItem>
+                      {
+                        event.state
+                          ?
+                          <ListItem>
+                            {event.address},{' '}
+                            {event.city},{' '}
+                            {event.state},{' '}
+                            {event.postalCode}
+                          </ListItem>
+                          :
+                          <ListItem>
+                            {event.address},{' '}
+                            {event.city},{' '}
+                            {event.postalCode}
+                          </ListItem>
+                      }
                       <Divider />
                       <ListItem>
                         <strong>Ticket sale starts: </strong>
