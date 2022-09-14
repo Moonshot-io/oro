@@ -97,9 +97,7 @@ const EventDetails: React.FC = () => {
   const idEvent = searchParams.get('id');
 
   const theme = UseTheme();
-  const inverseMode = theme.palette.secondary.main;
-  const highlight = theme.palette.secondary.main;
-  const iconColors = theme.palette.secondary.contrastText;
+
   const getDetails = () => {
     navigate(`/eventFeed/?id=${idEvent}`);
   };
@@ -131,10 +129,10 @@ const EventDetails: React.FC = () => {
 
   return (
     <div>
+    <Container maxWidth='lg'>
       <main>
         <MainFeaturedPost post={mainFeaturedPost} />
       </main>
-    <Container maxWidth='lg'>
       <div className="page-body">
       <Grid sx={{ mt: 3, alignItems: 'center' }}>
         <DetailCard detail={eventDetails} />
