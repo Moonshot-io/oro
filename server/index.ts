@@ -136,6 +136,7 @@ global.onlineUsers = new Map();
 
 io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any): void; (data: any): void; }) => void; id: any; to: (arg0: any) => { (): any; new(): any; emit: { (arg0: string, arg1: any): void; new(): any; }; }; }) => {
   global.chatSocket = socket;
+  console.log('user added');
   socket.on('add-user', (userId: any) => {
     onlineUsers.set(userId, socket.id);
   });
@@ -146,4 +147,12 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any): void; (
       socket.to(sendUserSocket).emit('msg-receive', data);
     }
   });
+
+  socket.on('send-noti', (data: {receiverId: string;}) => {
+    console.log('notification sent');
+    const sendUserSocket = onlineUsers.get(data.receiverId);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit('noti-receive', data);
+    }
+  })
 });

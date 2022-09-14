@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect, useRef} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
@@ -26,7 +26,10 @@ import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
+import { io } from 'socket.io-client'
+
 const App: React.FC = () => {
+  const socket = useRef()
   // update React.FC, .FC deprecated?
   // const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
@@ -37,6 +40,13 @@ const App: React.FC = () => {
 
   const [notifications, setNotifications] = React.useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
   const [profilePic, setProfilePic] = useState('');
+
+    useEffect(() => {
+    if(currentUserInfo?.id){
+        socket.current = io('/');
+        socket.current.emit('add-user', currentUserInfo.id)
+    }
+  }, [currentUserInfo]);
 
   const getNotifications = () => {
     if (currentUserInfo?.id === undefined) {
@@ -82,14 +92,14 @@ const App: React.FC = () => {
       {/* <UserContextProvider> */}
       <EventContextProvider>
         <ArtistContextProvider>
-          <Navbar notif={notifications} profile={profilePic} />
+          <Navbar socket={socket} notif={notifications} profile={profilePic} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/notifications' element={<NotificationsFeed key={location.key} getNotifications= {getNotifications} notif={notifications}/>} />
             <Route path='/backpack' element={<BackPack />} />
             <Route path='/eventListings' element={<EventListings />} />
-            <Route path='/eventFeed' element={<EventFeed />} />
+            <Route path='/eventFeed' socket={socket} element={<EventFeed />} />
             <Route path='/songFinder' element={<SongFinder />} />
             <Route path='/artists' element={<Artists />} />
             <Route path='/artists/*' element={<Artists />} />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import {Fab} from '../styles/material';
@@ -6,6 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Comment from './Comment';
 import { useTheme } from '@mui/material/styles';
 import { CssTextField } from '../styles/material';
+import { io } from 'socket.io-client'
 
 interface UserPictureProps {
   photo: {
@@ -16,10 +17,11 @@ interface UserPictureProps {
     created_at?: string;
     caption?: string;
     deleteToken?: string | null;
-  };
+  },
 }
 
-const Comments: React.FC<UserPictureProps> = ({photo}) => {
+const Comments: React.FC<UserPictureProps> = ({photo) => {
+  const socket = useRef()
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -69,6 +71,13 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
         axios.post('/api/notifications', {
           ownerId: photo.userId,
           commentId: commentData.data.id,
+        });
+        
+        socket.current = io('/');
+
+        socket.current.emit('send-noti', {
+          senderId: currentUserInfo.id,
+          receiverId: photo.userId
         });
 
       })

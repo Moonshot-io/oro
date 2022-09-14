@@ -24,11 +24,12 @@ interface FeedPhotoProps {
     deleteToken?: string | null;
   },
   updateFeed: () => void,
-  deleteSnack: () => void;
+  deleteSnack: () => void,
+  socket: { on: (arg0: string, arg1: { (userId: any): void; (data: any): void; }) => void; id: any; to: (arg0: any) => { (): any; new(): any; emit: { (arg0: string, arg1: any): void; new(): any; }; }; }
 }
 
 
-const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) => {
+const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, socket}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -308,7 +309,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack}) =
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent sx={{ bgcolor: inverseMode }}>
             <Typography sx={{ bgcolor: inverseMode }}>
-              <Comments photo={photo}/>
+              <Comments socket={socket} photo={photo}/>
             </Typography>
           </CardContent>
         </Collapse>

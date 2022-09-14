@@ -16,6 +16,8 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
   const [sender, setSender] = useState(null);
   const userContext = useContext(UserContext);
   const { currentUserInfo } = userContext;
+
+
   useEffect(() => {
     if (currentChat) {
       const getMessages = async () => {

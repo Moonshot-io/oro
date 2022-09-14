@@ -16,7 +16,7 @@ import Dialog from '@mui/material/Dialog';
 import { ThemeContext } from '../context/ThemeContext';
 
 
-const EventFeed: React.FC = () => {
+const EventFeed: React.FC = ({socket}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
 
@@ -237,7 +237,7 @@ const EventFeed: React.FC = () => {
             {feedPhotos.map((photo, i) => {
             return (
               <div margin-top="30px" key={i}>
-                <FeedPhoto deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
+                <FeedPhoto socket={socket} deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
               </div>
             );
           })}
