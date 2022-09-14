@@ -24,6 +24,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: `url(${post.image})`,
+        height: '200px'
       }}
     >
       {/* Increase the priority of the hero background image */}

@@ -2,9 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, IconButton, Button, ColorButton } from '../styles/material';
+import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, ColorButton } from '../styles/material';
 import axios from 'axios';
-import { IconButtonProps } from '@mui/material/IconButton';
 
 
 const Img = Styled('img')({
@@ -42,7 +41,6 @@ const EventCardDetails = ({event}) => {
   const [ pins, setPins ] = useState(['foo', 'bar']);
 
   const postEvent = () => {
-    console.log('posting event', event.startDate, event.endDate);
     axios.post('/api/events/list/pins', {
       userId: currentUserInfo?.id,
       eventAPIid: event.eventId,
@@ -70,7 +68,6 @@ const EventCardDetails = ({event}) => {
   };
 
   const handleClick = (eventId: string) => {
-    console.log(eventId);
     if (pins.includes(event.eventId)) {
       return deleteEvent();
     } else if (pins == ['foo', 'bar']) {
@@ -96,7 +93,7 @@ const EventCardDetails = ({event}) => {
 
   return (
     <div>
-      <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex' }}>
+      <Card sx={{ bgcolor: inverseMode, maxWidth: 'flex', backgroundImage:'none' }}>
       <Typography variant="h6" pt="20px">{moment(event.eventDate).add(1, 'day').format('MMMM Do YYYY')}</Typography>
         <div><CardHeader style={{display: "block", overflow: "hidden", textOverflow: "ellipsis", width: '90%'}}
           title={<Typography variant="h3" noWrap>
@@ -109,11 +106,10 @@ const EventCardDetails = ({event}) => {
         <CardContent>
           <Grid container spacing={2} mt="10px">
             <Grid xs={6} sm={6}>
-              <ColorButton variant="contained" onClick={()=>{handleClick(event.eventId)}}>
+              <ColorButton sx={{backgroundColor: pins.includes(event.eventId) ? '#1A76D2' : '#a352ff' }} variant="contained" onClick={()=>{handleClick(event.eventId)}}>
                 <PushPinIcon
                 className="icon-buttons"
                   id={event.eventId}
-                  htmlColor={pins.includes(event.eventId) ? '#1A76D2' : '#C1C1C1'}
                   />
               {pins.includes(event.eventId) ? 'saved' : 'save'}
               </ColorButton>
