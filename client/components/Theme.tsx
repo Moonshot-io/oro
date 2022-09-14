@@ -448,6 +448,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   #other-dialog-header {
     padding-left: 70px;
   }
+
+  .css-davyib-MuiTypography-root {
+    width: 180px;
+  }
 }
 
 @media only screen and (min-width: 750px) {
