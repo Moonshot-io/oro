@@ -6,9 +6,7 @@ import Box from '@mui/material/Box';
 
 interface MainFeaturedPostProps {
   post: {
-    description?: string;
     image?: string;
-    title?: string;
   };
 }
 
@@ -48,19 +46,7 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               p: { xs: 3, md: 6 },
               pr: { md: 0 },
             }}
-          >
-            <Typography
-              component='h1'
-              variant='h3'
-              color='inherit'
-              gutterBottom
-            >
-              {post.title}
-            </Typography>
-            <Typography variant='h5' color='inherit' paragraph>
-              {post.description}
-            </Typography>
-          </Box>
+          ></Box>
         </Grid>
       </Grid>
     </Paper>
