@@ -134,11 +134,11 @@ const io = socket(server, {
 
 global.onlineUsers = new Map();
 
-io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any): void; (data: any): void; }) => void; id: any; to: (arg0: any) => { (): any; new(): any; emit: { (arg0: string, arg1: any): void; new(): any; }; }; }) => {
+io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName?: string): void; (data: any): void; }) => void; id: any; to: (arg0: any) => { (): any; new(): any; emit: { (arg0: string, arg1: any): void; new(): any; }; }; }) => {
   global.chatSocket = socket;
-  console.log('user added');
-  socket.on('add-user', (userId: any) => {
+  socket.on('add-user', (userId: any, userName?: string) => {
     onlineUsers.set(userId, socket.id);
+    console.log(`${userName} connected`);
   });
 
   socket.on('send-msg', (data: { receiverId: string;}) => {
@@ -148,8 +148,8 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any): void; (
     }
   });
 
-  socket.on('send-noti', (data: {receiverId: string;}) => {
-    console.log('notification sent');
+  socket.on('send-noti', (data: {receiverId: string, sender: string;}) => {
+    console.log(`${data.sender} sent a notification`);
     const sendUserSocket = onlineUsers.get(data.receiverId);
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit('noti-receive', data);

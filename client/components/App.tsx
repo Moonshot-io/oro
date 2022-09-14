@@ -44,9 +44,10 @@ const App: React.FC = () => {
     useEffect(() => {
     if(currentUserInfo?.id){
         socket.current = io('/');
-        socket.current.emit('add-user', currentUserInfo.id)
+        socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
     }
   }, [currentUserInfo]);
+
 
   const getNotifications = () => {
     if (currentUserInfo?.id === undefined) {

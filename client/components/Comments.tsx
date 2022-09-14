@@ -72,12 +72,13 @@ const Comments: React.FC<UserPictureProps> = ({photo) => {
           ownerId: photo.userId,
           commentId: commentData.data.id,
         });
-        
+
         socket.current = io('/');
 
         socket.current.emit('send-noti', {
           senderId: currentUserInfo.id,
-          receiverId: photo.userId
+          receiverId: photo.userId,
+          sender: currentUserInfo?.fullName,
         });
 
       })
