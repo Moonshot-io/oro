@@ -27,11 +27,12 @@ import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 import { io } from 'socket.io-client'
-
 const App: React.FC = () => {
   const socket = useRef()
   // update React.FC, .FC deprecated?
   // const themeContext = useContext(ThemeContext);
+
+  // let socket;
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -40,10 +41,30 @@ const App: React.FC = () => {
 
   const [notifications, setNotifications] = React.useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
   const [profilePic, setProfilePic] = useState('');
+  const [notiCount, setNotiCount] = useState<number>(1);
+  
+  socket.current = io('/');
+
+  socket.current.on('noti-receive', (data) => {
+    console.log('notified');
+    setNotiCount(notiCount + 1);
+  }
+
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on('noti-receive', (data) => {
+  //       console.log('notified');
+  //       setNotiCount(notiCount + 1);
+  //     })
+  //   }
+  // }, [socket])
 
     useEffect(() => {
     if(currentUserInfo?.id){
-        socket.current = io('/');
+        // console.log(socket.current.on('firstEvent', (msg) => {
+        //   console.log(msg);
+        // }))
+
         socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
     }
   }, [currentUserInfo]);
@@ -93,7 +114,7 @@ const App: React.FC = () => {
       {/* <UserContextProvider> */}
       <EventContextProvider>
         <ArtistContextProvider>
-          <Navbar socket={socket} notif={notifications} profile={profilePic} />
+          <Navbar notiCount={notiCount} notif={notifications} profile={profilePic} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />

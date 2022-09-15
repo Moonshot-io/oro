@@ -42,30 +42,20 @@ interface navPropsType {
   notif: {commentId: number; created_at: string; id: number; read: boolean; type: string; userId: string;}[],
 }
 
-const Navbar = (props: navPropsType) => {
+const Navbar = ({notif, notiCount}) => {
   const { currentUserInfo, getCurrentUser, logoutUser } =
     useContext(UserContext);
 
-  const socket = useRef()
-  const { notif} = props;
+  // const socket = useRef()
+  // const { notif} = props;
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
-  const [notiCount, setNotiCount] = useState<number>(1);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (socket.current) {
-      socket.current = io('/');
-      socket.current.on('noti-receive', async (data) => {
-        setNotiCount(notiCount + 1);
-      });
-    }
-  });
 
 
   const pages = [
@@ -149,9 +139,9 @@ const Navbar = (props: navPropsType) => {
     isLoggedIn = true;
   }
 
-  useEffect(()=> {
-    console.log(socket)
-  }, []);
+  // useEffect(()=> {
+  //   console.log(socket)
+  // }, []);
 
   useEffect(() => {
     if (!currentUserInfo?.id) {

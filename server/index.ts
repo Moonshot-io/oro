@@ -132,17 +132,20 @@ const io = socket(server, {
   }
 });
 
-global.onlineUsers = new Map();
+const onlineUsers = {};
 
 io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName?: string): void; (data: any): void; }) => void; id: any; to: (arg0: any) => { (): any; new(): any; emit: { (arg0: string, arg1: any): void; new(): any; }; }; }) => {
+  io.emit('firstEvent', 'hello, this is a test');
+  
   global.chatSocket = socket;
   socket.on('add-user', (userId: any, userName?: string) => {
-    onlineUsers.set(userId, socket.id);
+    onlineUsers[userId] = socket.id;
     console.log(`${userName} connected`);
+    console.log(onlineUsers);
   });
 
   socket.on('send-msg', (data: { receiverId: string;}) => {
-    const sendUserSocket = onlineUsers.get(data.receiverId);
+    const sendUserSocket = onlineUsers[data.receiverId];
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit('msg-receive', data);
     }
@@ -150,9 +153,11 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName
 
   socket.on('send-noti', (data: {receiverId: string, sender: string;}) => {
     console.log(`${data.sender} sent a notification`);
-    const sendUserSocket = onlineUsers.get(data.receiverId);
+    console.log(onlineUsers[data.receiverId]);
+    const sendUserSocket = onlineUsers[data.receiverId];
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit('noti-receive', data);
     }
   })
 });
+export default io;
