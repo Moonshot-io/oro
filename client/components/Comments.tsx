@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import Comment from './Comment';
+import { useTheme } from '@mui/material/styles';
+import { io } from 'socket.io-client'
+
 import AvatarComponent from './Avatar';
 import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
 interface UserPictureProps {
@@ -13,10 +16,12 @@ interface UserPictureProps {
     created_at?: string;
     caption?: string;
     deleteToken?: string | null;
-  };
+  },
+  getNotifications: () => void;
 }
 
-const Comments: React.FC<UserPictureProps> = ({photo}) => {
+const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
+  const socket = useRef()
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -66,6 +71,14 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
         axios.post('/api/notifications', {
           ownerId: photo.userId,
           commentId: commentData.data.id,
+        });
+
+        socket.current = io('/');
+
+        socket.current.emit('send-noti', {
+          senderId: currentUserInfo.id,
+          receiverId: photo.userId,
+          sender: currentUserInfo?.fullName,
         });
 
       })
