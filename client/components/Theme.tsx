@@ -546,6 +546,14 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   justify-content: center;
 }
 
+#profile-photo-date {
+  display: flex;
+  justify-content: flex-end; 
+  font-size: small;
+  opacity: 0.7
+  padding: 4px 6px 12px 0px;
+}
+
 `;
 interface Props {
   children?: ReactNode

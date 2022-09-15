@@ -225,7 +225,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                 </div>
                 <CardHeader
                   title={photoEvent.name}
-                  subheader={moment(photo.created_at).calendar()}
+                  // subheader={moment(photo.created_at).calendar()}
                   sx={{ color: '#F0F2F5' }}
                 >
                 </CardHeader>
@@ -239,7 +239,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
               <div className='dialog-header' id='other-dialog-header'>
                 <CardHeader
                   title={photoEvent.name}
-                  subheader={moment(photo.created_at).calendar()}
+                  // subheader={moment(photo.created_at).calendar()}
                   sx={{ color: '#F0F2F5' }}
                 >
                 </CardHeader>
@@ -264,7 +264,14 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                 <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>
                 <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
               </Dialog>
-              <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
+              <Typography 
+                variant='body2' 
+                sx={{ bgcolor: inverseMode, color: 'lightgray' }}
+                id='profile-photo-date'
+              >
+                {moment(photo.created_at).calendar()}
+              </Typography>
+              <Typography variant='body2' sx={{ bgcolor: inverseMode, color: 'white' }}>
                 <span>
                   {!editor && photo.caption}
                 </span>
