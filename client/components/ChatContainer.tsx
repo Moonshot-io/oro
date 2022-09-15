@@ -65,7 +65,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
   });
 
   const fontColor = {
-    style: { color: '#9B27B0' }
+    style: { color: '#a352ff' }
   };
 
   useEffect(() => {

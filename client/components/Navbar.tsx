@@ -51,6 +51,8 @@ const Navbar = ({notif, notiCount}) => {
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
+  const modeBgColor = theme.palette.primary.main;
+  const highlight = theme.palette.primary.contrastText;
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
@@ -206,7 +208,7 @@ const Navbar = ({notif, notiCount}) => {
   return (
     <AppBar
       position='sticky'
-      sx={{ bgcolor: inverseMode, paddingRight: '20px' }}
+      sx={{ background: 'transparent', bgcolor: modeBgColor, backgroundImage: modeBgColor, boxShadow: 'none', paddingRight: '20px' }}
     >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
@@ -221,8 +223,8 @@ const Navbar = ({notif, notiCount}) => {
                 <img
                   src={
                     mode === 'dark'
-                      ? VSLOGODark
-                      : VSLOGO
+                      ? VSLOGO
+                      : VSLOGODark
                   }
                   height='75'
                 />
@@ -230,7 +232,7 @@ const Navbar = ({notif, notiCount}) => {
               <Box
                 sx={{
                   flexGrow: 1,
-                  display: { xs: 'none', md: 'none', bgcolor: inverseMode },
+                  display: { xs: 'none', md: 'none', bgcolor: modeBgColor },
                   mr: '5px',
                 }}
               >
@@ -294,9 +296,8 @@ const Navbar = ({notif, notiCount}) => {
                       notiCount
                     }
                     color='primary'>
-                      <MenuIcon sx={{ color: iconColors }} fontSize='large'/>
+                      <MenuIcon sx={{ color: highlight }} fontSize='large'/>
                   </Badge>
-
               </IconButton>
               <Menu
                 id='menu-appbar'
@@ -344,6 +345,7 @@ const Navbar = ({notif, notiCount}) => {
                           : handleCloseNavMenu('/login');
                       }}
                     >
+                      <Typography variant='h6' textAlign='center'>
                       <Link
                         to='/'
                         style={{ textDecoration: 'none' }}
@@ -353,6 +355,7 @@ const Navbar = ({notif, notiCount}) => {
                         <LogoutIcon className='nav-icons' />
                         Logout
                       </Link>
+                      </Typography>
                     </MenuItem>{' '}
                   </div>
                 ) : (
@@ -363,6 +366,7 @@ const Navbar = ({notif, notiCount}) => {
                         : handleCloseNavMenu('/login');
                     }}
                   >
+                    <Typography variant='h6' textAlign='center'>
                     <Link
                       to='/login'
                       style={{ textDecoration: 'none' }}
@@ -371,6 +375,7 @@ const Navbar = ({notif, notiCount}) => {
                       <LoginIcon className='nav-icons' />
                       Login
                     </Link>
+                    </Typography>
                   </MenuItem>
                 )}
               </Menu>

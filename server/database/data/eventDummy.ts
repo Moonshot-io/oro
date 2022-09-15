@@ -1,7 +1,7 @@
 const eventDummy = [
   {
       "eventDate": "2022-11-20T02:30:00Z",
-      "eventName": "The Smashing Pumpkins + Jane's Addiction: Spirits On Fire Tour",    
+      "eventName": "The Smashing Pumpkins + Jane's Addiction: Spirits On Fire Tour",
       "eventId": "vvG1iZ91Qz_gRH",
       "venueInfo": [
           {
@@ -10,6 +10,7 @@ const eventDummy = [
               "address": {
                   "line1": "2301 N Highland Ave"
               },
+              "date": "April 24, 2023",
               "city": "Hollywood",
               "state": "California",
               "country": "United States Of America",
@@ -94,7 +95,7 @@ const eventDummy = [
   },
   {
       "eventDate": "2022-11-05T23:30:00Z",
-      "eventName": "The Smashing Pumpkins + Jane's Addiction: Spirits On Fire Tour",    
+      "eventName": "The Smashing Pumpkins + Jane's Addiction: Spirits On Fire Tour",
       "eventId": "vvG18Z919Qtfgt",
       "venueInfo": [
           {
@@ -103,6 +104,7 @@ const eventDummy = [
               "address": {
                   "line1": "1901 W Madison"
               },
+              "date": "March 29, 2023",
               "city": "Chicago",
               "state": "Illinois",
               "country": "United States Of America",

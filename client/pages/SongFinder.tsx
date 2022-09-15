@@ -209,13 +209,13 @@ const SongFinder: React.FC = () => {
             <Accordion sx={{ bgcolor: iconColors }} expanded={true} >
               <AccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote></MusicNote>} Song Name
               </AccordionSummary>
-              <AccordionDetails sx={{ bgcolor: inverseMode }}>
+              <AccordionDetails sx={{ bgcolor: inverseMode}}>
                 {song}
               </AccordionDetails>
             </Accordion>
 
             <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon sx={{ bgcolor: iconColors }}/>}>{<Person></Person>} Artist
+              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person></Person>} Artist
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
@@ -231,7 +231,7 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon sx={{ bgcolor: iconColors }}/>}>{<Lyrics></Lyrics>} Lyrics
+              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics></Lyrics>} Lyrics
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div id='lyrics'>
@@ -241,7 +241,7 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon sx={{ bgcolor: iconColors }}/>}>{<LibraryMusic></LibraryMusic>} Album
+              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>

@@ -204,9 +204,9 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
     style: {
       WebkitBoxShadow: `0 0 0 1000px ${inverseMode} inset`,
       "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #9B27B0 inset",
+        WebkitBoxShadow: "0 0 0 1000px #a352ff inset",
       },
-      '-webkit-text-fill-color': '#9B27B0',
+      '-webkit-text-fill-color': '#a352ff',
       maxLength: 30,
     }
   };
@@ -214,7 +214,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
 
   return (
     <div>
-      <Card sx={{ maxWidth: 400, margin: 'auto', mt: '20px'}}>
+      <Card sx={{ maxWidth: 400, margin: 'auto', mt: '20px', backgroundImage: 'none',}}>
         <Dialog open={deleterOpen}>
           <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your photo?</Typography>
           <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>
@@ -281,7 +281,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
                 cancel
               </Typography>
             </Button>}
-            
+
             {editor &&
             <Button sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>
               <Typography variant='body2' sx={{ color: inverseMode }}>

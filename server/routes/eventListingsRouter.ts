@@ -65,30 +65,36 @@ eventListingsRouter.post('/list/pins', (req, res) => {
   prisma.userEvents.create({
     data: pinObj
   }).then((data) => {
-    res.send(data).status(201);
+    res.status(201).send(data);
   })
     .catch(err => {
       res.sendStatus(500);
     });
 });
 
-eventListingsRouter.get('/list/pins', (req, res) => {
-  prisma.userEvents.findMany()
+eventListingsRouter.get('/list/pins/:id', (req, res) => {
+  const { id } = req.params;
+  prisma.userEvents.findMany({
+    where: { userId: id }
+  })
     .then(eventData => {
-      res.send(eventData).status(200);
+      res.status(200).send(eventData);
     })
     .catch(err => {
       console.error(err);
       res.status(500).end();
     });
 
-  eventListingsRouter.delete('/list/pins', (req, res) => {
+  eventListingsRouter.delete('/list/pins/:id', (req, res) => {
     const { eventAPIid } = req.body;
+    const { id } = req.params;
+
     prisma.userEvents.deleteMany({
       where: {
         eventAPIid: {
           contains: eventAPIid
-        }
+        },
+        userId: id,
       }
     })
       .then(results => {

@@ -3,24 +3,17 @@ import axios from 'axios';
 import EventCardDetails from '../components/EventCardDetails';
 import Dropdown from '../components/Dropdown';
 import eventDummy from '../../server/database/data/eventDummy';
-import { CssTextField, Grid, SearchIcon, Button, Styled, purple, SortIcon, Tooltip, IconButton, InputAdornment, Box, Typography, UseTheme } from '../styles/material';
+import { CssTextField, Grid, SearchIcon, Button, Styled, InputAdornment, Box, Typography, UseTheme, ColorButton } from '../styles/material';
 
 const fontColor = {
-  style: { color: '#9B27B0' }
+  style: { color: '#a352ff' }
 };
-
-const ColorButton = Styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(purple[500]),
-  backgroundColor: purple[500],
-  '&:hover': {
-    backgroundColor: purple[700],
-  },
-}));
 
 const EventListings: React.FC = () => {
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
+  const themeBGColor = theme.palette.primary.main;
 
   const [ keyword, setKeyword ] = useState('');
   const [events, setEvents] = useState(eventDummy);
@@ -30,13 +23,11 @@ const EventListings: React.FC = () => {
   const getEvents = () => {
     axios.get('/api/events/list', { params: { keyword } })
       .then((responseObj) => {
-        console.log(responseObj.data);
         if(responseObj.data === false){
           setEventsExist(false);
           setEvents([]);
           setAllEvents([]);
         } else {
-        console.log(responseObj.data.events);
         setEvents(responseObj.data.events);
         setAllEvents(responseObj.data.events);
         setEventsExist(true);
@@ -93,12 +84,12 @@ const EventListings: React.FC = () => {
 
   const inputstyle = {
     style: {
-      WebkitBoxShadow: `0 0 0 1000px ${iconColors} inset`,
+      WebkitBoxShadow: `0 0 0 1000px ${themeBGColor} inset`,
       "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #9B27B0 inset",
+        WebkitBoxShadow: "0 0 0 1000px #a352ff inset",
       },
-      '-webkit-text-fill-color': '#9B27B0',
-      color: '#9B27B0',
+      '-webkit-text-fill-color': '#a352ff',
+      color: '#a352ff',
     }
   };
 
@@ -111,14 +102,15 @@ if(eventsExist){
       <Box>
       <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
   >
-      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth  InputLabelProps={fontColor} inputProps={inputstyle}
-          sx={{ mb: '15px'}} id="keywordSearch"
+      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth
+      size='small' InputLabelProps={fontColor} inputProps={inputstyle}
+          sx={{ mb: '15px', pr: '5px'}} id="keywordSearch"
           color="secondary" label="search events" type='text'
           onChange={ handleChange } value={keyword} onKeyDown={enterClick}
           InputProps={{endAdornment:
           (
             <InputAdornment position="end">
-              <ColorButton onClick={getEvents} sx={{bgColor:purple[500]}}>
+              <ColorButton onClick={getEvents} sx={{bgColor:'#a352ff'}}>
               <SearchIcon />
               </ColorButton>
             </InputAdornment>
@@ -157,7 +149,7 @@ if(eventsExist){
                 InputProps={{endAdornment:
                 (
                   <InputAdornment position="end">
-                    <ColorButton onClick={getEvents} sx={{bgColor:purple[500]}}>
+                    <ColorButton onClick={getEvents} sx={{bgColor:'#a352ff'}}>
                     <SearchIcon />
                     </ColorButton>
                   </InputAdornment>

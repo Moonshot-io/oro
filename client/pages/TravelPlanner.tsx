@@ -1,21 +1,9 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CircularProgress,
-  Divider,
-  Grid,
-  Modal,
-  Typography,
-} from '@mui/material';
-import { Box, Stack, styled } from '@mui/system';
+import { ColorButton, Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal, Typography, Box, Stack, UseTheme } from '../styles/material';
 import axios from 'axios';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { useTheme } from '@mui/material/styles';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { EventContext } from '../context/EventContext';
 import { CircleRounded } from '@mui/icons-material';
+import { wrap } from 'module';
 
 interface Hotel {
   location_id: string;
@@ -35,7 +23,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 800,
+  width: '80%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -48,7 +36,7 @@ const TravelPlanner: React.FC = () => {
   const [hotelDetails, setHotelDetails] = useState<HotelDetails | null>(null);
 
   const { eventDetails } = useContext(EventContext);
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
@@ -84,136 +72,148 @@ const TravelPlanner: React.FC = () => {
   const rating = Number(hotelDetails?.rating);
 
   return (
-    <div className="page-body">
-    <Typography
-    variant="h2">Search for Hotels</Typography>
-    <br/>
-    <Box>
-    <Grid container style={{ gap: 10, maxHeight: '50vh', maxWidth: '100vh' }}>
-      {hotels
-        .filter((hotel) => !!hotel.address_obj.postalcode)
-        .map((hotel) => {
-          const image = `https://source.unsplash.com/random/?${hotel.name}`;
-          return (
-            <Grid xs={12} key={hotel.location_id}>
-              <Card
-                sx={{
-                  ml: 'auto',
-                  mr: 'auto',
-                  bgcolor: inverseMode,
-                }}
-              >
-                <CardContent>
-                  <img src={image} width='80%' object-fit='cover' />
-                  <Typography variant='h5' component='div'>
-                    {hotel.name}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size='small'
-                    onClick={() => handleOpen(hotel)}
-                    sx={{ bgcolor: inverseMode, ml: 'auto', mr: 'auto' }}
+    <div className='page-body'>
+      <Typography variant='h2'>Search for Hotels</Typography>
+      <br />
+      <Box>
+        <Grid
+          container
+          style={{ gap: 10, maxHeight: '50vh', maxWidth: '100vh' }}
+        >
+          {hotels
+            .filter((hotel) => !!hotel.address_obj.postalcode)
+            .map((hotel) => {
+              const image = `https://source.unsplash.com/random/?${hotel.name}`;
+              return (
+                <Grid xs={12} key={hotel.location_id}>
+                  <Card
+                    sx={{
+                      ml: 'auto',
+                      mr: 'auto',
+                      bgcolor: inverseMode,
+                    }}
                   >
-                    View
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          );
-        })}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='Location modal'
-        aria-describedby='Modal for viewing a location'
-      >
-        <Box sx={style}>
-          {hotelDetails ? (
-            <>
-              <Typography variant='h3' textAlign={'left'}>
-                {hotelDetails.name}
-              </Typography>
-              <br />
-              <Divider />
-              <br />
-              <Stack direction={'row'} columnGap={2}>
-                <Stack style={{ width: '50%' }} direction={'column'}>
-                  <Stack direction={'row'} textAlign={'left'}>
-                    <Typography variant='h3'>{rating || ''}</Typography>
-                    <Stack ml={2}>
-                      <b>
-                        {rating < 2
-                          ? 'Poor'
-                          : rating < 3
-                          ? 'Fair'
-                          : rating < 4
-                          ? 'Good'
-                          : rating < 5
-                          ? 'Excellent'
-                          : ''}
-                      </b>
-                      <Typography variant='h6' textAlign={'left'}>
-                        {hotelDetails.num_reviews} reviews
+                    <CardContent>
+                      <img src={image} width='80%' object-fit='cover' />
+                      <Typography variant='h5' component='div'>
+                        {hotel.name}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        size='small'
+                        onClick={() => handleOpen(hotel)}
+                        sx={{ bgcolor: inverseMode, ml: 'auto', mr: 'auto' }}
+                      >
+                        View
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            })}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='Location modal'
+            aria-describedby='Modal for viewing a location'
+          >
+            <Box sx={style}>
+              {hotelDetails ? (
+                <>
+                  <Typography variant='h3' textAlign={'left'}>
+                    {hotelDetails.name}
+                  </Typography>
+                  <br />
+                  <Divider />
+                  <br />
+                  <Stack
+                    direction={'row'}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      flexWrap: 'wrap',
+                    }}
+                    columnGap={2}
+                  >
+                    <Stack direction={'column'}>
+                      <Stack direction={'row'} textAlign={'left'}>
+                        <Typography variant='h3'>{rating || ''}</Typography>
+                        <Stack ml={2}>
+                          <b>
+                            {rating < 2
+                              ? 'Poor'
+                              : rating < 3
+                              ? 'Fair'
+                              : rating < 4
+                              ? 'Good'
+                              : rating < 5
+                              ? 'Excellent'
+                              : ''}
+                          </b>
+                          <Typography variant='h6' textAlign={'left'}>
+                            {hotelDetails.num_reviews} reviews
+                          </Typography>
+                        </Stack>
+                      </Stack>
+                      <Stack>{hotelDetails.ranking_data?.ranking_string}</Stack>
+                      {hotelDetails.awards?.map((award) => {
+                        return (
+                          <Typography variant='h6' textAlign={'left'}>
+                            <img src={award.images.small} />{' '}
+                            {award.display_name}
+                          </Typography>
+                        );
+                      })}
+                      <br />
+                      <Divider />
+                      <br />
+                      <p>{hotelDetails.description}</p>
+                      <br />
+                      <Divider />
+                      <br />
+                      <Typography textAlign={'left'}>
+                        <a
+                          href={hotelDetails.web_url}
+                          rel='noreferrer nofollow'
+                          target='_blank'
+                          style={{ color: '#fff' }}
+                        >
+                          Click here for more information on TripAdvisor
+                        </a>
                       </Typography>
                     </Stack>
-                  </Stack>
-                  <Stack>{hotelDetails.ranking_data?.ranking_string}</Stack>
-                  {hotelDetails.awards?.map((award) => {
-                    return (
-                      <Typography variant='h6' textAlign={'left'}>
-                        <img src={award.images.small} /> {award.display_name}
-                      </Typography>
-                    );
-                  })}
-                  <br />
-                  <Divider />
-                  <br />
-                  <p>{hotelDetails.description}</p>
-                  <br />
-                  <Divider />
-                  <br />
-                  <Typography textAlign={'left'}>
-                    <a
-                      href={hotelDetails.web_url}
-                      rel='noreferrer nofollow'
-                      target='_blank'
-                      style={{ color: '#fff' }}
-                    >
-                      Click here for more information on TripAdvisor
-                    </a>
-                  </Typography>
-                </Stack>
 
-                <Stack style={{ width: '50%' }} direction={'column'}>
-                  <Typography variant='h5' textAlign={'left'}>
-                    <b>Property Amenities</b>
-                  </Typography>
-                  <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
-                    {hotelDetails.amenities?.slice(0, 10).map((amenity) => {
-                      return (
-                        <div style={{ textAlign: 'left', width: '50%' }}>
-                          - {amenity}
-                        </div>
-                      );
-                    })}
-                  </div>
-                  {Number(hotelDetails.amenities?.length) > 10 && (
-                    <Typography variant='h6' textAlign={'left'}>
-                      And {Number(hotelDetails.amenities?.length) - 10} more...
-                    </Typography>
-                  )}
-                </Stack>
-                <br />
-              </Stack>
-            </>
-          ) : (
-            <CircularProgress />
-          )}
-        </Box>
-      </Modal>
-    </Grid>
-    </Box>
+                    <Stack direction={'column'}>
+                      <Typography variant='h5' textAlign={'left'}>
+                        <b>Property Amenities</b>
+                      </Typography>
+                      <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
+                        {hotelDetails.amenities?.slice(0, 10).map((amenity) => {
+                          return (
+                            <div style={{ textAlign: 'left', width: '50%' }}>
+                              - {amenity}
+                            </div>
+                          );
+                        })}
+                      </div>
+                      {Number(hotelDetails.amenities?.length) > 10 && (
+                        <Typography variant='h6' textAlign={'left'}>
+                          And {Number(hotelDetails.amenities?.length) - 10}{' '}
+                          more...
+                        </Typography>
+                      )}
+                    </Stack>
+                    <br />
+                  </Stack>
+                </>
+              ) : (
+                <CircularProgress />
+              )}
+            </Box>
+          </Modal>
+        </Grid>
+      </Box>
     </div>
   );
 };

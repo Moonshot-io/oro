@@ -23,6 +23,8 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { UserContext } from '../context/UserContext';
 import Popover from '@mui/material/Popover';
+import { CardActionArea } from '@mui/material';
+import moment from 'moment';
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -35,7 +37,7 @@ interface UserPictureProps {
     userId: string;
     photoUrl: string;
     eventAPIid: string;
-    create_at: string;
+    created_at: string;
     caption?: string;
     deleteToken?: string;
   },
@@ -164,23 +166,33 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
 
   return (
     <div>
-      <img
+      <Card sx={{ maxWidth: 345 }} onClick={handleOpen}>
+        <CardActionArea>
+          <CardMedia
+            component='img'
+            image={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
+            alt={photoEvent.name}
+            id='profile-photo'
+          />
+        </CardActionArea>
+      </Card>
+      {/* <img
         id='profile-photo'
         src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
         srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
         alt={photoEvent.name}
         onClick={handleOpen}
-      />
+      /> */}
       <Dialog
         open={open}
         onClose={handleClose}
         id='photo-dialog'
       >
-        <Card sx={{ maxWidth: 345, color: inverseMode }}>
+        <Card sx={{ maxWidth: 345, color: inverseMode, backgroundImage: 'none', }}>
           {
             currentUserInfo?.id === photo.userId
               ?
-              <div id='dialog-header'>
+              <div className='dialog-header'>
                 <div>
                   <IconButton aria-describedby={moreVert} onClick={handlePopover}>
                     <MoreVertIcon />
@@ -201,18 +213,19 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                   >
                     <div>
                       <IconButton aria-label='delete' onClick={openDeleter} sx={{ fontSize: '1rem' }}>
-                        <DeleteOutlinedIcon sx={{ color: inverseMode }} />{' '}Delete Photo
+                        <DeleteOutlinedIcon />{' '}Delete Photo
                       </IconButton>
                       <br />
                       <IconButton aria-label='edit' onClick={openEditor} sx={{ fontSize: '1rem' }}>
-                        <EditOutlinedIcon sx={{ color: inverseMode }} />{' '}Edit Caption
+                        <EditOutlinedIcon />{' '}Edit Caption
                       </IconButton>
                     </div>
                   </Popover>
                 </div>
                 <CardHeader
                   title={photoEvent.name}
-                  subheader={photo.create_at}
+                  subheader={moment(photo.created_at).calendar()}
+                  sx={{ color: '#F0F2F5' }}
                 >
                 </CardHeader>
                 <div>
@@ -222,17 +235,19 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                 </div>
               </div>
               :
-              <>
+              <div className='dialog-header' id='other-dialog-header'>
                 <CardHeader
                   title={photoEvent.name}
-                  subheader={photo.create_at}
-                  action={
-                    <IconButton onClick={handleClose}>
-                      <CloseRoundedIcon />
-                    </IconButton>
-                  }
-                />
-              </>
+                  subheader={moment(photo.created_at).calendar()}
+                  sx={{ color: '#F0F2F5' }}
+                >
+                </CardHeader>
+                <div>
+                  <IconButton onClick={handleClose}>
+                    <CloseRoundedIcon />
+                  </IconButton>
+                </div>
+              </div>
           }
           <CardMedia
             component='img'

@@ -2,27 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { EventContext } from '../context/EventContext';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-// import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
-// import GitHubIcon from '@mui/icons-material/GitHub';
-// import FacebookIcon from '@mui/icons-material/Facebook';
-// import TwitterIcon from '@mui/icons-material/Twitter';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Header from './Header';
 import MainFeaturedPost from '../components/MainFeaturedPost';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-// import Sidebar from './Sidebar';
-// import Footer from './Footer';
-import { useTheme } from '@mui/material/styles';
-import { UseTheme, IconButton, PushPinIcon } from '../styles/material';
+import { UseTheme, IconButton, PushPinIcon, ColorButton, Grid, Container, Card,CardActions, CardContent, Typography } from '../styles/material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);
@@ -76,13 +59,12 @@ function DetailCard({ detail }): JSX.Element {
     }
   };
 
-  console.log('event detail', detail);
   return (
-    <div className='page-body'>
-      <Card sx={{ maxWidth: 345 }}>
+    <div>
+      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left', backgroundImage: 'none',}}>
         <CardContent>
           <Typography
-            color='text.secondary'
+            color={iconColors}
             gutterBottom
             variant='h5'
             component='div'
@@ -93,14 +75,14 @@ function DetailCard({ detail }): JSX.Element {
             {detail?.promoter?.name}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {detail?.venues?.address?.line1},{detail?.venues?.city?.name},
-            {detail?.venues?.state?.name},{detail?.venues?.postalCode}
+            {detail?.venues?.address?.line1} <br></br>
+            {detail?.venues?.city?.name}, {detail?.venues?.state?.name}, {detail?.venues?.postalCode}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant='contained' onClick={handleClick}>
+          <ColorButton variant='contained' onClick={handleClick}>
             Save
-          </Button>
+          </ColorButton>
         </CardActions>
       </Card>
     </div>
@@ -114,9 +96,8 @@ const EventDetails: React.FC = () => {
 
   const idEvent = searchParams.get('id');
 
-  const theme = useTheme();
-  const inverseMode = theme.palette.secondary.main;
-  const iconColors = theme.palette.secondary.contrastText;
+  const theme = UseTheme();
+
   const getDetails = () => {
     navigate(`/eventFeed/?id=${idEvent}`);
   };
@@ -147,25 +128,27 @@ const EventDetails: React.FC = () => {
   };
 
   return (
-    <div className='page-body'>
-      <Container maxWidth='lg'>
-        <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
-        </main>
-        <Grid sx={{ mt: 3, alignItems: 'center' }}>
-          <DetailCard detail={eventDetails} />
-          <Grid>
-            <Button sx={{ bgcolor: iconColors }} onClick={handleClick}>
-              Travel Information
-            </Button>
-          </Grid>
-          <Grid>
-            <Button sx={{ bgcolor: inverseMode }} onClick={getDetails}>
-              Event Feed
-            </Button>
-          </Grid>
+    <div>
+    <Container maxWidth='lg'>
+      <main>
+        <MainFeaturedPost post={mainFeaturedPost} />
+      </main>
+      <div className="page-body">
+      <Grid sx={{ mt: 3, alignItems: 'center' }}>
+        <DetailCard detail={eventDetails} />
+        <Grid>
+          <ColorButton onClick={handleClick}>
+            Travel Information
+          </ColorButton>
         </Grid>
-      </Container>
+        <Grid>
+          <ColorButton onClick={getDetails}>
+            Event Feed
+          </ColorButton>
+        </Grid>
+      </Grid>
+      </div>
+    </Container>
     </div>
   );
 };

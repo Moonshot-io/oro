@@ -29,6 +29,7 @@ interface themeType {
     h2: {
       fontSize: string,
       fontWeight: number,
+      color: string
     },
     h3: {
       fontSize: string,
@@ -61,6 +62,13 @@ interface themeType {
           }
         }
       }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: string,
+        }
+      }
     }
   }
 }
@@ -69,15 +77,15 @@ interface themeType {
 const dark = createTheme({
   palette: {
     primary: {
-      main: '#1A2027',
-      contrastText: '#F3F3F3',
+      main: '#1A2027', // main dark
+      contrastText: '#03a9f4', // highlight
     },
     secondary: {
-      main: '#F3F3F3',
-      contrastText: '#1A2027',
+      main: '#232c35', // off shade dark
+      contrastText: '#F0F2F5', // off white
     },
     text: {
-      primary: '#1A2027',
+      primary: '#F0F2F5',
     },
     mode: 'dark',
   },
@@ -91,6 +99,8 @@ const dark = createTheme({
       fontSize: '2rem',
       fontWeight: 550,
       marginTop: '2.25rem',
+      marginBottom: '1rem',
+      color: '#03a9f4'
     },
     h3: {
       fontSize: '1.75rem',
@@ -99,6 +109,7 @@ const dark = createTheme({
     h4: {
       fontSize: '1.5rem',
       fontWeight: 450,
+      marginTop: '2.25rem',
     },
     h5: {
       fontSize: '1.25rem',
@@ -128,9 +139,16 @@ const dark = createTheme({
             '&:-webkit-autofill': {
               '-webkit-box-shadow': '0 0 0 100px #000 inset',
             },
-            '-webkit-text-fill-color': '#9B27B0'
+            '-webkit-text-fill-color': '#a352ff'
           },
         },
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: '0px',
+        }
       }
     },
   }
@@ -139,15 +157,15 @@ const dark = createTheme({
 const light = createTheme({
   palette: {
     primary: {
-      main: '#F3F3F3',
-      contrastText: '#1A2027',
+      main: '#F0F2F5',
+      contrastText: '#03a9f4',
     },
     secondary: {
-      main: '#1A2027',
-      contrastText: '#F3F3F3',
+      main: '#ffffff',
+      contrastText: '#1A2027',
     },
     text: {
-      primary: '#F3F3F3',
+      primary: '#1A2027',
     },
     mode: 'light',
   },
@@ -161,6 +179,8 @@ const light = createTheme({
       fontSize: '2rem',
       fontWeight: 550,
       marginTop: '2.25rem',
+      marginBottom: '1rem',
+      color: '#03a9f4',
     },
     h3: {
       fontSize: '1.75rem',
@@ -169,6 +189,7 @@ const light = createTheme({
     h4: {
       fontSize: '1.5rem',
       fontWeight: 450,
+      marginTop: '2.25rem',
     },
     h5: {
       fontSize: '1.25rem',
@@ -198,10 +219,17 @@ const light = createTheme({
             '&:-webkit-autofill': {
               '-webkit-box-shadow': '0 0 0 100px #000 inset',
             },
-            '-webkit-text-fill-color': '#9B27B0'
+            '-webkit-text-fill-color': '#a352ff'
           }
         },
       },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: '1px',
+        }
+      }
     },
   },
 });
@@ -216,7 +244,7 @@ const GlobalTheme = createGlobalStyle`
     margin: 0;
     height: 100vh;
     background: ${(props: themeType) => props.theme.palette.primary.main};
-    color: ${(props) => props.theme.palette.primary.contrastText};
+    color: ${(props) => props.theme.palette.secondary.contrastText};
   }
 
 @media only screen and (min-width: 600px){
@@ -232,16 +260,9 @@ body {
 }
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-}
-
 .nav-icons {
   margin-right: 10px;
-  color: ${(props) => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.primary.contrastText};
 }
 
 .home-icons {
@@ -249,11 +270,19 @@ input:-webkit-autofill:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: ${(props) => props.theme.palette.primary.contrastText};
 }
 
 .page-body {
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
 }
 
 .home-body {
@@ -263,12 +292,24 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-.home-text {
+.avatar-submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-text-box {
   align-text: left;
-  background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#262B32' : '#DBDBDB'};
+  background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#232c35' : '#FFFFFF'};
   padding-bottom: 10px;
   max-width: 80%;
   margin: auto;
+  margin-left:
+}
+
+.home-text {
+  color: ${ (props) => props.theme.palette.mode === 'dark' ? '#F0F2F5' : '#232c35'};
 }
 
 .comment {
@@ -282,7 +323,7 @@ input:-webkit-autofill:active {
 }
 
 .commentsPaperLight {
-  background: #30363c;
+  background: #F0F2F5;
   word-break: break-all;
   word-wrap: break-word;
   width: auto;
@@ -293,7 +334,7 @@ input:-webkit-autofill:active {
 // }
 
 .commentsPaperDark {
-  background: #dbdbdb;
+  background: #1A2027;
   word-break: break-all;
   word-wrap: break-word;
   width: auto;
@@ -315,32 +356,85 @@ input:-webkit-autofill:active {
   color: #2e8b57;
 }
 
+/* #profile-photo {
+  opacity: 0.5;
+}
+
+#profile-photo:hover {
+  opacity: 1.0;
+} */
+
+#photo-dialog {
+  margin: 0px;
+}
+
+.chat-list{
+  float:left;
+}
+
+.chat{
+  float:right;
+}
+
+#social-media {
+  justify-content: center;
+}
+
+.commentTime {
+  float:left;
+}
+
+.editDelete {
+  float:right;
+}
+
+.edit {
+  margin: 0px 5px 0px 0px
+}
+
+.edit:hover {
+  font-weight: 900;
+}
+
+
+.delete {
+  margin: 0px 0px 0px 5px;
+}
+.delete:hover {
+  font-weight: 900;
+}
+
+.comments {
+  margin: 0px 0px 5px
+}
+
+#comments-container {
+  margin: auto;
+}
+
+#google-button {
+  display: flex;
+  justify-content: center;
+}
+
 .css-6hp17o-MuiList-root-MuiMenu-list {
-  background: ${(props) => props.theme.palette.primary.contrastText};
+  background: ${(props) => props.theme.palette.secondary.main};
 }
 
 a:-webkit-any-link {
-  color: ${(props) => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.secondary.contrastText};
 }
 
 .css-vj1n65-MuiGrid-root {
 margin-top: 20px;
 }
 
-.css-9425fu-MuiOutlinedInput-notchedOutline {
-  border-color: ${(props) => props.theme.palette.primary.main};
-}
-
-.css-1xc75p7-MuiFormLabel-root-MuiInputLabel-root {
-  color: ${(props) => props.theme.palette.primary.main};
-}
-
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-  color: ${(props) => props.theme.palette.primary.contrastText};
-}
-
 .css-v2i77y-MuiInputBase-input-MuiFilledInput-input {
   background: ${(props) => props.theme.palette.primary.main};
+}
+
+.css-l31d51-MuiInputBase-root-MuiOutlinedInput-root {
+  padding-right: 0px;
 }
 
 .css-1gb7w2s-MuiGrid-root {
@@ -355,13 +449,17 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   justify-content: space-between;
 }
 
+.icon-buttons {
+  padding: 5px;
+}
+
 .css-1q30djv-MuiListItem-root {
   padding-bottom: 2px;
 }
 
-.css-11lq3yg-MuiGrid-root {
-  padding: 10px 12.5px 0px 0px;
-}
+// .css-11lq3yg-MuiGrid-root {
+//   padding: 10px 12.5px 0px 0px;
+// }
 
 .notificationIMG {
   max-width: 100%;
@@ -370,7 +468,6 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .notificationBody {
   margin: auto;
-
 }
 
 .css-1a4m082-MuiCardContent-root:last-child {
@@ -379,6 +476,66 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 .css-1drgtl0-MuiButtonBase-root-MuiIconButton-root {
   font-size: 1rem;
+}
+
+.css-1l23jg-MuiTypography-root {
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 375px) {
+  #profile-photo {
+    height: 100px;
+    width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 70px;
+  }
+
+  .css-davyib-MuiTypography-root {
+    width: 180px;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  #profile-photo {
+    height: 125px;
+    width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 90px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #profile-photo {
+    height: 150px;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  #profile-photo {
+    height: 175px;
+    width: 100%;
+  }
+
+  #other-dialog-header {
+    padding-left: 90px;
+  }
+}
+
+#user-uploads {
+  padding: 20px 0px 20px 0px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 `;

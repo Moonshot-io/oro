@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Paper, Grid, OutlinedInput, Button, Avatar, Typography, IconButton } from '../styles/material';
-import { useTheme } from '@mui/material/styles';
+import { Grid, OutlinedInput, Button, Avatar, Typography, UseTheme, Dialog } from '../styles/material';
 import moment from 'moment';
 import { UserContext } from '../context/UserContext';
-import Dialog from '@mui/material/Dialog';
-import Input from '@mui/material/Input';
 import { ThemeContext } from '../context/ThemeContext';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 interface CommentProps {
   comment: {
@@ -26,7 +22,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
 
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const [commentText, setCommentText] = useState<string>(`${comment.comment}`);
@@ -116,10 +112,10 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           {
             currentUserInfo?.id === comment.userId
             ? <Link to='/profile'>
-              <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic} />
+              <Avatar sx={{ height: '30px', width: '30px', mb: '20px'}} src={profilePic} />
             </Link>
             : <Link to={`/user/?id=${comment.userId}`}>
-                <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic} />
+                <Avatar sx={{ height: '30px', width: '30px', mb: '20px'}} src={profilePic} />
               </Link>
           }
           {/* <Link to={`/user/?id=${comment.userId}`}>

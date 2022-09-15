@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
-import {Box, MenuItem, InputLabel, FormControl, Select} from '../styles/material';
+import {Box, MenuItem, InputLabel, FormControl, Select, UseTheme} from '../styles/material';
 
 // filter by city
 // filter by date
 export default function Dropdown({eventList, updateEvents}) {
+  const theme = UseTheme();
+  const iconColors = theme.palette.secondary.contrastText;
+  const inverseMode = theme.palette.secondary.main;
+  const themeBGColor = theme.palette.primary.main;
+
   const [events, setEvents] = React.useState([...eventList]);
   const [label, setLabel] = React.useState('city');
   const [city, setCity] = React.useState('');
@@ -15,12 +20,27 @@ export default function Dropdown({eventList, updateEvents}) {
     updateEvents(newCity);
   };
 
+  const fontColor = {
+    style: { color: '#a352ff' }
+  };
+
+  const inputStyle = {
+    style: {
+      WebkitBoxShadow: `0 0 0 1000px ${themeBGColor} inset`,
+      "&:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 1000px #a352ff inset",
+      },
+      '-webkit-text-fill-color': '#a352ff',
+      color: '#a352ff',
+    }
+  };
+
   React.useEffect(()=>{
   }, [events]);
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl fullWidth size='small'>
         <InputLabel id="demo-simple-select-label">{label}</InputLabel>
         <Select
           labelId="demo-simple-select-label"

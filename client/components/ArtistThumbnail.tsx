@@ -118,7 +118,9 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
   }, [favorite]);
 
   return (
-    <Card sx={{ bgcolor: inverseMode,
+    <Card sx={{
+      backgroundImage: 'none',
+      bgcolor: inverseMode,
       ':hover': {
         boxShadow: 20,
         opacity: 0.8,
