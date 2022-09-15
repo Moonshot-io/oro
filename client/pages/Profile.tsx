@@ -131,9 +131,7 @@ const Profile = () => {
       })
       .catch((err) => console.error(err));
   };
-  // const func = () => {
-  //   console.log('yoo')
-  // };
+
 
   const handleChange = (panel: string | boolean | ((prevState: string | false) => string | false)) => (_event: any, newExpanded: any) => {
     setExpanded(newExpanded ? panel : false);
