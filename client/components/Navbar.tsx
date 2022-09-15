@@ -1,8 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import VSLOGODark from './images/VSLOGO-dark.png';
 import VSLOGO from './images/VSLOGO.png';
+import { io } from 'socket.io-client'
 
 import {
   Box,
@@ -38,14 +39,15 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
 interface navPropsType {
-  notif: {commentId: number; created_at: string; id: number; read: boolean; type: string; userId: string;}[]
+  notif: {commentId: number; created_at: string; id: number; read: boolean; type: string; userId: string;}[],
 }
 
-const Navbar = (props: navPropsType) => {
+const Navbar = ({notif, notiCount}) => {
   const { currentUserInfo, getCurrentUser, logoutUser } =
     useContext(UserContext);
 
-  const { notif } = props;
+  // const socket = useRef()
+  // const { notif} = props;
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -54,9 +56,13 @@ const Navbar = (props: navPropsType) => {
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
+  // const [notifications, setNotifications] = useState<number>(notiCount);
 
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   setNotifications(notiCount);
+  // }, [])
 
   const pages = [
     [
@@ -139,6 +145,10 @@ const Navbar = (props: navPropsType) => {
     isLoggedIn = true;
   }
 
+  // useEffect(()=> {
+  //   console.log(socket)
+  // }, []);
+
   useEffect(() => {
     if (!currentUserInfo?.id) {
       getCurrentUser();
@@ -169,7 +179,12 @@ const Navbar = (props: navPropsType) => {
           style={{ textDecoration: 'none' }}
           key={'notifications'}
         >
-          <Badge badgeContent={notif.length && notif.filter((notification) => notification.read === false).length} color='primary'>
+          <Badge
+            badgeContent={
+              //notif.length && notif.filter((notification) => notification.read === false).length
+              notiCount
+            }
+            color='primary'>
             <EmailIcon className='nav-icons' />
           </Badge>
           Notifications
@@ -275,7 +290,14 @@ const Navbar = (props: navPropsType) => {
                 aria-haspopup='true'
                 onClick={handleOpenNavMenu}
               >
-                <MenuIcon sx={{ color: highlight }} fontSize='large' />
+                  <Badge
+                    badgeContent={
+                      //notif.length && notif.filter((notification) => notification.read === false).length
+                      notiCount
+                    }
+                    color='primary'>
+                      <MenuIcon sx={{ color: highlight }} fontSize='large'/>
+                  </Badge>
               </IconButton>
               <Menu
                 id='menu-appbar'
