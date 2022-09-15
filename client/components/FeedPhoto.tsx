@@ -29,7 +29,7 @@ interface FeedPhotoProps {
 }
 
 
-const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, socket}) => {
+const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, socket, getNotifications}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;

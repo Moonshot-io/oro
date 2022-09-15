@@ -54,9 +54,13 @@ const Navbar = ({notif, notiCount}) => {
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
+  // const [notifications, setNotifications] = useState<number>(notiCount);
 
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   setNotifications(notiCount);
+  // }, [])
 
   const pages = [
     [
@@ -176,7 +180,7 @@ const Navbar = ({notif, notiCount}) => {
           <Badge
             badgeContent={
               //notif.length && notif.filter((notification) => notification.read === false).length
-              notiCount  
+              notiCount
             }
             color='primary'>
             <EmailIcon className='nav-icons' />
@@ -284,7 +288,15 @@ const Navbar = ({notif, notiCount}) => {
                 aria-haspopup='true'
                 onClick={handleOpenNavMenu}
               >
-                <MenuIcon sx={{ color: iconColors }} fontSize='large' />
+                  <Badge
+                    badgeContent={
+                      //notif.length && notif.filter((notification) => notification.read === false).length
+                      notiCount
+                    }
+                    color='primary'>
+                      <MenuIcon sx={{ color: iconColors }} fontSize='large'/>
+                  </Badge>
+
               </IconButton>
               <Menu
                 id='menu-appbar'

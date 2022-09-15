@@ -18,9 +18,10 @@ interface UserPictureProps {
     caption?: string;
     deleteToken?: string | null;
   },
+  getNotifications: () => void;
 }
 
-const Comments: React.FC<UserPictureProps> = ({photo) => {
+const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
   const socket = useRef()
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;

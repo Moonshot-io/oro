@@ -41,14 +41,19 @@ const App: React.FC = () => {
 
   const [notifications, setNotifications] = React.useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
   const [profilePic, setProfilePic] = useState('');
-  const [notiCount, setNotiCount] = useState<number>(1);
+  const [notiCount, setNotiCount] = useState<number>(0);
   
   socket.current = io('/');
 
+
   socket.current.on('noti-receive', (data) => {
     console.log('notified');
-    setNotiCount(notiCount + 1);
-  }
+    getNotifications();
+  })
+
+  useEffect(() => {
+    getNotifications();
+  }, []);
 
   // useEffect(() => {
   //   if (socket) {
@@ -67,7 +72,12 @@ const App: React.FC = () => {
 
         socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
     }
+    getNotifications();
   }, [currentUserInfo]);
+
+  useEffect(() => {
+    setNotiCount(notifications.filter((noti) => noti.read === false).length);
+  }, [notifications])
 
 
   const getNotifications = () => {
@@ -114,7 +124,7 @@ const App: React.FC = () => {
       {/* <UserContextProvider> */}
       <EventContextProvider>
         <ArtistContextProvider>
-          <Navbar notiCount={notiCount} notif={notifications} profile={profilePic} />
+          <Navbar notiCount={notiCount} profile={profilePic} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
