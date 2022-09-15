@@ -43,7 +43,7 @@ const App: React.FC = () => {
   const [profilePic, setProfilePic] = useState('');
   const [notiCount, setNotiCount] = useState<number>(0);
   
-  socket.current = io('/');
+  socket.current = io.connect();
 
 
   socket.current.on('noti-receive', (data) => {

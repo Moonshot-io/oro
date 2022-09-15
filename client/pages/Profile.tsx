@@ -165,7 +165,7 @@ const Profile = () => {
           twitter: `${twitterLink}` || null,
         },
       })
-      .then(({data}) => {
+      .then(({ data }) => {
         setCurrentUserInfo(data);
       })
       .then(setOpenSnack(true))
@@ -184,6 +184,18 @@ const Profile = () => {
   const handleTwitterChange = (e) => {
     setTwitterLink(e.target.value);
   };
+
+  const deleteEvent = (event) => {
+    axios.delete('/api/profile/event/', {
+      data: {
+        event
+      }
+    })
+      .then(({ data }) => {
+        setUserEvents(data);
+      })
+      .catch(err => console.error(err));
+  }
 
   // const facebookLogin = () => {
   //   window.open('/auth/facebook', '_self');
@@ -396,12 +408,20 @@ const Profile = () => {
                       <ListItem>
                         {moment(event.endDate).format('llll')}
                       </ListItem>
-                      <Button
-                        sx={{ bgcolor: iconColors, color: inverseMode }}
-                        onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
-                      >
-                        More Details
-                      </Button>
+                      <div id='profile-event-buttons'>
+                        <Button
+                          sx={{ bgcolor: iconColors, color: inverseMode }}
+                          onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
+                        >
+                          More Details
+                        </Button>
+                        <Button
+                          sx={{ bgcolor: iconColors, color: inverseMode }}
+                          onClick={() => deleteEvent(event)}
+                        >
+                          Unsave Event
+                        </Button>
+                      </div>
                     </List>
                   </AccordionDetails>
                 </Accordion>

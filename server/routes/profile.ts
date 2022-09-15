@@ -88,4 +88,26 @@ profileRouter.get('/photo_event/:_id', (req, res) => {
     .catch(err => console.error(err));
 })
 
+profileRouter.delete('/event', (req, res) => {
+  const { event } = req.body;
+
+  prisma.userEvents.delete({
+    where: { 
+      id: event.id
+    }
+  })
+    .then(() => {
+      prisma.userEvents.findMany({
+        where: {
+          userId: event.userId
+        }
+      })
+        .then((data) => {
+          res.status(200).send(data);
+        })
+        .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
+})
+
 export default profileRouter;

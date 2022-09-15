@@ -550,8 +550,13 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   display: flex;
   justify-content: flex-end; 
   font-size: small;
-  opacity: 0.7
+  opacity: 0.7;
   padding: 4px 6px 12px 0px;
+}
+
+#profile-event-buttons {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 `;
