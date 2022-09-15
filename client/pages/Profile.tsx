@@ -35,6 +35,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
+// import { FacebookLoginButton, InstagramLoginButton, TwitterLoginButton } from "react-social-login-buttons"; 
 
 interface eventType {
   name: string;
@@ -88,7 +89,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo, getCurrentUser } = useContext(UserContext);
+  const { currentUserInfo, setCurrentUserInfo } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -164,9 +165,11 @@ const Profile = () => {
           twitter: `${twitterLink}` || null,
         },
       })
-      .then(() => setOpenSnack(true))
-      .then(() => handleClose())
-      .then(() => getCurrentUser())
+      .then(({data}) => {
+        setCurrentUserInfo(data);
+      })
+      .then(setOpenSnack(true))
+      .then(handleClose())
       .catch((err) => console.error(err));
   };
 
@@ -181,6 +184,10 @@ const Profile = () => {
   const handleTwitterChange = (e) => {
     setTwitterLink(e.target.value);
   };
+
+  // const facebookLogin = () => {
+  //   window.open('/auth/facebook', '_self');
+  // }
 
   useEffect(() => {
     getUserPhotos();
@@ -216,6 +223,9 @@ const Profile = () => {
                 Add your social media accounts to stay connected with other
                 concert and festival goers.
               </DialogContentText>
+              {/* <FacebookLoginButton onClick={ facebookLogin } />
+              <InstagramLoginButton />
+              <TwitterLoginButton /> */}
               <div>
                 <TextField
                   autoFocus
@@ -273,7 +283,7 @@ const Profile = () => {
         </div>
         <div>
           <Box>
-            <Grid container spacing={2} className='social-media'>
+            <Grid container spacing={2} id='social-media'>
               {
                 currentUserInfo.fbId
                   ?
@@ -314,7 +324,7 @@ const Profile = () => {
           </Box>
         </div>
         <>
-          {userEvents.map((event: eventType, index: number) => {
+          {Array.from(userEvents).map((event: eventType, index: number) => {
             return (
               <div key={index}>
                 <Accordion

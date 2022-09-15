@@ -463,6 +463,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   #other-dialog-header {
     padding-left: 90px;
   }
+
+  .css-davyib-MuiTypography-root {
+    width: 230px;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -493,6 +497,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#social-media {
+  justify-content: center;
 }
 
 `;

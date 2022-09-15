@@ -97,6 +97,7 @@ const UserContextProvider = ({ children }) => {
     logoutUser,
     currentUserInfo,
     getCurrentUser,
+    setCurrentUserInfo,
   };
 
   return (
