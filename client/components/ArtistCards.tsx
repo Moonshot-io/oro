@@ -111,10 +111,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
     wiki: [wiki, <QuizIcon key={'wiki'} sx={{ className: 'home-icons' }}/>],
   };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
   const getArtistEvents = (artist: string) => {
     const noSpecialChars: string = artist
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -149,19 +145,18 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
     }
   }
   }
-  // useEffect(() => {
-  //   updateEvents(city);
-  // }, [city]);
 
   return (
       <Box>
+
+          <Box>
+            <Grid container>
         <Grid>
           <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
             <Fab
               size='small'
               onClick={() => goBack()}
               sx={{
-                marginLeft: '25px',
                 top: 100,
                 right: 'auto',
                 bottom: 'auto',
@@ -172,9 +167,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
             </Fab>
           </Box>
           </Grid>
-
-          <Box>
-            <Grid container>
               <Grid xs={12} sm={8}>
                 <Typography variant="body1" align="left">
                   {removeHref()}
@@ -182,27 +174,21 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               </Grid>
               <Grid xs={12} sm={4}>
                 <Typography>
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
+                  <div className="socials">
                       {Object.keys(socials).map((social: string, index) => {
                         return (
-                          <Grid item key={`social${index}`}>
-                            <IconButton>
+                          <div key={`social${index}`} className="socials">
+                            <IconButton className="socials">
                               <a href={socials[social][0]}>{socials[social][1]}</a>
                             </IconButton>
-                          </Grid>
+                          </div>
                         );
                       })}
-                    </Grid>
-                  </Box>
+                    </div>
                 </Typography>
               </Grid>
             </Grid>
-            <Box>
-              <Grid container style={{ gap: 15, maxHeight: '50vh' }}
-              >
-                <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
-              </Grid></Box><br />
+
             <Grid>
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container>

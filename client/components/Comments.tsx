@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import {Fab} from '../styles/material';
-import SendIcon from '@mui/icons-material/Send';
 import Comment from './Comment';
-import { useTheme } from '@mui/material/styles';
-import { CssTextField } from '../styles/material';
-
+import AvatarComponent from './Avatar';
+import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
 interface UserPictureProps {
   photo: {
     id: number;
@@ -20,7 +17,7 @@ interface UserPictureProps {
 }
 
 const Comments: React.FC<UserPictureProps> = ({photo}) => {
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
@@ -98,13 +95,40 @@ const Comments: React.FC<UserPictureProps> = ({photo}) => {
           <Comment key={i} comment={comment} getComments={getComments}/>
         );
       })}
-
-      <CssTextField placeholder='add comment' onKeyPress={(e) => e.key === 'Enter' && handleSend()} InputLabelProps={fontColor} multiline={true} inputProps={{inputstyle, maxLength: 150}} sx={{ ml: '15px', mb: '40px', mt: '20px'}} color="secondary" size='small' onChange={(e) => handleComment(e)} value={message}/>
-      <Fab variant='extended' type='submit' onClick={handleSend}
-        sx={{bgcolor: iconColors, ml: '20px', mt: '15px'}}><SendIcon sx={{ color: inverseMode }}/></Fab>
+      <Grid container sx={{alignItems:"center"}}>
+      <Grid item xs={2} sm={2} md={2} sx={{alignItems:"center"}}>
+      <AvatarComponent/>
+      </Grid>
+      <Grid item xs={10} sm={10} md={10} sx={{alignItems:"center"}}>
+      <CssTextField
+      placeholder='add comment'
+      onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+      InputLabelProps={fontColor}
+      multiline={true}
+      inputProps={{
+        inputstyle, maxLength: 150
+      }}
+      InputProps={{endAdornment:
+        (
+          <InputAdornment position="end">
+            <ColorButton onClick={handleSend} sx={{bgColor:'#a352ff'}}>
+            <SendIcon sx={{ color: inverseMode }}/>
+            </ColorButton>
+          </InputAdornment>
+        )
+        }}
+      sx={{ mb: '20px', mt: '20px', pr: '1px'}} color="secondary" size='small' onChange={(e) => handleComment(e)}
+      value={message}/>
+        </Grid>
+        </Grid>
     </div>
   );
 };
 
 
 export default Comments;
+
+// <Grid item xs={2} sm={2} md={2}>
+// <Fab variant='extended' type='submit' onClick={handleSend}
+//   sx={{bgcolor: iconColors, mt: '15px'}}><SendIcon sx={{ color: inverseMode }}/></Fab>
+//   </Grid>

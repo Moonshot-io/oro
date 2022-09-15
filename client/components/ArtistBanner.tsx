@@ -1,33 +1,9 @@
 import * as React from 'react';
-import { Box, Grid, Typography, Paper, UseTheme, IconButton, YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, Styled, Link  } from '../styles/material';
+import { Box, Grid, Typography, Paper } from '../styles/material';
 
 
 export default function ArtistBanner({artistDetails}) {
-    const theme = UseTheme();
-    const iconColors = theme.palette.secondary.contrastText;
-    const inverseMode = theme.palette.secondary.main;
 
-  const {
-    artistName,
-    bio,
-    facebook,
-    homepage,
-    image,
-    instagram,
-    itunes,
-    twitter,
-    wiki,
-    youtube } = artistDetails;
-
-    const socials = {
-        youtube: [youtube, <YouTubeIcon key={'youtube'} sx={{ color: '#FFFFFF' }} />],
-        twitter: [twitter, <TwitterIcon key={'twitter'} sx={{ color: '#FFFFFF' }}/>],
-        facebook: [facebook, <FacebookIcon key={'fb'} sx={{ color: '#FFFFFF' }}/>],
-        instagram: [instagram, <InstagramIcon key={'insta'} sx={{ color: '#FFFFFF' }}/>],
-        homepage: [homepage, <LanguageIcon key={'homepage'} sx={{ color: '#FFFFFF' }}/>],
-        itunes: [itunes, <MusicNoteIcon key={'music'} sx={{ color: '#FFFFFF' }}/>],
-        wiki: [wiki, <QuizIcon key={'wiki'} sx={{ color: '#FFFFFF' }}/>],
-      };
 
   return (
     <Paper

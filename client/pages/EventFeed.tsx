@@ -173,15 +173,15 @@ const EventFeed: React.FC = () => {
   if (!feedPhotos.length) {
     return (
       <div className="page-body">
-        <Typography variant='h2' sx={{ color: inverseMode }}>
+        <Typography variant='h2'>
          Event Feed
         </Typography>
         <br></br>
-        <Typography variant='h4' sx={{ color: inverseMode }}>
+        <Typography variant='h4' sx={{ color: iconColors }}>
           {eventName}
         </Typography>
       <br></br>
-        <Typography variant='body1' sx={{ color: inverseMode }}>
+        <Typography variant='body1' sx={{ color: iconColors }}>
           Looks like there are no photos yet, start the party yourself by uploading one!
         </Typography>
 
@@ -218,17 +218,17 @@ const EventFeed: React.FC = () => {
   } else {
       return (
         <div className="page-body">
-          <Typography variant='h4' sx={{ color: inverseMode }}>
+          <Typography variant='h4' sx={{ color: iconColors }}>
             {eventName} Event Feed
           </Typography>
 
           <Dialog open={dialogOpen}>
             <img width='220px' height='auto' src={`${previewSource}`}/>
 
-            <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
+            <Typography variant='body1' sx={{ bgcolor: iconColors }}>
               <OutlinedInput fullWidth={true} placeholder='enter caption' inputProps={{maxLength: 30}} onKeyPress={(e) => e.key === 'Enter' && handleFileUpload()} value={caption} onChange={handleCaption}/>
             </Typography>
-    
+
             <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={handleFileUpload}><TaskAltIcon sx={{color: 'green'}}/></Button>
             <Button fullWidth={true} variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDialog}><DoDisturbAltIcon sx={{color: 'red'}}/></Button>
           </Dialog>

@@ -2,26 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { EventContext } from '../context/EventContext';
 import { UserContext } from '../context/UserContext';
 import moment from 'moment';
-// import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
-// import GitHubIcon from '@mui/icons-material/GitHub';
-// import FacebookIcon from '@mui/icons-material/Facebook';
-// import TwitterIcon from '@mui/icons-material/Twitter';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Header from './Header';
 import MainFeaturedPost from '../components/MainFeaturedPost';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-// import Sidebar from './Sidebar';
-// import Footer from './Footer';
-import { UseTheme, IconButton, PushPinIcon, ColorButton } from '../styles/material';
+import { UseTheme, IconButton, PushPinIcon, ColorButton, Grid, Container, Card,CardActions, CardContent, Typography } from '../styles/material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);
@@ -75,10 +59,9 @@ function DetailCard({ detail }): JSX.Element {
     }
   };
 
-  console.log('event detail', detail);
   return (
-    <div className='page-body'>
-      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left'}}>
+    <div>
+      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left', backgroundImage: 'none',}}>
         <CardContent>
           <Typography
             color={iconColors}
@@ -114,9 +97,7 @@ const EventDetails: React.FC = () => {
   const idEvent = searchParams.get('id');
 
   const theme = UseTheme();
-  const inverseMode = theme.palette.secondary.main;
-  const highlight = theme.palette.secondary.main;
-  const iconColors = theme.palette.secondary.contrastText;
+
   const getDetails = () => {
     navigate(`/eventFeed/?id=${idEvent}`);
   };
@@ -147,11 +128,12 @@ const EventDetails: React.FC = () => {
   };
 
   return (
-    <div className="page-body">
+    <div>
     <Container maxWidth='lg'>
       <main>
         <MainFeaturedPost post={mainFeaturedPost} />
       </main>
+      <div className="page-body">
       <Grid sx={{ mt: 3, alignItems: 'center' }}>
         <DetailCard detail={eventDetails} />
         <Grid>
@@ -165,6 +147,7 @@ const EventDetails: React.FC = () => {
           </ColorButton>
         </Grid>
       </Grid>
+      </div>
     </Container>
     </div>
   );

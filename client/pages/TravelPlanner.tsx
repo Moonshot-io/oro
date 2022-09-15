@@ -1,19 +1,6 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CircularProgress,
-  Divider,
-  Grid,
-  Modal,
-  Typography,
-} from '@mui/material';
-import { Box, Stack, styled, width } from '@mui/system';
+import { ColorButton, Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal, Typography, Box, Stack, UseTheme } from '../styles/material';
 import axios from 'axios';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { useTheme } from '@mui/material/styles';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { EventContext } from '../context/EventContext';
 import { CircleRounded } from '@mui/icons-material';
 import { wrap } from 'module';
@@ -49,7 +36,7 @@ const TravelPlanner: React.FC = () => {
   const [hotelDetails, setHotelDetails] = useState<HotelDetails | null>(null);
 
   const { eventDetails } = useContext(EventContext);
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
