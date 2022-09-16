@@ -5,7 +5,7 @@ import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutline} from '@mui/icons-material';
 import { UserContext } from '../context/UserContext';
-import {Typography, UseTheme, Button, Grid, Fab } from '../styles/material'
+import {Typography, UseTheme, Button, Grid, Fab, ColorButton, InvertedButton } from '../styles/material'
 
 window.oncontextmenu = function (event: any) {
   // eslint-disable-next-line no-console
@@ -182,13 +182,13 @@ const SongFinder: React.FC = () => {
     if (artist && favorited === true) {
       return (
         <div>
-          <Button sx={{ bgcolor: iconColors }} variant='contained' size='small' onClick={removeFavorites}>{<RemoveCircleOutline></RemoveCircleOutline>} remove from favorites</Button>
+          <InvertedButton sx={{ mt: '10px' }} variant='contained' size='small' onClick={removeFavorites}>{<RemoveCircleOutline></RemoveCircleOutline>} remove from favorites</InvertedButton>
         </div>
       );
     } else if (artist && favorited === false) {
       return (
         <div>
-          <Button sx={{ bgcolor: iconColors }} variant='contained' size='small' onClick={addToFavorites}>{<Star></Star>} add to favorites</Button>
+          <ColorButton sx={{ mt: '10px' }} variant='contained' size='small' onClick={addToFavorites}>{<Star></Star>} add to favorites</ColorButton>
         </div>
       );
     }
@@ -204,10 +204,10 @@ const SongFinder: React.FC = () => {
 
       <div>
         <Grid container>
-          <Grid item xs = {0} md = {4} sx={{ bgcolor: iconColors }}></Grid>
+          <Grid item xs = {0} md = {4}></Grid>
           <Grid item xs ={12} md = {4}>
             <Accordion sx={{ bgcolor: iconColors }} expanded={true} >
-              <AccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote></MusicNote>} Song Name
+              <AccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote className='icon-margin'></MusicNote>} Song Name
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode}}>
                 {song}
@@ -215,7 +215,7 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person></Person>} Artist
+              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person className='icon-margin'></Person>} Artist
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
@@ -231,7 +231,7 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics></Lyrics>} Lyrics
+              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics className='icon-margin'></Lyrics>} Lyrics
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div id='lyrics'>
@@ -241,7 +241,7 @@ const SongFinder: React.FC = () => {
             </Accordion>
 
             <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
+              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic className='icon-margin'></LibraryMusic>} Album
               </AccordionSummary>
               <AccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
@@ -254,10 +254,12 @@ const SongFinder: React.FC = () => {
           {/* <Grid item xs = {4}></Grid> */}
         </Grid>
       </div>
-      <div>
+      <div className='paragraph-padding'>
         {recording && 'Audio is recording, please wait'}
       </div>
+      <div className='paragraph-padding'>
       {!recording && 'click to start recording'}
+      </div>
       {recording &&
         <Fab sx={{ bgcolor: inverseMode }} variant='circular'>
           <img height='40px' width='auto' src='https://northshorecenter.org/nscpa_2020/wp-content/plugins/dkddi-events-addon/images/balls.gif'/>

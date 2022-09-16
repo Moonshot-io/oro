@@ -18,14 +18,6 @@ const Contacts = ({changeChat}) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   useEffect(() => {
     if (currentUser) {
       setCurrentUserName(currentUser.fullName);
@@ -34,6 +26,7 @@ const Contacts = ({changeChat}) => {
       }
     }
   }, [currentUser]);
+  
   const changeCurrentChat = (index:number, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
@@ -48,15 +41,13 @@ const Contacts = ({changeChat}) => {
 
 
   return (
-  <Grid maxWidth='100%'>
-  <ImageList sx={{ bgcolor: inverseMode,  gridAutoFlow: "column",
-            gridTemplateColumns: "repeat(auto-fill,minmax(160px,1fr)) !important",
-            gridAutoColumns: "minmax(160px, 1fr)" }}>
+  <Grid maxWidth='100%' container>
       {
         userContacts.map((contact, index) => {
           return (
-              <><ListItemButton
-              sx={{ color: iconColors, align:'center' }}
+            <Grid xs={12}>
+              <ListItemButton
+              sx={{ align:'center' }}
               key={'listitembutton' + index}
               alignItems="flex-start"
               selected={selectedIndex === index}
@@ -65,18 +56,20 @@ const Contacts = ({changeChat}) => {
                 changeCurrentChat(index, contact);
               } }
             >
-              <ListItemAvatar key={'listitemavatar' + index} sx={{align:'center'}}>
+              <Grid xs={2}>
                 <Avatar key={'avatar' + index} src={contact.profileURL} />
+                </Grid>
+                <Grid xs={8}>
               <ListItemText
                 primary={contact.fullName}
                 secondary={<React.Fragment>
                 </React.Fragment>} />
-              </ListItemAvatar>
-            </ListItemButton></>
+            </Grid>
+            </ListItemButton>
+            </Grid>
               );
             })
           }
-          </ImageList>
           </Grid>
   );
 };

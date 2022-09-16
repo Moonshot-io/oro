@@ -83,16 +83,10 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
         <div className="chat-header">
           <div className="user-details">
             <div className="avatar">
-              {/* <img
-            src={`data:image/svg+xml;base64,${currentChat.profileURL}`}
-            alt=""
-          /> */}
             </div>
             <div className="username">
-              {/* <h3>{currentChat.fullName}</h3> */}
             </div>
           </div>
-          {/* <Logout /> */}
         </div> <div className="chat-messages">
           {messages.map((message) => {
             return (

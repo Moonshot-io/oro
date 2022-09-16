@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import ArtistInfoCard from '../components/ArtistCards';
 import { ArtistContext } from '../context/ArtistContext';
 import { UserContext } from '../context/UserContext';
-import {Box,	Grid, Button, UseTheme, Typography} from '../styles/material';
+import {Box,	Grid, UseTheme, Typography} from '../styles/material';
 import ArtistThumbnail from '../components/ArtistThumbnail';
 import Login from './Login';
 import ArtistBanner from '../components/ArtistBanner';

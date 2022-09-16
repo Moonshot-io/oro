@@ -285,6 +285,14 @@ body {
   align-items: left;
 }
 
+.paragraph-padding {
+  margin-top: 20px;
+}
+
+.icon-margin {
+  margin-right: 5px;
+}
+
 .home-body {
   display: flex;
   flex-direction: column;

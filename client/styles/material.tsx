@@ -157,6 +157,14 @@ export const ColorButton = Styled(Button)(({ theme }) => ({
   },
 }));
 
+export const InvertedButton = Styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText('#03a9f4'),
+  backgroundColor: '#03a9f4',
+  '&:hover': {
+    backgroundColor: '#03a9f4',
+  },
+}));
+
 // export styled;
 export const GradeIcon = gradeIcon;
 export const LuggageIcon = luggageIcon;

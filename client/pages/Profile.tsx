@@ -28,7 +28,8 @@ import {
   Link,
   Snackbar,
   CardMedia,
-  Divider
+  Divider,
+  ColorButton
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
@@ -197,13 +198,13 @@ const Profile = () => {
         />
         <h1>Hello {firstName}</h1>
         <div>
-          <Button
-            sx={{ bgcolor: inverseMode, colors: inverseMode, mb: '30px' }}
+          <ColorButton
+            sx={{ mb: '30px' }}
             variant='outlined'
             onClick={handleClickOpen}
           >
             Update Profile
-          </Button>
+          </ColorButton>
           <Dialog
             open={open}
             onClose={handleClose}
@@ -386,12 +387,12 @@ const Profile = () => {
                       <ListItem>
                         {moment(event.endDate).format('llll')}
                       </ListItem>
-                      <Button
-                        sx={{ bgcolor: iconColors, color: inverseMode }}
+                      <ColorButton
+                      className='paragraph-padding'
                         onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
                       >
                         More Details
-                      </Button>
+                      </ColorButton>
                     </List>
                   </AccordionDetails>
                 </Accordion>

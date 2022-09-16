@@ -202,7 +202,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
                           </Grid>);
                       })}
                     </Grid></>
-                    : <Typography paragraph sx={{ color: inverseMode }}>No Upcoming Events</Typography>}
+                    : <Typography paragraph>No Upcoming Events</Typography>}
                 </Grid>
               </Box>
             </Grid>

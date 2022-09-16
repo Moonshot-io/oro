@@ -37,34 +37,6 @@ const ChatInput: React.FC<{}> = ({ handleSendMsg }) => {
     }
   };
 
-  //   return (
-  //     <Grid container>
-  //       <Grid item xs={1} sx={{mt: 1.5}}>
-  //         <BsEmojiSmileFill onClick={handleEmojiMenuToggle} />
-  //         {
-  //         showEmojiPicker &&
-  //         <Picker pickerStyle={{ position: 'relative', top: '-350px'}} onEmojiClick={handleEmojiClick} />
-  //         }
-  //       </Grid>
-  //       <Grid item xs={10}>
-  //       <TextField
-  //         hiddenLabel
-  //         id="filled-hidden-label-small"
-  //         placeholder="message"
-  //         variant="filled"
-  //         size="small"
-  //         value={msg}
-  //         onChange={(e)=>setMsg(e.target.value)}
-  //         onKeyDown={(e)=>enterClick(e)}
-  //         />
-  //       </Grid>
-  //       <Grid item xs={1} sx={{mt: 1.2}}>
-  //         <ArrowCircleUpIcon />
-  //       </Grid>
-  //     </Grid>
-  //   )
-  // }
-
   return (
     <Container>
       <div className="button-container">
