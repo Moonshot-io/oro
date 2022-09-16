@@ -1,4 +1,4 @@
-import { ColorButton, Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal, Typography, Box, Stack, UseTheme } from '../styles/material';
+import { Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal, Typography, Box, Stack, UseTheme, ColorButton } from '../styles/material';
 import axios from 'axios';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { EventContext } from '../context/EventContext';
@@ -100,13 +100,13 @@ const TravelPlanner: React.FC = () => {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button
+                      <ColorButton
                         size='small'
                         onClick={() => handleOpen(hotel)}
                         sx={{ bgcolor: inverseMode, ml: 'auto', mr: 'auto' }}
                       >
                         View
-                      </Button>
+                      </ColorButton>
                     </CardActions>
                   </Card>
                 </Grid>

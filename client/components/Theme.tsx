@@ -384,6 +384,42 @@ body {
   float:right;
 }
 
+.emoji {
+  position: relative;
+  svg {
+    font-size: 1.5rem;
+    color: #03a9f4;
+    cursor: pointer;
+    margin-left: -25px;
+  }
+  .emoji-picker-react {
+    position: absolute;
+    top: -350px;
+    background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#232c35' : '#FFFFFF'};
+    box-shadow: 1px 1px 5px #232c35;
+    border: none;
+    .emoji-scroll-wrapper::-webkit-scrollbar {
+      background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#232c35' : '#FFFFFF'};
+      width: 5px;
+      &-thumb {
+        background-color: #a352ff;
+      }
+    }
+    .emoji-categories {
+      button {
+        filter: contrast(0);
+      }
+    }
+    .emoji-search {
+      background-color: inherit;
+      border-color: #a352ff;
+    }
+    .emoji-group:before {
+      background-color: inherit;
+    }
+  }
+}
+
 #social-media {
   justify-content: center;
 }

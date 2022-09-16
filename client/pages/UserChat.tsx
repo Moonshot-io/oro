@@ -36,6 +36,7 @@ const UserChat: React.FC = () => {
     }, [currentUserInfo]);
 
   const handleChatChange = (chat) => {
+    console.log(chat);
     setCurrentChat(chat);
   };
 
@@ -51,24 +52,10 @@ if(currentChat === undefined){
       <Typography
     variant="h2">Chat</Typography>
       </div>
-      <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
-            <Fab
-              size='small'
-              onClick={() => goBack()}
-              sx={{
-                top: 100,
-                right: 'auto',
-                bottom: 'auto',
-                left: 'inherit',
-                position: 'fixed'
-              }}>
-              <ArrowBackIosNewIcon onClick={() => goBack()} />
-            </Fab>
-          </Box>
       <React.Fragment>
         <Grid container columnSpacing={0} maxWidth="100%" height= '70vh'>
           <Grid item xs={12} key='contactscontainer' maxWidth="100%">
-            <Box sx={{ bgcolor: '#0D1013', height: 'auto', width: '100%' }}>
+            <Box sx={{ height: 'auto', width: '100%' }}>
               <Contacts key='contacts' changeChat={handleChatChange} />
             </Box>
           </Grid>
@@ -83,7 +70,34 @@ if(currentChat === undefined){
   <Typography
 variant="h2">Chat</Typography>
   </div>
-            <Box sx={{ bgcolor: '#0D1013', height: 'auto', maxWidth: '100%' }}>
+  <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
+  <Grid container>
+        <Grid>
+            <Fab
+              size='small'
+              onClick={() => goBack()}
+              sx={{
+                top: 100,
+                right: 'auto',
+                bottom: 'auto',
+                left: 'inherit',
+                position: 'fixed'
+              }}>
+              <ArrowBackIosNewIcon onClick={() => goBack()} />
+            </Fab>
+            </Grid>
+            </Grid>
+          </Box>
+                <React.Fragment>
+        <Grid container columnSpacing={0} maxWidth="100%">
+          <Grid item xs={12} key='contactscontainer' maxWidth="100%">
+            <Box sx={{ height: 'auto', width: '100%' }}>
+              <Contacts key='contacts' changeChat={handleChatChange} currentContact={currentChat}/>
+            </Box>
+          </Grid>
+        </Grid>
+      </React.Fragment>
+            <Box sx={{ height: 'auto', maxWidth: '100%' }}>
           <Grid item xs={12} key='chatcontainer' maxWidth= '100%'>
               <ChatContainer currentUser={currentUser} currentChat={currentChat} socket={socket} />
           </Grid>

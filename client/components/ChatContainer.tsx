@@ -3,7 +3,7 @@ import { UserContext } from '../context/UserContext';
 import styled from 'styled-components';
 import ChatInput from './ChatInput';
 import axios from 'axios';
-import { CssTextField, Box, Grid, Button, UseTheme } from '../styles/material';
+import { CssTextField, Box, Grid, Button, UseTheme, Typography } from '../styles/material';
 import { v4 as uuidv4 } from 'uuid';
 
 const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
@@ -88,7 +88,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
             </div>
           </div>
         </div> <div className="chat-messages">
-          {messages.map((message) => {
+          {!messages.length ? <Typography variant="body1">You have no messages with this person.</Typography> : messages.map((message) => {
             return (
               <div ref={scrollRef} key={uuidv4()}>
                 <div
@@ -127,19 +127,19 @@ const Container = styled.div`
         padding: 1rem;
         font-size: 1.1rem;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: #F0F2F5;
       }
     }
     .sent {
       justify-content: flex-end;
       .content{
-        background-color: #4f04ff21;
+        background-color: #03a9f4;
       }
     }
     .received {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20
+        background-color: #546c84;
       }
     }
   }

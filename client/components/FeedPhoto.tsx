@@ -216,9 +216,9 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
     <div>
       <Card sx={{ maxWidth: 400, margin: 'auto', mt: '20px', backgroundImage: 'none',}}>
         <Dialog open={deleterOpen}>
-          <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your photo?</Typography>
-          <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>
-          <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
+          <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>are you sure you want to delete your photo?</Typography>
+          <Button variant='contained' size='small' sx={{ bgcolor: inverseMode }} onClick={deletePhoto}>DELETE</Button>
+          <Button variant='contained' size='small' sx={{ bgcolor: inverseMode }} onClick={closeDeleter}>cancel</Button>
         </Dialog>
 
         {owner && <Paper sx={{justifyContent: 'space-between', alignItems: 'center'}}>
@@ -236,7 +236,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
               <MenuItem onClick={openDeleter}>delete photo</MenuItem>
             </Menu>
             <IconButton>
-              <MoreHorizIcon onClick={openMenu} sx={{color: inverseMode}}/>
+              <MoreHorizIcon onClick={openMenu} sx={{color: iconColors}}/>
             </IconButton>
           </Typography>
         </Paper>

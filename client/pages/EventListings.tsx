@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import EventCardDetails from '../components/EventCardDetails';
 import Dropdown from '../components/Dropdown';
+import Login from './Login';
 import eventDummy from '../../server/database/data/eventDummy';
-import { CssTextField, Grid, SearchIcon, Button, Styled, InputAdornment, Box, Typography, UseTheme, ColorButton } from '../styles/material';
+import { UserContext } from '../context/UserContext';
+import { CssTextField, Grid, SearchIcon, InputAdornment, Box, Typography, UseTheme, ColorButton } from '../styles/material';
 
 const fontColor = {
   style: { color: '#a352ff' }
 };
 
 const EventListings: React.FC = () => {
+  const { currentUserInfo } = useContext(UserContext);
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -93,7 +96,15 @@ const EventListings: React.FC = () => {
     }
   };
 
-if(eventsExist){
+  if (currentUserInfo?.id === '') {
+    return (
+      <div className="page-body">
+        <Login/>
+      </div>
+    );
+  }
+
+else if(eventsExist){
   return (
     <div className="page-body">
    <Typography
