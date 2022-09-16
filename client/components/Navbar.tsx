@@ -180,11 +180,13 @@ const Navbar = ({notif, notiCount}) => {
           key={'notifications'}
         >
           <Badge
+            className='badge'
+            overlap='circular'
             badgeContent={
               //notif.length && notif.filter((notification) => notification.read === false).length
               notiCount
             }
-            color='primary'>
+            color='error'>
             <EmailIcon className='nav-icons' />
           </Badge>
           Notifications
@@ -291,11 +293,12 @@ const Navbar = ({notif, notiCount}) => {
                 onClick={handleOpenNavMenu}
               >
                   <Badge
+                    overlap='circular'
                     badgeContent={
                       //notif.length && notif.filter((notification) => notification.read === false).length
                       notiCount
                     }
-                    color='primary'>
+                    color='error'>
                       <MenuIcon sx={{ color: highlight }} fontSize='large'/>
                   </Badge>
               </IconButton>

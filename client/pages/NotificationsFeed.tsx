@@ -21,6 +21,9 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = UseTheme();
+  
+  const highlight = theme.palette.primary.contrastText;
+  const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const [notifications, setNotifications] = useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
   const location = useLocation();
@@ -72,7 +75,7 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
     <div className="page-body">
       <Typography
     variant="h2">Notifications</Typography>
-      <Button sx={{ bgcolor: inverseMode }} onClick={clearNotifications}>Clear Notifications</Button>
+      <Button sx={{ bgcolor: iconColors }} onClick={clearNotifications}>Clear Notifications</Button>
       <div >
         {notifications.map((notif, i) => {
           return (
