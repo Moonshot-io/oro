@@ -550,6 +550,10 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   #other-dialog-header {
     padding-left: 90px;
   }
+
+  .css-davyib-MuiTypography-root {
+    width: 230px;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -580,6 +584,23 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#social-media {
+  justify-content: center;
+}
+
+#profile-photo-date {
+  display: flex;
+  justify-content: flex-end; 
+  font-size: small;
+  opacity: 0.7;
+  padding: 4px 6px 12px 0px;
+}
+
+#profile-event-buttons {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 `;

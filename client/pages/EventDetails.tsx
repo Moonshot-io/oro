@@ -5,7 +5,18 @@ import moment from 'moment';
 import axios from 'axios';
 import MainFeaturedPost from '../components/MainFeaturedPost';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-import { UseTheme, IconButton, PushPinIcon, ColorButton, Grid, Container, Card,CardActions, CardContent, Typography } from '../styles/material';
+import {
+  UseTheme,
+  IconButton,
+  PushPinIcon,
+  ColorButton,
+  Grid,
+  Container,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from '../styles/material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);
@@ -61,7 +72,14 @@ function DetailCard({ detail }): JSX.Element {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345, backgroundColor: inverseMode, textAlign: 'left', backgroundImage: 'none',}}>
+      <Card
+        sx={{
+          maxWidth: 345,
+          backgroundColor: inverseMode,
+          textAlign: 'left',
+          backgroundImage: 'none',
+        }}
+      >
         <CardContent>
           <Typography
             color={iconColors}
@@ -76,7 +94,8 @@ function DetailCard({ detail }): JSX.Element {
           </Typography>
           <Typography variant='body2' color='text.secondary'>
             {detail?.venues?.address?.line1} <br></br>
-            {detail?.venues?.city?.name}, {detail?.venues?.state?.name}, {detail?.venues?.postalCode}
+            {detail?.venues?.city?.name}, {detail?.venues?.state?.name},{' '}
+            {detail?.venues?.postalCode}
           </Typography>
         </CardContent>
         <CardActions>
@@ -105,7 +124,7 @@ const EventDetails: React.FC = () => {
   useEffect(() => {
     if (idEvent !== null) {
       getEventDetails(idEvent);
-      console.log(eventDetails, 'not null');
+      console.log(getEventDetails(idEvent), 'not null');
     }
     console.log(eventDetails, ' null');
   }, []);
@@ -129,26 +148,24 @@ const EventDetails: React.FC = () => {
 
   return (
     <div>
-    <Container maxWidth='lg'>
-      <main>
-        <MainFeaturedPost post={mainFeaturedPost} />
-      </main>
-      <div className="page-body">
-      <Grid sx={{ mt: 3, alignItems: 'center' }}>
-        <DetailCard detail={eventDetails} />
-        <Grid>
-          <ColorButton onClick={handleClick}>
-            Travel Information
-          </ColorButton>
-        </Grid>
-        <Grid>
-          <ColorButton onClick={getDetails}>
-            Event Feed
-          </ColorButton>
-        </Grid>
-      </Grid>
-      </div>
-    </Container>
+      <Container maxWidth='lg'>
+        <main>
+          <MainFeaturedPost post={mainFeaturedPost} />
+        </main>
+        <div className='page-body'>
+          <Grid sx={{ mt: 3, alignItems: 'center' }}>
+            <DetailCard detail={eventDetails} />
+            <Grid>
+              <ColorButton onClick={handleClick}>
+                Travel Information
+              </ColorButton>
+            </Grid>
+            <Grid>
+              <ColorButton onClick={getDetails}>Event Feed</ColorButton>
+            </Grid>
+          </Grid>
+        </div>
+      </Container>
     </div>
   );
 };

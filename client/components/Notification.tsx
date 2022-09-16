@@ -314,7 +314,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
               </Grid>
 
               <Grid item xs={8} sx={{m: 'auto'}}>
-                <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>{!read && <b>*new*</b>} {person}{text} {moment(notification?.created_at).fromNow()}</Typography>
+                <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>{person}{text} {moment(notification?.created_at).fromNow()}</Typography>
               </Grid>
 
               <Grid item xs={2} sx={{m: 'auto', p: 1}}>
