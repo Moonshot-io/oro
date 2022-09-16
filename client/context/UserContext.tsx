@@ -40,6 +40,7 @@ const UserContextProvider = ({ children }) => {
     twitterId: '',
   });
   const [userContacts, setUserContacts] = useState([]);
+  const [userPhotos, setUserPhotos] = useState([]);
 
   const logoutUser = () => {
     axios
@@ -73,6 +74,16 @@ const UserContextProvider = ({ children }) => {
       });
   };
 
+  const getUserPhotos = () => {
+    axios
+      .get(`/api/profile/event_photos/${currentUserInfo?.id}`)
+      .then(({ data }) => {
+        setUserPhotos(data);
+        localStorage.setItem('photos', JSON.stringify(data));
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     getCurrentUser();
     // getUserEvents();
@@ -98,6 +109,9 @@ const UserContextProvider = ({ children }) => {
     currentUserInfo,
     getCurrentUser,
     setCurrentUserInfo,
+    setUserPhotos,
+    userPhotos,
+    getUserPhotos,
   };
 
   return (

@@ -90,9 +90,9 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo, setCurrentUserInfo } = useContext(UserContext);
+  const { currentUserInfo, setCurrentUserInfo, userPhotos, getUserPhotos, setUserPhotos } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
-  const [userPhotos, setUserPhotos] = useState([]);
+  // const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
   const [instagramLink, setInstagramLink] = useState('');
   const [twitterLink, setTwitterLink] = useState('');
@@ -125,14 +125,14 @@ const Profile = () => {
       .catch((err) => console.error(err));
   };
 
-  const getUserPhotos = () => {
-    axios
-      .get(`/api/profile/event_photos/${currentUserInfo?.id}`)
-      .then(({ data }) => {
-        setUserPhotos(data);
-      })
-      .catch((err) => console.error(err));
-  };
+  // const getUserPhotos = () => {
+  //   axios
+  //     .get(`/api/profile/event_photos/${currentUserInfo?.id}`)
+  //     .then(({ data }) => {
+  //       setUserPhotos(data);
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
 
 
   const handleChange = (panel: string | boolean | ((prevState: string | false) => string | false)) => (_event: any, newExpanded: any) => {
@@ -204,9 +204,16 @@ const Profile = () => {
   // }
 
   useEffect(() => {
+    setUserPhotos(JSON.parse(localStorage.getItem('photos')));
+  }, []);
+
+  useEffect(() => {
     getUserPhotos();
     getUserEvents();
   }, []);
+
+
+  console.log(userPhotos);
 
   if (currentUserInfo?.id) {
     return (

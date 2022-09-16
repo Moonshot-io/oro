@@ -177,13 +177,6 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           />
         </CardActionArea>
       </Card>
-      {/* <img
-        id='profile-photo'
-        src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
-        srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-        alt={photoEvent.name}
-        onClick={handleOpen}
-      /> */}
       <Dialog
         open={open}
         onClose={handleClose}
