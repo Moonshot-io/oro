@@ -26,6 +26,7 @@ interface NotificationProps {
 }
 const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) => {
   const theme = useTheme();
+  const highlight = theme.palette.primary.contrastText;
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const { currentUserInfo } = useContext(UserContext);
@@ -306,7 +307,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
 
       
 
-          <Paper onClick={handleOpen} sx={{m: 'auto', marginTop: '5px', bgcolor: inverseMode, color: iconColors}}>
+          <Paper onClick={handleOpen} sx={{m: 'auto', marginTop: '5px', bgcolor: read ? inverseMode: highlight, color: iconColors}}>
             <Grid container sx={{m: 'auto', mr: '10px'}}>
               <Grid item xs={2} sx={{m: 'auto'}}>
                 <Avatar sx={{m: 'auto'}} src={userAvatar}/>

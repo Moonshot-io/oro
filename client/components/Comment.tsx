@@ -23,6 +23,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = UseTheme();
+  const highlight = theme.palette.primary.contrastText;
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const [commentText, setCommentText] = useState<string>(`${comment.comment}`);
@@ -126,9 +127,9 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
           {/* <Paper className='commentsPaper' sx={{bgcolor: '#0b2545', width: '20',  wordWrap: 'break-word'}}> */}
           <div className={mode === 'dark' ? 'commentsPaperDark' : 'commentsPaperLight'}>
             <Dialog open={deleterOpen}>
-              <Typography textAlign='left' sx={{ color: inverseMode, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
-              <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deleteComment}>DELETE</Button>
-              <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
+              <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
+              <Button variant='contained' size='small' sx={{ bgcolor: inverseMode }} onClick={deleteComment}>DELETE</Button>
+              <Button variant='contained' size='small' sx={{ bgcolor: inverseMode }} onClick={closeDeleter}>cancel</Button>
             </Dialog>
             {!editor &&
               <Typography textAlign='left' sx={mode === 'dark' ? {color: iconColors} : {color: iconColors}}>
@@ -137,7 +138,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
                   {comment.edited && ' (edited)'}
                  </span>
               </Typography>}
-            <Typography variant='body2' sx={{ bgcolor: '#dbdbdb' }}>
+            <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
               {editor && <OutlinedInput fullWidth={true} inputProps={{maxLength: 150}} onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} sx={{color: iconColors}} value={commentText} onChange={handleEdit}/>}
             </Typography>
             <span>
