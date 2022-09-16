@@ -28,7 +28,8 @@ import {
   Link,
   Snackbar,
   CardMedia,
-  Divider
+  Divider,
+  ClickAwayListener
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
@@ -239,7 +240,6 @@ const Profile = () => {
               {/* <FacebookLoginButton onClick={ facebookLogin } />
               <InstagramLoginButton />
               <TwitterLoginButton /> */}
-              <div>
                 <TextField
                   autoFocus
                   margin='dense'
@@ -249,9 +249,9 @@ const Profile = () => {
                   fullWidth
                   variant='standard'
                   placeholder='Facebook Link'
+                  value={currentUserInfo.fbId ? currentUserInfo.fbId : null}
                   onChange={handleFacebookChange}
                 />
-              </div>
               <TextField
                 autoFocus
                 margin='dense'
@@ -261,6 +261,7 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Instagram Link'
+                value={currentUserInfo.instaId ? currentUserInfo.instaId : null}
                 onChange={handleInstagramChange}
               />
               <TextField
@@ -272,6 +273,7 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Twitter Link'
+                value={currentUserInfo.twitterId ? currentUserInfo.twitterId : null}
                 onChange={handleTwitterChange}
               />
             </DialogContent>

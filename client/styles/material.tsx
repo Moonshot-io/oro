@@ -95,6 +95,7 @@ import circularProgress from '@mui/material/CircularProgress';
 import stack from '@mui/material/Stack';
 import input from '@mui/material/Input';
 import sendIcon from '@mui/icons-material/Send';
+import clickAwayListener from '@mui/material/ClickAwayListener';
 
 export const SendIcon = sendIcon;
 export const Input = input;
@@ -230,3 +231,4 @@ export const Slide = slide;
 export const Avatar = avatar;
 export const Tooltip = tooltip;
 export const MoreVertIcon = moreVertIcon;
+export const ClickAwayListener = clickAwayListener

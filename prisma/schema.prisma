@@ -28,7 +28,7 @@ model UserEvents {
   name         String
   date         String
   image        String
-  venue        String
+  venue        String?
   address      String
   city         String
   state        String?
