@@ -71,6 +71,25 @@ export interface BoxOfficeInfoType {
   openHoursDetail: string;
   acceptedPaymentDetail: string;
   willCallDetail: string;
+  parkingDetails: string;
+  accessibleSeatingDetail: string;
+}
+export interface infoType {
+  info: string;
+  note: string;
+}
+
+export interface generalInfoType {
+  generalRule: string;
+  childRule: string;
+}
+
+export interface seatMapType {
+  seatMap: string;
+}
+
+export interface attractionType {
+  attraction: string;
 }
 export interface EventDetailsType {
   id: string;
@@ -81,6 +100,10 @@ export interface EventDetailsType {
   promoter: PromoterDetailsType;
   ageRestriction: AgeRestrictionType;
   boxOfficeInfo: BoxOfficeInfoType;
+  info: infoType;
+  generalInfo: generalInfoType;
+  seatMap: seatMapType;
+  attraction: attractionType;
   venues: VenuesDetailsType;
   ticketURL: string;
 }
