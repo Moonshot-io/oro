@@ -215,12 +215,12 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
                 ? <>
                   <IconButton onClick={openDeleter}>
                     <Tooltip title="Delete Photo" placement="top-start">
-                      <DeleteOutlinedIcon sx={{ color: inverseMode }} />
+                      <DeleteOutlinedIcon sx={{ color: iconColors }} />
                     </Tooltip>
                   </IconButton>
                   <IconButton onClick={openEditor}>
                     <Tooltip title="Edit Caption" placement="top-start">
-                      <EditOutlinedIcon sx={{ color: inverseMode }} />
+                      <EditOutlinedIcon sx={{ color: iconColors }} />
                     </Tooltip>
                   </IconButton>
                   <IconButton
@@ -235,16 +235,16 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
                       color: 'secondary',
                     }}
                   >
-                    <CloseRoundedIcon />
+                    <CloseRoundedIcon sx={{ color: iconColors}}/>
                   </IconButton>
                   <br />
-                  <DialogTitle id='dialog-title' sx={{ color: inverseMode }}>
+                  <DialogTitle id='dialog-title' sx={{ color: iconColors }}>
                     {photoEvent.name}
                   </DialogTitle>
                 </>
                 :
                 <>
-                  <DialogTitle id='dialog-title' sx={{ color: inverseMode }}>
+                  <DialogTitle id='dialog-title' sx={{ color: iconColors }}>
                     {photoEvent.name}
                   </DialogTitle>
                   <IconButton
@@ -259,19 +259,19 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
                       color: 'secondary',
                     }}
                   >
-                    <CloseRoundedIcon />
+                    <CloseRoundedIcon sx={{ color: iconColors}} />
                   </IconButton>
                 </>
             }
           </Toolbar>
         </AppBar>
-        <DialogContent sx={{ bgcolor: inverseMode, colors: inverseMode, padding: '0px' }}>
-          <Box sx={{ margin: 'auto', bgcolor: inverseMode, width: 'auto', alignItems: 'center', justifyContent: 'center' }}>
-            <img width='370px' height='auto' src={photo.photoUrl} />
+        <DialogContent sx={{bgcolor: inverseMode, colors: inverseMode, padding: '0px' }}>
+          <Box sx={{padding: '10px', bgcolor: inverseMode, maxWidth: '370px', alignItems: 'center', justifyContent: 'center' }}>
+            <img width='340px' height='auto' src={photo.photoUrl} />
             <Dialog open={deleterOpen} onClose={closeDeleter}>
-              <Typography textAlign='center' sx={{ color: inverseMode, m: '7px' }}>Are you sure you want to delete your photo?</Typography>
-              <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>
-              <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
+              <Typography textAlign='center' sx={{ color: iconColors, m: '7px' }}>Are you sure you want to delete your photo?</Typography>
+              <Button variant='contained' size='small' sx={{ bgcolor: inverseMode }} onClick={deletePhoto}>DELETE</Button>
+              <Button variant='contained' size='small' sx={{ bgcolor: inverseMode }} onClick={closeDeleter}>cancel</Button>
             </Dialog>
             <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
               {/* {photo.caption} */}
@@ -282,15 +282,15 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
               {editor && <OutlinedInput onKeyPress={(e) => e.key === 'Enter' && handleSubmitEdit()} placeholder={photo.caption} value={captionText} onChange={handleEdit} />}
               <div>
                 {editor &&
-                  <Button sx={{ bgcolor: iconColors }} onClick={closeEditor}>
-                    <Typography variant='body2' sx={{ color: inverseMode }}>
+                  <Button variant='contained' sx={{ bgcolor: iconColors }} onClick={closeEditor}>
+                    <Typography variant='body2' sx={{ color: highlight }}>
                       cancel
                     </Typography>
                   </Button>}
 
                 {editor &&
-                  <Button sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>
-                    <Typography variant='body2' sx={{ color: inverseMode }}>
+                  <Button variant='contained' sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>
+                    <Typography variant='body2' sx={{ color: highlight }}>
                       confirm changes
                     </Typography>
                   </Button>}
