@@ -68,18 +68,21 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
       .then((commentData) => {
         setMessage('');
         getComments();
-        axios.post('/api/notifications', {
-          ownerId: photo.userId,
-          commentId: commentData.data.id,
-        });
+        if (!currentUserInfo.id === photo.userId) {
+          axios.post('/api/notifications', {
+            ownerId: photo.userId,
+            commentId: commentData.data.id,
+          });
+  
+          socket.current = io('/');
+  
+          socket.current.emit('send-noti', {
+            senderId: currentUserInfo.id,
+            receiverId: photo.userId,
+            sender: currentUserInfo?.fullName,
+          });
 
-        socket.current = io('/');
-
-        socket.current.emit('send-noti', {
-          senderId: currentUserInfo.id,
-          receiverId: photo.userId,
-          sender: currentUserInfo?.fullName,
-        });
+        }
 
       })
       .catch((err) => console.error(err));
@@ -108,32 +111,39 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
           <Comment key={i} comment={comment} getComments={getComments}/>
         );
       })}
-      <Grid container sx={{alignItems:"center"}}>
-      <Grid item xs={2} sm={2} md={2} sx={{alignItems:"center"}}>
-      <AvatarComponent/>
-      </Grid>
-      <Grid item xs={10} sm={10} md={10} sx={{alignItems:"center"}}>
-      <CssTextField
-      placeholder='add comment'
-      onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-      InputLabelProps={fontColor}
-      multiline={true}
-      inputProps={{
-        inputstyle, maxLength: 150
-      }}
-      InputProps={{endAdornment:
-        (
-          <InputAdornment position="end">
-            <ColorButton onClick={handleSend} sx={{bgColor:'#a352ff'}}>
-            <SendIcon sx={{ color: inverseMode }}/>
-            </ColorButton>
-          </InputAdornment>
-        )
+      {currentUserInfo.id &&
+        <Grid container sx={{alignItems:"center"}}>
+        <Grid item xs={2} sm={2} md={2} sx={{alignItems:"center"}}>
+        <AvatarComponent/>
+        </Grid>
+        <Grid item xs={10} sm={10} md={10} sx={{alignItems:"center"}}>
+        <CssTextField
+        placeholder='add comment'
+        onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+        InputLabelProps={fontColor}
+        multiline={true}
+        inputProps={{
+          inputstyle, maxLength: 150
         }}
-      sx={{ mb: '20px', mt: '20px', pr: '1px'}} color="secondary" size='small' onChange={(e) => handleComment(e)}
-      value={message}/>
-        </Grid>
-        </Grid>
+        InputProps={{endAdornment:
+          (
+            <InputAdornment position="end">
+              <ColorButton onClick={handleSend} sx={{bgColor:'#a352ff'}}>
+              <SendIcon sx={{ color: inverseMode }}/>
+              </ColorButton>
+            </InputAdornment>
+          )
+          }}
+        sx={{ mb: '20px', mt: '20px', pr: '1px'}} color="secondary" size='small' onChange={(e) => handleComment(e)}
+        value={message}/>
+          </Grid>
+          </Grid>
+      
+      }
+
+      {!currentUserInfo.id &&
+      'Please log in to leave a comment'
+      }
     </div>
   );
 };
