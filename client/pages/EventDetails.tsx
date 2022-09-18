@@ -143,7 +143,7 @@ function DetailCard({ detail }): JSX.Element {
         >
           <CardActions>
             <ColorButton variant='contained' onClick={handleClick}>
-              Save
+              Save Event
             </ColorButton>
           </CardActions>
           <CardActions>
