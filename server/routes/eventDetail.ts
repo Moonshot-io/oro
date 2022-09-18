@@ -15,7 +15,7 @@ eventDetailsRouter.get('/', (req, res) => {
       const eventDetails = {
         id: singleEvent?.id,
         name: singleEvent?.name,
-        image: singleEvent?.images[3].url,
+        image: singleEvent?.images[0].url,
         sales: {
           public: {
             startDateTime: singleEvent?.sales.public.startDateTime,

@@ -15,7 +15,7 @@ import {
   Button,
   UseTheme,
   Link,
-  ColorButton
+  ColorButton,
 } from '../styles/material';
 
 const Img = styled('img')({
@@ -37,7 +37,7 @@ const EventCards = ({ events }) => {
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-  const getDetails = (id:string) => {
+  const getDetails = (id: string) => {
     navigate(`/details/?id=${id}`);
   };
 
@@ -55,41 +55,53 @@ const EventCards = ({ events }) => {
     >
       <Grid container spacing={2}>
         <Grid item xs={12} container>
-
           <Grid item container direction='column' spacing={2}>
-
             <Grid item>
               <Img alt='alt tag' src={image} />
             </Grid>
 
             <Grid item>
-              <Typography variant='h6' paragraph>{name}</Typography>
+              <Typography variant='h6' paragraph>
+                {name}
+              </Typography>
             </Grid>
 
             <Grid item>
-              <CalendarMonthIcon sx={{ color: theme.palette.primary.contrastText,mr:"5px" }}/>
+              <CalendarMonthIcon
+                sx={{ color: theme.palette.primary.contrastText, mr: '5px' }}
+              />
               {date}
             </Grid>
 
             {info ? (
               <Grid item>
-                <DescriptionIcon sx={{ color: theme.palette.primary.contrastText, mr:"5px" }}/>
+                <DescriptionIcon
+                  sx={{ color: theme.palette.primary.contrastText, mr: '5px' }}
+                />
                 {info}
               </Grid>
             ) : (
               <Grid item>
-                <DescriptionIcon sx={{ color: theme.palette.primary.contrastText, mr:"5px" }}/> No event details
+                <DescriptionIcon
+                  sx={{ color: theme.palette.primary.contrastText, mr: '5px' }}
+                />{' '}
+                No event details
               </Grid>
             )}
 
             <Grid item>
-            <Grid item xs={12} sm={6}>
-              <Link href={url} style={{ textDecoration: 'none' }}>
-            <ColorButton variant='contained'><LocalActivityIcon className="icon-buttons" sx={{  mr:"5px"}} /> Tickets</ColorButton>
-            </Link>
+              <Grid item xs={12} sm={6}>
+                <Link href={url} style={{ textDecoration: 'none' }}>
+                  <ColorButton variant='contained'>
+                    <LocalActivityIcon
+                      className='icon-buttons'
+                      sx={{ mr: '5px' }}
+                    />{' '}
+                    Tickets
+                  </ColorButton>
+                </Link>
+              </Grid>
             </Grid>
-        </Grid>
-
           </Grid>
         </Grid>
       </Grid>
@@ -99,9 +111,10 @@ const EventCards = ({ events }) => {
 
 export default EventCards;
 
-
-{/* <Grid xs={6} sm={6}>
+{
+  /* <Grid xs={6} sm={6}>
 <ColorButton variant="contained" onClick={() => {getDetails(id);}}>
   <InfoIcon className="icon-buttons"/> Info
 </ColorButton>
-</Grid> */}
+</Grid> */
+}
