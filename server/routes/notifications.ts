@@ -23,6 +23,7 @@ notificationsRouter.get('/', async (req, res) => {
 });
 
 notificationsRouter.post('/', async (req, res) => {
+  console.log('create notification');
   const {commentId, ownerId} = req.body;
   await prisma.notifications.create({
     data: {

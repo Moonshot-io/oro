@@ -5,26 +5,12 @@ import moment from 'moment';
 import { InfoIcon, Grid, Styled, UseTheme, Typography, PushPinIcon, Card, CardHeader, CardMedia, CardContent, ColorButton } from '../styles/material';
 import axios from 'axios';
 
-
-const Img = Styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
-
-
 const EventCardDetails = ({event}) => {
   const { currentUserInfo } = useContext(UserContext);
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
   const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   useEffect(() => {
     getPins();
@@ -79,16 +65,10 @@ const EventCardDetails = ({event}) => {
   };
 
   const navigate = useNavigate();
-  // let date = event.eventDate;
-  // date = moment(date).add(1, 'day').format('MMMM Do YYYY');
   const image = event.artistInfo[0].artistImages[1].url;
 
   const getDetails = () => {
     navigate(`/details/?id=${event.eventId}`);
-  };
-
-  const fontColor = {
-    style: { color:'#1A2027' }
   };
 
   return (

@@ -77,17 +77,6 @@ const Navbar = ({notif, notiCount}) => {
       </Link>,
     ],
     [
-      '/travelPlanner',
-      <Link
-        to='/travelPlanner'
-        style={{ textDecoration: 'none' }}
-        key={'travelPlanner'}
-      >
-        <LuggageIcon className='nav-icons' />
-        Travel Planner
-      </Link>,
-    ],
-    [
       '/backpack',
       <Link to='/backpack' style={{ textDecoration: 'none' }} key={'backpack'}>
         <PriceChangeIcon className='nav-icons' />

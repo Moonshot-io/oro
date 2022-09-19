@@ -97,7 +97,7 @@ const ChatInput: React.FC<{}> = ({ handleSendMsg }) => {
       width: 90%;
       height: 60%;
       background-color: transparent;
-      color: white;
+      color: #232c35;
       border: none;
       padding-left: 1rem;
       font-size: 1.2rem;
@@ -124,7 +124,7 @@ const ChatInput: React.FC<{}> = ({ handleSendMsg }) => {
       }
       svg {
         font-size: 2rem;
-        color: white;
+        color: #232c35;
       }
     }
   }

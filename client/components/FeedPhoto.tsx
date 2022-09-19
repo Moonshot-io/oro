@@ -30,7 +30,7 @@ interface FeedPhotoProps {
 }
 
 
-const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, socket, getNotifications}) => {
+const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, socket}) => {
   const theme = useTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -45,8 +45,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [owner, setOwner] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const [open, setOpen] = useState<boolean>(false);
   const [openCaptionSnack, setOpenCaptionSnack] = useState<boolean>(false);
 
   const [feedPhoto, setFeedPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null}>({
