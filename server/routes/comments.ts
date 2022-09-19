@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import axios from 'axios';
-import path from 'path';
 import prisma from '../database/db';
 require('dotenv').config();
 
@@ -24,7 +22,6 @@ commentsRouter.get('/', async (req, res) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 });
@@ -41,7 +38,6 @@ commentsRouter.get('/comment', async (req, res) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 });
@@ -61,7 +57,6 @@ commentsRouter.post('/', async (req, res) => {
 
     })
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 });

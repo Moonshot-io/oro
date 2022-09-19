@@ -19,8 +19,6 @@ import Navbar from '../components/Navbar';
 import UserChat from '../pages/UserChat';
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';
-// import { UserContextProvider } from '../context/UserContext';
-// import { ThemeContext } from '../context/ThemeContext';
 import { Container } from '../components/Container';
 import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
@@ -29,10 +27,6 @@ import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client'
 const App: React.FC = () => {
   const socket = useRef()
-  // update React.FC, .FC deprecated?
-  // const themeContext = useContext(ThemeContext);
-
-  // let socket;
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -47,7 +41,6 @@ const App: React.FC = () => {
 
 
   socket.current.on('noti-receive', (data) => {
-    console.log('notified');
     getNotifications();
   })
 
@@ -55,21 +48,8 @@ const App: React.FC = () => {
     getNotifications();
   }, []);
 
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on('noti-receive', (data) => {
-  //       console.log('notified');
-  //       setNotiCount(notiCount + 1);
-  //     })
-  //   }
-  // }, [socket])
-
     useEffect(() => {
     if(currentUserInfo?.id){
-        // console.log(socket.current.on('firstEvent', (msg) => {
-        //   console.log(msg);
-        // }))
-
         socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
     }
     getNotifications();
@@ -90,12 +70,7 @@ const App: React.FC = () => {
         }
       })
         .then((notifData) => {
-          // console.log(notifData);
-          // if (notifData.data.length) {
             setNotifications([...notifData.data]);
-          // } else {
-          //   setNotifications([]);
-          // }
         })
         .catch((err) => console.error(err));
     }

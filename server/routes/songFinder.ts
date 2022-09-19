@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import axios from 'axios';
-import path from 'path';
-// import dotenv from 'dotenv';
 require('dotenv').config();
 import { v2 as cloudinary } from 'cloudinary';
-
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -12,13 +9,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
-
-
-
-
 const songFinderRouter = Router();
-
 
 songFinderRouter.post('/', async (req, res) => {
   try {
@@ -30,7 +21,6 @@ songFinderRouter.post('/', async (req, res) => {
           'api_token': process.env.AUDD_TOKEN,
           'url': uploadResponse.secure_url,
           'return': 'lyrics,apple_music,spotify',
-
         })
           .then((data) => {
             res.status(200).send(data.data.result);
@@ -42,14 +32,5 @@ songFinderRouter.post('/', async (req, res) => {
     res.sendStatus(500);
   }
 });
-
-// songFinderRouter.delete('/', (req, res) => {
-//   // cloudinary.uploader.destroy(audioId, () => res.sendStatus(200));
-//   // cloudinary.delete_by_token(req.body.delete_token)
-//     // .then(() => { res.sendStatus(200); })
-//     // .catch((err) => res.sendStatus(500));
-// });
-
-
 
 export default songFinderRouter;
