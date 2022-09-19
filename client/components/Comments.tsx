@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import Comment from './Comment';
+import { io } from 'socket.io-client'
 
 import AvatarComponent from './Avatar';
 import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
@@ -61,8 +62,13 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
       .then((commentData) => {
         setMessage('');
         getComments();
+<<<<<<< HEAD
         if (!(currentUserInfo?.id === photo.userId)) {
           console.log('send comment and then notify');
+=======
+        if (!(currentUserInfo.id === photo.userId)) {
+          console.log('test');
+>>>>>>> 23d9791db06b96f6699214e84ca41abf56df8871
           axios.post('/api/notifications', {
             ownerId: photo.userId,
             commentId: commentData.data.id,

@@ -1,19 +1,11 @@
 import React, { useState, useContext } from 'react';
 import Picker from 'emoji-picker-react';
 import { BsEmojiSmileFill } from 'react-icons/bs';
-import {TextField, Grid, ArrowCircleUpIcon, UseTheme} from '../styles/material';
+import {ArrowCircleUpIcon, UseTheme} from '../styles/material';
 import { UserContext } from '../context/UserContext';
 import styled from 'styled-components';
-import ChatBoxStyle from './ChatBoxStyle';
 
 const ChatInput: React.FC<{}> = ({ handleSendMsg }) => {
-  const theme = UseTheme();
-  const inverseMode = theme.palette.secondary.main;
-  const iconColors = theme.palette.secondary.contrastText;
-
-  const userContext = useContext(UserContext);
-  const { currentUserInfo } = userContext;
-  const currentUser = currentUserInfo;
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [msg, setMsg] = useState('');
 
