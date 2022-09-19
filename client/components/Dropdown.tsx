@@ -51,7 +51,6 @@ export default function Dropdown({eventList, updateEvents}) {
          <MenuItem value="all">All</MenuItem>
           {(()=>{
             const cities = {};
-            console.log(eventList);
             return eventList.map((event)=>{
 
               if(event.venueInfo){

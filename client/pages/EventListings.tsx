@@ -66,7 +66,6 @@ const EventListings: React.FC = () => {
   };
 
   const handleSort = () => {
-    console.log('sort date');
   }
 
   const updateEvents = (city) => {

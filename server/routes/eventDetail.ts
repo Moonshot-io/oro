@@ -123,7 +123,6 @@ eventDetailsRouter.post('/pins', (req, res) => {
       data: pinObj,
     })
     .then((data) => {
-      console.log(data);
       res.send(data).status(201);
     })
     .catch((err) => {

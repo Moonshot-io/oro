@@ -4,36 +4,8 @@ import {
   Box,	Grid, Typography,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, Button, ArrowBackIosNewIcon, Fab, purple,
 } from '../styles/material';
 import EventCards from './ArtistEventCards';
-import ArtistBanner from './ArtistBanner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Dropdown from '../components/Dropdown';
-interface ExpandMoreProps extends IconButtonProps {
-    expand: boolean;
-}
-
-const fontColor = {
-  style: { color: '#a352ff' }
-};
-
-const ColorButton = Styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(purple[500]),
-  backgroundColor: purple[500],
-  '&:hover': {
-    backgroundColor: purple[700],
-  },
-}));
-const ExpandMore = Styled((props: ExpandMoreProps) => {
-  const { ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
 interface artistPropsType {
   artistProps: {
   id: number,
@@ -54,14 +26,8 @@ interface artistPropsType {
 
 const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
   const navigate = useNavigate();
-  const [expanded, setExpanded] = React.useState(false);
-  const [ keyword, setKeyword ] = useState('');
   const [allEvents, setAllEvents] = useState([]);
-  const [city, setCity] = useState('any');
-  const [eventsExist, setEventsExist] = useState(true);
   const [events, setEvents] = useState(
     [{
       name: 'No events found',
@@ -88,14 +54,26 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
     const bioArr = bio.split(' ');
     let newBio = '';
     let i = 0;
-    while(bioArr[i][0] !== '<'){
-      newBio += bioArr[i] + ' ';
-      i++;
-    }
-    newBio = newBio.slice(0, newBio.length - 1);
-    console.log(newBio[newBio.length - 1]);
-    if(newBio[newBio.length - 1] !== '.'){
-      newBio += '.';
+    if(bioArr.includes('<a') ){
+      while(bioArr[i][0] !== '<'){
+        newBio += bioArr[i] + ' ';
+
+        if(bioArr[i+1] !== undefined){
+          i++;
+        }
+      }
+      newBio = newBio.slice(0, newBio.length - 1);
+      if(newBio[newBio.length - 1] !== '.'){
+        newBio += '.';
+      }
+    } else {
+      for(let i = 0; i < bioArr.length; i++){
+        newBio += bioArr[i] + ' ';
+      }
+      newBio = newBio.slice(0, newBio.length - 1);
+      if(newBio[newBio.length - 1] !== '.'){
+        newBio += '.';
+      }
     }
     return newBio;
   }
@@ -128,23 +106,7 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
 
   useEffect(()=>{
     getArtistEvents(artistName);
-  },[])
-
-  const updateEvents = (city) => {
-    setCity(city);
-    if(city === 'all'){
-      setEvents(allEvents);
-    } else {
-    const filteredEvents = allEvents.filter((event) => {
-      return event.venueInfo[0].city === city;
-    })
-    if(!filteredEvents.length){
-      setEvents([...allEvents]);
-    } else {
-      setEvents([...filteredEvents]);
-    }
-  }
-  }
+  },[]);
 
   return (
       <Box>

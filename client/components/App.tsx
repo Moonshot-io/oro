@@ -22,13 +22,11 @@ import { EventContextProvider } from '../context/EventContext';
 import { Container } from '../components/Container';
 import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 import { io } from 'socket.io-client'
 const App: React.FC = () => {
   const socket = useRef()
   const userContext = useContext(UserContext);
-  const navigate = useNavigate();
 
   const { currentUserInfo } = userContext;
   const location = useLocation();
@@ -36,7 +34,7 @@ const App: React.FC = () => {
   const [notifications, setNotifications] = React.useState<Array<{id: number; userId: string; commentId: number; type: string; read: boolean; created_at: string;}>>([]);
   const [profilePic, setProfilePic] = useState('');
   const [notiCount, setNotiCount] = useState<number>(0);
-  
+
   socket.current = io.connect();
 
 
@@ -96,7 +94,6 @@ const App: React.FC = () => {
 
   return (
     <Container onClick={navClick}>
-      {/* <UserContextProvider> */}
       <EventContextProvider>
         <ArtistContextProvider>
           <Navbar notiCount={notiCount} profile={profilePic} />
@@ -118,7 +115,6 @@ const App: React.FC = () => {
           </Routes>
         </ArtistContextProvider>
       </EventContextProvider>
-      {/* </UserContextProvider> */}
     </Container>
   );
 };

@@ -27,7 +27,6 @@ interface artistPropsType {
 const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:artistPropsType) => {
   const favesLocalData = window.localStorage.getItem('userFaves');
   if (!favesLocalData) {
-    console.log('if local storage doesnt exist, create empty object');
     window.localStorage.setItem('userFaves', JSON.stringify({}));
   }
   const theme = UseTheme();
@@ -43,13 +42,11 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
 
   const { currentUserInfo } = useContext(UserContext);
   const handleClick = (name:string) => {
-    console.log('handleClick');
     navigate(`/artists/${name}`);
     updateSingle(name);
   };
 
   const handleFollow = (artistId: number) => {
-    console.log('follow', artistId);
     const favesLocalData = window.localStorage.getItem('userFaves');
     let favesObj: object;
     if (favesLocalData) {
@@ -73,12 +70,10 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
   };
 
   const getLocalStorage = ()=>{
-    console.log('getLocalStorage');
     const favesLocalData = window.localStorage.getItem('userFaves');
     let favesObj: {0: boolean};
     if (favesLocalData) {
       favesObj = JSON.parse(favesLocalData);
-      console.log(favesObj, id);
     } else {
       favesObj = {0: false};
     }
@@ -89,23 +84,18 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
 
 
   const handleUnfollow = (artistId: number) => {
-    console.log('unfollow', artistId);
     const favesLocalData = window.localStorage.getItem('userFaves');
     let favesObj: {0: boolean};
     if (favesLocalData) {
-      console.log(favesLocalData);
       favesObj = JSON.parse(favesLocalData);
       favesObj[artistId] = false;
-      console.log(favesObj);
       window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
       const checkLocalData = window.localStorage.getItem('userFaves');
-      console.log(checkLocalData);
     } else {
       favesObj = {0: false};
       favesObj[artistId] = false;
       window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
       const checkLocalData = window.localStorage.getItem('userFaves');
-      console.log(checkLocalData);
     }
 
     const userId = currentUserInfo?.id;
@@ -123,7 +113,6 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
   };
 
   useEffect(()=>{
-    console.log('useEffect, set ThumbFav state with favorite', favorite);
     setThumbFav(thumbFav);
   }, []);
 

@@ -34,7 +34,6 @@ const UserChat: React.FC = () => {
     }, [currentUserInfo]);
 
   const handleChatChange = (chat) => {
-    console.log(chat);
     setCurrentChat(chat);
   };
 

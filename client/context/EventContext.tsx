@@ -24,8 +24,6 @@ const EventContextProvider = ({ children, ...props }: Props) => {
     axios
       .get('/api/eventDetails', { params: { id } })
       .then(({ data }) => {
-        console.log(data);
-
         setEventDetails(data);
       })
       .catch((err) => console.error(err));

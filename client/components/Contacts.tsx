@@ -33,7 +33,6 @@ const Contacts = ({changeChat, currentContact}) => {
         senderId: sender.id,
         receiverId: receiver.id
       });
-      console.log(response)
       setCurrentChat(response.data);
   }
 
@@ -41,8 +40,6 @@ const Contacts = ({changeChat, currentContact}) => {
   const changeCurrentChat = (index:number, contact) => {
 
     getMessages(currentUser, contact);
-    console.log(index, contact);
-    console.log('change current chat');
     setCurrentSelected(index);
     changeChat(contact);
   };

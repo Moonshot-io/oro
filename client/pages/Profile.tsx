@@ -208,9 +208,6 @@ const Profile = () => {
     getUserEvents();
   }, [userPhotos]);
 
-  // console.log('userEvents =>', userEvents);
-  // console.log('userPhotos => ', userPhotos);
-
   if (currentUserInfo?.id) {
     return (
       <div className="page-body">

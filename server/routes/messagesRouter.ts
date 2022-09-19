@@ -23,7 +23,6 @@ const addMessage = async (req, res, next) => {
 }
 
 const getAllMessages = async (req, res, next) => {
-  console.log(req.body);
   try {
     const { senderId, receiverId } = req.body;
     const messagesTo = await prisma.messages.findMany({
@@ -58,8 +57,6 @@ const getAllMessages = async (req, res, next) => {
 
     const messages = messagesTo.concat(messagesFrom);
 
-    console.log(messages);
-
   messages.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1));
   const projectMessages = messages.map(msg => {
     return{
@@ -67,9 +64,6 @@ const getAllMessages = async (req, res, next) => {
       text: msg.text
     }
   })
-
-  console.log(projectMessages);
-
     return res.json(projectMessages);
   } catch (ex) {
       next(ex);

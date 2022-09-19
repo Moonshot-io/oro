@@ -14,7 +14,6 @@ budgetRouter.post('/', async (req, res) => {
     Merch,
     Travel,
   } = req.body;
-  console.log(req.body);
   await prisma.budget
     .create({
       data: {
