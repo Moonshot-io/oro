@@ -89,12 +89,14 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
     if (favesLocalData) {
       favesObj = JSON.parse(favesLocalData);
       favesObj[artistId] = false;
+      window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
+      const checkLocalData = window.localStorage.getItem('userFaves');
     } else {
       favesObj = {0: false};
       favesObj[artistId] = false;
+      window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
+      const checkLocalData = window.localStorage.getItem('userFaves');
     }
-
-    window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
 
     const userId = currentUserInfo?.id;
     axios.put('/api/favArtists/update', { params: { artist: artistId, user: userId } })
@@ -111,11 +113,8 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
   };
 
   useEffect(()=>{
-    setThumbFav(favorite);
-  }, [favorite, thumbFav]);
-  useEffect(()=>{
-    setThumbFav(favorite);
-  }, [favorite]);
+    setThumbFav(thumbFav);
+  }, []);
 
   return (
     <Card sx={{

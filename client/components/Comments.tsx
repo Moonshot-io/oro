@@ -21,7 +21,6 @@ interface UserPictureProps {
 const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
   const socket = useRef()
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
   const userContext = useContext(UserContext);
@@ -67,9 +66,9 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
             ownerId: photo.userId,
             commentId: commentData.data.id,
           });
-  
+
           socket.current = io('/');
-  
+
           socket.current.emit('send-noti', {
             senderId: currentUserInfo.id,
             receiverId: photo.userId,
@@ -130,7 +129,7 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
         value={message}/>
           </Grid>
           </Grid>
-      
+
       }
 
       {!currentUserInfo.id &&

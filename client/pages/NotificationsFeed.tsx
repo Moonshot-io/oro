@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import Notification from '../components/Notification';
-import {Button, Typography, UseTheme} from '../styles/material';
+import {Button, Typography, UseTheme, ColorButton} from '../styles/material';
 import { useLocation } from "react-router-dom";
 
 interface NotificationProps {
@@ -21,7 +21,7 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = UseTheme();
-  
+
   const highlight = theme.palette.primary.contrastText;
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -56,7 +56,7 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
     <div className="page-body">
       <Typography
     variant="h2">Notifications</Typography>
-      <Button sx={{ bgcolor: iconColors }} onClick={clearNotifications}>Clear Notifications</Button>
+      <ColorButton onClick={clearNotifications}>Clear Notifications</ColorButton>
       <div >
         {notifications.map((notif, i) => {
           return (

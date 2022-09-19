@@ -1,24 +1,14 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import AppBar from '@mui/material/AppBar';
-import Grid from '@mui/material/Grid';
-import Toolbar from '@mui/material/Toolbar';
 import Contacts from '../components/Contacts';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import IconButton from '@mui/material/IconButton';
-import RateReviewIcon from '@mui/icons-material/RateReview';
 import ChatContainer from '../components/ChatContainer';
 import { io } from 'socket.io-client'
-import { useTheme } from '@mui/material/styles';
-import { ColorButton } from '../styles/material';
+import { ColorButton, ArrowBackIosNewIcon, Fab, Box, UseTheme, Typography, Grid } from '../styles/material';
 
 const UserChat: React.FC = () => {
   const socket = useRef()
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
@@ -36,8 +26,6 @@ const UserChat: React.FC = () => {
   }, [currentUser]);
   useEffect(()=>{console.info('CHAT', document.querySelectorAll(" p > div "))}, [])
 
-  const obj = {id: '88', profileURL: 'stuff'}
-
   //WORKING LOGIN REDIRECT
   useEffect(() => {
     if (!currentUserInfo?.id) {
@@ -49,48 +37,71 @@ const UserChat: React.FC = () => {
     setCurrentChat(chat);
   };
 
+  const goBack = () => {
+    setCurrentChat(undefined);
+  };
+
+
+if(currentChat === undefined){
   return (
     <div className="page-body">
       <div>
       <Typography
-    variant="h2">Chat</Typography>
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" sx={{ bgcolor: inverseMode }}>
-            <Toolbar>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                href='/profile'
-                sx={{ mr: 2 }}
-              >
-                <ArrowBackIosNewIcon />
-              </IconButton>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Messages
-              </Typography>
-              <ColorButton>< RateReviewIcon /></ColorButton>
-            </Toolbar>
-          </AppBar>
-        </Box>
+    variant="h2">Chats</Typography>
       </div>
       <React.Fragment>
         <Grid container columnSpacing={0} maxWidth="100%" height= '70vh'>
           <Grid item xs={12} key='contactscontainer' maxWidth="100%">
-            <Box sx={{ bgcolor: '#0D1013', height: 'auto', width: '100%' }}>
+            <Box sx={{ height: 'auto', width: '100%' }}>
               <Contacts key='contacts' changeChat={handleChatChange} />
             </Box>
           </Grid>
-            <Box sx={{ bgcolor: '#0D1013', height: 'auto', maxWidth: '100%' }}>
-          <Grid item xs={12} key='chatcontainer' maxWidth= '100%'>
-              <ChatContainer currentUser={currentUser} currentChat={currentChat} socket={socket} />
-          </Grid>
-            </Box>
         </Grid>
       </React.Fragment>
     </div>
   );
+} else {
+  return (
+  <div className="page-body">
+  <div>
+  <Typography
+variant="h2">Chats</Typography>
+  </div>
+  <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
+  <Grid container>
+        <Grid>
+            <Fab
+              size='small'
+              onClick={() => goBack()}
+              sx={{
+                top: 100,
+                right: 'auto',
+                bottom: 'auto',
+                left: 'inherit',
+                position: 'fixed'
+              }}>
+              <ArrowBackIosNewIcon onClick={() => goBack()} />
+            </Fab>
+            </Grid>
+            </Grid>
+          </Box>
+                <React.Fragment>
+        <Grid container columnSpacing={0} maxWidth="100%">
+          <Grid item xs={12} key='contactscontainer' maxWidth="100%">
+            <Box sx={{ height: 'auto', width: '100%' }}>
+              <Contacts key='contacts' changeChat={handleChatChange} currentContact={currentChat}/>
+            </Box>
+          </Grid>
+        </Grid>
+      </React.Fragment>
+            <Box sx={{ height: 'auto', maxWidth: '100%' }}>
+          <Grid item xs={12} key='chatcontainer' maxWidth= '100%'>
+              <ChatContainer currentUser={currentUser} currentChat={currentChat} socket={socket} />
+          </Grid>
+            </Box>
+            </div>
+)
+}
 };
 
 

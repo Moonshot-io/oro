@@ -29,8 +29,9 @@ import {
   Snackbar,
   CardMedia,
   Divider,
+  ColorButton,
+  UseTheme
 } from '../styles/material';
-import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +72,7 @@ const AccordionSummary = styled((props) => (
 ))(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, .05)'
+      ? '#232C35'
       : 'rgba(0, 0, 0, .03)',
   flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
@@ -98,7 +99,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
   const navigate = useNavigate();
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const firstName = currentUserInfo?.fullName.split(' ')[0];
@@ -219,13 +220,13 @@ const Profile = () => {
         />
         <h1>Hello {firstName}</h1>
         <div>
-          <Button
-            sx={{ bgcolor: inverseMode, color: 'inherit', mb: '30px' }}
+          <ColorButton
+            sx={{ mb: '30px' }}
             variant='outlined'
             onClick={handleClickOpen}
           >
             Update Profile
-          </Button>
+          </ColorButton>
           <Dialog
             open={open}
             onClose={handleClose}
@@ -338,12 +339,12 @@ const Profile = () => {
             return (
               <div key={index}>
                 <Accordion
-                  sx={{ bgcolor: inverseMode }}
+                  sx={{ bgcolor: inverseMode, backgroundImage: 'none' }}
                   expanded={expanded === `panel${index + 1}`}
                   onChange={handleChange(`panel${index + 1}`)}
                 >
                   <AccordionSummary
-                    sx={{ bgcolor: inverseMode }}
+                    sx={{ bgcolor: inverseMode, backgroundImage: 'none' }}
                     aria-controls='panel1d-content'
                     id='panel1d-header'
                   >
@@ -407,18 +408,16 @@ const Profile = () => {
                         {moment(event.endDate).format('llll')}
                       </ListItem>
                       <div id='profile-event-buttons'>
-                        <Button
-                          sx={{ bgcolor: iconColors, color: inverseMode }}
+                        <ColorButton
                           onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
                         >
                           More Details
-                        </Button>
-                        <Button
-                          sx={{ bgcolor: iconColors, color: inverseMode }}
+                        </ColorButton>
+                        <ColorButton
                           onClick={() => deleteEvent(event)}
                         >
                           Unsave Event
-                        </Button>
+                        </ColorButton>
                       </div>
                     </List>
                   </AccordionDetails>

@@ -23,7 +23,6 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
   const theme = UseTheme();
-  const highlight = theme.palette.primary.contrastText;
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const [commentText, setCommentText] = useState<string>(`${comment.comment}`);
