@@ -91,7 +91,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo, setCurrentUserInfo } = useContext(UserContext);
+  const { currentUserInfo, setCurrentUserInfo  } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -130,7 +130,7 @@ const Profile = () => {
     axios
       .get(`/api/profile/event_photos/${currentUserInfo?.id}`)
       .then(({ data }) => {
-        setUserPhotos(data);
+        setUserPhotos([...data]);
       })
       .catch((err) => console.error(err));
   };
@@ -200,14 +200,16 @@ const Profile = () => {
       .catch(err => console.error(err));
   }
 
-  // const facebookLogin = () => {
-  //   window.open('/auth/facebook', '_self');
-  // }
-
   useEffect(() => {
     getUserPhotos();
+  }, [currentUserInfo]);
+
+  useEffect(() => {
     getUserEvents();
-  }, []);
+  }, [userPhotos]);
+
+  // console.log('userEvents =>', userEvents);
+  // console.log('userPhotos => ', userPhotos);
 
   if (currentUserInfo?.id) {
     return (
@@ -238,9 +240,6 @@ const Profile = () => {
                 Add your social media accounts to stay connected with other
                 concert and festival goers.
               </DialogContentText>
-              {/* <FacebookLoginButton onClick={ facebookLogin } />
-              <InstagramLoginButton />
-              <TwitterLoginButton /> */}
                 <TextField
                   autoFocus
                   margin='dense'

@@ -110,29 +110,6 @@ app.post('/logout', (req, res) => {
   });
 });
 
-// import facebookStrategy from 'passport-facebook';
-// const FacebookStrategy = facebookStrategy.Strategy;
-
-// passport.use(new FacebookStrategy({
-//   clientID: process.env.FB_APP_ID,
-//   clientSecret: process.env.FB_CLIENT_SECRET,
-//   callbackURL: process.env.FB_CALLBACK_URL,
-// },
-//   (async (_accessToken: any, _refreshToken: any, profile: undefined, cb: (arg0: undefined, arg1: undefined) => any) => {
-//     console.log(profile);
-//     cb(null, profile);
-//   })
-// ));
-
-// app.get('/auth/facebook',
-//   passport.authenticate('facebook'));
-
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', { failureRedirect: '/login' }),
-//   function (_req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
 
 app.get('/*', (_req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'), (err) => {
@@ -164,8 +141,6 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName
   global.chatSocket = socket;
   socket.on('add-user', (userId: any, userName?: string) => {
     onlineUsers[userId] = socket.id;
-    console.log(`${userName} connected`);
-    console.log(onlineUsers);
   });
 
   socket.on('send-msg', (data: { receiverId: string;}) => {
@@ -176,8 +151,6 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName
   });
 
   socket.on('send-noti', (data: {receiverId: string, sender: string;}) => {
-    console.log(`${data.sender} sent a notification`);
-    console.log(onlineUsers[data.receiverId]);
     const sendUserSocket = onlineUsers[data.receiverId];
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit('noti-receive', data);

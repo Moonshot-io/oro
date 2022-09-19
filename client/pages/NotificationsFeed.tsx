@@ -29,13 +29,8 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
   const location = useLocation();
 
   useEffect(() => {
-    // if (notif.length) {
       setNotifications([...notif]);
-    // } else {
-    //   setNotifications([]);
-    // }
-    // console.log(notif);
-    // getNotifications();
+
   }, []);
 
   useEffect(() => {
@@ -45,20 +40,6 @@ const NotificationsFeed: React.FC<NotificationProps> = ({notif, getNotifications
 
   }, [notifications]);
 
-
-  // const getNotifications = (): void => {
-  //   axios.get('/api/notifications', {
-  //     params: {
-  //       userId: currentUserInfo?.id
-  //     }
-  //   })
-  //     .then((notificationsObj) => {
-  //       setNotifications(notificationsObj.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
 
   const clearNotifications = (): void => {
     axios.delete('/api/notifications/all', {

@@ -2,8 +2,9 @@ import { Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal,
 import axios from 'axios';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { EventContext } from '../context/EventContext';
-import { CircleRounded } from '@mui/icons-material';
+import { CircleRounded, Close } from '@mui/icons-material';
 import { wrap } from 'module';
+import { IconButton } from '@mui/material';
 
 interface Hotel {
   location_id: string;
@@ -28,6 +29,8 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  maxHeight: '90vh',
+  overflowY: 'scroll',
 };
 
 const TravelPlanner: React.FC = () => {
@@ -124,6 +127,12 @@ const TravelPlanner: React.FC = () => {
                   <Typography variant='h3' textAlign={'left'}>
                     {hotelDetails.name}
                   </Typography>
+                  <IconButton
+                    style={{ top: 10, right: 15, position: 'absolute' }}
+                    onClick={() => setOpen(false)}
+                  >
+                    <Close />
+                  </IconButton>
                   <br />
                   <Divider />
                   <br />
@@ -211,6 +220,11 @@ const TravelPlanner: React.FC = () => {
                 <CircularProgress />
               )}
             </Box>
+            {/* <CardActions>
+              <ColorButton variant='contained' onClick={() => handleClose}>
+                Close
+              </ColorButton>
+            </CardActions> */}
           </Modal>
         </Grid>
       </Box>
