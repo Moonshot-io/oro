@@ -2,8 +2,6 @@ import * as React from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import {Box, MenuItem, InputLabel, FormControl, Select, UseTheme} from '../styles/material';
 
-// filter by city
-// filter by date
 export default function Dropdown({eventList, updateEvents}) {
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
