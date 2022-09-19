@@ -29,14 +29,12 @@ import {
   Snackbar,
   CardMedia,
   Divider,
-  ClickAwayListener
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
-// import { FacebookLoginButton, InstagramLoginButton, TwitterLoginButton } from "react-social-login-buttons"; 
 
 interface eventType {
   name: string;
@@ -206,9 +204,6 @@ const Profile = () => {
   useEffect(() => {
     getUserEvents();
   }, [userPhotos]);
-
-  // console.log('userEvents =>', userEvents);
-  // console.log('userPhotos => ', userPhotos);
 
   if (currentUserInfo?.id) {
     return (
