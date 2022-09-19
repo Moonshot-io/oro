@@ -14,7 +14,7 @@ eventDetailsRouter.get('/', (req, res) => {
       const eventDetails = {
         id: singleEvent?.id,
         name: singleEvent?.name,
-        image: singleEvent?.images[3].url,
+        image: singleEvent?.images[0].url,
         sales: {
           public: {
             startDateTime: singleEvent?.sales.public.startDateTime,
@@ -123,6 +123,7 @@ eventDetailsRouter.post('/pins', (req, res) => {
       data: pinObj,
     })
     .then((data) => {
+      console.log(data);
       res.send(data).status(201);
     })
     .catch((err) => {
