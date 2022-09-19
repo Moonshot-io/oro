@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageList, Grid } from '../styles/material';
+import { Grid } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import UserPicture from './UserPicture';
 
