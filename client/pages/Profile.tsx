@@ -88,7 +88,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo, setCurrentUserInfo  } = useContext(UserContext);
+  const { currentUserInfo, setCurrentUserInfo, getCurrentUser  } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -198,6 +198,10 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  useEffect(() => {
     getUserPhotos();
   }, [currentUserInfo]);
 
@@ -216,7 +220,7 @@ const Profile = () => {
         <h1>Hello {firstName}</h1>
         <div>
           <Button
-            sx={{ bgcolor: inverseMode, colors: inverseMode, mb: '30px' }}
+            sx={{ bgcolor: inverseMode, color: 'inherit', mb: '30px' }}
             variant='outlined'
             onClick={handleClickOpen}
           >
@@ -243,7 +247,6 @@ const Profile = () => {
                   fullWidth
                   variant='standard'
                   placeholder='Facebook Link'
-                  value={currentUserInfo.fbId ? currentUserInfo.fbId : null}
                   onChange={handleFacebookChange}
                 />
               <TextField
@@ -255,7 +258,6 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Instagram Link'
-                value={currentUserInfo.instaId ? currentUserInfo.instaId : null}
                 onChange={handleInstagramChange}
               />
               <TextField
@@ -267,13 +269,12 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Twitter Link'
-                value={currentUserInfo.twitterId ? currentUserInfo.twitterId : null}
                 onChange={handleTwitterChange}
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleUpdate}>Update</Button>
+              <Button onClick={handleClose} sx={{ bgcolor: inverseMode, color: 'inherit' }}>Cancel</Button>
+              <Button onClick={handleUpdate} sx={{ bgcolor: inverseMode, color: 'inherit' }}>Update</Button>
             </DialogActions>
           </Dialog>
           <Snackbar
