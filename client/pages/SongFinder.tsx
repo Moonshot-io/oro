@@ -179,7 +179,7 @@ const SongFinder: React.FC = () => {
 
       <div>
         <Grid container>
-          <Grid item xs = {0} md = {4} sx={{ bgcolor: iconColors }}></Grid>
+          <Grid item xs = {0} md = {4}></Grid>
           <Grid item xs ={12} md = {4}>
             <MuiAccordion sx={{ bgcolor: iconColors }} expanded={true} >
               <MuiAccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote></MusicNote>} Song Name
