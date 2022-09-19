@@ -13,14 +13,19 @@ import {
   Grid,
   Container,
   Card,
+  Divider,
   CardActions,
   CardContent,
   Typography,
+  Link,
 } from '../styles/material';
+import { Stack } from '@mui/material';
+import { DoDisturbAltOutlined } from '@mui/icons-material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);
   const theme = UseTheme();
+  const navigate = useNavigate();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
@@ -45,6 +50,16 @@ function DetailCard({ detail }): JSX.Element {
       .post('/api/eventDetails/pins', {
         userId: currentUserInfo?.id,
         eventAPIid: detail.id,
+        name: detail?.name,
+        date: detail?.dates?.localDate,
+        image: detail?.image,
+        venue: detail?.venues?.name,
+        address: detail?.venues?.address?.line1,
+        city: detail?.venues?.city?.name,
+        state: detail?.venues?.state?.name,
+        postalCode: detail?.venues?.postalCode,
+        startDate: detail?.sales?.public?.startDateTime,
+        endDate: detail?.sales?.public?.startDateTime,
       })
       .then(getPins)
       .catch((err) => console.error('POST ERROR', err));
@@ -87,22 +102,72 @@ function DetailCard({ detail }): JSX.Element {
             variant='h5'
             component='div'
           >
-            {moment(detail?.dates?.localDate).format('LL')}
+            {detail?.name}
           </Typography>
+          <Typography> Promoter :</Typography>
           <Typography variant='body2' color='text.secondary'>
             {detail?.promoter?.name}
           </Typography>
+          <Typography> Venue :</Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.venues?.name}
+          </Typography>
+          <Typography> Address :</Typography>
           <Typography variant='body2' color='text.secondary'>
             {detail?.venues?.address?.line1} <br></br>
             {detail?.venues?.city?.name}, {detail?.venues?.state?.name},{' '}
             {detail?.venues?.postalCode}
           </Typography>
+          <Typography>Phone Number :</Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.boxOfficeInfo.phoneNumberDetail}
+          </Typography>
+          <Typography>Box Office Info :</Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.boxOfficeInfo.openHoursDetail}
+          </Typography>
+          <Typography>Parking Info :</Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.boxOfficeInfo.parkingDetails}
+          </Typography>
+          <Typography>Will Call Info :</Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.boxOfficeInfo.willCallDetail}
+          </Typography>
+          <Typography>General Event Info :</Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {detail?.info?.info}
+            <br />
+            <Divider />
+            <br />
+            {detail?.info?.note}
+            <br />
+            <Divider />
+            <br />
+            {detail?.generalInfo?.generalRule}
+          </Typography>
         </CardContent>
-        <CardActions>
-          <ColorButton variant='contained' onClick={handleClick}>
-            Save
-          </ColorButton>
-        </CardActions>
+        <Stack
+          direction={'row'}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+        >
+          <CardActions>
+            <ColorButton variant='contained' onClick={handleClick}>
+              Save Event
+            </ColorButton>
+          </CardActions>
+          <CardActions>
+            <a
+              href={detail?.ticketURL}
+              rel='noreferrer nofollow'
+              target='_blank'
+              style={{ textDecoration: 'none' }}
+            >
+              <ColorButton variant='contained'>Purchase Tickets</ColorButton>
+            </a>
+          </CardActions>
+        </Stack>
       </Card>
     </div>
   );
@@ -130,12 +195,8 @@ const EventDetails: React.FC = () => {
   }, []);
 
   const mainFeaturedPost: {
-    description?: string;
     image?: string;
-    title?: string;
   } = {
-    title: eventDetails?.name,
-    description: `${eventDetails?.venues.name}... ${eventDetails?.venues.city.name}, ${eventDetails?.venues.state.name}`,
     image: eventDetails?.image,
   };
 
