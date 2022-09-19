@@ -141,8 +141,6 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName
   global.chatSocket = socket;
   socket.on('add-user', (userId: any, userName?: string) => {
     onlineUsers[userId] = socket.id;
-    console.log(`${userName} connected`);
-    console.log(onlineUsers);
   });
 
   socket.on('send-msg', (data: { receiverId: string;}) => {
@@ -153,8 +151,6 @@ io.on('connection', (socket: { on: (arg0: string, arg1: { (userId: any, userName
   });
 
   socket.on('send-noti', (data: {receiverId: string, sender: string;}) => {
-    console.log(`${data.sender} sent a notification`);
-    console.log(onlineUsers[data.receiverId]);
     const sendUserSocket = onlineUsers[data.receiverId];
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit('noti-receive', data);

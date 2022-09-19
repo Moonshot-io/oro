@@ -17,7 +17,6 @@ notificationsRouter.get('/', async (req, res) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 
@@ -68,7 +67,6 @@ notificationsRouter.delete('/all', async (req, res) => {
       res.sendStatus(200);
     })
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 });
@@ -90,7 +88,6 @@ notificationsRouter.delete('/', async (req, res) => {
           res.sendStatus(200);
         })
         .catch((err) => {
-          console.error(err);
           res.sendStatus(500);
         });
 

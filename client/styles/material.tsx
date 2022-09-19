@@ -96,12 +96,24 @@ import stack from '@mui/material/Stack';
 import input from '@mui/material/Input';
 import sendIcon from '@mui/icons-material/Send';
 import clickAwayListener from '@mui/material/ClickAwayListener';
+import editOutlinedIcon from '@mui/icons-material/EditOutlined';
+import deleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import taskAltIcon from '@mui/icons-material/TaskAlt';
+import doDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
+import addPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import moreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 export const SendIcon = sendIcon;
 export const Input = input;
 
 export const Stack = stack;
 
+export const MoreHorizIcon = moreHorizIcon;
+export const TaskAltIcon = taskAltIcon;
+export const DoDisturbAltIcon = doDisturbAltIcon;
+export const AddPhotoAlternateIcon = addPhotoAlternateIcon;
+export const DeleteOutlinedIcon = deleteOutlinedIcon;
+export const EditOutlinedIcon = editOutlinedIcon;
 export const CircularProgress = circularProgress;
 export const AttachMoneyIcon = attachMoneyIcon;
 export const InputAdornment = inputAdornment;
