@@ -1,24 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import { UseTheme, ListItemAvatar, ListItemText, Divider, Avatar, Typography, List, ListItemButton, Grid, ImageList, Card } from '../styles/material';
+import { ListItemText, Avatar, ListItemButton, Grid } from '../styles/material';
 
 const Contacts = ({changeChat, currentContact}) => {
   const userContext = useContext(UserContext);
   const { currentUserInfo, userContacts } = userContext;
-  const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
-
   const currentUser = currentUserInfo;
-  const [allContacts, setAllContacts] = useState(userContacts);
   const [currentUserName, setCurrentUserName ] = useState('');
   const [ currentUserImage, setCurrentUserImage ] = useState('');
   const [ currentSelected, setCurrentSelected ] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [open, setOpen] = React.useState(false);
   const [currentChat, setCurrentChat] = useState([]);
-  const [recentMessages, setMessages] = useState([]);
   useEffect(() => {
     if (currentUser) {
       setCurrentUserName(currentUser.fullName);

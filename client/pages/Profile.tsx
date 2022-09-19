@@ -30,14 +30,12 @@ import {
   CardMedia,
   Divider,
   ColorButton,
-  ClickAwayListener
+  UseTheme
 } from '../styles/material';
-import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
-// import { FacebookLoginButton, InstagramLoginButton, TwitterLoginButton } from "react-social-login-buttons";
 
 interface eventType {
   name: string;
@@ -74,7 +72,7 @@ const AccordionSummary = styled((props) => (
 ))(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, .05)'
+      ? '#232C35'
       : 'rgba(0, 0, 0, .03)',
   flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
@@ -91,7 +89,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo, setCurrentUserInfo  } = useContext(UserContext);
+  const { currentUserInfo, setCurrentUserInfo, getCurrentUser  } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -101,7 +99,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
   const navigate = useNavigate();
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const firstName = currentUserInfo?.fullName.split(' ')[0];
@@ -201,6 +199,10 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  useEffect(() => {
     getUserPhotos();
   }, [currentUserInfo]);
 
@@ -246,7 +248,6 @@ const Profile = () => {
                   fullWidth
                   variant='standard'
                   placeholder='Facebook Link'
-                  value={currentUserInfo.fbId ? currentUserInfo.fbId : null}
                   onChange={handleFacebookChange}
                 />
               <TextField
@@ -258,7 +259,6 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Instagram Link'
-                value={currentUserInfo.instaId ? currentUserInfo.instaId : null}
                 onChange={handleInstagramChange}
               />
               <TextField
@@ -270,13 +270,12 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Twitter Link'
-                value={currentUserInfo.twitterId ? currentUserInfo.twitterId : null}
                 onChange={handleTwitterChange}
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleUpdate}>Update</Button>
+              <Button onClick={handleClose} sx={{ bgcolor: inverseMode, color: 'inherit' }}>Cancel</Button>
+              <Button onClick={handleUpdate} sx={{ bgcolor: inverseMode, color: 'inherit' }}>Update</Button>
             </DialogActions>
           </Dialog>
           <Snackbar
@@ -340,12 +339,12 @@ const Profile = () => {
             return (
               <div key={index}>
                 <Accordion
-                  sx={{ bgcolor: inverseMode }}
+                  sx={{ bgcolor: inverseMode, backgroundImage: 'none' }}
                   expanded={expanded === `panel${index + 1}`}
                   onChange={handleChange(`panel${index + 1}`)}
                 >
                   <AccordionSummary
-                    sx={{ bgcolor: inverseMode }}
+                    sx={{ bgcolor: inverseMode, backgroundImage: 'none' }}
                     aria-controls='panel1d-content'
                     id='panel1d-header'
                   >

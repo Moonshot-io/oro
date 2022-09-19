@@ -1,21 +1,15 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import { UserContext } from '../context/UserContext';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ChatInput from './ChatInput';
 import axios from 'axios';
-import { CssTextField, Box, Grid, Button, UseTheme, Typography } from '../styles/material';
+import { Box, Typography } from '../styles/material';
 import { v4 as uuidv4 } from 'uuid';
 
 const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
-  const theme = UseTheme();
-  // const iconColors = theme.palette.secondary.contrastText;
-  // const inverseMode = theme.palette.secondary.main;
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [sender, setSender] = useState(null);
-  const userContext = useContext(UserContext);
-  const { currentUserInfo } = userContext;
 
 
   useEffect(() => {
@@ -63,11 +57,6 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
       });
     }
   });
-
-  const fontColor = {
-    style: { color: '#a352ff' }
-  };
-
   useEffect(() => {
 
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);

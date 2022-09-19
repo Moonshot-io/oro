@@ -25,6 +25,7 @@ import { UserContext } from '../context/UserContext';
 import Popover from '@mui/material/Popover';
 import { CardActionArea } from '@mui/material';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -63,6 +64,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
   const [openSnack, setOpenSnack] = useState(false);
   const { currentUserInfo } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+  const navigate = useNavigate();
 
   const handlePopover = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -218,7 +220,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                 </div>
                 <CardHeader
                   title={photoEvent.name}
-                  // subheader={moment(photo.created_at).calendar()}
+                  onClick={() => navigate(`/eventfeed/?id=${photo.eventAPIid}`)}
                   sx={{ color: '#F0F2F5' }}
                 >
                 </CardHeader>
@@ -232,6 +234,7 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
               <div className='dialog-header' id='other-dialog-header'>
                 <CardHeader
                   title={photoEvent.name}
+                  onClick={() => navigate(`/eventfeed/?id=${photo.eventAPIid}`)}
                   sx={{ color: '#F0F2F5' }}
                 >
                 </CardHeader>

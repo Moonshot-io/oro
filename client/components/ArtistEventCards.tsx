@@ -98,11 +98,3 @@ const EventCards = ({ events }) => {
 };
 
 export default EventCards;
-
-{
-  /* <Grid xs={6} sm={6}>
-<ColorButton variant="contained" onClick={() => {getDetails(id);}}>
-  <InfoIcon className="icon-buttons"/> Info
-</ColorButton>
-</Grid> */
-}

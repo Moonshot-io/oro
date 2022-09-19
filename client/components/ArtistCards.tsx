@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { IconButtonProps } from '@mui/material/IconButton';
 import {
-  Box,	Grid, Typography,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, UseTheme, Styled, Button, ArrowBackIosNewIcon, Fab, purple,
+  Box,	Grid, Typography,	YouTubeIcon,	TwitterIcon,	MusicNoteIcon,	FacebookIcon,	QuizIcon,	InstagramIcon,	LanguageIcon, IconButton, ArrowBackIosNewIcon, Fab
 } from '../styles/material';
 import EventCards from './ArtistEventCards';
 import axios from 'axios';
@@ -25,9 +24,7 @@ interface artistPropsType {
 }
 
 const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
-  const theme = UseTheme();
   const navigate = useNavigate();
-  const [allEvents, setAllEvents] = useState([]);
   const [events, setEvents] = useState(
     [{
       name: 'No events found',

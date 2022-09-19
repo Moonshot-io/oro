@@ -592,7 +592,7 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 #profile-photo-date {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   font-size: small;
   opacity: 0.7;
   padding: 4px 9px 12px 0px;
