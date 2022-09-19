@@ -418,13 +418,6 @@ body {
       background-color: inherit;
     }
   }
-<<<<<<< HEAD
-=======
-}
-
-#social-media {
-  justify-content: center;
->>>>>>> 23d9791db06b96f6699214e84ca41abf56df8871
 }
 
 .commentTime {
