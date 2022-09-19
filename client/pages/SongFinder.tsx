@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import { Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutline} from '@mui/icons-material';
-import {InvertedButton, ColorButton, MuiAccordion, MuiAccordionSummary, MuiAccordionDetails, Typography, ExpandMoreIcon, UseTheme, Button, Grid, Fab } from '../styles/material'
+import {Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutlineIcon, MuiAccordion, MuiAccordionSummary, MuiAccordionDetails, Typography, ExpandMoreIcon, UseTheme, Button, Grid, Fab, ColorButton } from '../styles/material'
 const MicRecorder = require('mic-recorder-to-mp3');
 
 window.oncontextmenu = function (event: any) {
@@ -157,7 +156,7 @@ const SongFinder: React.FC = () => {
     if (artist && favorited === true) {
       return (
         <div>
-          <InvertedButton sx={{ mt: '10px' }} variant='contained' size='small' onClick={removeFavorites}>{<RemoveCircleOutline></RemoveCircleOutline>} remove from favorites</InvertedButton>
+          <Button sx={{ bgcolor: iconColors }} variant='contained' size='small' onClick={removeFavorites}>{<RemoveCircleOutlineIcon></RemoveCircleOutlineIcon>} remove from favorites</Button>
         </div>
       );
     } else if (artist && favorited === false) {
