@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import Comment from './Comment';
+import { io } from 'socket.io-client'
 
 import AvatarComponent from './Avatar';
 import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
