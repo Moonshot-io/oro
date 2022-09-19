@@ -33,38 +33,16 @@ const Contacts = ({changeChat, currentContact}) => {
         senderId: sender.id,
         receiverId: receiver.id
       });
-      return response.data;
+      console.log(response)
+      setCurrentChat(response.data);
   }
-  useEffect(() => {
-    const allMsgs = [];
-
-    if(allContacts){
-      console.log(allContacts);
-      allContacts.map((contact, index) => {
-        getMessages(currentUser, contact)
-        .then((messages) => {
-          console.log(messages[messages.length - 1].text);
-          const recentMsg = messages[messages.length - 1].text;
-          allMsgs.push(recentMsg);
-          console.log(allMsgs);
-        })
-        .catch((err)=> {
-          console.error(err);
-        })
-      })
-      setMessages(allMsgs);
-    }
-
-  }, [allContacts]);
-
-  useEffect(() => {
-
-
-  }, [recentMessages])
-
 
 
   const changeCurrentChat = (index:number, contact) => {
+
+    getMessages(currentUser, contact);
+    console.log(index, contact);
+    console.log('change current chat');
     setCurrentSelected(index);
     changeChat(contact);
   };
@@ -99,7 +77,7 @@ if(currentContact === undefined){
                 <Grid xs={8}>
               <ListItemText
                 primary={contact.fullName}
-                secondary='no messsages...' />
+                />
             </Grid>
             </ListItemButton>
             </Grid>
@@ -133,9 +111,7 @@ if(currentContact === undefined){
                   </Grid>
                   <Grid xs={8}>
                 <ListItemText
-                  primary={contact.fullName}
-                  secondary={<React.Fragment>
-                  </React.Fragment>} />
+                  primary={contact.fullName} />
               </Grid>
               </ListItemButton>
               </Grid>

@@ -23,42 +23,42 @@ const addMessage = async (req, res, next) => {
 }
 
 const getAllMessages = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { senderId, receiverId } = req.body;
-    const messages = await prisma.messages.findMany({
+    const messagesTo = await prisma.messages.findMany({
       where: {
         AND: [
           {
-            OR: [
-              {
                 senderId: {
                   equals: senderId
-                }
-              },
-              {
-                senderId: {
-                  equals: receiverId
-                }
-              }
-            ]
-          },
-          {
-            OR: [
-              {
+                },
                 receiverId: {
                   equals: receiverId
                 }
-              },
-              {
-                receiverId: {
-                  equals: senderId
-                }
-              }
-            ]
           }
         ]
       }
     })
+
+    const messagesFrom = await prisma.messages.findMany({
+      where: {
+        AND: [
+          {
+                senderId: {
+                  equals: receiverId
+                },
+                receiverId: {
+                  equals: senderId
+                }
+          }
+        ]
+      }
+    })
+
+    const messages = messagesTo.concat(messagesFrom);
+
+    console.log(messages);
 
   messages.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1));
   const projectMessages = messages.map(msg => {
@@ -67,6 +67,8 @@ const getAllMessages = async (req, res, next) => {
       text: msg.text
     }
   })
+
+  console.log(projectMessages);
 
     return res.json(projectMessages);
   } catch (ex) {
@@ -79,3 +81,39 @@ messagesRouter.post('/getmsg', getAllMessages);
 
 
 export default messagesRouter;
+
+
+// const messagesFrom = await prisma.messages.findMany({
+//   where: {
+//     AND: [
+//       {
+//         OR: [
+//           {
+//             senderId: {
+//               equals: senderId
+//             }
+//           },
+//           {
+//             senderId: {
+//               equals: receiverId.id
+//             }
+//           }
+//         ]
+//       },
+//       {
+//         OR: [
+//           {
+//             receiverId: {
+//               equals: receiverId.id
+//             }
+//           },
+//           {
+//             receiverId: {
+//               equals: senderId
+//             }
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// })
