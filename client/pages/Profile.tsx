@@ -414,13 +414,11 @@ const Profile = () => {
                       </ListItem>
                       <div id='profile-event-buttons'>
                         <ColorButton
-                          sx={{ bgcolor: iconColors, color: inverseMode }}
                           onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
                         >
                           More Details
                         </ColorButton>
                         <ColorButton
-                          sx={{ bgcolor: iconColors, color: inverseMode }}
                           onClick={() => deleteEvent(event)}
                         >
                           Unsave Event

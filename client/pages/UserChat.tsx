@@ -26,8 +26,6 @@ const UserChat: React.FC = () => {
   }, [currentUser]);
   useEffect(()=>{console.info('CHAT', document.querySelectorAll(" p > div "))}, [])
 
-  const obj = {id: '88', profileURL: 'stuff'}
-
   //WORKING LOGIN REDIRECT
   useEffect(() => {
     if (!currentUserInfo?.id) {
@@ -50,7 +48,7 @@ if(currentChat === undefined){
     <div className="page-body">
       <div>
       <Typography
-    variant="h2">Chat</Typography>
+    variant="h2">Chats</Typography>
       </div>
       <React.Fragment>
         <Grid container columnSpacing={0} maxWidth="100%" height= '70vh'>
@@ -68,7 +66,7 @@ if(currentChat === undefined){
   <div className="page-body">
   <div>
   <Typography
-variant="h2">Chat</Typography>
+variant="h2">Chats</Typography>
   </div>
   <Box sx={{ position: 'sticky', zIndex: 'tooltip' }}>
   <Grid container>

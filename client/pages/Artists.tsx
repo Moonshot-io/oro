@@ -6,17 +6,16 @@ import {Box,	Grid, UseTheme, Typography} from '../styles/material';
 import ArtistThumbnail from '../components/ArtistThumbnail';
 import Login from './Login';
 import ArtistBanner from '../components/ArtistBanner';
+
 const Artists = () => {
   const { currentUserInfo } = useContext(UserContext);
-
   const artistContext = useContext(ArtistContext);
   const {artistData, getFaveArtists } = artistContext;
   const {allArtists, artists} = artistData;
   const [singleArtist, setSingleArtist] = useState('none');
   const [faveUpdated, setFaveUpdated] = useState(false);
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
+
 
   const updateSingle = (name: string) => {
     setSingleArtist(name);
@@ -31,13 +30,14 @@ const Artists = () => {
   }, []);
   useEffect(() => {
     getFaveArtists(currentUserInfo?.id);
-  }, [faveUpdated]);
+  }, []);
 
   const saveUpdates = () => {
     setFaveUpdated(!faveUpdated);
   }
 
   if (currentUserInfo?.id === '') {
+      window.localStorage.setItem('userFaves', JSON.stringify({}));
     return (
       <div className="page-body">
         <Login/>
@@ -67,11 +67,11 @@ const Artists = () => {
       </div></>
     );
   } else if (artists === true && Array.isArray(allArtists)) {
-    const favesObj = {};
-    allArtists.forEach((child) => {
-      favesObj[child.id] = true;
-      window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
-    });
+    // const favesObj = {};
+    // allArtists.forEach((child) => {
+    //   favesObj[child.id] = true;
+    //   window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
+    // });
     return (
       <div className="page-body">
             <Typography

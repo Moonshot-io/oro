@@ -1,5 +1,6 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { UserContext } from '../context/UserContext';
 
 interface Props {
   children?: ReactNode
@@ -29,6 +30,24 @@ interface artistTypeProps {
 const ArtistContext = React.createContext({} as artistTypeProps);
 
 const ArtistContextProvider = ({ children }: Props) => {
+  const { currentUserInfo } = useContext(UserContext);
+
+  const getFaveArtists = (id: string | undefined) => {
+    if (id) {
+      axios.get(`/api/favArtists/${id}`)
+        .then((artistData) => {
+          const artistsArr = artistData.data;
+          setArtistData(artistsArr);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
+  useEffect(()=>{
+    getFaveArtists(currentUserInfo?.id);
+  }, [])
 
   const [artistData, setArtistData] = useState(
     {allArtists: [{
@@ -49,18 +68,6 @@ const ArtistContextProvider = ({ children }: Props) => {
     }
   );
 
-  const getFaveArtists = (id: string | undefined) => {
-    if (id) {
-      axios.get(`/api/favArtists/${id}`)
-        .then((artistData) => {
-          const artistsArr = artistData.data;
-          setArtistData(artistsArr);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  };
 
   return (
     <ArtistContext.Provider value = {{artistData, setArtistData, getFaveArtists}} >
