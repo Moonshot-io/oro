@@ -177,19 +177,12 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
           />
         </CardActionArea>
       </Card>
-      {/* <img
-        id='profile-photo'
-        src={`${photo.photoUrl}?w=100&h=100&fit=crop&auto=format`}
-        srcSet={`${photo.photoUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-        alt={photoEvent.name}
-        onClick={handleOpen}
-      /> */}
       <Dialog
         open={open}
         onClose={handleClose}
         id='photo-dialog'
       >
-        <Card sx={{ maxWidth: 345, color: inverseMode, backgroundImage: 'none', }}>
+        <Card sx={{ maxWidth: 345, color: inverseMode, backgroundImage: 'none', overflowY: 'auto' }}>
           {
             currentUserInfo?.id === photo.userId
               ?
@@ -239,7 +232,6 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
               <div className='dialog-header' id='other-dialog-header'>
                 <CardHeader
                   title={photoEvent.name}
-                  // subheader={moment(photo.created_at).calendar()}
                   sx={{ color: '#F0F2F5' }}
                 >
                 </CardHeader>
