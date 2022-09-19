@@ -62,7 +62,8 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
       .then((commentData) => {
         setMessage('');
         getComments();
-        if (!currentUserInfo.id === photo.userId) {
+        if (!(currentUserInfo.id === photo.userId)) {
+          console.log('test');
           axios.post('/api/notifications', {
             ownerId: photo.userId,
             commentId: commentData.data.id,
