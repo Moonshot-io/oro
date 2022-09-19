@@ -1,0 +1,12 @@
+/* body {
+    background-color: #1A2027;
+    color: #1A2027;
+} */
+
+.chat-list{
+    float:left;
+}
+
+.chat{
+    float:right;
+}

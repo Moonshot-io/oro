@@ -28,13 +28,15 @@ import {
   Link,
   Snackbar,
   CardMedia,
-  Divider
+  Divider,
+  ClickAwayListener
 } from '../styles/material';
 import { useTheme } from '@mui/material/styles';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
+// import { FacebookLoginButton, InstagramLoginButton, TwitterLoginButton } from "react-social-login-buttons"; 
 
 interface eventType {
   name: string;
@@ -88,7 +90,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Profile = () => {
-  const { currentUserInfo, getCurrentUser } = useContext(UserContext);
+  const { currentUserInfo, setCurrentUserInfo } = useContext(UserContext);
   const [userEvents, setUserEvents] = useState([]);
   const [userPhotos, setUserPhotos] = useState([]);
   const [facebookLink, setFacebookLink] = useState('');
@@ -165,9 +167,11 @@ const Profile = () => {
           twitter: `${twitterLink}` || null,
         },
       })
-      .then(() => setOpenSnack(true))
-      .then(() => handleClose())
-      .then(() => getCurrentUser())
+      .then(({ data }) => {
+        setCurrentUserInfo(data);
+      })
+      .then(setOpenSnack(true))
+      .then(handleClose())
       .catch((err) => console.error(err));
   };
 
@@ -182,6 +186,22 @@ const Profile = () => {
   const handleTwitterChange = (e) => {
     setTwitterLink(e.target.value);
   };
+
+  const deleteEvent = (event) => {
+    axios.delete('/api/profile/event/', {
+      data: {
+        event
+      }
+    })
+      .then(({ data }) => {
+        setUserEvents(data);
+      })
+      .catch(err => console.error(err));
+  }
+
+  // const facebookLogin = () => {
+  //   window.open('/auth/facebook', '_self');
+  // }
 
   useEffect(() => {
     getUserPhotos();
@@ -217,7 +237,9 @@ const Profile = () => {
                 Add your social media accounts to stay connected with other
                 concert and festival goers.
               </DialogContentText>
-              <div>
+              {/* <FacebookLoginButton onClick={ facebookLogin } />
+              <InstagramLoginButton />
+              <TwitterLoginButton /> */}
                 <TextField
                   autoFocus
                   margin='dense'
@@ -227,9 +249,9 @@ const Profile = () => {
                   fullWidth
                   variant='standard'
                   placeholder='Facebook Link'
+                  value={currentUserInfo.fbId ? currentUserInfo.fbId : null}
                   onChange={handleFacebookChange}
                 />
-              </div>
               <TextField
                 autoFocus
                 margin='dense'
@@ -239,6 +261,7 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Instagram Link'
+                value={currentUserInfo.instaId ? currentUserInfo.instaId : null}
                 onChange={handleInstagramChange}
               />
               <TextField
@@ -250,6 +273,7 @@ const Profile = () => {
                 fullWidth
                 variant='standard'
                 placeholder='Twitter Link'
+                value={currentUserInfo.twitterId ? currentUserInfo.twitterId : null}
                 onChange={handleTwitterChange}
               />
             </DialogContent>
@@ -274,7 +298,7 @@ const Profile = () => {
         </div>
         <div>
           <Box>
-            <Grid container spacing={2} className='social-media'>
+            <Grid container spacing={2} id='social-media'>
               {
                 currentUserInfo.fbId
                   ?
@@ -315,7 +339,7 @@ const Profile = () => {
           </Box>
         </div>
         <>
-          {userEvents.map((event: eventType, index: number) => {
+          {Array.from(userEvents).map((event: eventType, index: number) => {
             return (
               <div key={index}>
                 <Accordion
@@ -387,12 +411,20 @@ const Profile = () => {
                       <ListItem>
                         {moment(event.endDate).format('llll')}
                       </ListItem>
-                      <Button
-                        sx={{ bgcolor: iconColors, color: inverseMode }}
-                        onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
-                      >
-                        More Details
-                      </Button>
+                      <div id='profile-event-buttons'>
+                        <Button
+                          sx={{ bgcolor: iconColors, color: inverseMode }}
+                          onClick={() => navigate(`/details/?id=${event.eventAPIid}`)}
+                        >
+                          More Details
+                        </Button>
+                        <Button
+                          sx={{ bgcolor: iconColors, color: inverseMode }}
+                          onClick={() => deleteEvent(event)}
+                        >
+                          Unsave Event
+                        </Button>
+                      </div>
                     </List>
                   </AccordionDetails>
                 </Accordion>

@@ -26,7 +26,7 @@ const UserPhotos: React.FC<UserPhotosProps> = ({ photos, getUserPhotos }) => {
         id='user-uploads'
         spacing={{ xs: .5, md: 2 }}
       >
-        {photos.map((photo, index) => (
+        {Array.from(photos).map((photo, index) => (
           <Grid 
             item 
             key={index}

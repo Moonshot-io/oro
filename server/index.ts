@@ -41,7 +41,7 @@ passport.use(new GoogleStrategy(
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK_URL,
   },
-  (async (req: any, accessToken: any, refreshToken: any, profile: { id: any; emails: { value: any; }[]; displayName: any; photos: { value: any; }[]; }, cb: (arg0: undefined, arg1: undefined) => any) => {
+  (async (_req: any, _accessToken: any, _refreshToken: any, profile: { id: any; emails: { value: any; }[]; displayName: any; photos: { value: any; }[]; }, cb: (arg0: undefined, arg1: undefined) => any) => {
     await prisma.users.create(
       {
         data: {
@@ -84,7 +84,7 @@ const isLoggedIn = (req: { user: any; }, res: { sendStatus: (arg0: number) => an
 app.get('/hidden', isLoggedIn, (req, res) => {
   const userObj = req.user;
 
-  prisma.users.findUnique({ where: { id: userObj.id }})
+  prisma.users.findUnique({ where: { id: userObj.id } })
     .then((data) => {
       res.status(200).send(data);
     })
@@ -110,7 +110,31 @@ app.post('/logout', (req, res) => {
   });
 });
 
-app.get('/*', (req, res) => {
+// import facebookStrategy from 'passport-facebook';
+// const FacebookStrategy = facebookStrategy.Strategy;
+
+// passport.use(new FacebookStrategy({
+//   clientID: process.env.FB_APP_ID,
+//   clientSecret: process.env.FB_CLIENT_SECRET,
+//   callbackURL: process.env.FB_CALLBACK_URL,
+// },
+//   (async (_accessToken: any, _refreshToken: any, profile: undefined, cb: (arg0: undefined, arg1: undefined) => any) => {
+//     console.log(profile);
+//     cb(null, profile);
+//   })
+// ));
+
+// app.get('/auth/facebook',
+//   passport.authenticate('facebook'));
+
+// app.get('/auth/facebook/callback',
+//   passport.authenticate('facebook', { failureRedirect: '/login' }),
+//   function (_req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
+
+app.get('/*', (_req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'), (err) => {
     if (err) {
       res.status(500).send(err);
