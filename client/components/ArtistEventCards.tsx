@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import moment from 'moment';
@@ -7,12 +7,9 @@ import {
   Grid,
   Paper,
   Typography,
-  ButtonBase,
   LocalActivityIcon,
   CalendarMonthIcon,
-  InfoIcon,
   DescriptionIcon,
-  Button,
   UseTheme,
   Link,
   ColorButton,
@@ -27,19 +24,10 @@ const Img = styled('img')({
 
 const EventCards = ({ events }) => {
   const theme = UseTheme();
-  const navigate = useNavigate();
   let date = events.dates.start.dateTime;
   date = moment(date).add(1, 'day').format('MMMM Do YYYY');
   const image = events.images[0].url;
-  const id = events.id;
   const { name, url, info } = events;
-
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
-
-  const getDetails = (id: string) => {
-    navigate(`/details/?id=${id}`);
-  };
 
   return (
     <Paper
@@ -110,11 +98,3 @@ const EventCards = ({ events }) => {
 };
 
 export default EventCards;
-
-{
-  /* <Grid xs={6} sm={6}>
-<ColorButton variant="contained" onClick={() => {getDetails(id);}}>
-  <InfoIcon className="icon-buttons"/> Info
-</ColorButton>
-</Grid> */
-}

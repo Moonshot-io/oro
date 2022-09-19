@@ -31,7 +31,6 @@ function DetailCard({ detail }): JSX.Element {
 
   useEffect(() => {
     getPins();
-    console.log(detail);
   }, []);
 
   const getPins = () => {
@@ -189,9 +188,7 @@ const EventDetails: React.FC = () => {
   useEffect(() => {
     if (idEvent !== null) {
       getEventDetails(idEvent);
-      console.log(getEventDetails(idEvent), 'not null');
     }
-    console.log(eventDetails, ' null');
   }, []);
 
   const mainFeaturedPost: {

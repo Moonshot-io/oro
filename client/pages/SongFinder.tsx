@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import {Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutlineIcon, MuiAccordion, MuiAccordionSummary, MuiAccordionDetails, Typography, ExpandMoreIcon, UseTheme, Button, Grid, Fab } from '../styles/material'
+import {Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutlineIcon, MuiAccordion, MuiAccordionSummary, MuiAccordionDetails, Typography, ExpandMoreIcon, UseTheme, Button, Grid, Fab, ColorButton } from '../styles/material'
 const MicRecorder = require('mic-recorder-to-mp3');
 
 window.oncontextmenu = function (event: any) {
@@ -162,7 +162,7 @@ const SongFinder: React.FC = () => {
     } else if (artist && favorited === false) {
       return (
         <div>
-          <Button sx={{ bgcolor: iconColors }} variant='contained' size='small' onClick={addToFavorites}>{<Star></Star>} add to favorites</Button>
+          <ColorButton sx={{ mt: '10px' }} variant='contained' size='small' onClick={addToFavorites}>{<Star></Star>} add to favorites</ColorButton>
         </div>
       );
     }
@@ -181,7 +181,7 @@ const SongFinder: React.FC = () => {
           <Grid item xs = {0} md = {4}></Grid>
           <Grid item xs ={12} md = {4}>
             <MuiAccordion sx={{ bgcolor: iconColors }} expanded={true} >
-              <MuiAccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote></MusicNote>} Song Name
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote className='icon-margin'></MusicNote>} Song Name
               </MuiAccordionSummary>
               <MuiAccordionDetails sx={{ bgcolor: inverseMode}}>
                 {song}
@@ -189,7 +189,7 @@ const SongFinder: React.FC = () => {
             </MuiAccordion>
 
             <MuiAccordion sx={{ bgcolor: iconColors }}>
-              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person></Person>} Artist
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person className='icon-margin'></Person>} Artist
               </MuiAccordionSummary>
               <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
@@ -205,7 +205,7 @@ const SongFinder: React.FC = () => {
             </MuiAccordion>
 
             <MuiAccordion sx={{ bgcolor: iconColors }}>
-              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics></Lyrics>} Lyrics
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics className='icon-margin'></Lyrics>} Lyrics
               </MuiAccordionSummary>
               <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div id='lyrics'>
@@ -215,7 +215,7 @@ const SongFinder: React.FC = () => {
             </MuiAccordion>
 
             <MuiAccordion sx={{ bgcolor: iconColors }}>
-              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic className='icon-margin'></LibraryMusic>} Album
               </MuiAccordionSummary>
               <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
@@ -227,10 +227,12 @@ const SongFinder: React.FC = () => {
           </Grid>
         </Grid>
       </div>
-      <div>
+      <div className='paragraph-padding'>
         {recording && 'Audio is recording, please wait'}
       </div>
+      <div className='paragraph-padding'>
       {!recording && 'click to start recording'}
+      </div>
       {recording &&
         <Fab sx={{ bgcolor: inverseMode }} variant='circular'>
           <img height='40px' width='auto' src='https://northshorecenter.org/nscpa_2020/wp-content/plugins/dkddi-events-addon/images/balls.gif'/>

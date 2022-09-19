@@ -54,7 +54,6 @@ eventListingsRouter.get('/list', (req, res) => {
       });
       res.status(200).send({events});
     } else {
-      console.log('no events from server');
       res.status(200).send('false');
 }})
     .catch(err => console.error(err));

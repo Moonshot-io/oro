@@ -285,6 +285,14 @@ body {
   align-items: left;
 }
 
+.paragraph-padding {
+  margin-top: 20px;
+}
+
+.icon-margin {
+  margin-right: 5px;
+}
+
 .home-body {
   display: flex;
   flex-direction: column;
@@ -374,6 +382,42 @@ body {
 
 .chat{
   float:right;
+}
+
+.emoji {
+  position: relative;
+  svg {
+    font-size: 1.5rem;
+    color: #03a9f4;
+    cursor: pointer;
+    margin-left: -25px;
+  }
+  .emoji-picker-react {
+    position: absolute;
+    top: -350px;
+    background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#232c35' : '#FFFFFF'};
+    box-shadow: 1px 1px 5px #232c35;
+    border: none;
+    .emoji-scroll-wrapper::-webkit-scrollbar {
+      background-color: ${ (props) => props.theme.palette.mode === 'dark' ? '#232c35' : '#FFFFFF'};
+      width: 5px;
+      &-thumb {
+        background-color: #a352ff;
+      }
+    }
+    .emoji-categories {
+      button {
+        filter: contrast(0);
+      }
+    }
+    .emoji-search {
+      background-color: inherit;
+      border-color: #a352ff;
+    }
+    .emoji-group:before {
+      background-color: inherit;
+    }
+  }
 }
 
 #social-media {
@@ -548,7 +592,7 @@ color: ${(props) => props.theme.palette.primary.contrastText};
 
 #profile-photo-date {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   font-size: small;
   opacity: 0.7;
   padding: 4px 9px 12px 0px;
