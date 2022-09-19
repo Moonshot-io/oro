@@ -102,12 +102,24 @@ import taskAltIcon from '@mui/icons-material/TaskAlt';
 import doDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
 import addPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import moreHorizIcon from '@mui/icons-material/MoreHoriz';
+import star from '@mui/icons-material/Star';
+import person from '@mui/icons-material/Person';
+import musicNote from '@mui/icons-material/MusicNote';
+import libraryMusic from '@mui/icons-material/LibraryMusic';
+import lyrics from '@mui/icons-material/Lyrics';
+import removeCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 export const SendIcon = sendIcon;
 export const Input = input;
 
 export const Stack = stack;
 
+export const Star = star;
+export const Person = person;
+export const MusicNote = musicNote;
+export const LibraryMusic = libraryMusic;
+export const Lyrics = lyrics;
+export const RemoveCircleOutlineIcon = removeCircleOutlineIcon;
 export const MoreHorizIcon = moreHorizIcon;
 export const TaskAltIcon = taskAltIcon;
 export const DoDisturbAltIcon = doDisturbAltIcon;
