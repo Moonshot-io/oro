@@ -322,6 +322,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
       >
         <Alert
           severity='success'
+          color='info'
           sx={{ width: '100%' }}
         >
           Caption Updated
