@@ -119,11 +119,13 @@ eventDetailsRouter.get('/', (req, res) => {
 
 eventDetailsRouter.post('/pins', (req, res) => {
   const pinObj = req.body;
+  console.log(pinObj, 'body');
   prisma.userEvents
     .create({
       data: pinObj,
     })
     .then((data) => {
+      console.log(data);
       res.send(data).status(201);
     })
     .catch((err) => {

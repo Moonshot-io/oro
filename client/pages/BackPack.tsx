@@ -72,7 +72,7 @@ const BackPack: React.FC = () => {
     axios
       .get(`/api/profile/events/${currentUserInfo?.id}`)
       .then(({ data }) => {
-        // console.log('event data', data);
+        console.log('event data', data);
         setUserEvents(data);
       })
       .catch((err) => console.error(err));
@@ -82,7 +82,7 @@ const BackPack: React.FC = () => {
   }, []);
 
   return (
-    <div className="page-body">
+    <div className='page-body'>
       {Array.isArray(userEvents) ? (
         userEvents.map((event, index) => {
           return (
@@ -148,7 +148,7 @@ const EventItem = function ({
       Travel: budgetList[5].value,
       Merch: budgetList[4].value,
       Drinks: budgetList[2].value,
-      userEventId: event.userEventId,
+      userEventId: event.id,
     };
     try {
       // console.log('budget data', data);
@@ -161,10 +161,9 @@ const EventItem = function ({
     }
   };
   return (
-    <div className="page-body" key={index}>
-      <Typography
-    variant="h2">Event Budgets</Typography>
-    <br></br>
+    <div className='page-body' key={index}>
+      <Typography variant='h2'>Event Budgets</Typography>
+      <br></br>
       <Accordion
         sx={{ bgcolor: inverseMode }}
         expanded={expanded === `panel${index + 1}`}
@@ -191,15 +190,19 @@ const EventItem = function ({
           })}
           <>
             <div margin-top='20px'>
-              <Typography variant="h6">
+              <Typography variant='h6'>
                 Total: ${totalSum ? formatCurrency(totalSum) : 0}
               </Typography>
             </div>
-            <ColorButton style={{
-        borderRadius: 5,
-    }}
-    variant="contained"
-    onClick={handleSubmit}>Save Budget</ColorButton>
+            <ColorButton
+              style={{
+                borderRadius: 5,
+              }}
+              variant='contained'
+              onClick={handleSubmit}
+            >
+              Save Budget
+            </ColorButton>
           </>
         </AccordionDetails>
       </Accordion>

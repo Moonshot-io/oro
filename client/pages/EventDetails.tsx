@@ -20,6 +20,7 @@ import {
   Link,
 } from '../styles/material';
 import { Stack } from '@mui/material';
+import { DoDisturbAltOutlined } from '@mui/icons-material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);
@@ -49,6 +50,16 @@ function DetailCard({ detail }): JSX.Element {
       .post('/api/eventDetails/pins', {
         userId: currentUserInfo?.id,
         eventAPIid: detail.id,
+        name: detail?.name,
+        date: detail?.dates?.localDate,
+        image: detail?.image,
+        venue: detail?.venues?.name,
+        address: detail?.venues?.address?.line1,
+        city: detail?.venues?.city?.name,
+        state: detail?.venues?.state?.name,
+        postalCode: detail?.venues?.postalCode,
+        startDate: detail?.sales?.public?.startDateTime,
+        endDate: detail?.sales?.public?.startDateTime,
       })
       .then(getPins)
       .catch((err) => console.error('POST ERROR', err));
@@ -147,9 +158,14 @@ function DetailCard({ detail }): JSX.Element {
             </ColorButton>
           </CardActions>
           <CardActions>
-            <Link href={detail?.ticketURL} style={{ textDecoration: 'none' }}>
+            <a
+              href={detail?.ticketURL}
+              rel='noreferrer nofollow'
+              target='_blank'
+              style={{ textDecoration: 'none' }}
+            >
               <ColorButton variant='contained'>Purchase Tickets</ColorButton>
-            </Link>
+            </a>
           </CardActions>
         </Stack>
       </Card>
