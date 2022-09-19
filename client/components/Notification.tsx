@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
-import {Paper, Modal, OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button} from '../styles/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { useTheme } from '@mui/material/styles';
-import Comments from './Comments';
-import FeedPhoto from './FeedPhoto';
-import PhotoDialog from './PhotoDialog';
-import {Avatar} from '../styles/material';
 import moment from 'moment';
+
+import Comments from './Comments';
+
+import { useTheme } from '@mui/material/styles';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
+
+import {Avatar, Paper, DeleteOutlinedIcon, EditOutlinedIcon, OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button} from '../styles/material';
 
 interface NotificationProps {
   notif: {
@@ -166,7 +164,6 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
           })
           .catch((err) => console.error(err));
         });
-        // getUserPhotos();
       })
       .catch((err) => console.error(err));
   };
@@ -185,20 +182,13 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
         setEditor(false);
         setModalStatus(false);
         navigate('/notifications');
-        // getUserPhotos()
       })
-      //setOpenSnack(true)
       .catch((err) => console.error(err));
   };
 
 
   return (
     <div className='notificationBody'>
-      {/* {
-        photo &&
-        <PhotoDialog key={location.key} open={modalStatus} photoObj={photo}/>
-
-      } */}
       {
         photo && person && notification?.id &&
         

@@ -1,9 +1,8 @@
-import React, { useEffect, useContext, useState, useRef} from 'react';
+import React, { useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import VSLOGODark from './images/VSLOGO-dark.png';
 import VSLOGO from './images/VSLOGO.png';
-import { io } from 'socket.io-client'
 
 import {
   Box,
@@ -46,8 +45,6 @@ const Navbar = ({notif, notiCount}) => {
   const { currentUserInfo, getCurrentUser, logoutUser } =
     useContext(UserContext);
 
-  // const socket = useRef()
-  // const { notif} = props;
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -56,13 +53,9 @@ const Navbar = ({notif, notiCount}) => {
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
-  // const [notifications, setNotifications] = useState<number>(notiCount);
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setNotifications(notiCount);
-  // }, [])
 
   const pages = [
     [
@@ -145,10 +138,6 @@ const Navbar = ({notif, notiCount}) => {
     isLoggedIn = true;
   }
 
-  // useEffect(()=> {
-  //   console.log(socket)
-  // }, []);
-
   useEffect(() => {
     if (!currentUserInfo?.id) {
       getCurrentUser();
@@ -183,7 +172,6 @@ const Navbar = ({notif, notiCount}) => {
             className='badge'
             overlap='circular'
             badgeContent={
-              //notif.length && notif.filter((notification) => notification.read === false).length
               notiCount
             }
             color='error'>
@@ -295,7 +283,6 @@ const Navbar = ({notif, notiCount}) => {
                   <Badge
                     overlap='circular'
                     badgeContent={
-                      //notif.length && notif.filter((notification) => notification.read === false).length
                       notiCount
                     }
                     color='error'>

@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import axios from 'axios';
-import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 import prisma from '../database/db';
 require('dotenv').config();
@@ -29,7 +27,6 @@ eventFeedRouter.post('/', async (req, res) => {
             res.status(200).send(data);
           })
           .catch((err) => {
-            console.error(err);
             res.sendStatus(500);
           });
       })
@@ -107,7 +104,6 @@ eventFeedRouter.put('/', async (req, res) => {
   })
     .then(() => res.sendStatus(200))
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 });
@@ -129,12 +125,10 @@ eventFeedRouter.delete('/', async (req, res) => {
           res.status(200).send(data);
         })
         .catch((err) => {
-          console.error(err);
           res.sendStatus(500);
         });
     })
     .catch((err) => {
-      console.error(err);
       res.sendStatus(500);
     });
 });

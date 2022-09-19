@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
+
 import axios from 'axios';
-import Comments from '../components/Comments';
-import {Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar, CssTextField} from '../styles/material';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { styled } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
-import Dialog from '@mui/material/Dialog';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+
 import { UserContext } from '../context/UserContext';
+import { useTheme } from '@mui/material/styles';
+
+import Comments from '../components/Comments';
+
+import {Styled, MoreHorizIcon, Menu, MenuItem, Dialog, Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar, CssTextField} from '../styles/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+
 
 interface FeedPhotoProps {
   photo: {
@@ -48,7 +49,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
   const [open, setOpen] = useState<boolean>(false);
   const [openCaptionSnack, setOpenCaptionSnack] = useState<boolean>(false);
 
-  // const [feedPhoto, setFeedPhoto] = useState({});
   const [feedPhoto, setFeedPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null}>({
     userId: '',
     photoUrl: '',
@@ -58,7 +58,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
     caption: '',
     deleteToken: null,
   });
-  // const [feedPhoto, setFeedPhoto] = useState(photo);
+
   const getAvatar = (id: string): void => {
     axios.get('/api/eventFeed/avatar', {
       params: {
@@ -85,12 +85,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
     getAvatar(feedPhoto.userId);
   }, [feedPhoto]);
 
-  // useEffect(() => {
-  //   if (currentUserInfo?.id === photo.userId) {
-  //     setOwner(true);
-  //   }
-  //   setFeedPhoto(photo);
-  // }, []);
+
   useEffect(() => {
     setFeedPhoto(photo);
   }, [photo])
@@ -99,7 +94,7 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
     updateFeed();
   }, [profilePic]);
 
-  const ExpandMore = styled((props) => {
+  const ExpandMore = Styled((props) => {
     const { ...other } = props;
     return <IconButton {...other} />;
   })(({ theme }) => ({
@@ -241,7 +236,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
           </Typography>
         </Paper>
         }
-        {/* {getMenuOption()} */}
         <CardHeader
           avatar={
             currentUserInfo?.id === photo.userId
@@ -262,7 +256,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
           sx={{ bgcolor: inverseMode }}
         />
         <CardContent sx={{ bgcolor: inverseMode }}>
-            {/* {photo.caption} */}
             <Typography variant='subtitle1' sx={{ bgcolor: inverseMode }}>
 
             <span>
@@ -289,9 +282,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, so
               </Typography>
             </Button>}
 
-            {/* <span onClick={openEditor}>
-              <Typography textAlign='right' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>edit</Typography>
-            </span> */}
           </Typography>
         </CardContent>
         <CardActions

@@ -1,30 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-const MicRecorder = require('mic-recorder-to-mp3');
 import axios from 'axios';
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutline} from '@mui/icons-material';
 import { UserContext } from '../context/UserContext';
-import {Typography, UseTheme, Button, Grid, Fab } from '../styles/material'
+import { Star, Person, MusicNote, LibraryMusic, Lyrics, RemoveCircleOutline} from '@mui/icons-material';
+import {MuiAccordion, MuiAccordionSummary, MuiAccordionDetails, Typography, ExpandMoreIcon, UseTheme, Button, Grid, Fab } from '../styles/material'
+const MicRecorder = require('mic-recorder-to-mp3');
 
 window.oncontextmenu = function (event: any) {
-  // eslint-disable-next-line no-console
 
   const pointerEvent = event as PointerEvent;
-  // eslint-disable-next-line no-console
 
   if (pointerEvent.pointerType === 'touch') {
-    // context menu was triggerd by long press
     return false;
   }
 
-  // just to show that pointerEvent.pointerType has another value 'mouse' aka right click
   if (pointerEvent.pointerType === 'mouse') {
-    // context menu was triggered by right click
+
     return true;
   }
 
-  // returning true will show a context menu for other cases
   return true;
 };
 
@@ -37,18 +30,15 @@ const SongFinder: React.FC = () => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
 
-  // const [isRecording, setIsRecording] = useState(false);
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [previewSource, setPreviewSource] = useState<string | ArrayBuffer | null>('');
   const [song, setSong] = useState<string>('');
   const [artist, setArtist] = useState<string>('');
-  // const [artistImage, setArtistImage] = useState('');
   const [albumTitle, setAlbumTitle] = useState<string>('');
   const [albumImage, setAlbumImage] = useState<string>('');
   const [favorited, setFavorited] = useState<boolean>(false);
   const [lyrics, setLyrics] = useState<Array<string>>([]);
   const [recording, setRecording] = useState<boolean>(false);
-  // const [deleteToken, setDeleteToken] = useState('');
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({audio: true},
@@ -61,20 +51,6 @@ const SongFinder: React.FC = () => {
   }, []);
 
 
-  // useEffect(() => {
-  //   if (artist) {
-  //     axios.get(`/api/favArtists/${currentUserInfo?.id}`)
-  //       .then((results) => {
-  //         results.data.allArtists.forEach((artistObj) => {
-  //           if (artistObj.artistName === artist) {
-  //             setFavorited(true);
-  //           }
-  //         });
-  //       })
-  //       .catch((err) => console.error(err));
-
-  //   }
-  // }, [artist]);
 
   useEffect(() => {
     if (artist) {
@@ -130,7 +106,6 @@ const SongFinder: React.FC = () => {
           setPreviewSource(reader.result);
 
         };
-        // setSong('');
         setArtist('');
         setAlbumTitle('');
         setAlbumImage('');
@@ -206,18 +181,18 @@ const SongFinder: React.FC = () => {
         <Grid container>
           <Grid item xs = {0} md = {4} sx={{ bgcolor: iconColors }}></Grid>
           <Grid item xs ={12} md = {4}>
-            <Accordion sx={{ bgcolor: iconColors }} expanded={true} >
-              <AccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote></MusicNote>} Song Name
-              </AccordionSummary>
-              <AccordionDetails sx={{ bgcolor: inverseMode}}>
+            <MuiAccordion sx={{ bgcolor: iconColors }} expanded={true} >
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }}>{<MusicNote></MusicNote>} Song Name
+              </MuiAccordionSummary>
+              <MuiAccordionDetails sx={{ bgcolor: inverseMode}}>
                 {song}
-              </AccordionDetails>
-            </Accordion>
+              </MuiAccordionDetails>
+            </MuiAccordion>
 
-            <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person></Person>} Artist
-              </AccordionSummary>
-              <AccordionDetails sx={{ bgcolor: inverseMode }}>
+            <MuiAccordion sx={{ bgcolor: iconColors }}>
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Person></Person>} Artist
+              </MuiAccordionSummary>
+              <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
                   <div id='artistName'>
                     {artist}
@@ -227,31 +202,30 @@ const SongFinder: React.FC = () => {
                     {favoriteButton()}
                   </div>
                 </div>
-              </AccordionDetails>
-            </Accordion>
+              </MuiAccordionDetails>
+            </MuiAccordion>
 
-            <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics></Lyrics>} Lyrics
-              </AccordionSummary>
-              <AccordionDetails sx={{ bgcolor: inverseMode }}>
+            <MuiAccordion sx={{ bgcolor: iconColors }}>
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<Lyrics></Lyrics>} Lyrics
+              </MuiAccordionSummary>
+              <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div id='lyrics'>
                   {getLyrics()}
                 </div>
-              </AccordionDetails>
-            </Accordion>
+              </MuiAccordionDetails>
+            </MuiAccordion>
 
-            <Accordion sx={{ bgcolor: iconColors }}>
-              <AccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
-              </AccordionSummary>
-              <AccordionDetails sx={{ bgcolor: inverseMode }}>
+            <MuiAccordion sx={{ bgcolor: iconColors }}>
+              <MuiAccordionSummary sx={{ bgcolor: inverseMode }} expandIcon={<ExpandMoreIcon/>}>{<LibraryMusic></LibraryMusic>} Album
+              </MuiAccordionSummary>
+              <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                 <div>
                   {albumTitle}
                 </div>
                 <img height='100px' width='auto' src={albumImage}/>
-              </AccordionDetails>
-            </Accordion>
+              </MuiAccordionDetails>
+            </MuiAccordion>
           </Grid>
-          {/* <Grid item xs = {4}></Grid> */}
         </Grid>
       </div>
       <div>

@@ -4,16 +4,11 @@ import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import {useSearchParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { ThemeContext } from '../context/ThemeContext';
 
 import FeedPhoto from '../components/FeedPhoto';
-
-import {OutlinedInput, Fab, Box, Button, Typography, Grid, Snackbar} from '../styles/material';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import Dialog from '@mui/material/Dialog';
-import { ThemeContext } from '../context/ThemeContext';
+import {Dialog, TaskAltIcon, DoDisturbAltIcon, AddPhotoAlternateIcon, OutlinedInput, Fab, Box, Button, Typography, Grid, Snackbar} from '../styles/material';
 
 
 const EventFeed: React.FC = ({socket}) => {
@@ -31,7 +26,6 @@ const EventFeed: React.FC = ({socket}) => {
 
   const themeContext = useContext(ThemeContext);
   const { mode, toggleMode } = themeContext;
-  // const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const [searchParams] = useSearchParams();
   const eventId: string | null = searchParams.get('id');
@@ -92,16 +86,6 @@ const EventFeed: React.FC = ({socket}) => {
     setDialogOpen(true);
   };
 
-  // useEffect(() => {
-
-  // }, [feedPhotos]);
-  // useEffect(() => {
-  //   if (openUploadSnack) {
-  //     setOpenUploadSnack(false);
-  //   }
-  // }, [openUploadSnack])
-
-
   const handleFileUpload = (): void => {
     const formData = new FormData();
     formData.append('myFile', photo, photo.name);
@@ -114,7 +98,6 @@ const EventFeed: React.FC = ({socket}) => {
     })
       .then((data) => {
         setDialogOpen(false);
-        // setFeedPhotos(feedPhotos => [data.data, ...feedPhotos]);
         setPhoto(null);
         setPreviewSource(null);
         setCaption('');
@@ -162,14 +145,6 @@ const EventFeed: React.FC = ({socket}) => {
   });
 
 
-  // const renderFeed = () => {
-  //   return (
-  //     <div>
-
-  //     </div>
-  //   );
-  // };
-
   if (!feedPhotos.length) {
     return (
       <div className="page-body">
@@ -205,8 +180,6 @@ const EventFeed: React.FC = ({socket}) => {
               sx={{
                 ml: '20px',
                 bgcolor: mode === 'dark' ? '#51AFF7' : '#533483',
-                // boxShadow: 3,
-                // border: '1px solid black',
                 margin: 0,
                 top: 'auto',
                 right: 20,
@@ -285,8 +258,6 @@ const EventFeed: React.FC = ({socket}) => {
             sx={{
               ml: '20px',
               bgcolor: mode === 'dark' ? '#51AFF7' : '#533483',
-              // boxShadow: 3,
-              // border: '1px solid black',
               margin: 0,
               top: 'auto',
               right: 20,

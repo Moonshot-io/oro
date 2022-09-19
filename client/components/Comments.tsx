@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import Comment from './Comment';
-import { useTheme } from '@mui/material/styles';
-import { io } from 'socket.io-client'
 
 import AvatarComponent from './Avatar';
 import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
@@ -26,13 +24,9 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
-
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
 
-
-
-  // const [commentsOpen, setCommentsOpen] = useState(false);
   const [message, setMessage] = useState<string>('');
   const [comments, setComments] = useState<Array<{id: number; userId: string; photoUrl: string; comment: string; edited: boolean; created_at: string;}>>([]);
 
@@ -81,9 +75,7 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
             receiverId: photo.userId,
             sender: currentUserInfo?.fullName,
           });
-
         }
-
       })
       .catch((err) => console.error(err));
   };
@@ -150,8 +142,3 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
 
 
 export default Comments;
-
-// <Grid item xs={2} sm={2} md={2}>
-// <Fab variant='extended' type='submit' onClick={handleSend}
-//   sx={{bgcolor: iconColors, mt: '15px'}}><SendIcon sx={{ color: inverseMode }}/></Fab>
-//   </Grid>

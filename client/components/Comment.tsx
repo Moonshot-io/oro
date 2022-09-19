@@ -95,15 +95,6 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const closeDeleter = (): void => {
     setDeleterOpen(false);
   };
-  // const getEditDeleteOptions = () => {
-  //   if (comment.userId === currentUserInfo?.id) {
-  //     return (
-  //       <span>
-
-  //       </span>
-  //     );
-  //   }
-  // };
 
 
   return (
@@ -119,12 +110,8 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
                 <Avatar sx={{ height: '30px', width: '30px', mb: '20px'}} src={profilePic} />
               </Link>
           }
-          {/* <Link to={`/user/?id=${comment.userId}`}>
-            <Avatar sx={{ height: '30px', width: '30px', ml: '15px', mb: '20px'}} src={profilePic}/>
-          </Link> */}
         </Grid>
         <Grid item xs={10} sm={10} md={10}>
-          {/* <Paper className='commentsPaper' sx={{bgcolor: '#0b2545', width: '20',  wordWrap: 'break-word'}}> */}
           <div className={mode === 'dark' ? 'commentsPaperDark' : 'commentsPaperLight'}>
             <Dialog open={deleterOpen}>
               <Typography textAlign='left' sx={{ color: iconColors, mb: '20px', ml: '5px'}}>are you sure you want to delete your comment?</Typography>
@@ -171,7 +158,6 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
               </span>
                   }
                 </Typography>
-        {/* {getEditDeleteOptions()} */}
         </Grid>
       </Grid>
     </div>
