@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { EventContext } from '../context/EventContext';
 import { UserContext } from '../context/UserContext';
-import moment from 'moment';
 import axios from 'axios';
 import MainFeaturedPost from '../components/MainFeaturedPost';
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   UseTheme,
-  IconButton,
-  PushPinIcon,
   ColorButton,
   Grid,
   Container,
@@ -17,10 +14,8 @@ import {
   CardActions,
   CardContent,
   Typography,
-  Link,
 } from '../styles/material';
 import { Stack } from '@mui/material';
-import { DoDisturbAltOutlined } from '@mui/icons-material';
 
 function DetailCard({ detail }): JSX.Element {
   const { currentUserInfo } = useContext(UserContext);

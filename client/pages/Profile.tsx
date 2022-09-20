@@ -1,39 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import UserPhotos from '../components/UserPhotos';
-import Artists from './Artists';
 import { UserContext } from '../context/UserContext';
 import { styled } from '@mui/material/styles';
 import {
-  ArrowForwardIosSharpIcon,
-  MuiAccordion,
-  MuiAccordionSummary,
-  MuiAccordionDetails,
-  Typography,
-  List,
-  ListItem,
-  Button,
-  Avatar,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FacebookIcon,
-  InstagramIcon,
-  TwitterIcon,
-  Grid,
-  IconButton,
-  Box,
-  Link,
-  Snackbar,
-  CardMedia,
-  Divider,
-  ColorButton,
-  UseTheme
-} from '../styles/material';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+  ArrowForwardIosSharpIcon,MuiAccordion,MuiAccordionSummary,MuiAccordionDetails,Typography,List,ListItem,Button,Avatar,TextField,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,FacebookIcon,InstagramIcon,TwitterIcon,Grid,IconButton,Box,Link,Snackbar,CardMedia,Divider,ColorButton,UseTheme, MuiAlert} from '../styles/material';
+import { AlertProps } from '@mui/material/Alert';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
