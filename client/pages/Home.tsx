@@ -1,6 +1,5 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeContext } from '../context/ThemeContext';
 
 import { Box, Grid, UseTheme, Typography, Badge, TravelExploreIcon, MusicNoteIcon, GradeIcon, PriceChangeIcon, ForumIcon, EmailIcon, AccountCircleIcon } from '../styles/material';
 

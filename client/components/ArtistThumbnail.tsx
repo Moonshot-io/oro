@@ -90,12 +90,10 @@ const ArtistThumbnail = ({artistProps, updateSingle, favorite, getFaveArtists}:a
       favesObj = JSON.parse(favesLocalData);
       favesObj[artistId] = false;
       window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
-      const checkLocalData = window.localStorage.getItem('userFaves');
     } else {
       favesObj = {0: false};
       favesObj[artistId] = false;
       window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
-      const checkLocalData = window.localStorage.getItem('userFaves');
     }
 
     const userId = currentUserInfo?.id;
