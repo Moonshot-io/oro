@@ -61,11 +61,9 @@ const UserContextProvider = ({ children }) => {
   };
 
   const getCurrentUser = () => {
-    // Once user logs in, get user info
     axios
       .get('/hidden')
       .then(({ data }) => {
-        // set state to user info
         setCurrentUserInfo(data);
       })
       .catch((err) => {

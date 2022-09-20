@@ -108,7 +108,13 @@ import musicNote from '@mui/icons-material/MusicNote';
 import libraryMusic from '@mui/icons-material/LibraryMusic';
 import lyrics from '@mui/icons-material/Lyrics';
 import removeCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import muiAlert from '@mui/material/Alert';
+import popover from '@mui/material/Popover';
+import closeIcon from '@mui/icons-material/Close';
 
+export const CloseIcon = closeIcon;
+export const Popover = popover;
+export const MuiAlert = muiAlert;
 export const SendIcon = sendIcon;
 export const Input = input;
 

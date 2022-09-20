@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid } from '../styles/material';
-import { useTheme } from '@mui/material/styles';
+import { Grid, UseTheme } from '../styles/material';
 import UserPicture from './UserPicture';
 
 interface UserPhotosProps {
@@ -16,19 +15,19 @@ interface UserPhotosProps {
 };
 
 const UserPhotos: React.FC<UserPhotosProps> = ({ photos, getUserPhotos }) => {
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
   return (
-      <Grid 
-        container 
+      <Grid
+        container
         id='user-uploads'
         spacing={{ xs: .5, md: 2 }}
       >
         {Array.from(photos).map((photo, index) => (
-          <Grid 
-            item 
+          <Grid
+            item
             key={index}
             xs={3.8} md={3}
             >

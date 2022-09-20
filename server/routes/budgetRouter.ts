@@ -1,5 +1,4 @@
 import prisma from '../database/db';
-import axios from 'axios';
 import { Router } from 'express';
 
 const budgetRouter = Router();

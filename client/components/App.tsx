@@ -15,7 +15,6 @@ import EventFeed from '../pages/EventFeed';
 import OtherUser from '../pages/OtherUser';
 import TravelPlanner from '../pages/TravelPlanner';
 import Navbar from '../components/Navbar';
-
 import UserChat from '../pages/UserChat';
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';
@@ -35,9 +34,11 @@ const App: React.FC = () => {
   const [profilePic, setProfilePic] = useState('');
   const [notiCount, setNotiCount] = useState<number>(0);
 
-  socket.current = io.connect();
 
 
+  useEffect(() => {
+    socket.current = io.connect();
+  }, []);
   socket.current.on('noti-receive', (data) => {
     getNotifications();
   })

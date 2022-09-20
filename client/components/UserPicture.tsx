@@ -2,27 +2,10 @@ import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Comments from './Comments';
 import {
-  Grid,
-  Box,
-  CloseRoundedIcon,
-  Dialog,
-  IconButton,
-  Typography,
-  Button,
-  OutlinedInput,
-  Snackbar,
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  MoreVertIcon,
+  Grid,Box,CloseRoundedIcon,Dialog,IconButton,Typography,Button,OutlinedInput,Snackbar,Card,CardHeader,CardMedia,CardContent,MoreVertIcon,DeleteOutlinedIcon,UseTheme,EditOutlinedIcon, MuiAlert, Popover
 } from '../styles/material';
-import { useTheme } from '@mui/material/styles';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { AlertProps } from '@mui/material/Alert';
 import { UserContext } from '../context/UserContext';
-import Popover from '@mui/material/Popover';
 import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
@@ -53,7 +36,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const [photoEvent, setPhotoEvent] = useState([]);
@@ -259,8 +242,8 @@ const UserPicture: React.FC<UserPictureProps> = ({ photo, getUserPhotos }) => {
                 <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={deletePhoto}>DELETE</Button>
                 <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
               </Dialog>
-              <Typography 
-                variant='body2' 
+              <Typography
+                variant='body2'
                 sx={{ bgcolor: inverseMode, color: 'lightgray' }}
                 id='profile-photo-date'
               >

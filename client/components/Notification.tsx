@@ -4,12 +4,11 @@ import moment from 'moment';
 
 import Comments from './Comments';
 
-import { useTheme } from '@mui/material/styles';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
-import {Avatar, Paper, DeleteOutlinedIcon, EditOutlinedIcon, OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button} from '../styles/material';
+import {Avatar, Paper, DeleteOutlinedIcon, EditOutlinedIcon, OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button, UseTheme} from '../styles/material';
 
 interface NotificationProps {
   notif: {
@@ -23,7 +22,7 @@ interface NotificationProps {
   getNotifications: () => void;
 }
 const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) => {
-  const theme = useTheme();
+  const theme = UseTheme();
   const highlight = theme.palette.primary.contrastText;
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
@@ -191,7 +190,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
     <div className='notificationBody'>
       {
         photo && person && notification?.id &&
-        
+
         <Box >
       <Dialog
         open={modalStatus}
@@ -285,7 +284,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
                     </Typography>
                   </Button>}
 
-   
+
               </div>
             </Typography>
             <Grid container>
@@ -295,7 +294,7 @@ const Notification: React.FC<NotificationProps> = ({notif, getNotifications}) =>
         </DialogContent>
       </Dialog>
 
-      
+
 
           <Paper onClick={handleOpen} sx={{m: 'auto', marginTop: '5px', bgcolor: read ? inverseMode: highlight, color: iconColors}}>
             <Grid container sx={{m: 'auto', mr: '10px'}}>

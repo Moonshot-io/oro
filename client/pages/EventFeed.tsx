@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import { UserContext } from '../context/UserContext';
@@ -8,7 +8,7 @@ import { ThemeContext } from '../context/ThemeContext';
 
 import FeedPhoto from '../components/FeedPhoto';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import {Dialog, TaskAltIcon, DoDisturbAltIcon, AddPhotoAlternateIcon, OutlinedInput, Fab, Box, Button, Typography, Grid, Snackbar} from '../styles/material';
+import {Dialog, TaskAltIcon, DoDisturbAltIcon, AddPhotoAlternateIcon, OutlinedInput, Fab, Box, Button, Typography, Snackbar} from '../styles/material';
 
 
 const EventFeed: React.FC = ({socket}) => {

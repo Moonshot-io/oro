@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
-import {OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button} from '../styles/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { useTheme } from '@mui/material/styles';
+import {OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button, UseTheme, DeleteOutlinedIcon, EditOutlinedIcon} from '../styles/material';
 import Comments from './Comments';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const PhotoDialog = ({photoObj, open}) => {
 
 
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const { currentUserInfo } = useContext(UserContext);
@@ -20,7 +17,6 @@ const PhotoDialog = ({photoObj, open}) => {
   const [photoUrl, setPhotoUrl] = useState<string>('');
   const [modalStatus, setModalStatus] = useState<boolean>(open);
   const [photo, setPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null} | null>(photoObj);
-  const [read, setRead] = useState<boolean>(true);
 
   const [captionText, setCaptionText] = useState('');
   const [photoEvent, setPhotoEvent] = useState([]);

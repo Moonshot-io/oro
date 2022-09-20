@@ -74,6 +74,7 @@ const ChatContainer: React.FC<{}> = ({ currentUser, currentChat, socket }) => {
             <div className="avatar">
             </div>
             <div className="username">
+              <Typography variant="h6">{currentChat !== undefined ? currentChat.fullName : ''}</Typography>
             </div>
           </div>
         </div> <div className="chat-messages">
