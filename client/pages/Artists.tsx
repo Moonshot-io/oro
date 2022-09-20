@@ -32,9 +32,6 @@ const Artists = () => {
     getFaveArtists(currentUserInfo?.id);
   }, []);
 
-  const saveUpdates = () => {
-    setFaveUpdated(!faveUpdated);
-  }
 
   if (currentUserInfo?.id === '') {
       window.localStorage.setItem('userFaves', JSON.stringify({}));
@@ -67,11 +64,11 @@ const Artists = () => {
       </div></>
     );
   } else if (artists === true && Array.isArray(allArtists)) {
-    // const favesObj = {};
-    // allArtists.forEach((child) => {
-    //   favesObj[child.id] = true;
-    //   window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
-    // });
+    const favesObj = {};
+    allArtists.forEach((child) => {
+      favesObj[child.id] = true;
+      window.localStorage.setItem('userFaves', JSON.stringify(favesObj));
+    });
     return (
       <div className="page-body">
             <Typography
