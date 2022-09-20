@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import UserPhotos from '../components/UserPhotos';
+import Artists from './Artists';
 import { UserContext } from '../context/UserContext';
 import { styled } from '@mui/material/styles';
 import {
