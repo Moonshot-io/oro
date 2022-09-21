@@ -107,7 +107,7 @@ else if(eventsExist){
       <Box>
       <Grid container style={{ gap: 15, maxHeight: '50vh' }}  alignItems="left"
   >
-      <Grid xs={12} sm={12} md={6}><CssTextField fullWidth
+      <Grid item xs={12} sm={12} md={6}><CssTextField fullWidth
       size='small' InputLabelProps={fontColor} inputProps={inputstyle}
           sx={{ mb: '15px', pr: '5px'}} id="keywordSearch"
           color="secondary" label="search events" type='text'
@@ -122,12 +122,12 @@ else if(eventsExist){
           )
           }}/>
         </Grid>
-        <Grid xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
+        <Grid item xs={8} sm={8} md={4}><Dropdown updateEvents={updateEvents} eventList={[...events]} /></Grid>
       </Grid></Box><br/>
       <Grid container spacing={2}>
         {
           events.map((event, index) => (
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} key={index}>
             <EventCardDetails
               event={event}
               key={`event${index}`}
