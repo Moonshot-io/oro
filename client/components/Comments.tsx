@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import Comment from './Comment';
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
 
 import AvatarComponent from './Avatar';
 import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
@@ -20,7 +20,7 @@ interface UserPictureProps {
 }
 
 const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
-  const socket = useRef()
+  // const socket = useRef()
   const theme = UseTheme();
   const inverseMode = theme.palette.secondary.main;
 
@@ -33,6 +33,7 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
   useEffect(() => {
     getComments();
   }, []);
+  
 
   const getComments = async (): Promise<void> => {
     await axios.get('/api/comments', {
@@ -63,19 +64,18 @@ const Comments: React.FC<UserPictureProps> = ({photo, getNotifications}) => {
         setMessage('');
         getComments();
         if (!(currentUserInfo.id === photo.userId)) {
-          console.log('test');
           axios.post('/api/notifications', {
             ownerId: photo.userId,
             commentId: commentData.data.id,
           });
 
-          socket.current = io('/');
+          // socket.current = io('/');
 
-          socket.current.emit('send-noti', {
-            senderId: currentUserInfo.id,
-            receiverId: photo.userId,
-            sender: currentUserInfo?.fullName,
-          });
+          // socket.current.emit('send-noti', {
+          //   senderId: currentUserInfo.id,
+          //   receiverId: photo.userId,
+          //   sender: currentUserInfo?.fullName,
+          // });
         }
       })
       .catch((err) => console.error(err));

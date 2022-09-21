@@ -11,7 +11,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import {Dialog, TaskAltIcon, DoDisturbAltIcon, AddPhotoAlternateIcon, OutlinedInput, Fab, Box, Button, Typography, Grid, Snackbar} from '../styles/material';
 
 
-const EventFeed: React.FC = ({socket}) => {
+const EventFeed: React.FC = () => {
   const userContext = useContext(UserContext);
   const {currentUserInfo} = userContext;
 
@@ -244,7 +244,7 @@ const EventFeed: React.FC = ({socket}) => {
             {feedPhotos.map((photo, i) => {
             return (
               <div margin-top="30px" key={i}>
-                <FeedPhoto socket={socket} deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
+                <FeedPhoto deleteSnack={deleteSnack} updateFeed={updateFeed} photo={photo}/>
               </div>
             );
           })}
