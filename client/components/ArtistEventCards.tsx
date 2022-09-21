@@ -28,8 +28,6 @@ const EventCards = ({ events }) => {
   const image = events.images[0].url;
   const { name, url, info } = events;
 
-  const [isLoading, setLoading] = useState(true);
-
   return (
     <Paper
       sx={{
@@ -42,7 +40,6 @@ const EventCards = ({ events }) => {
         textAlign: 'left',
       }}
     >
-                <img height='40px' width='auto' src='./images/loading.gif'/>
       <Grid container spacing={2}>
         <Grid item xs={12} container>
           <Grid item container direction='column' spacing={2}>

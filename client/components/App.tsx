@@ -37,6 +37,10 @@ const App: React.FC = () => {
   // socket.current = io.connect();
 
 
+  // useEffect(() => {
+  //   const socket = useRef()
+  //   socket.current = io.connect();
+  // }, []);
   // socket.current.on('noti-receive', (data) => {
   //   getNotifications();
   // })
@@ -48,6 +52,7 @@ const App: React.FC = () => {
   //   useEffect(() => {
   //   if(currentUserInfo?.id){
   //       socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
+  //       socket?.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
   //   }
   //   getNotifications();
   // }, [currentUserInfo]);
