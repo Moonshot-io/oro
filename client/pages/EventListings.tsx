@@ -14,8 +14,6 @@ const fontColor = {
 const EventListings: React.FC = () => {
   const { currentUserInfo } = useContext(UserContext);
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
   const themeBGColor = theme.palette.primary.main;
 
   const [ keyword, setKeyword ] = useState('');
@@ -64,9 +62,6 @@ const EventListings: React.FC = () => {
   const handleChange = (e: { target: HTMLInputElement; }) => {
     setKeyword(e.target.value);
   };
-
-  const handleSort = () => {
-  }
 
   const updateEvents = (city) => {
     setCity(city);

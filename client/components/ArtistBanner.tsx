@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Box, Grid, Typography, Paper } from '../styles/material';
-
-
 export default function ArtistBanner({artistDetails}) {
 
 

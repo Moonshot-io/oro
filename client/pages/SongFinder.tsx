@@ -87,7 +87,6 @@ const SongFinder: React.FC = () => {
   const start = (): void => {
     setRecording(true);
     if (isBlocked) {
-      console.log('permission denied');
     } else {
       Mp3Recorder.start()
         .then(() => setTimeout(stop, 5000))

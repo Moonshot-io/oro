@@ -9,8 +9,8 @@ import { useTheme } from '@mui/material/styles';
 
 import Comments from '../components/Comments';
 
-import {Styled, MoreHorizIcon, Menu, MenuItem, Dialog, Button, OutlinedInput, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar, CssTextField} from '../styles/material';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import {Styled, MoreHorizIcon, Menu, MenuItem, Dialog, Button, MuiAlert, Card, Paper, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, Typography, IconButton, Snackbar, CssTextField} from '../styles/material';
+import { AlertProps } from '@mui/material/Alert';
 
 
 
@@ -44,8 +44,6 @@ const FeedPhoto: React.FC<FeedPhotoProps> = ({photo, updateFeed, deleteSnack, ge
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [owner, setOwner] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const [open, setOpen] = useState<boolean>(false);
   const [openCaptionSnack, setOpenCaptionSnack] = useState<boolean>(false);
 
   const [feedPhoto, setFeedPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null}>({

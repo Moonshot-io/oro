@@ -4,8 +4,6 @@ import {Box, MenuItem, InputLabel, FormControl, Select, UseTheme} from '../style
 
 export default function Dropdown({eventList, updateEvents}) {
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
   const themeBGColor = theme.palette.primary.main;
 
   const [events, setEvents] = React.useState([...eventList]);
@@ -18,21 +16,6 @@ export default function Dropdown({eventList, updateEvents}) {
     updateEvents(newCity);
   };
 
-  const fontColor = {
-    style: { color: '#a352ff' }
-  };
-
-  const inputStyle = {
-    style: {
-      WebkitBoxShadow: `0 0 0 1000px ${themeBGColor} inset`,
-      "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #a352ff inset",
-      },
-      '-webkit-text-fill-color': '#a352ff',
-      color: '#a352ff',
-    }
-  };
-
   React.useEffect(()=>{
   }, [events]);
 
@@ -43,7 +26,6 @@ export default function Dropdown({eventList, updateEvents}) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-        //   value={age}
           onChange={handleChange}
         >
          <MenuItem value="all">All</MenuItem>

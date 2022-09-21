@@ -1,8 +1,5 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import React from 'react';
+import { Box, Grid, Paper} from '../styles/material';
 
 interface MainFeaturedPostProps {
   post: {
@@ -27,7 +24,6 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         height: '200px'
       }}
     >
-      {/* Increase the priority of the hero background image */}
       {<img style={{ display: 'none' }} src={post.image} />}
       <Box
         sx={{

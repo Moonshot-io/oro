@@ -21,7 +21,7 @@ module.exports = {
     ],
   },
   devtool: 'eval',
-  mode: 'development',
+  mode: 'production',
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },

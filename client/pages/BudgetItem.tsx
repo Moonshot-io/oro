@@ -16,7 +16,6 @@ const fontColor = {
 function BudgetItem({ label, value, onChange }: BudgetItemProps): JSX.Element {
 
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
 
   const inputstyle = {

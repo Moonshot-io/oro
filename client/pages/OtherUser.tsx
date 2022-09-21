@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserPhotos from '../components/UserPhotos';
-import { useTheme } from '@mui/material/styles';
-import { Box, Grid, Link, IconButton, FacebookIcon, InstagramIcon, TwitterIcon, Avatar, Typography } from '../styles/material';
+import { Box, Grid, Link, IconButton, FacebookIcon, InstagramIcon, TwitterIcon, Avatar, Typography, UseTheme } from '../styles/material';
 
 const OtherUser: React.FC = () => {
   const [userInfo, setUserInfo] = useState
@@ -22,9 +21,7 @@ const OtherUser: React.FC = () => {
       twitterId: '',
     });
   const [userPhotos, setUserPhotos] = useState([]);
-  const theme = useTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
+  const theme = UseTheme();
 
   const params = (new URLSearchParams(window.location.search));
   const id = params.get('id');

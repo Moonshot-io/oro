@@ -1,10 +1,7 @@
-import { Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal, Typography, Box, Stack, UseTheme, ColorButton } from '../styles/material';
+import { Card, CardActions, CardContent, CircularProgress, Divider, Grid, Modal, Typography, Box, Stack, UseTheme, ColorButton, IconButton, CloseIcon } from '../styles/material';
 import axios from 'axios';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { EventContext } from '../context/EventContext';
-import { CircleRounded, Close } from '@mui/icons-material';
-import { wrap } from 'module';
-import { IconButton } from '@mui/material';
 
 interface Hotel {
   location_id: string;
@@ -131,7 +128,7 @@ const TravelPlanner: React.FC = () => {
                     style={{ top: 10, right: 15, position: 'absolute' }}
                     onClick={() => setOpen(false)}
                   >
-                    <Close />
+                    <CloseIcon />
                   </IconButton>
                   <br />
                   <Divider />
@@ -220,11 +217,6 @@ const TravelPlanner: React.FC = () => {
                 <CircularProgress />
               )}
             </Box>
-            {/* <CardActions>
-              <ColorButton variant='contained' onClick={() => handleClose}>
-                Close
-              </ColorButton>
-            </CardActions> */}
           </Modal>
         </Grid>
       </Box>

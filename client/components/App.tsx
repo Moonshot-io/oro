@@ -15,7 +15,6 @@ import EventFeed from '../pages/EventFeed';
 import OtherUser from '../pages/OtherUser';
 import TravelPlanner from '../pages/TravelPlanner';
 import Navbar from '../components/Navbar';
-
 import UserChat from '../pages/UserChat';
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';

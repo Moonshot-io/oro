@@ -420,10 +420,6 @@ body {
   }
 }
 
-#social-media {
-  justify-content: center;
-}
-
 .commentTime {
   float:left;
 }
@@ -586,7 +582,7 @@ color: ${(props) => props.theme.palette.primary.contrastText};
   align-items: center;
 }
 
-#social-media {
+.social-media {
   justify-content: center;
 }
 

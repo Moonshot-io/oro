@@ -16,7 +16,6 @@ const ThemeContextProvider = ({ children, ...props }: Props) => {
 
   const [mode, setMode] = useState('dark');
 
-  // function to toggle the theme
   const toggleMode = () => {
     mode === 'dark' ? setMode('light') : setMode('dark');
   };

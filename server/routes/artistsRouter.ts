@@ -253,19 +253,5 @@ artistsRouter.post('/', (req, res) => {
     });
 });
 
-artistsRouter.delete('/', (req, res) => {
-  const {artistName, userId} = req.body;
-  // prisma.artistFollowing.update({
-  //   where: artistName,
-  //   data: {
-  //     user: {
-  //       disconnect: true,
-  //     }
-  //   }
-  // })
-  //   .then(() => res.sendStatus(200))
-  //   .catch(() => res.sendStatus(500));
-});
-
 
 export default artistsRouter;

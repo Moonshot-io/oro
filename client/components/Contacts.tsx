@@ -4,6 +4,16 @@ import { UserContext } from '../context/UserContext';
 import { ListItemText, Avatar, ListItemButton, Grid } from '../styles/material';
 
 const Contacts = ({changeChat, currentContact}) => {
+  const [isMobile, setMobile] = useState(window.innerWidth < 1026);
+  const updateMedia = () => {
+    setMobile(window.innerWidth < 1026);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
   const userContext = useContext(UserContext);
   const { currentUserInfo, userContacts } = userContext;
   const currentUser = currentUserInfo;
@@ -61,13 +71,13 @@ if(currentContact === undefined){
                 changeCurrentChat(index, contact);
               } }
             >
-              <Grid xs={2}>
-                <Avatar key={'avatar' + index} src={contact.profileURL} />
+              <Grid xs={1} sx={{mr:'30px'}}>
+              {isMobile ? <Avatar key={'avatar' + index} src={contact.profileURL} sx={{mr:'5px'}}/> : <Avatar key={'avatar' + index} src={contact.profileURL} sx={{mr:'30px'}}/> }
                 </Grid>
                 <Grid xs={8}>
-              <ListItemText
-                primary={contact.fullName}
-                />
+              {isMobile ? <ListItemText
+                primary=''/> : <ListItemText
+                primary={contact.fullName}/> }
             </Grid>
             </ListItemButton>
             </Grid>
@@ -96,12 +106,13 @@ if(currentContact === undefined){
                   changeCurrentChat(index, contact);
                 } }
               >
-                <Grid xs={2}>
-                  <Avatar key={'avatar' + index} src={contact.profileURL} />
+                <Grid xs={1} sx={{mr:'30px'}}>
+                {isMobile ? <Avatar key={'avatar' + index} src={contact.profileURL} sx={{mr:'5px'}}/> : <Avatar key={'avatar' + index} src={contact.profileURL} sx={{mr:'30px'}}/> }
                   </Grid>
                   <Grid xs={8}>
-                <ListItemText
-                  primary={contact.fullName} />
+                  {isMobile ? <ListItemText
+                primary=''/> : <ListItemText
+                primary={contact.fullName}/> }
               </Grid>
               </ListItemButton>
               </Grid>

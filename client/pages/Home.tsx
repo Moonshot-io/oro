@@ -1,22 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeContext } from '../context/ThemeContext';
 
-import { Box, Grid, UseTheme, Typography, Badge, TravelExploreIcon, MusicNoteIcon, LuggageIcon, GradeIcon, PriceChangeIcon, ForumIcon, EmailIcon, AccountCircleIcon } from '../styles/material';
-
-import { useNavigate } from 'react-router-dom';
+import { Box, Grid, UseTheme, Typography, Badge, TravelExploreIcon, MusicNoteIcon, GradeIcon, PriceChangeIcon, ForumIcon, EmailIcon, AccountCircleIcon } from '../styles/material';
 
 const Home: React.FC = () => {
   const theme = UseTheme();
-  const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
   const highlight = theme.palette.primary.contrastText;
-  const themeContext = useContext(ThemeContext);
-  const { mode, toggleMode } = themeContext;
-  const navigate = useNavigate();
-  useEffect(() => {
-    // getUser();
-  }, []);
+
   return (
     <div>
       <div className="home-body">
@@ -110,18 +100,3 @@ const Home: React.FC = () => {
 
 
 export default Home;
-
-
-{/* <Grid xs={6} md={4} item sx={{ mb: '15px' }}>
-<div className="home-icons">
-<Link
-className="home-icons"
-to='/travelPlanner'
-style={{ textDecoration: 'none' }}
-key={'travelPlanner'}
->
-<LuggageIcon className="home-icons" sx={{ color: inverseMode,  fontSize: '2.5rem' }}/>
-<Typography className="home-icons" sx={{ color: inverseMode }}>Travel Planner</Typography>
-</Link>
-</div>
-</Grid> */}

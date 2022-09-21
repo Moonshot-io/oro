@@ -1,15 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 import { styled } from '@mui/material/styles';
-import {
-  ArrowForwardIosSharpIcon,
-  MuiAccordion,
-  MuiAccordionSummary,
-  MuiAccordionDetails,
-  Typography,
-  Button,
-  ColorButton,
-  UseTheme,
+import {ArrowForwardIosSharpIcon,MuiAccordion,MuiAccordionSummary,
+  MuiAccordionDetails, Typography, ColorButton, UseTheme,
 } from '../styles/material';
 import BudgetItem from './BudgetItem';
 import axios from 'axios';
@@ -113,7 +106,6 @@ const BackPack: React.FC = () => {
 const EventItem = function ({
   event,
   index,
-  iconColors,
   inverseMode,
   expanded,
   handleChange,

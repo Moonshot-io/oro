@@ -1,32 +1,22 @@
 import React, { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
-import {Paper, Modal, OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button} from '../styles/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { useTheme } from '@mui/material/styles';
+import {OutlinedInput, Box, Grid, Typography, Dialog, DialogContent, DialogTitle, AppBar, Toolbar, IconButton, Tooltip, CloseRoundedIcon, Button, UseTheme, DeleteOutlinedIcon, EditOutlinedIcon} from '../styles/material';
 import Comments from './Comments';
-import FeedPhoto from './FeedPhoto';
-import {Avatar} from '../styles/material';
-import moment from 'moment';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 const PhotoDialog = ({photoObj, open}) => {
 
 
-  const theme = useTheme();
+  const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
   const inverseMode = theme.palette.secondary.main;
   const { currentUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const [person, setPerson] = useState<string>('');
-  const [text, setText] = useState<string>('');
   const [photoUrl, setPhotoUrl] = useState<string>('');
   const [modalStatus, setModalStatus] = useState<boolean>(open);
   const [photo, setPhoto] = useState<{userId?: string; photoUrl: string; eventAPIid: string; id: number; created_at: string; caption?: string; deleteToken?: string | null} | null>(photoObj);
-  const [userAvatar, setUserAvatar] = useState<string>('');
-  const [read, setRead] = useState<boolean>(true);
 
   const [captionText, setCaptionText] = useState('');
   const [photoEvent, setPhotoEvent] = useState([]);
@@ -71,39 +61,6 @@ const PhotoDialog = ({photoObj, open}) => {
     setCaptionText(e.target.value);
   };
 
-  // const getPerson = (): void => {
-  //   axios.get('/api/comments/comment', {
-  //     params: {
-  //       commentId: notif.commentId,
-  //     }
-  //   })
-  //     .then((commentData) => {
-  //       axios.get(`/api/profile/${commentData.data.userId}`)
-  //         .then((commenterData) => {
-  //           setPerson(commenterData.data.fullName);
-  //           setUserAvatar(commenterData.data.profileURL);
-  //           setPhotoUrl(commentData.data.photoUrl);
-  //         })
-  //         .catch((err) => console.error(err));
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
-
-
-
-  // useEffect(() => {
-  //   if (notif.read === false) {
-  //     setRead(false);
-  //   }
-  //   // getPerson();
-  //   getType();
-  // }, []);
-
-  const handleOpen = (): void => {
-    setRead(true);
-    setModalStatus(true);
-  };
-
   const handleClose = (): void => {
     setModalStatus(false);
   };
@@ -139,7 +96,6 @@ const PhotoDialog = ({photoObj, open}) => {
             .catch((err) => console.error(err));
         });
         navigate('/notifications');
-        // getUserPhotos();
       })
       .catch((err) => console.error(err));
   };
@@ -157,17 +113,15 @@ const PhotoDialog = ({photoObj, open}) => {
         setCaptionText('');
         setEditor(false);
         setModalStatus(false);
-        // getUserPhotos()
       })
       .then(() => {
         navigate('/notifications');
       }
-      //setOpenSnack(true)
       )
       .catch((err) => console.error(err));
   };
 
-  
+
   return (
     <Dialog
     open={modalStatus}
@@ -240,7 +194,6 @@ const PhotoDialog = ({photoObj, open}) => {
           <Button variant='contained' size='small' sx={{ bgcolor: iconColors }} onClick={closeDeleter}>cancel</Button>
         </Dialog>
         <Typography variant='body2' sx={{ bgcolor: inverseMode }}>
-          {/* {photo.caption} */}
           <span>
             {!editor && photo.caption}
           </span>
@@ -253,7 +206,7 @@ const PhotoDialog = ({photoObj, open}) => {
                   cancel
                 </Typography>
               </Button>}
-              
+
             {editor &&
               <Button sx={{ bgcolor: iconColors }} onClick={handleSubmitEdit}>
                 <Typography variant='body2' sx={{ color: inverseMode }}>

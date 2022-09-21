@@ -77,17 +77,6 @@ const Navbar = ({notif, notiCount}) => {
       </Link>,
     ],
     [
-      '/travelPlanner',
-      <Link
-        to='/travelPlanner'
-        style={{ textDecoration: 'none' }}
-        key={'travelPlanner'}
-      >
-        <LuggageIcon className='nav-icons' />
-        Travel Planner
-      </Link>,
-    ],
-    [
       '/backpack',
       <Link to='/backpack' style={{ textDecoration: 'none' }} key={'backpack'}>
         <PriceChangeIcon className='nav-icons' />
@@ -209,7 +198,7 @@ const Navbar = ({notif, notiCount}) => {
               sm={10}
               style={{ display: 'flex', alignItems: 'left' }}
             >
-              <a href='/'>
+              <Link to='/' style={{ textDecoration: 'none' }} key={'home'}>
                 <img
                   src={
                     mode === 'dark'
@@ -218,7 +207,7 @@ const Navbar = ({notif, notiCount}) => {
                   }
                   height='75'
                 />
-              </a>
+              </Link>
               <Box
                 sx={{
                   flexGrow: 1,

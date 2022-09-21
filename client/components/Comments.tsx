@@ -2,7 +2,11 @@ import React, { useState, useEffect, useContext, useRef} from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import Comment from './Comment';
+<<<<<<< HEAD
 // import { io } from 'socket.io-client'
+=======
+import { io } from 'socket.io-client'
+>>>>>>> fc3569204b70f337f638d84cd1da3fae9afff6f0
 
 import AvatarComponent from './Avatar';
 import { CssTextField, Grid, UseTheme, SendIcon, Fab, ColorButton, InputAdornment } from '../styles/material';
