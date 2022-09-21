@@ -39,7 +39,6 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
     bio,
     facebook,
     homepage,
-    image,
     instagram,
     itunes,
     twitter,
@@ -152,11 +151,12 @@ const ArtistInfoCard = ({artistProps, resetSingle}: artistPropsType) => {
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container>
                   {events.length > 1
-                    ? <><Typography variant="h2">Events:</Typography><Grid container id={artistName}>
+                    ? <>
+                    <Typography variant="h2">Events:</Typography><Grid container id={artistName}>
                       {events.map((eventObj, index) => {
 
                         return (
-                          <Grid item xs={12} md={6}>
+                          <Grid item xs={12} md={6} key={index}>
                             <EventCards events={eventObj} key={`event${index}`} />
                           </Grid>);
                       })}

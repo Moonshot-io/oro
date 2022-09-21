@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
-import {Box, MenuItem, InputLabel, FormControl, Select, UseTheme} from '../styles/material';
+import {Box, MenuItem, InputLabel, FormControl, Select} from '../styles/material';
 
 export default function Dropdown({eventList, updateEvents}) {
-  const theme = UseTheme();
-  const themeBGColor = theme.palette.primary.main;
 
   const [events, setEvents] = React.useState([...eventList]);
   const [label, setLabel] = React.useState('city');
@@ -31,19 +29,19 @@ export default function Dropdown({eventList, updateEvents}) {
          <MenuItem value="all">All</MenuItem>
           {(()=>{
             const cities = {};
-            return eventList.map((event)=>{
+            return eventList.map((event, index)=>{
 
               if(event.venueInfo){
                 const cityName = event.venueInfo[0].city;
                 if(!cities[cityName]){
                     cities[cityName] = cityName;
-                    return <MenuItem value={cityName}>{cityName}</MenuItem>
+                    return <MenuItem value={cityName} key={index}>{cityName}</MenuItem>
                 }
               } else {
                 const cityName = event.city;
                 if(!cities[cityName]){
                     cities[cityName] = cityName;
-                    return <MenuItem value={cityName}>{cityName}</MenuItem>
+                    return <MenuItem value={cityName} key={index}>{cityName}</MenuItem>
                 }
               }
           })})()}

@@ -1,7 +1,6 @@
 import React, { useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
-import VSLOGODark from './images/VSLOGO-dark.png';
 import VSLOGO from './images/VSLOGO.png';
 
 import {
@@ -47,7 +46,6 @@ const Navbar = ({notif, notiCount}) => {
 
   const theme = UseTheme();
   const iconColors = theme.palette.secondary.contrastText;
-  const inverseMode = theme.palette.secondary.main;
   const modeBgColor = theme.palette.primary.main;
   const highlight = theme.palette.primary.contrastText;
 
@@ -138,7 +136,7 @@ const Navbar = ({notif, notiCount}) => {
       [
         '/profile',
         <Link to='/profile' style={{ textDecoration: 'none' }} key={'profile'}>
-          <img src={currentUserInfo?.profileURL} className='nav-icons avatar' />
+          <img src={currentUserInfo?.profileURL} className='nav-icons avatar' referrerPolicy="no-referrer"/>
           Account
         </Link>,
       ],
@@ -200,11 +198,7 @@ const Navbar = ({notif, notiCount}) => {
             >
               <Link to='/' style={{ textDecoration: 'none' }} key={'home'}>
                 <img
-                  src={
-                    mode === 'dark'
-                      ? VSLOGO
-                      : VSLOGODark
-                  }
+                  src={VSLOGO}
                   height='75'
                 />
               </Link>

@@ -24,7 +24,6 @@ import { UserContext } from '../context/UserContext';
 
 import { io } from 'socket.io-client'
 const App: React.FC = () => {
-  const socket = useRef()
   const userContext = useContext(UserContext);
 
   const { currentUserInfo } = userContext;
@@ -36,23 +35,24 @@ const App: React.FC = () => {
 
 
 
-  useEffect(() => {
-    socket.current = io.connect();
-  }, []);
-  socket.current.on('noti-receive', (data) => {
-    getNotifications();
-  })
+  // useEffect(() => {
+  //   const socket = useRef()
+  //   socket.current = io.connect();
+  // }, []);
+  // socket.current.on('noti-receive', (data) => {
+  //   getNotifications();
+  // })
 
   useEffect(() => {
     getNotifications();
   }, []);
 
-    useEffect(() => {
-    if(currentUserInfo?.id){
-        socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
-    }
-    getNotifications();
-  }, [currentUserInfo]);
+  //   useEffect(() => {
+  //   if(currentUserInfo?.id){
+  //       socket?.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
+  //   }
+  //   getNotifications();
+  // }, [currentUserInfo]);
 
   useEffect(() => {
     setNotiCount(notifications.filter((noti) => noti.read === false).length);
@@ -104,7 +104,7 @@ const App: React.FC = () => {
             <Route path='/notifications' element={<NotificationsFeed key={location.key} getNotifications= {getNotifications} notif={notifications}/>} />
             <Route path='/backpack' element={<BackPack />} />
             <Route path='/eventListings' element={<EventListings />} />
-            <Route path='/eventFeed' socket={socket} element={<EventFeed />} />
+            <Route path='/eventFeed' element={<EventFeed />} />
             <Route path='/songFinder' element={<SongFinder />} />
             <Route path='/artists' element={<Artists />} />
             <Route path='/artists/*' element={<Artists />} />
