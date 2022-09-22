@@ -1,26 +1,42 @@
-import React, { useState, useContext, useEffect, useRef} from 'react';
+import React, { useState, useContext, useEffect, useRef, lazy, Suspense} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
 
-import Profile from '../pages/Profile';
-import Home from '../pages/Home';
-import NotificationsFeed from '../pages/NotificationsFeed';
-import EventListings from '../pages/EventListings';
-import SongFinder from '../pages/SongFinder';
-import Artists from '../pages/Artists';
-import Login from '../pages/Login';
-import EventDetails from '../pages/EventDetails';
-import EventFeed from '../pages/EventFeed';
-import OtherUser from '../pages/OtherUser';
-import TravelPlanner from '../pages/TravelPlanner';
-import Navbar from '../components/Navbar';
-import UserChat from '../pages/UserChat';
+// import BackPack from '../pages/BackPack';
+// import Profile from '../pages/Profile';
+// import Home from '../pages/Home';
+// import NotificationsFeed from '../pages/NotificationsFeed';
+// import EventListings from '../pages/EventListings';
+// import SongFinder from '../pages/SongFinder';
+// import Artists from '../pages/Artists';
+// import Login from '../pages/Login';
+// import EventDetails from '../pages/EventDetails';
+// import EventFeed from '../pages/EventFeed';
+// import OtherUser from '../pages/OtherUser';
+// import TravelPlanner from '../pages/TravelPlanner';
+// import Navbar from '../components/Navbar';
+// import UserChat from '../pages/UserChat';
+const BackPack = lazy(() => import('../pages/BackPack'));
+const Profile = lazy(() => import('../pages/Profile'));
+const Home = lazy(() => import('../pages/Home'));
+const NotificationsFeed = lazy(() => import('../pages/NotificationsFeed'));
+const EventListings = lazy(() => import('../pages/EventListings'));
+const SongFinder = lazy(() => import('../pages/SongFinder'));
+const Artists = lazy(() => import('../pages/Artists'));
+const Login = lazy(() => import('../pages/Login'));
+const EventDetails = lazy(() => import('../pages/EventDetails'));
+const EventFeed = lazy(() => import('../pages/EventFeed'));
+const OtherUser = lazy(() => import('../pages/OtherUser'));
+const TravelPlanner = lazy(() => import('../pages/TravelPlanner'));
+const Navbar = lazy(() => import('../components/Navbar'));
+const UserChat = lazy(() => import('../pages/UserChat'));
+
 import { ArtistContextProvider } from '../context/ArtistContext';
 import { EventContextProvider } from '../context/EventContext';
 import { Container } from '../components/Container';
-import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
+import { Typography } from '../styles/material';
 
 // import { io } from 'socket.io-client'
 const App: React.FC = () => {
@@ -101,6 +117,13 @@ const App: React.FC = () => {
       <EventContextProvider>
         <ArtistContextProvider>
           <Navbar onClick={getNotifications} notiCount={notiCount} profile={profilePic} />
+            <Suspense fallback={
+            <div>
+              <Typography variant="h2">Loading Page...
+              </Typography>
+              <img src='./images/loading.gif'/>
+              <br></br>
+            </div>}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
@@ -117,6 +140,7 @@ const App: React.FC = () => {
             <Route path='/travel-planner' element={<TravelPlanner />} />
             <Route path='/chat' element={<UserChat />} />
           </Routes>
+            </Suspense>
         </ArtistContextProvider>
       </EventContextProvider>
     </Container>
