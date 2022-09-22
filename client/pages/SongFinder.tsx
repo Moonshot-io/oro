@@ -44,85 +44,85 @@ const SongFinder: React.FC = () => {
   const demoSong = {
     songName: 'Rolling in the Deep',
     Artist: 'Adele',
-    Lyrics: `[Verse 1]
-    There's a fire starting in my heart
-    Reaching a fever pitch, and it's bringing me out the dark
-    Finally, I can see you crystal clear
-    Go ahead and sell me out, and then I'll lay your shit bare
-    See how I'll leave with every piece of you
-    Don't underestimate the things that I will do
-    There's a fire starting in my heart
-    Reaching a fever pitch, and it's bringing me out the dark
-    [Pre-Chorus]
-    The scars of your love remind me of us
-    They keep me thinkin' that we almost had it all
-    The scars of your love, they leave me breathless
-    I can't help feeling
-    [Chorus]
-    We could have had it all
-    (You're gonna wish you – never had met me)
-    Rolling in the deep
-    (Tears are gonna fall, rolling in the deep)
-    You had my heart inside of your hand
-    (You're gonna wish you – never had met me)
-    And you played it to the beat
-    (Tears are gonna fall, rolling in the deep)
-    [Verse 2]
-    Baby, I have no story to be told
-    But I've heard one on you, now I'm gonna make your head burn
-    Think of me in the depths of your despair
-    Make a home down there, as mine sure won't be shared
-    [Pre-Chorus]
-    (You're gonna wish you – never had met me)
-    The scars of your love remind me of us
-    (Tears are gonna fall, rolling in the deep)
-    They keep me thinkin' that we almost had it all
-    (You're gonna wish you – never had met me)
-    The scars of your love, they leave me breathless
-    (Tears are gonna fall, rolling in the deep)
-    I can't help feeling
-    [Chorus]
-    We could have had it all
-    (You're gonna wish you – never had met me)
-    Rolling in the deep
-    (Tears are gonna fall, rolling in the deep)
-    You had my heart inside of your hand
-    (You're gonna wish you – never had met me)
-    And you played it to the beat
-    (Tears are gonna fall, rolling in the deep)
-    Could have had it all
-    Rolling in the deep
-    You had my heart inside of your hand
-    But you played it with a beating
-    [Verse 3]
-    Throw your soul through every open door (oh-oh)
-    Count your blessings to find what you look for (whoa-oh)
-    Turn my sorrow into treasured gold (oh-oh)
-    You'll pay me back in kind and reap just what you sow
-    [Breakdown]
-    (You're gonna wish you – never had met me)
-    We could have had it all
-    (Tears are gonna fall, rolling in the deep)
-    We could have had it all
-    (You're gonna wish you – never had met me)
-    It all, it all, it all
-    (Tears are gonna fall, rolling in the deep)
-    [Chorus]
-    We could have had it all
-    (You're gonna wish you – never had met me)
-    Rolling in the deep
-    (Tears are gonna fall, rolling in the deep)
-    You had my heart inside of your hand
-    (You're gonna wish you – never had met me)
-    And you played it to the beat
-    (Tears are gonna fall, rolling in the deep)
-    We could have had it all
-    (You're gonna wish you – never had met me)
-    Rolling in the deep
-    (Tears are gonna fall, rolling in the deep)
-    You had my heart inside of your hand
-    (You're gonna wish you – never had met me)
-    But you played it, you played it, you played it
+    Lyrics: `[Verse 1]\n
+    There's a fire starting in my heart\n
+    Reaching a fever pitch, and it's bringing me out the dark\n
+    Finally, I can see you crystal clear\n
+    Go ahead and sell me out, and then I'll lay your shit bare\n
+    See how I'll leave with every piece of you\n
+    Don't underestimate the things that I will do\n
+    There's a fire starting in my heart\n
+    Reaching a fever pitch, and it's bringing me out the dark\n
+    [Pre-Chorus]\n
+    The scars of your love remind me of us\n
+    They keep me thinkin' that we almost had it all\n
+    The scars of your love, they leave me breathless\n
+    I can't help feeling\n
+    [Chorus]\n
+    We could have had it all\n
+    (You're gonna wish you – never had met me)\n
+    Rolling in the deep\n
+    (Tears are gonna fall, rolling in the deep)\n
+    You had my heart inside of your hand\n
+    (You're gonna wish you – never had met me)\n
+    And you played it to the beat\n
+    (Tears are gonna fall, rolling in the deep)\n
+    [Verse 2]\n
+    Baby, I have no story to be told\n
+    But I've heard one on you, now I'm gonna make your head burn\n
+    Think of me in the depths of your despair\n
+    Make a home down there, as mine sure won't be shared\n
+    [Pre-Chorus]\n
+    (You're gonna wish you – never had met me)\n
+    The scars of your love remind me of us\n
+    (Tears are gonna fall, rolling in the deep)\n
+    They keep me thinkin' that we almost had it all\n
+    (You're gonna wish you – never had met me)\n
+    The scars of your love, they leave me breathless\n
+    (Tears are gonna fall, rolling in the deep)\n
+    I can't help feeling\n
+    [Chorus]\n
+    We could have had it all\n
+    (You're gonna wish you – never had met me)\n
+    Rolling in the deep\n
+    (Tears are gonna fall, rolling in the deep)\n
+    You had my heart inside of your hand\n
+    (You're gonna wish you – never had met me)\n
+    And you played it to the beat\n
+    (Tears are gonna fall, rolling in the deep)\n
+    Could have had it all\n
+    Rolling in the deep\n
+    You had my heart inside of your hand\n
+    But you played it with a beating\n
+    [Verse 3]\n
+    Throw your soul through every open door (oh-oh)\n
+    Count your blessings to find what you look for (whoa-oh)\n
+    Turn my sorrow into treasured gold (oh-oh)\n
+    You'll pay me back in kind and reap just what you sow\n
+    [Breakdown]\n
+    (You're gonna wish you – never had met me)\n
+    We could have had it all\n
+    (Tears are gonna fall, rolling in the deep)\n
+    We could have had it all\n
+    (You're gonna wish you – never had met me)\n
+    It all, it all, it all\n
+    (Tears are gonna fall, rolling in the deep)\n
+    [Chorus]\n
+    We could have had it all\n
+    (You're gonna wish you – never had met me)\n
+    Rolling in the deep\n
+    (Tears are gonna fall, rolling in the deep)\n
+    You had my heart inside of your hand\n
+    (You're gonna wish you – never had met me)\n
+    And you played it to the beat\n
+    (Tears are gonna fall, rolling in the deep)\n
+    We could have had it all\n
+    (You're gonna wish you – never had met me)\n
+    Rolling in the deep\n
+    (Tears are gonna fall, rolling in the deep)\n
+    You had my heart inside of your hand\n
+    (You're gonna wish you – never had met me)\n
+    But you played it, you played it, you played it\n
     You played it to the beat`,
     albumName: '21',
     albumImage: 'https://i.scdn.co/image/ab67616d0000b273fb7eedd9877b0c60597ef3e5'
@@ -139,6 +139,8 @@ const SongFinder: React.FC = () => {
   }, []);
 
   const handleDemo = () => {
+    setArtist('Adele');
+    setFavorited(false);
     setDemoClicked(true);
   }
 
@@ -285,12 +287,13 @@ const SongFinder: React.FC = () => {
                 <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                   <div>
                     <div id='artistName'>
-                      {demoSong.Artist}
+                      {artist}
                     </div>
 
                     <div id='favoriteButton'>
                     <div>
-          <ColorButton sx={{ mt: '10px' }} variant='contained' size='small' onClick={addToFavorites}>{<Star></Star>} add to favorites</ColorButton>
+                      {favoriteButton()}
+          {/* <ColorButton sx={{ mt: '10px' }} variant='contained' size='small' onClick={addToFavorites}>{<Star></Star>} add to favorites</ColorButton> */}
         </div>
                     </div>
                   </div>
@@ -302,7 +305,13 @@ const SongFinder: React.FC = () => {
                 </MuiAccordionSummary>
                 <MuiAccordionDetails sx={{ bgcolor: inverseMode }}>
                   <div id='lyrics'>
-                    {demoSong.Lyrics}
+                    {demoSong.Lyrics.split('\n').map((line, i) => {
+                      return (
+                        <div key={i}>
+                          {line}
+                        </div>
+                      )
+                    })}
                   </div>
                 </MuiAccordionDetails>
               </MuiAccordion>
