@@ -32,7 +32,7 @@ const Comment: React.FC<CommentProps> = ({comment, getComments}) => {
   const { mode, toggleMode } = themeContext;
 
   const [profilePic, setProfilePic] = useState<string>('');
-
+  
   useEffect(() => {
     getAvatar();
   }, []);

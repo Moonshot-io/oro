@@ -22,8 +22,9 @@ import { Container } from '../components/Container';
 import BackPack from '../pages/BackPack';
 import { UserContext } from '../context/UserContext';
 
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
 const App: React.FC = () => {
+  // const socket = useRef()
   const userContext = useContext(UserContext);
 
   const { currentUserInfo } = userContext;
@@ -33,6 +34,7 @@ const App: React.FC = () => {
   const [profilePic, setProfilePic] = useState('');
   const [notiCount, setNotiCount] = useState<number>(0);
 
+  // socket.current = io.connect();
 
 
   // useEffect(() => {
@@ -49,6 +51,7 @@ const App: React.FC = () => {
 
   //   useEffect(() => {
   //   if(currentUserInfo?.id){
+  //       socket.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
   //       socket?.current.emit('add-user', currentUserInfo.id, currentUserInfo.fullName)
   //   }
   //   getNotifications();
@@ -97,7 +100,7 @@ const App: React.FC = () => {
     <Container onClick={navClick}>
       <EventContextProvider>
         <ArtistContextProvider>
-          <Navbar notiCount={notiCount} profile={profilePic} />
+          <Navbar onClick={getNotifications} notiCount={notiCount} profile={profilePic} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
