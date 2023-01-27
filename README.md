@@ -223,27 +223,14 @@ Google Oauth requires a google cloud account. First create your account and then
 - First fork the repo and clone it to your local machine.
 - Collect all env keys
 - Run 'npm install' to install all dependencies
-<<<<<<< HEAD
 - (if using local mysql) Open mysql, create and use a database called 'TakeAHike'
 - (if using RDS) Update .env to match your RDS specs
 - Run 'npm run dev' to start Webpack
 - Run 'npm run seed' to seed Database
 - Run 'npm start' to run the server
-
-
-## App Mockups
-![Trips](mockups/takeahike-trips.png)
-![Packing List](mockups/takeahike-quartermaster.png)
-![Checklist](mockups/takeahike-checklist.png)
-![Trails](mockups/takeahike-trails.png)
-![Weather](mockups/takeahike-weather.png)
-![Map](mockups/takeahike-map.png)
-![Gallery](mockups/takeahike-gallery.png)
-=======
 - (if using RDS) Update .env to match your RDS specs
 - Run 'npm run type' to start TypeScript transpiler
 - Run 'npm run build' to run Webpack bundler
-- Run 'npm start' to run the server
 - (optional) run npx prisma studio to see the database in browser.
 
 ### Known Bugs
