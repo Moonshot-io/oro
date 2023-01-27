@@ -27,40 +27,33 @@ Located at the top right of every page is a navigation burger menu which contain
       This is a more expanded page for specific events that the user is interested in. In it, users will find more information regarding the location, dates, and ticket purchasing information. The user also still has the ability to pin the event from this page.
 
       From here, the user can then navigate to either the Travel Information's page or the Event Feed.
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
-      - ### Travel Information
+### Travel Information
         If a user wishes to see what local travel accommodations are available for the location of their events, they will have access to all hotels in the area of the event with their ratings along with features and amenities.
-      - ### Event Feed
+### Event Feed
         As events are happening, users will be able to post photos to a public feed to share their experiences with others who are interested in this event. Here, users can also comment on each others photos and interact with one another.
 
-- ### Budgets
+### Budgets
   After pinning events, users can then plan out their budget for that specific event. There are budget sections for a variety of common travel expenses such as Tickets, Food, Drinks, Parking, Merchandise, and Travel. Users can enter their allotted budgets and will be provided a total for their trip.
 
-- ### Song Finder
+### Song Finder
   Our application also provides music-related features apart from trip planning. As a user, when they hear a song in public and wish to know more information about it. Our SongFinder will listen to a small clip of audio from their device and then find information related to that specific song such as it's name, the artist, the lyrics, and album name.
 
   If a user wishes to follow that specific artist, they can then hit the 'Add to Favorites' button to add it to their Favorite Artists page.
 
-- ### Favorite Artists
+### Favorite Artists
   Here, users will find a list of all artists they've decided to follow. If they click on the artist again, they will be brought to an expanded view which talks about the artists Bio, provides their social media information, and will also provide a list of that artist's upcoming events.
 
   If users do not have any artists currently liked, they will be provided a list of recommended artists to follow to get started.
 
-<<<<<<< HEAD
-- ### Account
-=======
-- ### Account 
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
+### Account
+
   On this page, a user can see their current profile. Here, they can update their social media links for public viewing. It will also contain their upcoming events that they've pinned along with any photos they have posted on Event Feeds. Clicking a photo from the feed will allow them to directly see the comments on their photo.
 
-- ### Chat
+### Chat
   A direct messaging feature that enables user to message each other privately. Here users can send messages to one another and will render immediately. Users are also able to send emojis.
 
-- ### Notifications
+### Notifications
   As users receive comments on photos they have uploaded, they will receive notifications. Currently notifications are indicated by a badge that displays the amount of notifications they have. From the menu, a user can check their notification feed. New notifications are differentiated by the bold **new**. Once users check their feed, these notifcations will be considered read and not be accounted for in the notification badge. Users can also clear their feed in case it clutters their screen.
 
 # Tech
@@ -84,12 +77,7 @@ Located at the top right of every page is a navigation burger menu which contain
 - NGinX
 
 ### database:
-
-<<<<<<< HEAD
 We have a PostgreSQL database. We have all of our models located in prisma/schema.prisma.
-=======
-We have a PostgreSQL database. We have all of our models located in prisma/schema.prisma. 
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
 
 ### server:
 
@@ -118,8 +106,6 @@ We used several external apis for this project:
 
 - TripAdvisor - API with hotel/travel information used to display hotel information based on location on our travel planning page.
 
-
-<<<<<<< HEAD
 ### front-end
 
 The front-end was built using React and React Router. In App.jsx we initialize our trail data so that upon refresh of trail profile, the most recent trail data is rendered. In that same file we route our links and routes for the app.
@@ -189,13 +175,10 @@ The styling is found in main.css and mapStyles.js.
 - ### Trip Advisor (hotel/travel)
   - TRIP_ADVISOR_API_KEY=
 
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
-
 ## Google OAuth
 
 Google Oauth requires a google cloud account. First create your account and then navigate to the developer console. Go to google API and create a clientID and clientSecret. Your redirect URI should match what's in the server/middleware/auth file. These api keys go inside the .env file.
 
-<<<<<<< HEAD
 # Setting up Google Client Id and Secret
 1. Navigate to Google cloud console and sign in
 2. Create a new project within Google console
@@ -223,9 +206,6 @@ Google Oauth requires a google cloud account. First create your account and then
 
     iii. Authorized redirect URIs: your local URI with the endpoint '/auth/google/callback' (example: http://localhost:5000/auth/google/callback)
 
-
-=======
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
 ## AWS RDS DATABASE SETUP
 - To create an online database to be accessible anywhere, you will need to have an AWS account and have IAM users set up.
 - Then you will need to create a database through RDS. Save your username and password for the database. You will need them for the next step. https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html
@@ -250,12 +230,6 @@ Google Oauth requires a google cloud account. First create your account and then
 - Run 'npm run seed' to seed Database
 - Run 'npm start' to run the server
 
-### Known Bugs
-
--
--
--
-
 
 ## App Mockups
 ![Trips](mockups/takeahike-trips.png)
@@ -279,4 +253,3 @@ Google Oauth requires a google cloud account. First create your account and then
 
 
 ## App Mockups
->>>>>>> 5bed72def098909a04f91bac6f7542fefd8db991
