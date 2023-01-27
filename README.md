@@ -29,9 +29,9 @@ Located at the top right of every page is a navigation burger menu which contain
       From here, the user can then navigate to either the Travel Information's page or the Event Feed.
 
 ### Travel Information
-        If a user wishes to see what local travel accommodations are available for the location of their events, they will have access to all hotels in the area of the event with their ratings along with features and amenities.
+If a user wishes to see what local travel accommodations are available for the location of their events, they will have access to all hotels in the area of the event with their ratings along with features and amenities.
 ### Event Feed
-        As events are happening, users will be able to post photos to a public feed to share their experiences with others who are interested in this event. Here, users can also comment on each others photos and interact with one another.
+As events are happening, users will be able to post photos to a public feed to share their experiences with others who are interested in this event. Here, users can also comment on each others photos and interact with one another.
 
 ### Budgets
   After pinning events, users can then plan out their budget for that specific event. There are budget sections for a variety of common travel expenses such as Tickets, Food, Drinks, Parking, Merchandise, and Travel. Users can enter their allotted budgets and will be provided a total for their trip.
